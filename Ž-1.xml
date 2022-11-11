@@ -1,114 +1,134 @@
 <zahtev_za_priznanje_ziga>
-    <podaci_o_instituciji>
-        <naziv>Zavod za intelektualnu svojinu</naziv>
-        <adresa>
-            <ulica>Kneginje Ljubice</ulica>
-            <broj>5</broj>
-            <postanski_broj>11000</postanski_broj>
-            <mesto>Beograd</mesto>
-        </adresa>
-    </podaci_o_instituciji>
 
     <podaci_o_zahtevu>
         <broj_prijave>Ž-</broj_prijave>
-        <datum_podnosenja></datum_podnosenja>
+        <datum_podnosenja/>
     </podaci_o_zahtevu>
 
     <podaci_o_podnosiocu>
-        <puno_ime tip_lica="fizicko">
-            <ime></ime>
-            <prezime></prezime>
-        </puno_ime>
-        <puno_ime tip_lica="pravno"></puno_ime>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
-            <mesto></mesto>
-            <drzava></drzava>
-        </adresa>
-        <telefon></telefon>
-        <email></email>
-        <faks></faks>
-        <potpis />
+        <licni_podaci tip_lica="fizicko">
+            <ime/>
+            <prezime/>
+            <adresa>
+                <ulica/>
+                <broj/>
+                <postanski_broj/>
+                <mesto/>
+                <drzava/>
+            </adresa>
+        </licni_podaci>
+
+        <licni_podaci tip_lica="pravno">
+            <ime/>
+            <adresa>
+                <ulica/>
+                <broj/>
+                <postanski_broj/>
+                <mesto/>
+                <drzava/>
+            </adresa>
+        </licni_podaci>
+        <telefon/>
+        <email/>
+        <faks/>
     </podaci_o_podnosiocu>
 
     <podaci_o_punomocniku>
-        <puno_ime tip_lica="fizicko">
-            <ime></ime>
-            <prezime></prezime>
-        </puno_ime>
-        <puno_ime tip_lica="pravno"></puno_ime>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
-            <mesto></mesto>
-            <drzava></drzava>
-        </adresa>
-        <telefon></telefon>
-        <email></email>
-        <faks></faks>
+        <licni_podaci tip_lica="fizicko">
+            <ime/>
+            <prezime/>
+            <adresa>
+                <ulica/>
+                <broj/>
+                <postanski_broj/>
+                <mesto/>
+                <drzava/>
+            </adresa>
+        </licni_podaci>
+        
+        <licni_podaci tip_lica="pravno">
+            <ime/>
+            <adresa>
+                <ulica/>
+                <broj/>
+                <postanski_broj/>
+                <mesto/>
+                <drzava/>
+            </adresa>
+        </licni_podaci>
+        <telefon/>
+        <email/>
+        <faks/>
     </podaci_o_punomocniku>
 
     <podaci_o_predstavniku broj_podnosilaca="">
-        <puno_ime tip_lica="fizicko">
-            <ime></ime>
-            <prezime></prezime>
-        </puno_ime>
-        <puno_ime tip_lica="pravno"></puno_ime>
-        <adresa>
-            <ulica></ulica>
-            <broj></broj>
-            <postanski_broj></postanski_broj>
-            <mesto></mesto>
-            <drzava></drzava>
-        </adresa>
-        <telefon></telefon>
-        <email></email>
-        <faks></faks>
+        <licni_podaci tip_lica="fizicko">
+            <ime/>
+            <prezime/>
+            <adresa>
+                <ulica/>
+                <broj/>
+                <postanski_broj/>
+                <mesto/>
+                <drzava/>
+            </adresa>
+        </licni_podaci>
+        
+        <licni_podaci tip_lica="pravno">
+            <ime/>
+            <adresa>
+                <ulica/>
+                <broj/>
+                <postanski_broj/>
+                <mesto/>
+                <drzava/>
+            </adresa>
+        </licni_podaci>
+        <telefon/>
+        <email/>
+        <faks/>
     </podaci_o_predstavniku>
 
     <podaci_o_zigu>
         <vrsta_ziga>
-            <individualni_zig />
-            <kolektivni_zig />
-            <zig_garancije />
+            <individualni_zig/>
+            <kolektivni_zig/>
+            <zig_garancije/>
         </vrsta_ziga>
         <vrsta_znaka>
-            <verbalni_znak />
-            <graficki_znak />
-            <kombinovani_znak />
-            <trodimenzionalni_znak />
-            <drugo></drugo>
+            <verbalni_znak/>
+            <graficki_znak/>
+            <kombinovani_znak/>
+            <trodimenzionalni_znak/>
+            <drugo/>
         </vrsta_znaka>
-        <izgled_znaka />
-        <naznacenje_boje></naznacenje_boje>
-        <transliteracija></transliteracija>
-        <prevod></prevod>
-        <opis></opis>
-        <brojevi_klasa_robe_i_usluga klasifikacija="Nicanska"></brojevi_klasa_robe_i_usluga>
+        <izgled_znaka/>
+        <naznacenje_boje/>
+        <transliteracija/>
+        <prevod/>
+        <opis/>
+        <brojevi_klasa_robe_i_usluga/>
         <pravo_prvenstva>
-            <zatrazeno />
-            <osnov></osnov>
+            <zatrazeno/>
+            <osnov/>
         </pravo_prvenstva>
     </podaci_o_zigu>
 
     <podaci_o_placenoj_taksi>
-        <osnovna_taksa></osnovna_taksa>
-        <za_klase klase=""></za_klase>
-        <za_graficko_resenje></za_graficko_resenje>
-        <ukupno></ukupno>
+        <osnovna_taksa/>
+        <za_klase klase=""/>
+        <za_graficko_resenje/>
+        <ukupno/>
     </podaci_o_placenoj_taksi>
 
     <prilozi>
-        <primerak_znaka />
-        <spisak_robe_i_usluga />
-        <punomocje />
-        <ranije_prilozeno_punomocje />
-        <naknadno_dostavljeno_punomocje />
-        <opsti_akt_o_zigu />
-        <dokaz_o_pravu_prvenstva />
-        <dokaz_o_uplati_takse />
+        <primerak_znaka/>
+        <spisak_robe_i_usluga/>
+        <punomocje/>
+        <ranije_prilozeno_punomocje/>
+        <naknadno_dostavljeno_punomocje/>
+        <opsti_akt_o_zigu/>
+        <dokaz_o_pravu_prvenstva/>
+        <dokaz_o_uplati_takse/>
     </prilozi>
 </zahtev_za_priznanje_ziga>

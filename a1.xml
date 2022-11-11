@@ -8,67 +8,65 @@
   </podaci_o_zavodu>
 
   <podaci_o_zahtevu>
-    <datum_podnosenja</podaci_o_zahtevu>
+    <datum_podnosenja/>
     <obrazac>A-1</obrazac>
   </podaci_o_zahtevu>
 
-  <podaci_o_podnosiocu >
+  <podaci_o_podnosiocu>
     <licni_podaci tip_lica="fizicko">
-    <ime></ime>
-    <prezime></prezime>
-    <adresa></adresa>
-    <drzavljanstvo></drzavljanstvo>
+      <ime/>
+      <prezime/>
+      <adresa/>
+      <drzavljanstvo/>
     </licni_podaci>
     <licni_podaci tip_lica="pravno">
-    <poslovno_ime></poslovno_ime>
-    <sediste></sediste>
+      <poslovno_ime/>
+      <sediste/>
     </licni_podaci>
-    <telefon></telefon>
-    <email></email>
-    <pseudonim></pseudonim>
-    <potpis></potpis>
+    <telefon/>
+    <email/>
+    <pseudonim/>
+    <potpis/>
   </podaci_o_podnosiocu>
 
   <podaci_punomocnika>
-    <ime></ime>
-    <prezime></prezime>
-    <adresa></adresa>
+    <ime/>
+    <prezime/>
+    <adresa/>
   </podaci_punomocnika>
- 
+
   <podaci_o_autorskom_delu>
-    <naslov></naslov>
-    <alternativni_naslov></alternativni_naslov>
+    <naslov/>
+    <alternativni_naslov/>
     <podaci_o_izvornom_delu>
-        <naslov></naslov>
-        <autor></autor>
+      <naslov/>
+      <autor/>
     </podaci_o_izvornom_delu>
-    <vrsta_autorskog_dela></vrsta_autorskog_dela>
-    <forma_autorskog_dela></forma_autorskog_dela>
-    <stvoreno_u_radnom_odnosu></stvoreno_u_radnom_odnosu>
-    <nacin_koriscenja></nacin_koriscenja>
+    <vrsta_autorskog_dela/>
+    <forma_autorskog_dela/>
+    <stvoreno_u_radnom_odnosu/>
+    <nacin_koriscenja/>
   </podaci_o_autorskom_delu>
 
-<podaci_o_autoru status="ziv">
-    <ime></ime>
-    <prezime></prezime>
-    <adresa></adresa>
-    <drzavljanstvo></drzavljanstvo>
-</podaci_o_autoru>
+  <podaci_o_autoru status="ziv">
+    <ime/>
+    <prezime/>
+    <adresa/>
+    <drzavljanstvo/>
+  </podaci_o_autoru>
 
-<podaci_o_autoru status="mrtav">
-    <ime></ime>
-    <prezime></prezime>
-    <adresa></adresa>
-    <drzavljanstvo></drzavljanstvo>
-    <godina_smrti></godina_smrti>
-</podaci_o_autoru>
-<podaci_o_autoru status="anoniman">
-</podaci_o_autoru>
- 
-<prilozi>
-    <opis_autorskog_dela></opis_autorskog_dela>
-    <primer_autorskog_dela></primer_autorskog_dela>
-</prilozi>
-  
-   </zahtev_za_autorska_prava
->>
+  <podaci_o_autoru status="mrtav">
+    <ime/>
+    <prezime/>
+    <adresa/>
+    <drzavljanstvo/>
+    <godina_smrti/>
+  </podaci_o_autoru>
+  <podaci_o_autoru status="anoniman"> </podaci_o_autoru>
+
+  <prilozi>
+    <opis_autorskog_dela/>
+    <primer_autorskog_dela/>
+  </prilozi>
+
+</zahtev_za_autorska_prava>
