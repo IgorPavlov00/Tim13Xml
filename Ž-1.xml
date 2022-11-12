@@ -11,7 +11,6 @@
             <prezime/>
             <adresa>
                 <ulica/>
-                <broj/>
                 <postanski_broj/>
                 <mesto/>
                 <drzava/>
@@ -20,13 +19,7 @@
 
         <licni_podaci tip_lica="pravno">
             <ime/>
-            <adresa>
-                <ulica/>
-                <broj/>
-                <postanski_broj/>
-                <mesto/>
-                <drzava/>
-            </adresa>
+            <adresa/>
         </licni_podaci>
         <telefon/>
         <email/>
@@ -34,56 +27,16 @@
     </podaci_o_podnosiocu>
 
     <podaci_o_punomocniku>
-        <licni_podaci tip_lica="fizicko">
-            <ime/>
-            <prezime/>
-            <adresa>
-                <ulica/>
-                <broj/>
-                <postanski_broj/>
-                <mesto/>
-                <drzava/>
-            </adresa>
-        </licni_podaci>
-        
-        <licni_podaci tip_lica="pravno">
-            <ime/>
-            <adresa>
-                <ulica/>
-                <broj/>
-                <postanski_broj/>
-                <mesto/>
-                <drzava/>
-            </adresa>
-        </licni_podaci>
+        <licni_podaci tip_lica="fizicko"> </licni_podaci>
+        <licni_podaci tip_lica="pravno"> </licni_podaci>
         <telefon/>
         <email/>
         <faks/>
     </podaci_o_punomocniku>
 
-    <podaci_o_predstavniku broj_podnosilaca="">
-        <licni_podaci tip_lica="fizicko">
-            <ime/>
-            <prezime/>
-            <adresa>
-                <ulica/>
-                <broj/>
-                <postanski_broj/>
-                <mesto/>
-                <drzava/>
-            </adresa>
-        </licni_podaci>
-        
-        <licni_podaci tip_lica="pravno">
-            <ime/>
-            <adresa>
-                <ulica/>
-                <broj/>
-                <postanski_broj/>
-                <mesto/>
-                <drzava/>
-            </adresa>
-        </licni_podaci>
+    <podaci_o_predstavniku>
+        <licni_podaci tip_lica="fizicko"> </licni_podaci>
+        <licni_podaci tip_lica="pravno"> </licni_podaci>
         <telefon/>
         <email/>
         <faks/>

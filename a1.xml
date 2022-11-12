@@ -8,11 +8,7 @@
   </podaci_o_zavodu>
 
   <podaci_o_zahtevu>
-
-    <datum_podnosenja></datum_podnosenja>
-
- 
-
+    <datum_podnosenja/>
     <obrazac>A-1</obrazac>
   </podaci_o_zahtevu>
 
@@ -30,7 +26,6 @@
     <telefon/>
     <email/>
     <pseudonim/>
-    <potpis/>
   </podaci_o_podnosiocu>
 
   <podaci_punomocnika>
@@ -57,6 +52,7 @@
     <prezime/>
     <adresa/>
     <drzavljanstvo/>
+    <pseudonim/>
   </podaci_o_autoru>
 
   <podaci_o_autoru status="mrtav">
@@ -65,6 +61,7 @@
     <adresa/>
     <drzavljanstvo/>
     <godina_smrti/>
+    <pseudonim/>
   </podaci_o_autoru>
   <podaci_o_autoru status="anoniman"> </podaci_o_autoru>
 

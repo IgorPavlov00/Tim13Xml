@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="zahtev_za_priznanje_ziga">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="podaci_o_zahtevu"/>
+        <xs:element ref="podaci_o_podnosiocu"/>
+        <xs:element ref="podaci_o_punomocniku" minOccurs="0"/>
+        <xs:element ref="podaci_o_predstavniku" minOccurs="0"/>
+        <xs:element ref="podaci_o_zigu"/>
+        <xs:element ref="podaci_o_placenoj_taksi"/>
+        <xs:element ref="prilozi"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="podaci_o_zahtevu">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="broj_prijave"/>
+        <xs:element ref="datum_podnosenja"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="broj_prijave" type="xs:NCName"/>
+  <xs:element name="datum_podnosenja">
+    <xs:complexType/>
+  </xs:element>
+  <xs:complexType name="podaci_o_osobi">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" ref="licni_podaci"/>
+      <xs:element ref="telefon"/>
+      <xs:element ref="email"/>
+      <xs:element ref="faks"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="podaci_o_podnosiocu" type="podaci_o_osobi"/>
+  <xs:element name="podaci_o_punomocniku" type="podaci_o_osobi"/>
+  <xs:element name="podaci_o_predstavniku" type="podaci_o_osobi"/>
+  <xs:element name="podaci_o_zigu">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="vrsta_ziga"/>
+        <xs:element ref="vrsta_znaka"/>
+        <xs:element ref="izgled_znaka"/>
+        <xs:element ref="naznacenje_boje"/>
+        <xs:element ref="transliteracija"/>
+        <xs:element ref="prevod"/>
+        <xs:element ref="opis"/>
+        <xs:element ref="brojevi_klasa_robe_i_usluga"/>
+        <xs:element ref="pravo_prvenstva"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vrsta_ziga">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="individualni_zig"/>
+        <xs:element ref="kolektivni_zig"/>
+        <xs:element ref="zig_garancije"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="individualni_zig">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="kolektivni_zig">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="zig_garancije">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="vrsta_znaka">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="verbalni_znak"/>
+        <xs:element ref="graficki_znak"/>
+        <xs:element ref="kombinovani_znak"/>
+        <xs:element ref="trodimenzionalni_znak"/>
+        <xs:element ref="drugo"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="verbalni_znak">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="graficki_znak">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="kombinovani_znak">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="trodimenzionalni_znak">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="drugo">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="izgled_znaka">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="naznacenje_boje">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="transliteracija">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="prevod">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="opis">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="brojevi_klasa_robe_i_usluga">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="pravo_prvenstva">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="zatrazeno"/>
+        <xs:element ref="osnov"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zatrazeno">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="osnov">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="podaci_o_placenoj_taksi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="osnovna_taksa"/>
+        <xs:element ref="za_klase"/>
+        <xs:element ref="za_graficko_resenje"/>
+        <xs:element ref="ukupno"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="osnovna_taksa">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="za_klase">
+    <xs:complexType>
+      <xs:attribute name="klase" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="za_graficko_resenje">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="ukupno">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="prilozi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="primerak_znaka"/>
+        <xs:element ref="spisak_robe_i_usluga"/>
+        <xs:element ref="punomocje"/>
+        <xs:element ref="ranije_prilozeno_punomocje"/>
+        <xs:element ref="naknadno_dostavljeno_punomocje"/>
+        <xs:element ref="opsti_akt_o_zigu"/>
+        <xs:element ref="dokaz_o_pravu_prvenstva"/>
+        <xs:element ref="dokaz_o_uplati_takse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="primerak_znaka">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="spisak_robe_i_usluga">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="punomocje">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="ranije_prilozeno_punomocje">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="naknadno_dostavljeno_punomocje">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="opsti_akt_o_zigu">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="dokaz_o_pravu_prvenstva">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="dokaz_o_uplati_takse">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="licni_podaci">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="ime"/>
+        <xs:element minOccurs="0" ref="prezime"/>
+        <xs:element minOccurs="0" ref="adresa"/>
+      </xs:sequence>
+      <xs:attribute name="tip_lica" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ime">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="prezime">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="adresa">
+    <xs:complexType>
+      <xs:sequence minOccurs="0">
+        <xs:element ref="ulica"/>
+        <xs:element ref="postanski_broj"/>
+        <xs:element ref="mesto"/>
+        <xs:element ref="drzava"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ulica">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="postanski_broj">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="mesto">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="drzava">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="telefon">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="email">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="faks">
+    <xs:complexType/>
+  </xs:element>
+</xs:schema>
