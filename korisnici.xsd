@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="korisnici">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="korisnik"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="korisnik">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="email"/>
+        <xs:element ref="lozinka"/>
+        <xs:element ref="ime"/>
+        <xs:element ref="prezime"/>
+      </xs:sequence>
+      <xs:attribute name="tip" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="email">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="lozinka">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="ime">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="prezime">
+    <xs:complexType/>
+  </xs:element>
+</xs:schema>

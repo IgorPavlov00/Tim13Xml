@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<korisnici>
+<korisnik tip="gradjanin">
+    <email></email>
+    <lozinka></lozinka>
+    <ime></ime>
+    <prezime></prezime>
+</korisnik>
+    <korisnik tip="sluzbenik">
+        <email></email>
+        <lozinka></lozinka>
+        <ime></ime>
+        <prezime></prezime>
+    </korisnik>
+</korisnici>
