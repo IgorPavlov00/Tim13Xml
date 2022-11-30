@@ -8,66 +8,67 @@
   </podaci_o_zavodu>
 
   <podaci_o_zahtevu>
-    <datum_podnosenja/>
+    <datum_podnosenja>11.22.2022</datum_podnosenja>
     <obrazac>A-1</obrazac>
   </podaci_o_zahtevu>
 
   <podaci_o_podnosiocu>
     <licni_podaci tip_lica="fizicko">
-      <ime/>
-      <prezime/>
-      <adresa/>
-      <drzavljanstvo/>
+      <ime>Igor</ime>
+      <prezime>Pavlov</prezime>
+      <adresa>Adi Endrea 33</adresa>
+      <drzavljanstvo>srpsko</drzavljanstvo>
     </licni_podaci>
     <licni_podaci tip_lica="pravno">
-      <poslovno_ime/>
-      <sediste/>
+      <poslovno_ime>Igor</poslovno_ime>
+      <sediste>Adi Endrea 33</sediste>
     </licni_podaci>
-    <telefon/>
-    <email/>
-    <pseudonim/>
+    <telefon>021345667</telefon>
+    <email>i@gmail.com</email>
+    <pseudonim>ip</pseudonim>
   </podaci_o_podnosiocu>
 
   <podaci_punomocnika>
-    <ime/>
-    <prezime/>
-    <adresa/>
+    <ime>Ognjen</ime>
+    <prezime>Popovic</prezime>
+    <adresa>Manjaca 69</adresa>
   </podaci_punomocnika>
 
   <podaci_o_autorskom_delu>
-    <naslov/>
-    <alternativni_naslov/>
+    <naslov>Naslov</naslov>
+    <alternativni_naslov>ANaslov</alternativni_naslov>
     <podaci_o_izvornom_delu>
-      <naslov/>
-      <autor/>
+      <naslov>Inaslov</naslov>
+      <autor>Nikola</autor>
     </podaci_o_izvornom_delu>
-    <vrsta_autorskog_dela/>
-    <forma_autorskog_dela/>
-    <stvoreno_u_radnom_odnosu/>
-    <nacin_koriscenja/>
+    <vrsta_autorskog_dela>Triler</vrsta_autorskog_dela>
+    <forma_autorskog_dela>Pisana</forma_autorskog_dela>
+    <stvoreno_u_radnom_odnosu>aaa</stvoreno_u_radnom_odnosu>
+    <nacin_koriscenja>aaa</nacin_koriscenja>
   </podaci_o_autorskom_delu>
 
-  <podaci_o_autoru status="ziv">
-    <ime/>
-    <prezime/>
-    <adresa/>
-    <drzavljanstvo/>
-    <pseudonim/>
-  </podaci_o_autoru>
+  <podaci_o_autoru_ziv>
+    <ime>Igor</ime>
+    <prezime>Pavlov</prezime>
+    <adresa>Adi Endrea 33</adresa>
+    <drzavljanstvo>srpsko</drzavljanstvo>
+    <pseudonim>ip</pseudonim>
+  </podaci_o_autoru_ziv>
 
-  <podaci_o_autoru status="mrtav">
-    <ime/>
-    <prezime/>
-    <adresa/>
-    <drzavljanstvo/>
-    <godina_smrti/>
-    <pseudonim/>
-  </podaci_o_autoru>
-  <podaci_o_autoru status="anoniman"> </podaci_o_autoru>
+  <podaci_o_autoru_mrtav>
+    <ime>Igor</ime>
+    <prezime>Pavlov</prezime>
+    <adresa>Adi Endrea 33</adresa>
+    <drzavljanstvo>srpsko</drzavljanstvo>
+    <pseudonim>ip</pseudonim>
+    <godina_smrti>2078</godina_smrti>
+    <pseudonim>ip</pseudonim>
+  </podaci_o_autoru_mrtav>
+  <podaci_o_autoru status="anoniman"></podaci_o_autoru>
 
   <prilozi>
-    <opis_autorskog_dela/>
-    <primer_autorskog_dela/>
+    <opis_autorskog_dela>opis</opis_autorskog_dela>
+    <primer_autorskog_dela>primer</primer_autorskog_dela>
   </prilozi>
 
 </zahtev_za_autorska_prava>
