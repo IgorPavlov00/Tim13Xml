@@ -1,4 +1,4 @@
-package Tim13.Model;
+package Tim13.XmlProjekat.Model;
 
 public class Osoba {
 

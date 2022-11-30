@@ -1,4 +1,4 @@
-package Tim13.Model;
+package Tim13.XmlProjekat.Model;
 
 import javax.xml.bind.annotation.*;
 import java.util.Date;
