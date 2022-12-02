@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><zahtev_za_priznanje_ziga>
+
+    <podaci_o_zahtevu>
+        <broj_prijave>Ž-</broj_prijave>
+        <datum_podnosenja/>
+    </podaci_o_zahtevu>
+
+    <podaci_o_podnosiocu>
+        <licni_podaci tip_lica="fizicko">
+            <ime/>
+            <prezime/>
+            <adresa>
+                <ulica/>
+                <postanski_broj/>
+                <mesto/>
+                <drzava/>
+            </adresa>
+        </licni_podaci>
+
+        <licni_podaci tip_lica="pravno">
+            <ime/>
+            <adresa/>
+        </licni_podaci>
+        <telefon/>
+        <email/>
+        <faks/>
+    </podaci_o_podnosiocu>
+
+    <podaci_o_punomocniku>
+        <licni_podaci tip_lica="fizicko"> </licni_podaci>
+        <licni_podaci tip_lica="pravno"> </licni_podaci>
+        <telefon/>
+        <email/>
+        <faks/>
+    </podaci_o_punomocniku>
+
+    <podaci_o_predstavniku>
+        <licni_podaci tip_lica="fizicko"> </licni_podaci>
+        <licni_podaci tip_lica="pravno"> </licni_podaci>
+        <telefon/>
+        <email/>
+        <faks/>
+    </podaci_o_predstavniku>
+
+    <podaci_o_zigu>
+        <vrsta_ziga>
+            <individualni_zig/>
+            <kolektivni_zig/>
+            <zig_garancije/>
+        </vrsta_ziga>
+        <vrsta_znaka>
+            <verbalni_znak/>
+            <graficki_znak/>
+            <kombinovani_znak/>
+            <trodimenzionalni_znak/>
+            <drugo/>
+        </vrsta_znaka>
+        <izgled_znaka/>
+        <naznacenje_boje/>
+        <transliteracija/>
+        <prevod/>
+        <opis/>
+        <brojevi_klasa_robe_i_usluga/>
+        <pravo_prvenstva>
+            <zatrazeno/>
+            <osnov/>
+        </pravo_prvenstva>
+    </podaci_o_zigu>
+
+    <podaci_o_placenoj_taksi>
+        <osnovna_taksa/>
+        <za_klase klase=""/>
+        <za_graficko_resenje/>
+        <ukupno/>
+    </podaci_o_placenoj_taksi>
+
+    <prilozi>
+        <primerak_znaka/>
+        <spisak_robe_i_usluga/>
+        <punomocje/>
+        <ranije_prilozeno_punomocje/>
+        <naknadno_dostavljeno_punomocje/>
+        <opsti_akt_o_zigu/>
+        <dokaz_o_pravu_prvenstva/>
+        <dokaz_o_uplati_takse/>
+    </prilozi>
+</zahtev_za_priznanje_ziga>

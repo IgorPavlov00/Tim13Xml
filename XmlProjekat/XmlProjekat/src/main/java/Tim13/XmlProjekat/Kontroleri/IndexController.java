@@ -14,10 +14,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 
@@ -31,12 +28,14 @@ public class IndexController {
         // xml ucitavanje
         // samo zameni komentare kodom iz main f-je
         File xmlFile = new File("..\\a1.xml");
+        File xmlZ1 = new File("..\\z1.xml");
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.parse(xmlFile);
+        Document z1 = builder.parse(xmlZ1);
         getA1(doc);
+        getZ1(z1);
 
-        TransformerFactory t=TransformerFactory.newInstance();
         String filepath="..\\a11.xml";
         try (FileOutputStream output =
                      new FileOutputStream(filepath)) {
@@ -45,6 +44,13 @@ public class IndexController {
             e.printStackTrace();
         }
 
+        String filepathZ="..\\Z1_1.xml";
+        try (FileOutputStream output =
+                     new FileOutputStream(filepathZ)) {
+            writeXml(z1, output);
+        } catch (IOException | TransformerException e) {
+            e.printStackTrace();
+        }
         return "index.html";
     }
 
@@ -244,4 +250,83 @@ public class IndexController {
 
     }
     // ovde ubaci funkciju za ucitavanje xml-a
+
+    private static void getZ1(Document doc)
+    {
+        System.out.println("Podaci o dokumentu Z1");
+        printNode(doc);
+    }
+
+    private static void printNode(Node node) {
+
+        if (node == null)
+            return;
+
+        if (node instanceof Document) {
+
+            System.out.println("START_DOCUMENT");
+
+            Document doc = (Document) node;
+            printNode(doc.getDocumentElement());
+        } else if (node instanceof Element) {
+
+            Element element = (Element) node;
+
+            System.out.print("START_ELEMENT: " + element.getTagName());
+
+            NamedNodeMap attributes = element.getAttributes();
+
+            if (attributes.getLength() > 0) {
+
+                System.out.print(", ATTRIBUTES: ");
+
+                for (int i = 0; i < attributes.getLength(); i++) {
+                    Node attribute = attributes.item(i);
+                    printNode(attribute);
+                    if (i < attributes.getLength()-1)
+                        System.out.print(", ");
+                }
+            }
+
+            System.out.println();
+
+            NodeList children = element.getChildNodes();
+
+            if (children != null) {
+                for (int i = 0; i < children.getLength(); i++) {
+                    Node aChild = children.item(i);
+                    printNode(aChild);
+                }
+            }
+        }
+        else if (node instanceof Attr) {
+
+            Attr attr = (Attr) node;
+            System.out.print(attr.getName() + "=" + attr.getValue());
+
+        }
+        else if (node instanceof Text) {
+            Text text = (Text) node;
+
+            if (text.getTextContent().trim().length() > 0)
+                System.out.println("CHARACTERS: " + text.getTextContent().trim());
+        }
+        else if (node instanceof CDATASection) {
+            System.out.println("CDATA: " + node.getNodeValue());
+        }
+        else if (node instanceof Comment) {
+            System.out.println("COMMENT: " + node.getNodeValue());
+        }
+        else if (node instanceof ProcessingInstruction) {
+            System.out.print("PROCESSING INSTRUCTION: ");
+
+            ProcessingInstruction instruction = (ProcessingInstruction) node;
+            System.out.print("data: " + instruction.getData());
+            System.out.println(", target: " + instruction.getTarget());
+        }
+        else if (node instanceof Entity) {
+            Entity entity = (Entity) node;
+            System.out.println("ENTITY: " + entity.getNotationName());
+        }
+    }
 }
