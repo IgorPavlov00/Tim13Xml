@@ -8,7 +8,7 @@
   </podaci_o_zavodu>
 
   <podaci_o_zahtevu>
-    <datum_podnosenja>11.22.2022</datum_podnosenja>
+    <datum_podnosenja>22/11/2022</datum_podnosenja>
     <obrazac>A-1</obrazac>
   </podaci_o_zahtevu>
 
@@ -16,12 +16,11 @@
     <licni_podaci tip_lica="fizicko">
       <ime>Igor</ime>
       <prezime>Pavlov</prezime>
-      <adresa>Adi Endrea 33</adresa>
+      <adresa>
+        <ulica>Adi Endrea 33</ulica>
+        <mesto>Novi Sad</mesto>
+      </adresa>
       <drzavljanstvo>srpsko</drzavljanstvo>
-    </licni_podaci>
-    <licni_podaci tip_lica="pravno">
-      <poslovno_ime>Igor</poslovno_ime>
-      <sediste>Adi Endrea 33</sediste>
     </licni_podaci>
     <telefon>021345667</telefon>
     <email>i@gmail.com</email>
@@ -31,7 +30,10 @@
   <podaci_punomocnika>
     <ime>Ognjen</ime>
     <prezime>Popovic</prezime>
-    <adresa>Manjaca 69</adresa>
+    <adresa>
+      <ulica>Manjaca 69</ulica>
+      <mesto>Novi Sad</mesto>
+    </adresa>
   </podaci_punomocnika>
 
   <podaci_o_autorskom_delu>
@@ -43,32 +45,23 @@
     </podaci_o_izvornom_delu>
     <vrsta_autorskog_dela>Triler</vrsta_autorskog_dela>
     <forma_autorskog_dela>Pisana</forma_autorskog_dela>
-    <stvoreno_u_radnom_odnosu>aaa</stvoreno_u_radnom_odnosu>
+    <stvoreno_u_radnom_odnosu>false</stvoreno_u_radnom_odnosu>
     <nacin_koriscenja>aaa</nacin_koriscenja>
   </podaci_o_autorskom_delu>
 
   <podaci_o_autoru_ziv>
     <ime>Igor</ime>
     <prezime>Pavlov</prezime>
-    <adresa>Adi Endrea 33</adresa>
+    <adresa>
+      <ulica>Adi Endrea 33</ulica>
+      <mesto>Novi Sad</mesto></adresa>
     <drzavljanstvo>srpsko</drzavljanstvo>
     <pseudonim>ip</pseudonim>
   </podaci_o_autoru_ziv>
-
-  <podaci_o_autoru_mrtav>
-    <ime>Igor</ime>
-    <prezime>Pavlov</prezime>
-    <adresa>Adi Endrea 33</adresa>
-    <drzavljanstvo>srpsko</drzavljanstvo>
-    <pseudonim>ip</pseudonim>
-    <godina_smrti>2078</godina_smrti>
-    <pseudonim>ip</pseudonim>
-  </podaci_o_autoru_mrtav>
-  <podaci_o_autoru status="anoniman"></podaci_o_autoru>
-
+  
   <prilozi>
-    <opis_autorskog_dela>opis</opis_autorskog_dela>
-    <primer_autorskog_dela>primer</primer_autorskog_dela>
+    <opis_autorskog_dela>true</opis_autorskog_dela>
+    <primer_autorskog_dela>true</primer_autorskog_dela>
   </prilozi>
 
 </zahtev_za_autorska_prava>

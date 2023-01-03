@@ -1,87 +1,71 @@
 <zahtev_za_priznanje_ziga>
 
     <podaci_o_zahtevu>
-        <broj_prijave>Ž-</broj_prijave>
-        <datum_podnosenja/>
+        <broj_prijave>Ž-05/1122</broj_prijave>
+        <datum_podnosenja>15/11/2022</datum_podnosenja>
     </podaci_o_zahtevu>
 
     <podaci_o_podnosiocu>
         <licni_podaci tip_lica="fizicko">
-            <ime/>
-            <prezime/>
+            <ime>Pera</ime>
+            <prezime>Peric</prezime>
             <adresa>
-                <ulica/>
-                <postanski_broj/>
-                <mesto/>
-                <drzava/>
+                <ulica>Fejes Klare 5</ulica>
+                <postanski_broj>21000</postanski_broj>
+                <mesto>Novi Sad</mesto>
+                <drzava>Srbija</drzava>
             </adresa>
         </licni_podaci>
 
-        <licni_podaci tip_lica="pravno">
-            <ime/>
-            <adresa/>
-        </licni_podaci>
-        <telefon/>
-        <email/>
-        <faks/>
+        <telefon>0651234567</telefon>
+        <email>peraperic@gmail.com</email>
     </podaci_o_podnosiocu>
 
     <podaci_o_punomocniku>
-        <licni_podaci tip_lica="fizicko"> </licni_podaci>
-        <licni_podaci tip_lica="pravno"> </licni_podaci>
-        <telefon/>
-        <email/>
-        <faks/>
+        <licni_podaci tip_lica="pravno"> 
+            <ime>IT Solutions DOO</ime>
+            <adresa>
+                <ulica>Bulevar Oslobođenja 2</ulica>
+                <postanski_broj>11000</postanski_broj>
+                <mesto>Beograd</mesto>
+                <drzava>Srbija</drzava>
+            </adresa>
+        </licni_podaci>
+        <telefon>011123456</telefon>
+        <email>info@itsolutions.com</email>
     </podaci_o_punomocniku>
-
-    <podaci_o_predstavniku>
-        <licni_podaci tip_lica="fizicko"> </licni_podaci>
-        <licni_podaci tip_lica="pravno"> </licni_podaci>
-        <telefon/>
-        <email/>
-        <faks/>
-    </podaci_o_predstavniku>
 
     <podaci_o_zigu>
         <vrsta_ziga>
-            <individualni_zig/>
-            <kolektivni_zig/>
-            <zig_garancije/>
+            <individualni_zig>true</individualni_zig>
         </vrsta_ziga>
         <vrsta_znaka>
-            <verbalni_znak/>
-            <graficki_znak/>
-            <kombinovani_znak/>
-            <trodimenzionalni_znak/>
-            <drugo/>
+            <graficki_znak>true</graficki_znak>
         </vrsta_znaka>
-        <izgled_znaka/>
-        <naznacenje_boje/>
-        <transliteracija/>
-        <prevod/>
-        <opis/>
-        <brojevi_klasa_robe_i_usluga/>
+        <izgled_znaka>https://localhost:8083/zahtev/51122/izgled</izgled_znaka>
+        <naznacenje_boje>plava</naznacenje_boje>
+        <opis>opis</opis>
+        <brojevi_klasa_robe_i_usluga>9</brojevi_klasa_robe_i_usluga>
         <pravo_prvenstva>
-            <zatrazeno/>
-            <osnov/>
+            <zatrazeno>false</zatrazeno>
         </pravo_prvenstva>
     </podaci_o_zigu>
 
     <podaci_o_placenoj_taksi>
-        <osnovna_taksa/>
-        <za_klase klase=""/>
-        <za_graficko_resenje/>
-        <ukupno/>
+        <osnovna_taksa>1000</osnovna_taksa>
+        <za_klase klase="9">2000</za_klase>
+        <za_graficko_resenje>1500</za_graficko_resenje>
+        <ukupno>4500</ukupno>
     </podaci_o_placenoj_taksi>
 
     <prilozi>
-        <primerak_znaka/>
-        <spisak_robe_i_usluga/>
-        <punomocje/>
-        <ranije_prilozeno_punomocje/>
-        <naknadno_dostavljeno_punomocje/>
-        <opsti_akt_o_zigu/>
-        <dokaz_o_pravu_prvenstva/>
-        <dokaz_o_uplati_takse/>
+        <primerak_znaka>true</primerak_znaka>
+        <spisak_robe_i_usluga>true</spisak_robe_i_usluga>
+        <punomocje>true</punomocje>
+        <ranije_prilozeno_punomocje>true</ranije_prilozeno_punomocje>
+        <naknadno_dostavljeno_punomocje>false</naknadno_dostavljeno_punomocje>
+        <opsti_akt_o_zigu>true</opsti_akt_o_zigu>
+        <dokaz_o_pravu_prvenstva>false</dokaz_o_pravu_prvenstva>
+        <dokaz_o_uplati_takse>true</dokaz_o_uplati_takse>
     </prilozi>
 </zahtev_za_priznanje_ziga>

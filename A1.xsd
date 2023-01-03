@@ -6,13 +6,18 @@
         <xs:element ref="podaci_o_zavodu"/>
         <xs:element ref="podaci_o_zahtevu"/>
         <xs:element ref="podaci_o_podnosiocu"/>
-        <xs:element ref="podaci_punomocnika"/>
+        <xs:element ref="podaci_punomocnika" minOccurs="0"/>
         <xs:element ref="podaci_o_autorskom_delu"/>
-        <xs:element maxOccurs="unbounded" ref="podaci_o_autoru"/>
+        <xs:choice>
+          <xs:element ref="podaci_o_autoru_ziv"/>
+          <xs:element ref="podaci_o_autoru_mrtav"/>
+          <xs:element ref="podaci_o_autoru_anoniman"/>
+        </xs:choice>
         <xs:element ref="prilozi"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  
   <xs:element name="podaci_o_zavodu">
     <xs:complexType>
       <xs:sequence>
@@ -22,6 +27,7 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="naziv" type="xs:string"/>
+  
   <xs:element name="podaci_o_zahtevu">
     <xs:complexType>
       <xs:sequence>
@@ -30,49 +36,27 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="datum_podnosenja">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="obrazac" type="xs:NCName"/>
+  
+  <xs:element name="datum_podnosenja" type="xs:string"/>
+  <xs:element name="obrazac" type="xs:string"/>
+  
   <xs:element name="podaci_o_podnosiocu">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="licni_podaci"/>
+        <xs:element ref="licni_podaci" maxOccurs="1"/>
         <xs:element ref="telefon"/>
         <xs:element ref="email"/>
         <xs:element ref="pseudonim"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="licni_podaci">
-    <xs:complexType>
-      <xs:choice>
-        <xs:sequence>
-          <xs:element ref="poslovno_ime"/>
-          <xs:element ref="sediste"/>
-        </xs:sequence>
-        <xs:sequence>
-          <xs:element ref="ime"/>
-          <xs:element ref="prezime"/>
-          <xs:element ref="adresa"/>
-          <xs:element ref="drzavljanstvo"/>
-        </xs:sequence>
-      </xs:choice>
-      <xs:attribute name="tip_lica" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="poslovno_ime">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="sediste">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="telefon">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="email">
-    <xs:complexType/>
-  </xs:element>
+  
+  <xs:element name="licni_podaci" type="LicniPodaciType"/>
+  <xs:element name="poslovno_ime" type="xs:string"/>
+  <xs:element name="sediste" type="AdresaType"/>
+  <xs:element name="telefon" type="xs:string"/>
+  <xs:element name="email" type="xs:string"/>
+  
   <xs:element name="podaci_punomocnika">
     <xs:complexType>
       <xs:sequence>
@@ -82,12 +66,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  
   <xs:element name="podaci_o_autorskom_delu">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="naslov"/>
-        <xs:element ref="alternativni_naslov"/>
-        <xs:element ref="podaci_o_izvornom_delu"/>
+        <xs:element ref="alternativni_naslov" minOccurs="0"/>
+        <xs:element ref="podaci_o_izvornom_delu" minOccurs="0"/>
         <xs:element ref="vrsta_autorskog_dela"/>
         <xs:element ref="forma_autorskog_dela"/>
         <xs:element ref="stvoreno_u_radnom_odnosu"/>
@@ -95,87 +80,85 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="alternativni_naslov">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="podaci_o_izvornom_delu">
-    <xs:complexType>
+  
+  <xs:element name="alternativni_naslov" type="xs:string"/>
+  <xs:element name="podaci_o_izvornom_delu" type="IzvornoDeloType"/>
+  <xs:element name="autor" type="xs:string"/>
+  <xs:element name="vrsta_autorskog_dela" type="xs:string"/>
+  <xs:element name="forma_autorskog_dela" type="xs:string"/>
+  <xs:element name="stvoreno_u_radnom_odnosu" type="xs:boolean"/>
+  <xs:element name="nacin_koriscenja" type="xs:string"/>
+  <xs:element name="podaci_o_autoru_ziv" type="AutorType"/>
+  <xs:element name="podaci_o_autoru_mrtav" type="PreminuoAutorType"/>
+  <xs:element name="podaci_o_autoru_anoniman" type="xs:boolean"/>
+  <xs:element name="prilozi" type="PriloziType"/>
+  <xs:element name="adresa" type="AdresaType"/>
+  
+  <xs:complexType name="LicniPodaciType">
+    <xs:choice>
       <xs:sequence>
-        <xs:element ref="naslov"/>
-        <xs:element ref="autor"/>
+        <xs:element ref="ime"/>
+        <xs:element ref="prezime"/>
+        <xs:element ref="adresa"/>
+        <xs:element ref="drzavljanstvo"/>
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="autor">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="vrsta_autorskog_dela">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="forma_autorskog_dela">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="stvoreno_u_radnom_odnosu">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="nacin_koriscenja">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="podaci_o_autoru">
-    <xs:complexType>
       <xs:sequence>
-        <xs:sequence minOccurs="0">
-          <xs:element ref="ime"/>
-          <xs:element ref="prezime"/>
-          <xs:element ref="adresa"/>
-          <xs:element ref="drzavljanstvo"/>
+        <xs:element ref="poslovno_ime"/>
+        <xs:element ref="sediste"/>
+      </xs:sequence>
+    </xs:choice>
+    <xs:attribute name="tip_lica" use="required" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="IzvornoDeloType">
+    <xs:sequence>
+      <xs:element ref="naslov"/>
+      <xs:element ref="autor"/>
+    </xs:sequence>
+   </xs:complexType>
+  
+  <xs:complexType name="AdresaType">
+    <xs:sequence>
+      <xs:element ref="ulica"/>
+      <xs:element ref="mesto"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="AutorType">
+    <xs:sequence>
+      <xs:element ref="ime"/>
+      <xs:element ref="prezime"/>
+      <xs:element ref="adresa"/>
+      <xs:element ref="drzavljanstvo"/>
+      <xs:element ref="pseudonim"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="PreminuoAutorType">
+    <xs:complexContent>
+      <xs:extension base="AutorType">
+        <xs:sequence>
+          <xs:element ref="godina_smrti"/>
         </xs:sequence>
-        <xs:element minOccurs="0" ref="godina_smrti"/>
-        <xs:element minOccurs="0" ref="pseudonim"/>
-      </xs:sequence>
-      <xs:attribute name="status" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="godina_smrti">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="prilozi">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="opis_autorskog_dela"/>
-        <xs:element ref="primer_autorskog_dela"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="opis_autorskog_dela">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="primer_autorskog_dela">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="adresa">
-    <xs:complexType>
-      <xs:sequence minOccurs="0">
-        <xs:element ref="ulica"/>
-        <xs:element ref="mesto"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="PriloziType">
+    <xs:sequence>
+      <xs:element ref="opis_autorskog_dela"/>
+      <xs:element ref="primer_autorskog_dela"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="opis_autorskog_dela" type="xs:boolean"/>
+  <xs:element name="primer_autorskog_dela" type="xs:boolean"/>
+  <xs:element name="mesto" type="xs:string"/>
   <xs:element name="ulica" type="xs:string"/>
-  <xs:element name="mesto" type="xs:NCName"/>
-  <xs:element name="ime">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="prezime">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="drzavljanstvo">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="pseudonim">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="naslov">
-    <xs:complexType/>
-  </xs:element>
+  <xs:element name="ime" type="xs:string"/>
+  <xs:element name="prezime" type="xs:string"/>
+  <xs:element name="drzavljanstvo" type="xs:string"/>
+  <xs:element name="pseudonim" type="xs:string"/>
+  <xs:element name="naslov" type="xs:string"/>
+  <xs:element name="godina_smrti" type="xs:integer"/>
 </xs:schema>
