@@ -49,6 +49,20 @@
 			<artifactId>xmldb</artifactId>
 			<version>1.0</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/fop -->
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>fop</artifactId>
+			<version>2.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.saxon/saxon -->
+		<dependency>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>saxon</artifactId>
+			<version>8.7</version>
+		</dependency>
+
 	</dependencies>
 
 
