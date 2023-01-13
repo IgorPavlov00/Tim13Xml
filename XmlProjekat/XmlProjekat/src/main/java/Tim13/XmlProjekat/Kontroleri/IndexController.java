@@ -1,22 +1,23 @@
 package Tim13.XmlProjekat.Kontroleri;
 
 import Tim13.XmlProjekat.util.ConnectionProperties;
+import net.sf.saxon.TransformerFactoryImpl;
+import org.apache.fop.apps.FOUserAgent;
+import org.apache.fop.apps.Fop;
+import org.apache.fop.apps.FopFactory;
+import org.apache.fop.apps.MimeConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import javax.xml.transform.stream.StreamSource;
+import java.io.*;
 
 import org.exist.xmldb.EXistResource;
 import org.xmldb.api.DatabaseManager;
@@ -300,6 +301,8 @@ public class IndexController {
         store(conn=ConnectionProperties.loadProperties(),args);
         String[] args2={"/db/sample/library","a1.xml"};
         retrive(ConnectionProperties.loadProperties(),args2);
+        generatePDF();
+        generateXHTML();
         return "index.html";
     }
     public static void retrive(ConnectionProperties conn, String args[]) throws Exception {
@@ -520,5 +523,80 @@ public class IndexController {
         } else {
             return col;
         }
+    }
+    private void generatePDF() throws Exception {
+
+        FopFactory fopFactory= FopFactory.newInstance(new File("../fop.xconf"));
+
+        TransformerFactory transformerFactory = new TransformerFactoryImpl();
+
+
+        final String INPUT_FILE = "../a1.xml";
+
+         final String XSL_FILE = "../a1.xsl";
+
+        final String OUTPUT_FILE = "../a1.pdf";
+
+        // Point to the XSL-FO file
+        File xslFile = new File(XSL_FILE);
+
+        // Create transformation source
+        StreamSource transformSource = new StreamSource(xslFile);
+
+        // Initialize the transformation subject
+        StreamSource source = new StreamSource(new File(INPUT_FILE));
+
+        // Initialize user agent needed for the transformation
+        FOUserAgent userAgent = fopFactory.newFOUserAgent();
+
+        // Create the output stream to store the results
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+
+        // Initialize the XSL-FO transformer object
+        Transformer xslFoTransformer = transformerFactory.newTransformer(transformSource);
+
+        // Construct FOP instance with desired output format
+        Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outStream);
+
+        // Resulting SAX events
+        Result res = new SAXResult(fop.getDefaultHandler());
+
+        // Start XSLT transformation and FOP processing
+        xslFoTransformer.transform(source, res);
+
+        // Generate PDF file
+        File pdfFile = new File(OUTPUT_FILE);
+        if (!pdfFile.getParentFile().exists()) {
+            System.out.println("[INFO] A new directory is created: " + pdfFile.getParentFile().getAbsolutePath() + ".");
+            pdfFile.getParentFile().mkdir();
+        }
+
+        OutputStream out = new BufferedOutputStream(new FileOutputStream(pdfFile));
+        out.write(outStream.toByteArray());
+
+
+
+        System.out.println("[INFO] End.");
+
+    }
+    private void generateXHTML() throws Exception {
+try {
+    TransformerFactory tFactory = TransformerFactory.newInstance();
+
+    Source xslDoc = new StreamSource("../a1html.xsl");
+
+    Source xmlDoc = new StreamSource("../a1.xml");
+
+    String outputFileName = "../a1.xhtml";
+
+    OutputStream htmlFile = new FileOutputStream(outputFileName);
+
+    Transformer trasform = tFactory.newTransformer(xslDoc);
+
+    trasform.transform(xmlDoc, new StreamResult(htmlFile));
+}catch (Exception exception){
+    exception.printStackTrace();
+}
+
     }
 }
