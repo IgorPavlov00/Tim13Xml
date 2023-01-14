@@ -6,9 +6,16 @@ import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+import org.exist.xmldb.EXistResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.w3c.dom.*;
+import org.xmldb.api.DatabaseManager;
+import org.xmldb.api.base.Collection;
+import org.xmldb.api.base.Database;
+import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.CollectionManagementService;
+import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,18 +26,66 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 
-import org.exist.xmldb.EXistResource;
-import org.xmldb.api.DatabaseManager;
-import org.xmldb.api.base.Collection;
-import org.xmldb.api.base.Database;
-import org.xmldb.api.base.XMLDBException;
-import org.xmldb.api.modules.CollectionManagementService;
-import org.xmldb.api.modules.XMLResource;
-
 @Controller
 @RequestMapping("")
 public class IndexController {
-  private static ConnectionProperties conn;
+    private static ConnectionProperties conn;
+
+
+    @RequestMapping("/")
+    public String index() throws Exception {
+        System.out.println("Pocetna strana!");
+        // xml ucitavanje
+        // samo zameni komentare kodom iz main f-je
+        File xmlFile = new File("..\\xml\\a1.xml");
+        File xmlZ1 = new File("..\\xml\\z1.xml");
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(xmlFile);
+        Document z1 = builder.parse(xmlZ1);
+        getA1(doc);
+        getZ1(z1);
+
+        String filepath = "..\\xml\\a11.xml";
+        try (FileOutputStream output =
+                     new FileOutputStream(filepath)) {
+            writeXml(doc, output);
+        } catch (IOException | TransformerException e) {
+            e.printStackTrace();
+        }
+
+        String filepathZ = "..\\xml\\Z1_1.xml";
+        try (FileOutputStream output =
+                     new FileOutputStream(filepathZ)) {
+            writeXml(z1, output);
+        } catch (IOException | TransformerException e) {
+            e.printStackTrace();
+        }
+
+       /* // xml baza - upis i ucitavanje obrasca A1
+        String[] args = {"/db/sample/library", "a1.xml", "..\\xml\\a1.xml"};
+        store(conn = ConnectionProperties.loadProperties(), args);
+        String[] args2 = {"/db/sample/library", "a1.xml"};
+        retrive(ConnectionProperties.loadProperties(), args2);
+
+        // xml baza - upis i ucitavanje obrasca Z1
+        String[] argsZs = {"/db/sample/library", "z1.xml", "..\\xml\\z1.xml"};
+        store(conn = ConnectionProperties.loadProperties(), argsZs);
+        String[] argsZr = {"/db/sample/library", "z1.xml"};
+        retrive(ConnectionProperties.loadProperties(), argsZr);
+        */
+        // generisanje PDF i XHTML za A1
+        generatePDF("../xml/a1.xml", "../xsl/a1.xsl", "../pdf/a1.pdf");
+        generatePDF("../xml/a1.xml", "../xsl/a1ex.xsl", "../pdf/a1ex.pdf");
+        generateXHTML("../xml/a1.xml", "../xsl/a1html.xsl", "../xhtml/a1.xhtml");
+
+        // generisanje PDF i XHTML za Z1
+        generatePDF("../xml/z1.xml", "../xsl/z1.xsl", "../pdf/z1.pdf");
+        generatePDF("../xml/z1.xml", "../xsl/z1ex.xsl", "../pdf/z1ex.pdf");
+        generateXHTML("../xml/z1.xml", "../xsl/z1html.xsl", "../xhtml/z1.xhtml");
+        return "index.html";
+    }
+
     private static void writeXml(Document doc,
                                  OutputStream output)
             throws TransformerException {
@@ -207,7 +262,7 @@ public class IndexController {
 
     private static void getZ1(Document doc) {
         System.out.println("Podaci o dokumentu Z1");
-        printNode(doc);
+        //printNode(doc);
     }
 
     private static void printNode(Node node) {
@@ -267,44 +322,6 @@ public class IndexController {
         }
     }
 
-    @RequestMapping("/")
-    public String index() throws Exception {
-        System.out.println("Pocetna strana!");
-        // xml ucitavanje
-        // samo zameni komentare kodom iz main f-je
-        File xmlFile = new File("..\\a1.xml");
-        File xmlZ1 = new File("..\\z1.xml");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(xmlFile);
-        Document z1 = builder.parse(xmlZ1);
-        getA1(doc);
-        getZ1(z1);
-
-        String filepath = "..\\a11.xml";
-        try (FileOutputStream output =
-                     new FileOutputStream(filepath)) {
-            writeXml(doc, output);
-        } catch (IOException | TransformerException e) {
-            e.printStackTrace();
-        }
-
-        String filepathZ = "..\\Z1_1.xml";
-        try (FileOutputStream output =
-                     new FileOutputStream(filepathZ)) {
-            writeXml(z1, output);
-        } catch (IOException | TransformerException e) {
-            e.printStackTrace();
-        }
-
-        String[] args={"/db/sample/library","a1.xml","..\\a1.xml"};
-        store(conn=ConnectionProperties.loadProperties(),args);
-        String[] args2={"/db/sample/library","a1.xml"};
-        retrive(ConnectionProperties.loadProperties(),args2);
-        generatePDF();
-        generateXHTML();
-        return "index.html";
-    }
     public static void retrive(ConnectionProperties conn, String args[]) throws Exception {
 
 
@@ -378,8 +395,8 @@ public class IndexController {
             }
         }
     }
-    public static void store(ConnectionProperties conn, String args[]) throws Exception {
 
+    public static void store(ConnectionProperties conn, String args[]) throws Exception {
 
 
         // initialize collection and document identifiers
@@ -440,7 +457,7 @@ public class IndexController {
 
             File f = new File(filePath);
 
-            if(!f.canRead()) {
+            if (!f.canRead()) {
                 System.out.println("[ERROR] Cannot read the file: " + filePath);
                 return;
             }
@@ -454,15 +471,15 @@ public class IndexController {
         } finally {
 
             //don't forget to cleanup
-            if(res != null) {
+            if (res != null) {
                 try {
-                    ((EXistResource)res).freeResources();
+                    ((EXistResource) res).freeResources();
                 } catch (XMLDBException xe) {
                     xe.printStackTrace();
                 }
             }
 
-            if(col != null) {
+            if (col != null) {
                 try {
                     col.close();
                 } catch (XMLDBException xe) {
@@ -477,24 +494,24 @@ public class IndexController {
     }
 
     private static Collection getOrCreateCollection(String collectionUri, int pathSegmentOffset) throws XMLDBException {
-        System.out.println(conn.uri+collectionUri);
+        System.out.println(conn.uri + collectionUri);
         System.out.println(conn.user);
         System.out.println(conn.password);
         Collection col = DatabaseManager.getCollection(conn.uri + collectionUri, conn.user, conn.password);
 
         // create the collection if it does not exist
-        if(col == null) {
+        if (col == null) {
 
-            if(collectionUri.startsWith("/")) {
+            if (collectionUri.startsWith("/")) {
                 collectionUri = collectionUri.substring(1);
             }
 
             String pathSegments[] = collectionUri.split("/");
 
-            if(pathSegments.length > 0) {
+            if (pathSegments.length > 0) {
                 StringBuilder path = new StringBuilder();
 
-                for(int i = 0; i <= pathSegmentOffset; i++) {
+                for (int i = 0; i <= pathSegmentOffset; i++) {
                     path.append("/" + pathSegments[i]);
                 }
 
@@ -524,18 +541,12 @@ public class IndexController {
             return col;
         }
     }
-    private void generatePDF() throws Exception {
 
-        FopFactory fopFactory= FopFactory.newInstance(new File("../fop.xconf"));
+    private void generatePDF(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
+
+        FopFactory fopFactory = FopFactory.newInstance(new File("../fop.xconf"));
 
         TransformerFactory transformerFactory = new TransformerFactoryImpl();
-
-
-        final String INPUT_FILE = "../a1.xml";
-
-         final String XSL_FILE = "../a1.xsl";
-
-        final String OUTPUT_FILE = "../a1.pdf";
 
         // Point to the XSL-FO file
         File xslFile = new File(XSL_FILE);
@@ -575,28 +586,26 @@ public class IndexController {
         out.write(outStream.toByteArray());
 
 
-
         System.out.println("[INFO] End.");
 
     }
-    private void generateXHTML() throws Exception {
-try {
-    TransformerFactory tFactory = TransformerFactory.newInstance();
 
-    Source xslDoc = new StreamSource("../a1html.xsl");
+    private void generateXHTML(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
+        try {
+            TransformerFactory tFactory = TransformerFactory.newInstance();
 
-    Source xmlDoc = new StreamSource("../a1.xml");
+            Source xslDoc = new StreamSource(XSL_FILE);
 
-    String outputFileName = "../a1.xhtml";
+            Source xmlDoc = new StreamSource(INPUT_FILE);
 
-    OutputStream htmlFile = new FileOutputStream(outputFileName);
+            OutputStream xhtmlFile = new FileOutputStream(OUTPUT_FILE);
 
-    Transformer trasform = tFactory.newTransformer(xslDoc);
+            Transformer transformer = tFactory.newTransformer(xslDoc);
 
-    trasform.transform(xmlDoc, new StreamResult(htmlFile));
-}catch (Exception exception){
-    exception.printStackTrace();
-}
+            transformer.transform(xmlDoc, new StreamResult(xhtmlFile));
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
     }
 }

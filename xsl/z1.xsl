@@ -1,17 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 
     <xsl:template match="/">
-        <fo:root font-family="Calibri"
-            xmlns:fo="http://www.w3.org/1999/XSL/Format"
-            xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml">
-            <fo:layout-master-set xmlns:rx="http://www.renderx.com/XSL/Extensions"
-                xmlns:o="urn:schemas-microsoft-com:office:office"
-                xmlns:v="urn:schemas-microsoft-com:vml"
-                xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint"
-                xmlns:aml="http://schemas.microsoft.com/aml/2001/core"
-                xmlns:w10="urn:schemas-microsoft-com:office:word"
-                xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+        <fo:root font-family="Calibri">
+            <fo:layout-master-set>
                 <fo:simple-page-master master-name="section1-first-page" page-width="8.5in"
                     page-height="11in" margin-top="0pt" margin-bottom="0pt" margin-right="40pt"
                     margin-left="40pt">
@@ -4846,7 +4839,7 @@
         недвосмисленом значењу.</fo:inline>
                         </fo:block>
                     </fo:block>
-                    <fo:block id="ID00PWVJQVHIS3D0532YLXNIVFJP3F1MJHSFU14KZWVC3GMKECEMM" />
+                    <fo:block id="ID00PWVJQVHIS3D0532YLXNIVFJP3F1MJHSFU14KZWVC3GMKECEMa" />
                 </fo:flow>
             </fo:page-sequence>
         </fo:root>
