@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ConnectionProperties {
+public class ExistConnProperties {
     private static String connectionUri = "xmldb:exist://%1$s:%2$s/exist/xmlrpc";
 
         public String host;
@@ -14,7 +14,7 @@ public class ConnectionProperties {
         public String driver;
         public String uri;
 
-        public ConnectionProperties(Properties props) {
+        public ExistConnProperties(Properties props) {
             super();
 
             user = props.getProperty("conn.user").trim();
@@ -34,7 +34,7 @@ public class ConnectionProperties {
      *
      * @return the configuration object
      */
-    public static ConnectionProperties loadProperties() throws IOException {
+    public static ExistConnProperties loadProperties() throws IOException {
         String propsName = "exist.properties";
 
         InputStream propsStream = openStream(propsName);
@@ -44,7 +44,7 @@ public class ConnectionProperties {
         Properties props = new Properties();
         props.load(propsStream);
 
-        return new ConnectionProperties(props);
+        return new ExistConnProperties(props);
     }
 
     /**
@@ -56,7 +56,7 @@ public class ConnectionProperties {
      * @throws IOException
      */
     public static InputStream openStream(String fileName) throws IOException {
-        return ConnectionProperties.class.getClassLoader().getResourceAsStream(fileName);
+        return ExistConnProperties.class.getClassLoader().getResourceAsStream(fileName);
     }
 
 }

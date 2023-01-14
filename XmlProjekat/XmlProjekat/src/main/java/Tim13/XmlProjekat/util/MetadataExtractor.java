@@ -1,7 +1,5 @@
 package Tim13.XmlProjekat.util;
 
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,12 +30,16 @@ public class MetadataExtractor {
 
     private TransformerFactory transformerFactory;
 
-    private static final String XSLT_FILE = "data/xsl/grddl.xsl";
+    private String INPUT_FILE;
+    private String OUTPUT_METADATA;
+    private static final String XSLT_FILE = "../xsl/grddl.xsl";
 
-    public MetadataExtractor() throws SAXException, IOException {
+    public MetadataExtractor(String INPUT_FILE, String OUTPUT_METADATA) throws SAXException, IOException {
 
+        this.INPUT_FILE = INPUT_FILE;
+        this.OUTPUT_METADATA = OUTPUT_METADATA;
         // Setup the XSLT transformer factory
-        transformerFactory = new TransformerFactoryImpl();
+        this.transformerFactory = new TransformerFactoryImpl();
     }
 
     /**
@@ -53,7 +55,7 @@ public class MetadataExtractor {
         StreamSource transformSource = new StreamSource(new File(XSLT_FILE));
 
         // Initialize GRDDL transformer object
-        Transformer grddlTransformer = transformerFactory.newTransformer(transformSource);
+        Transformer grddlTransformer = this.transformerFactory.newTransformer(transformSource);
 
         // Set the indentation properties
         grddlTransformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
@@ -75,15 +77,13 @@ public class MetadataExtractor {
 
         System.out.println("[INFO] " + MetadataExtractor.class.getSimpleName());
 
-        String filePath = "gen/grddl_metadata.rdf";
+        InputStream in = new FileInputStream(new File(this.INPUT_FILE));
 
-        InputStream in = new FileInputStream(new File("data/rdfa/contacts.xml"));
-
-        OutputStream out = new FileOutputStream(filePath);
+        OutputStream out = new FileOutputStream(this.OUTPUT_METADATA);
 
         extractMetadata(in, out);
 
-        System.out.println("[INFO] File \"" + filePath + "\" generated successfully.");
+        System.out.println("[INFO] File \"" + OUTPUT_METADATA + "\" generated successfully.");
 
         System.out.println("[INFO] End.");
 

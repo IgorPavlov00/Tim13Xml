@@ -1,11 +1,23 @@
 package Tim13.XmlProjekat.Kontroleri;
 
-import Tim13.XmlProjekat.util.ConnectionProperties;
+import Tim13.XmlProjekat.util.ExistConnProperties;
+import Tim13.XmlProjekat.util.FusekiAuthProperties;
+import Tim13.XmlProjekat.util.FusekiAuthProperties.FusekiConnProperties;
+import Tim13.XmlProjekat.util.MetadataExtractor;
+import Tim13.XmlProjekat.util.SparqlUtil;
 import net.sf.saxon.TransformerFactoryImpl;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.exist.xmldb.EXistResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,66 +37,14 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.util.Iterator;
 
 @Controller
 @RequestMapping("")
 public class IndexController {
-    private static ConnectionProperties conn;
-
-
-    @RequestMapping("/")
-    public String index() throws Exception {
-        System.out.println("Pocetna strana!");
-        // xml ucitavanje
-        // samo zameni komentare kodom iz main f-je
-        File xmlFile = new File("..\\xml\\a1.xml");
-        File xmlZ1 = new File("..\\xml\\z1.xml");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(xmlFile);
-        Document z1 = builder.parse(xmlZ1);
-        getA1(doc);
-        getZ1(z1);
-
-        String filepath = "..\\xml\\a11.xml";
-        try (FileOutputStream output =
-                     new FileOutputStream(filepath)) {
-            writeXml(doc, output);
-        } catch (IOException | TransformerException e) {
-            e.printStackTrace();
-        }
-
-        String filepathZ = "..\\xml\\Z1_1.xml";
-        try (FileOutputStream output =
-                     new FileOutputStream(filepathZ)) {
-            writeXml(z1, output);
-        } catch (IOException | TransformerException e) {
-            e.printStackTrace();
-        }
-
-       /* // xml baza - upis i ucitavanje obrasca A1
-        String[] args = {"/db/sample/library", "a1.xml", "..\\xml\\a1.xml"};
-        store(conn = ConnectionProperties.loadProperties(), args);
-        String[] args2 = {"/db/sample/library", "a1.xml"};
-        retrive(ConnectionProperties.loadProperties(), args2);
-
-        // xml baza - upis i ucitavanje obrasca Z1
-        String[] argsZs = {"/db/sample/library", "z1.xml", "..\\xml\\z1.xml"};
-        store(conn = ConnectionProperties.loadProperties(), argsZs);
-        String[] argsZr = {"/db/sample/library", "z1.xml"};
-        retrive(ConnectionProperties.loadProperties(), argsZr);
-        */
-        // generisanje PDF i XHTML za A1
-        generatePDF("../xml/a1.xml", "../xsl/a1.xsl", "../pdf/a1.pdf");
-        generatePDF("../xml/a1.xml", "../xsl/a1ex.xsl", "../pdf/a1ex.pdf");
-        generateXHTML("../xml/a1.xml", "../xsl/a1html.xsl", "../xhtml/a1.xhtml");
-
-        // generisanje PDF i XHTML za Z1
-        generatePDF("../xml/z1.xml", "../xsl/z1.xsl", "../pdf/z1.pdf");
-        generatePDF("../xml/z1.xml", "../xsl/z1ex.xsl", "../pdf/z1ex.pdf");
-        generateXHTML("../xml/z1.xml", "../xsl/z1html.xsl", "../xhtml/z1.xhtml");
-        return "index.html";
-    }
+    private static final String A1_NAMED_GRAPH_URI = "/a1";
+    private static final String Z1_NAMED_GRAPH_URI = "/z1";
+    private static ExistConnProperties conn;
 
     private static void writeXml(Document doc,
                                  OutputStream output)
@@ -322,7 +282,7 @@ public class IndexController {
         }
     }
 
-    public static void retrive(ConnectionProperties conn, String args[]) throws Exception {
+    public static void retrive(ExistConnProperties conn, String args[]) throws Exception {
 
 
         // initialize collection and document identifiers
@@ -396,7 +356,7 @@ public class IndexController {
         }
     }
 
-    public static void store(ConnectionProperties conn, String args[]) throws Exception {
+    public static void store(ExistConnProperties conn, String args[]) throws Exception {
 
 
         // initialize collection and document identifiers
@@ -542,6 +502,164 @@ public class IndexController {
         }
     }
 
+    public static void writeRDF(FusekiConnProperties conn, String rdfFilePath, String NAMED_GRAPH_URI) throws IOException {
+
+        System.out.println("[INFO] Loading triples from an RDF/XML to a model...");
+
+
+        // Creates a default model
+        Model model = ModelFactory.createDefaultModel();
+        model.read(rdfFilePath);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        model.write(out, SparqlUtil.NTRIPLES);
+
+        System.out.println("[INFO] Rendering model as RDF/XML...");
+        model.write(System.out, SparqlUtil.RDF_XML);
+
+        // Delete all of the triples in all of the named graphs
+        UpdateRequest request = UpdateFactory.create();
+        request.add(SparqlUtil.dropAll());
+
+        /*
+         * Create UpdateProcessor, an instance of execution of an UpdateRequest.
+         * UpdateProcessor sends update request to a remote SPARQL update service.
+         */
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(request, conn.updateEndpoint);
+        processor.execute();
+
+        // Creating the first named graph and updating it with RDF data
+        System.out.println("[INFO] Writing the triples to a named graph \"" + NAMED_GRAPH_URI + "\".");
+        String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + NAMED_GRAPH_URI, new String(out.toByteArray()));
+        System.out.println(sparqlUpdate);
+
+        // UpdateRequest represents a unit of execution
+        UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+        processor = UpdateExecutionFactory.createRemote(update, conn.updateEndpoint);
+        processor.execute();
+
+
+        System.out.println("[INFO] End.");
+    }
+
+    public static void readRDF(FusekiConnProperties conn) throws IOException {
+
+        // Querying the first named graph with a simple SPARQL query
+        System.out.println("[INFO] Selecting the triples from the named graph \"" + A1_NAMED_GRAPH_URI + "\".");
+        String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + A1_NAMED_GRAPH_URI, "?s ?p ?o");
+
+        // Create a QueryExecution that will access a SPARQL service over HTTP
+        QueryExecution query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+        // Query the SPARQL endpoint, iterate over the result set...
+        ResultSet results = query.execSelect();
+
+        String varName;
+        RDFNode varValue;
+
+        while (results.hasNext()) {
+
+            // A single answer from a SELECT query
+            QuerySolution querySolution = results.next();
+            Iterator<String> variableBindings = querySolution.varNames();
+
+            // Retrieve variable bindings
+            while (variableBindings.hasNext()) {
+
+                varName = variableBindings.next();
+                varValue = querySolution.get(varName);
+
+                System.out.println(varName + ": " + varValue);
+            }
+            System.out.println();
+        }
+
+        // Querying the other named graph
+        System.out.println("[INFO] Selecting the triples from the named graph \"" + Z1_NAMED_GRAPH_URI + "\".");
+        sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + Z1_NAMED_GRAPH_URI, "?s ?p ?o");
+
+        // Create a QueryExecution that will access a SPARQL service over HTTP
+        query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+
+
+        // Query the collection, dump output response as XML
+        results = query.execSelect();
+
+        ResultSetFormatter.outputAsXML(System.out, results);
+
+        query.close();
+
+        System.out.println("[INFO] End.");
+    }
+
+    @RequestMapping("/")
+    public String index() throws Exception {
+        System.out.println("Pocetna strana!");
+        String a1File = "../xml/a1.xml";
+        String z1File = "../xml/z1.xml";
+        // xml ucitavanje
+        // samo zameni komentare kodom iz main f-je
+        File xmlFile = new File(a1File);
+        File xmlZ1 = new File(z1File);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(xmlFile);
+        Document z1 = builder.parse(xmlZ1);
+        getA1(doc);
+        getZ1(z1);
+
+        String filepath = "..\\xml\\a11.xml";
+        try (FileOutputStream output =
+                     new FileOutputStream(filepath)) {
+            writeXml(doc, output);
+        } catch (IOException | TransformerException e) {
+            e.printStackTrace();
+        }
+
+        String filepathZ = "..\\xml\\Z1_1.xml";
+        try (FileOutputStream output =
+                     new FileOutputStream(filepathZ)) {
+            writeXml(z1, output);
+        } catch (IOException | TransformerException e) {
+            e.printStackTrace();
+        }
+
+        // xml baza - upis i ucitavanje obrasca A1
+        String[] args = {"/db/sample/library", "a1.xml", a1File};
+        store(conn = ExistConnProperties.loadProperties(), args);
+        String[] args2 = {"/db/sample/library", "a1.xml"};
+        retrive(ExistConnProperties.loadProperties(), args2);
+
+        // xml baza - upis i ucitavanje obrasca Z1
+        String[] argsZs = {"/db/sample/library", "z1.xml", z1File};
+        store(conn = ExistConnProperties.loadProperties(), argsZs);
+        String[] argsZr = {"/db/sample/library", "z1.xml"};
+        retrive(ExistConnProperties.loadProperties(), argsZr);
+
+        // generisanje PDF i XHTML za A1
+        generatePDF(a1File, "../xsl/a1.xsl", "../pdf/a1.pdf");
+        generateXHTML(a1File, "../xsl/a1html.xsl", "../xhtml/a1.xhtml");
+
+        // generisanje PDF i XHTML za Z1
+        generatePDF(z1File, "../xsl/z1.xsl", "../pdf/z1.pdf");
+        generateXHTML(z1File, "../xsl/z1html.xsl", "../xhtml/z1.xhtml");
+
+        // izvlacenje metapodataka
+        MetadataExtractor extractorA1 = new MetadataExtractor(a1File, "../rdf/a1_metadata.rdf");
+        MetadataExtractor extractorZ1 = new MetadataExtractor(z1File, "../rdf/z1_metadata.rdf");
+        extractorA1.test();
+        extractorZ1.test();
+
+        // upis i citanje RDF
+        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
+        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/z1_metadata.rdf", Z1_NAMED_GRAPH_URI);
+        readRDF(FusekiAuthProperties.loadProperties());
+
+        return "index.html";
+    }
+
     private void generatePDF(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
 
         FopFactory fopFactory = FopFactory.newInstance(new File("../fop.xconf"));
@@ -608,4 +726,5 @@ public class IndexController {
         }
 
     }
+
 }
