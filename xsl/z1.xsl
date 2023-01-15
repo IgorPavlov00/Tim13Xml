@@ -23,11 +23,11 @@
           (попунити на рачунару)
         </fo:block>
         <fo:table>
-          <fo:table-column />
+          <fo:table-column border-width="0.5px" border-style="solid"/>
 
           <fo:table-body>
             <!-- podaci o podnosiocu -->
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:block>
                   <fo:inline font-weight="bold">1. Подносилац пријаве:</fo:inline> име и презиме/пословно име, улица и број, поштански број, место, држава пребивалишта/седишта: 
@@ -35,22 +35,22 @@
               </fo:table-cell>
             </fo:table-row>
 
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:block xsl:value-of="//podaci_o_podnosiocu/licni_podaci"></fo:block>
               </fo:table-cell>
             </fo:table-row>
 
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:table>
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
 
-                  <fo:table-row>
+                  <fo:table-row border-width="0.5px" border-style="solid">
                     <fo:table-cell>
-                      <fo:block>телефон: <fo:inline xsl:value-of="//podaci_o_podnosiocu/telefon"></fo:inline>
+                      <fo:block>телефон:                        <fo:inline xsl:value-of="//podaci_o_podnosiocu/telefon"></fo:inline>
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
@@ -58,7 +58,7 @@
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
-                      <fo:block>факс: <fo:inline xsl:value-of="//podaci_o_podnosiocu/faks"></fo:inline>
+                      <fo:block>факс:                        <fo:inline xsl:value-of="//podaci_o_podnosiocu/faks"></fo:inline>
                       </fo:block>
                     </fo:table-cell>
                   </fo:table-row>
@@ -67,7 +67,7 @@
             </fo:table-row>
 
             <!-- podaci o punomocniku -->
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:block>
                   <fo:inline font-weight="bold">2. Пуномоћник:</fo:inline> име и презиме/пословно име, улица и број, поштански број, место, држава пребивалишта/седишта: 
@@ -75,22 +75,22 @@
               </fo:table-cell>
             </fo:table-row>
 
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:block xsl:value-of="//podaci_o_punomocniku/licni_podaci"></fo:block>
               </fo:table-cell>
             </fo:table-row>
 
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:table>
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
 
-                  <fo:table-row>
+                  <fo:table-row border-width="0.5px" border-style="solid">
                     <fo:table-cell>
-                      <fo:block>телефон: <fo:inline xsl:value-of="//podaci_o_punomocniku/telefon"></fo:inline>
+                      <fo:block>телефон:                        <fo:inline xsl:value-of="//podaci_o_punomocniku/telefon"></fo:inline>
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
@@ -98,7 +98,7 @@
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
-                      <fo:block>факс: <fo:inline xsl:value-of="//podaci_o_punomocniku/faks"></fo:inline>
+                      <fo:block>факс:                        <fo:inline xsl:value-of="//podaci_o_punomocniku/faks"></fo:inline>
                       </fo:block>
                     </fo:table-cell>
                   </fo:table-row>
@@ -107,7 +107,7 @@
             </fo:table-row>
 
             <!-- podaci o predstavniku -->
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:block>
                   <fo:inline font-weight="bold">3. Подаци о заједничком представнику ако постоји више подносилаца пријаве:</fo:inline>
@@ -115,22 +115,22 @@
               </fo:table-cell>
             </fo:table-row>
 
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:block xsl:value-of="//podaci_o_predstavniku/licni_podaci"></fo:block>
               </fo:table-cell>
             </fo:table-row>
 
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:table>
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
 
-                  <fo:table-row>
+                  <fo:table-row border-width="0.5px" border-style="solid">
                     <fo:table-cell>
-                      <fo:block>телефон: <fo:inline xsl:value-of="//podaci_o_predstavniku/telefon"></fo:inline>
+                      <fo:block>телефон:                        <fo:inline xsl:value-of="//podaci_o_predstavniku/telefon"></fo:inline>
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
@@ -138,7 +138,7 @@
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
-                      <fo:block>факс: <fo:inline xsl:value-of="//podaci_o_predstavniku/faks"></fo:inline>
+                      <fo:block>факс:                        <fo:inline xsl:value-of="//podaci_o_predstavniku/faks"></fo:inline>
                       </fo:block>
                     </fo:table-cell>
                   </fo:table-row>
@@ -147,284 +147,434 @@
             </fo:table-row>
 
             <!-- podaci o zigu -->
-            <fo:table-row>
+            <fo:table-row border-width="0.5px" border-style="solid">
               <fo:table-cell>
                 <fo:table>
-                  <fo:table-column />
-                  <fo:table-column />
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                  <fo:table-column border-width="0.5px" border-style="solid"/>
 
                   <fo:table-body>
-                    <fo:table-row>
+                    <fo:table-row border-width="0.5px" border-style="solid">
                       <!-- vrste i opis -->
                       <fo:table-cell>
                         <fo:table>
-                          <fo:table-column />
+                          <fo:table-column border-width="0.5px" border-style="solid"/>
 
                           <fo:table-body>
                             <!-- popuni sa X -->
-                              <fo:table-row>
-                                <fo:table-cell>
-                                  <fo:block>
-                                    <fo:inline font-weight="bold">4. Пријава се подноси за (уписати X):</fo:inline>
-                                  </fo:block>
-                                </fo:table-cell>
-                              </fo:table-row>
-                              <fo:table-row>
-                                <fo:table-cell>
-                                  
+                            <fo:table-row border-width="0.5px" border-style="solid">
+                              <fo:table-cell>
+                                <fo:block>
+                                  <fo:inline font-weight="bold">4. Пријава се подноси за (уписати X):</fo:inline>
+                                </fo:block>
+                              </fo:table-cell>
+                            </fo:table-row>
+                            <fo:table-row border-width="0.5px" border-style="solid">
+                              <fo:table-cell>
+                                <fo:table>
+                                  <fo:table-column border-width="0.5px" border-style="solid"/>
+                                  <fo:table-column border-width="0.5px" border-style="solid"/>
+
+                                  <fo:table-body>
+                                    <fo:table-row border-width="0.5px" border-style="solid">
+                                      <fo:table-cell>
+                                        <fo:block>
+                                          <fo:inline font-weight="bold">а)</fo:inline>
+                                        </fo:block>
+                                      </fo:table-cell>
+                                      <fo:table-cell>
+                                        <fo:table>
+                                          <fo:table-column border-width="0.5px" border-style="solid"/>
+                                          <fo:table-column border-width="0.5px" border-style="solid"/>
+
+                                          <fo:table-body>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>индивидуални жиг</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>колективни жиг</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>жиг гаранције</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                          </fo:table-body>
+                                        </fo:table>
+                                      </fo:table-cell>
+                                    </fo:table-row>
+                                    <fo:table-row border-width="0.5px" border-style="solid">
+                                      <fo:table-cell>
+                                        <fo:block>
+                                          <fo:inline font-weight="bold">б)</fo:inline>
+                                        </fo:block>
+                                      </fo:table-cell>
+                                      <fo:table-cell>
+                                        <fo:table>
+                                          <fo:table-column border-width="0.5px" border-style="solid"/>
+                                          <fo:table-column border-width="0.5px" border-style="solid"/>
+
+                                          <fo:table-body>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>вербални знак (знак у речи)</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>графички знак; боју, комбинацију боја</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>комбиновани знак</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>тродимензионални знак</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                              <fo:table-cell>
+                                                <fo:block>
+                                                  <fo:inline>другу врсту знака (навести коју)</fo:inline>
+                                                </fo:block>
+                                              </fo:table-cell>
+                                              <fo:table-cell>
+                                                <fo:block></fo:block>
+                                              </fo:table-cell>
+                                            </fo:table-row>
+                                          </fo:table-body>
+                                          </fo:table>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                    </fo:table-body>
+                                  </fo:table>
                                 </fo:table-cell>
                               </fo:table-row>
 
                               <!-- naznacenje itd. -->
-                              <fo:table-row>
-                                <fo:table-cell></fo:table-cell>
+                              <fo:table-row border-width="0.5px" border-style="solid">
+                                <fo:table-cell>
+                                  <fo:block>
+                                    <fo:inline font-weight="bold">5. Назначење боје, односно боја из којих се знак састоји:</fo:inline>
+                                  </fo:block>
+                                  <fo:block>
+                                    <fo:inline xsl:value-of="//naznacenje_boje"></fo:inline>
+                                  </fo:block>
+                                </fo:table-cell>
                               </fo:table-row>
-                              <fo:table-row>
-                                <fo:table-cell></fo:table-cell>
+                              <fo:table-row border-width="0.5px" border-style="solid">
+                                <fo:table-cell>
+                                  <fo:block>
+                                    <fo:inline font-weight="bold">6. Транслитерација знака*:</fo:inline>
+                                  </fo:block>
+                                  <fo:block>
+                                    <fo:inline xsl:value-of="//transliteracija"></fo:inline>
+                                  </fo:block>
+                                </fo:table-cell>
                               </fo:table-row>
-                              <fo:table-row>
-                                <fo:table-cell></fo:table-cell>
+                              <fo:table-row border-width="0.5px" border-style="solid">
+                                <fo:table-cell>
+                                  <fo:block>
+                                    <fo:inline font-weight="bold">7. Превод знака*:</fo:inline>
+                                  </fo:block>
+                                  <fo:block>
+                                    <fo:inline xsl:value-of="//prevod"></fo:inline>
+                                  </fo:block>
+                                </fo:table-cell>
                               </fo:table-row>
-                              <fo:table-row>
-                                <fo:table-cell></fo:table-cell>
+                              <fo:table-row border-width="0.5px" border-style="solid">
+                                <fo:table-cell>
+                                  <fo:block>
+                                    <fo:inline font-weight="bold">8. Опис знака:</fo:inline>
+                                  </fo:block>
+                                  <fo:block>
+                                    <fo:inline xsl:value-of="//opis"></fo:inline>
+                                  </fo:block>
+                                </fo:table-cell>
                               </fo:table-row>
-                          </fo:table-body>
-                        </fo:table>
-                      </fo:table-cell>
+                            </fo:table-body>
+                          </fo:table>
+                        </fo:table-cell>
 
-                      <!-- izgled -->
-                      <fo:table-cell>
-                        <fo:table>
-                          <fo:table-column />
+                        <!-- izgled -->
+                        <fo:table-cell>
+                          <fo:table>
+                            <fo:table-column border-width="0.5px" border-style="solid"/>
 
-                          <fo:table-body>
-                            <fo:table-row>
-                              <fo:table-cell>
+                            <fo:table-body>
+                              <fo:table-row border-width="0.5px" border-style="solid">
+                                <fo:table-cell>
                                   <fo:block>
                                     <fo:inline font-weight="bold">в) изглед знака:</fo:inline>
                                   </fo:block>
-                              </fo:table-cell>
-                            </fo:table-row>
-                            <fo:table-row>
-                              <fo:table-cell>
-                                <fo:block xsl:value-of="//izgled_znaka"></fo:block>
-                              </fo:table-cell>
-                            </fo:table-row>
-                          </fo:table-body>
-                        </fo:table>
-                      </fo:table-cell>
-                    </fo:table-row>
-                  </fo:table-body>
-                </fo:table>
-              </fo:table-cell>
-            </fo:table-row>
+                                </fo:table-cell>
+                              </fo:table-row>
+                              <fo:table-row border-width="0.5px" border-style="solid">
+                                <fo:table-cell>
+                                  <fo:block xsl:value-of="//izgled_znaka"></fo:block>
+                                </fo:table-cell>
+                              </fo:table-row>
+                            </fo:table-body>
+                          </fo:table>
+                        </fo:table-cell>
+                      </fo:table-row>
+                    </fo:table-body>
+                  </fo:table>
+                </fo:table-cell>
+              </fo:table-row>
 
-            <!-- klasifikacija -->
-            <fo:table-row>
-              <fo:table-cell>
-                <fo:block>
-                  <fo:inline font-weight="bold">9. Заокружити бројеве класа робе и услуга према Ничанској класификацији:</fo:inline>
-                </fo:block>
-              </fo:table-cell>
-            </fo:table-row>
+              <!-- klasifikacija -->
+              <fo:table-row border-width="0.5px" border-style="solid">
+                <fo:table-cell>
+                  <fo:block>
+                    <fo:inline font-weight="bold">9. Заокружити бројеве класа робе и услуга према Ничанској класификацији:</fo:inline>
+                  </fo:block>
+                </fo:table-cell>
+              </fo:table-row>
 
-            <fo:table-row>
-              <fo:table-cell>
-                <fo:table>
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
-                  <fo:table-column />
+              <fo:table-row border-width="0.5px" border-style="solid">
+                <fo:table-cell>
+                  <fo:table>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
+                    <fo:table-column border-width="0.5px" border-style="solid"/>
 
-                  <fo:table-body>
-                    <!-- red 1 - 23 -->
-                    <fo:table-row>
-                      <fo:table-cell>
-                        <fo:block>1</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>2</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>3</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>4</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>5</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>6</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>7</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>8</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>9</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>10</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>11</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>12</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>13</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>14</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>15</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>16</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>17</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>18</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>19</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>20</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>21</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>22</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>23</fo:block>
-                      </fo:table-cell>
-                    </fo:table-row>
+                    <fo:table-body>
+                      <!-- red 1 - 23 -->
+                      <fo:table-row border-width="0.5px" border-style="solid">
+                        <fo:table-cell>
+                          <fo:block>1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>2</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>3</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>4</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>5</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>6</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>7</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>8</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>9</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>10</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>11</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>12</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>13</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>14</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>15</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>16</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>17</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>18</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>19</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>20</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>21</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>22</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>23</fo:block>
+                        </fo:table-cell>
+                      </fo:table-row>
 
 
-                    <!-- red 24 - 45 -->
-                    <fo:table-row>
-                      <fo:table-cell>
-                        <fo:block>24</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>25</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>26</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>27</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>28</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>29</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>30</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>31</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>32</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>33</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>34</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>35</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>36</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>37</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>38</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>39</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>40</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>41</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>42</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>43</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>44</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block>45</fo:block>
-                      </fo:table-cell>
-                      <fo:table-cell>
-                        <fo:block></fo:block>
-                      </fo:table-cell>
-                    </fo:table-row>
-                  </fo:table-body>
-                </fo:table>
-              </fo:table-cell>
-            </fo:table-row>
+                      <!-- red 24 - 45 -->
+                      <fo:table-row border-width="0.5px" border-style="solid">
+                        <fo:table-cell>
+                          <fo:block>24</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>25</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>26</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>27</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>28</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>29</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>30</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>31</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>32</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>33</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>34</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>35</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>36</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>37</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>38</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>39</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>40</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>41</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>42</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>43</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>44</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block>45</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                          <fo:block></fo:block>
+                        </fo:table-cell>
+                      </fo:table-row>
+                    </fo:table-body>
+                  </fo:table>
+                </fo:table-cell>
+              </fo:table-row>
 
-            <!-- pravo prvenstva -->
-            <fo:table-row>
-              <fo:table-cell>
-                <fo:block>
-                  <fo:inline font-weight="bold">10. Затражено право првенства и основ:</fo:inline>
-                </fo:block>
-                <fo:block>
-                  <fo:inline xsl:value-of="//pravo_prvenstva/uslov[../zatrazeno='true']"></fo:inline>
-                </fo:block>
-              </fo:table-cell>
-            </fo:table-row>
-          </fo:table-body>
+              <!-- pravo prvenstva -->
+              <fo:table-row border-width="0.5px" border-style="solid">
+                <fo:table-cell>
+                  <fo:block>
+                    <fo:inline font-weight="bold">10. Затражено право првенства и основ:</fo:inline>
+                  </fo:block>
+                  <fo:block>
+                    <fo:inline xsl:value-of="//pravo_prvenstva/uslov[../zatrazeno='true']"></fo:inline>
+                  </fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-body>
 
-        </fo:table>
-      </fo:page-sequence>
-      <fo:page-sequence master-reference="Letter">
+          </fo:table>
+          
+          <fo:block>
+            <fo:inline>*Попунити само ако је знак или елемент знака исписан словима која нису ћирилична или латинична</fo:inline>
+          </fo:block>
+        </fo:page-sequence>
+        <fo:page-sequence master-reference="Letter">
 
-      </fo:page-sequence>
-    </fo:root>
-  </xsl:template>
-</xsl:stylesheet>
+        </fo:page-sequence>
+      </fo:root>
+    </xsl:template>
+  </xsl:stylesheet>
