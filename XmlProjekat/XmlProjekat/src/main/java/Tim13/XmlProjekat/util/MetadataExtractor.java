@@ -32,7 +32,7 @@ public class MetadataExtractor {
 
     private String INPUT_FILE;
     private String OUTPUT_METADATA;
-    private static final String XSLT_FILE = "../xsl/grddl.xsl";
+    private static final String XSLT_FILE = "../xsl/metadata.xsl";
 
     public MetadataExtractor(String INPUT_FILE, String OUTPUT_METADATA) throws SAXException, IOException {
 

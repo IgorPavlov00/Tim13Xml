@@ -1,12 +1,1 @@
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <!--Could not produce the triple for: http://localhost:8083/zahtev - zz:id - 51122-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev - zz:datum_podnosenja - 15/11/2022-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/podnosilac - zz:licni_podaci - http://localhost:8083/korisnik/Pera_Peric-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/podnosilac - zz:zivi_u - Novi Sad-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/podnosilac - zz:telefon - 0651234567-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/podnosilac - zz:email - peraperic@gmail.com-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/punomocnik - zz:nalazi_u - Beograd-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/punomocnik - zz:telefon - 011123456-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/punomocnik - zz:email - info@itsolutions.com-->
-  <!--Could not produce the triple for: http://localhost:8083/zahtev/placene_takse - zz:osnovno - 1000-->
-</rdf:RDF>
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>

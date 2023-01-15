@@ -1,42 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?>
-<zahtev_za_priznanje_ziga xmlns="http://www.w3.org/ns/rdfa#" prefix="zz: http://localhost:8083/zahtev">
-
-    <podaci_o_zahtevu about="http://localhost:8083/zahtev">
-        <broj_prijave property="zz:id" content="51122">Ž-05/1122</broj_prijave>
-        <datum_podnosenja property="zz:datum_podnosenja">15/11/2022</datum_podnosenja>
+<?xml-stylesheet href="../xsl/metadata.xsl" type="text/xsl"?>
+<zahtev_za_priznanje_ziga>
+    <podaci_o_zahtevu>
+        <broj_prijave>Ž-05/1122</broj_prijave>
+        <datum_podnosenja>15/11/2022</datum_podnosenja>
     </podaci_o_zahtevu>
-
-    <podaci_o_podnosiocu about="http://localhost:8083/zahtev/podnosilac">
-        <licni_podaci tip_lica="fizicko" property="zz:licni_podaci" content="http://localhost:8083/korisnik/Pera_Peric">
+    <podaci_o_podnosiocu>
+        <licni_podaci tip_lica="fizicko">
             <ime>Pera</ime>
             <prezime>Peric</prezime>
             <adresa>
                 <ulica>Fejes Klare 5</ulica>
                 <postanski_broj>21000</postanski_broj>
-                <mesto property="zz:zivi_u">Novi Sad</mesto>
+                <mesto>Novi Sad</mesto>
                 <drzava>Srbija</drzava>
             </adresa>
         </licni_podaci>
-
-        <telefon property="zz:telefon">0651234567</telefon>
-        <email property="zz:email">peraperic@gmail.com</email>
+        <telefon>0651234567</telefon>
+        <email>peraperic@gmail.com</email>
     </podaci_o_podnosiocu>
-
-    <podaci_o_punomocniku about="http://localhost:8083/zahtev/punomocnik">
-        <licni_podaci tip_lica="pravno"> 
+    <podaci_o_punomocniku>
+        <licni_podaci tip_lica="pravno">
             <ime>IT Solutions DOO</ime>
             <adresa>
                 <ulica>Bulevar Oslobođenja 2</ulica>
                 <postanski_broj>11000</postanski_broj>
-                <mesto property="zz:nalazi_u">Beograd</mesto>
+                <mesto>Beograd</mesto>
                 <drzava>Srbija</drzava>
             </adresa>
         </licni_podaci>
-        <telefon property="zz:telefon">011123456</telefon>
-        <email property="zz:email">info@itsolutions.com</email>
+        <telefon>011123456</telefon>
+        <email>info@itsolutions.com</email>
     </podaci_o_punomocniku>
-
     <podaci_o_zigu>
         <vrsta_ziga>
             <individualni_zig>true</individualni_zig>
@@ -52,14 +47,12 @@
             <zatrazeno>false</zatrazeno>
         </pravo_prvenstva>
     </podaci_o_zigu>
-
-    <podaci_o_placenoj_taksi about="http://localhost:8083/zahtev/placene_takse">
-        <osnovna_taksa property="zz:osnovno">1000</osnovna_taksa>
+    <podaci_o_placenoj_taksi>
+        <osnovna_taksa>1000</osnovna_taksa>
         <za_klase klase="9">2000</za_klase>
         <za_graficko_resenje>1500</za_graficko_resenje>
         <ukupno>4500</ukupno>
     </podaci_o_placenoj_taksi>
-
     <prilozi>
         <primerak_znaka>true</primerak_znaka>
         <spisak_robe_i_usluga>true</spisak_robe_i_usluga>
