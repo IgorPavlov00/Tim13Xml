@@ -629,24 +629,24 @@ public class IndexController {
             e.printStackTrace();
         }
 
-        // xml baza - upis i ucitavanje obrasca A1
-        String[] args = {"/db/sample/library", "a1.xml", a1File};
-        store(conn = ExistConnProperties.loadProperties(), args);
-        String[] args2 = {"/db/sample/library", "a1.xml"};
-        retrive(ExistConnProperties.loadProperties(), args2);
-
-        // xml baza - upis i ucitavanje obrasca Z1
-        String[] argsZs = {"/db/sample/library", "z1.xml", z1File};
-        store(conn = ExistConnProperties.loadProperties(), argsZs);
-        String[] argsZr = {"/db/sample/library", "z1.xml"};
-        retrive(ExistConnProperties.loadProperties(), argsZr);
+//        // xml baza - upis i ucitavanje obrasca A1
+//        String[] args = {"/db/sample/library", "a1.xml", a1File};
+//        store(conn = ExistConnProperties.loadProperties(), args);
+//        String[] args2 = {"/db/sample/library", "a1.xml"};
+//        retrive(ExistConnProperties.loadProperties(), args2);
+//
+//        // xml baza - upis i ucitavanje obrasca Z1
+//        String[] argsZs = {"/db/sample/library", "z1.xml", z1File};
+//        store(conn = ExistConnProperties.loadProperties(), argsZs);
+//        String[] argsZr = {"/db/sample/library", "z1.xml"};
+//        retrive(ExistConnProperties.loadProperties(), argsZr);
 
         // generisanje PDF i XHTML za A1
         generatePDF(a1File, "../xsl/a1.xsl", "../pdf/a1.pdf");
         generateXHTML(a1File, "../xsl/a1html.xsl", "../xhtml/a1.xhtml");
 
         // generisanje PDF i XHTML za Z1
-//        generatePDF(z1File, "../xsl/z1.xsl", "../pdf/z1.pdf");
+        generatePDF(z1File, "../xsl/z1.xsl", "../pdf/z1.pdf");
         generateXHTML(z1File, "../xsl/z1html.xsl", "../xhtml/z1.xhtml");
 
         // izvlacenje metapodataka
@@ -656,9 +656,9 @@ public class IndexController {
         extractorZ1.test();
 
         // upis i citanje RDF
-        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
-        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/z1_metadata.rdf", Z1_NAMED_GRAPH_URI);
-        readRDF(FusekiAuthProperties.loadProperties());
+//        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
+//        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/z1_metadata.rdf", Z1_NAMED_GRAPH_URI);
+//        readRDF(FusekiAuthProperties.loadProperties());
 
         return "index.html";
     }
