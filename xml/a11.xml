@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="../xsl/grddl.xsl"?><zahtev_za_autorska_prava xmlns="http://www.w3.org/ns/rdfa#">
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="../xsl/metadata.xsl"?><zahtev_za_autorska_prava>
   <podaci_o_zavodu>
     <naziv>Zavod za intelektualnu svojinu</naziv>
     <adresa>

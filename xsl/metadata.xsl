@@ -8,7 +8,7 @@
     </xsl:template>
 
     <xsl:template match="zahtev_za_priznanje_ziga">
-        <rdf:Description rdf:about="http://localhost:8083/zahtev_z"
+        <rdf:Description rdf:about="http://localhost:8083"
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
             <xsl:apply-templates select="podaci_o_zahtevu" />
             <xsl:apply-templates select="podaci_o_podnosiocu" />
@@ -24,16 +24,16 @@
     </xsl:template>
 
     <xsl:template match="podaci_o_podnosiocu">
-        <xsl:element name="ime">
+        <xsl:element name="ime_podnosioca">
             <xsl:value-of select="licni_podaci/ime" />
         </xsl:element>
-        <xsl:element name="prezime">
+        <xsl:element name="prezime_podnosioca">
             <xsl:value-of select="licni_podaci/prezime" />
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="podaci_o_punomocniku">
-        <xsl:element name="ime">
+        <xsl:element name="ime_punomocnika">
             <xsl:value-of select="licni_podaci/ime" />
         </xsl:element>
     </xsl:template>
@@ -45,7 +45,7 @@
     </xsl:template>
 
     <xsl:template match="zahtev_za_autorska_prava">
-        <rdf:Description rdf:about="http://localhost:8083/zahtev_a"
+        <rdf:Description rdf:about="http://localhost:8083"
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
             <xsl:apply-templates select="podaci_o_zahtevu" />
             <xsl:apply-templates select="podaci_o_podnosiocu" />
@@ -56,10 +56,10 @@
     </xsl:template>
 
     <xsl:template match="podaci_punomocnika">
-        <xsl:element name="ime">
+        <xsl:element name="ime_punomocnika">
             <xsl:value-of select="ime" />
         </xsl:element>
-        <xsl:element name="prezime">
+        <xsl:element name="prezime_punomocnika">
             <xsl:value-of select="prezime" />
         </xsl:element>
     </xsl:template>
@@ -71,11 +71,11 @@
     </xsl:template>
 
     <xsl:template match="podaci_o_autoru_ziv">
-        <xsl:element name="ime">
-            <xsl:value-of select="licni_podaci/ime" />
+        <xsl:element name="ime_autora">
+            <xsl:value-of select="ime" />
         </xsl:element>
-        <xsl:element name="prezime">
-            <xsl:value-of select="licni_podaci/prezime" />
+        <xsl:element name="prezime_autora">
+            <xsl:value-of select="prezime" />
         </xsl:element>
     </xsl:template>
 </xsl:stylesheet>

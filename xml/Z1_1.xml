@@ -24,9 +24,12 @@
                 <ulica>Bulevar Oslobođenja 2</ulica>
                 <postanski_broj>11000</postanski_broj>
                 <mesto>Beograd</mesto>
+                <mesto>Beograd</mesto>
                 <drzava>Srbija</drzava>
             </adresa>
         </licni_podaci>
+        <telefon>011123456</telefon>
+        <email>info@itsolutions.com</email>
         <telefon>011123456</telefon>
         <email>info@itsolutions.com</email>
     </podaci_o_punomocniku>

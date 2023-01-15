@@ -516,11 +516,14 @@ public class IndexController {
         model.write(out, SparqlUtil.NTRIPLES);
 
         System.out.println("[INFO] Rendering model as RDF/XML...");
-        model.write(System.out, SparqlUtil.RDF_XML);
+        try{
+        model.write(System.out, SparqlUtil.RDF_XML);}catch(Exception e){
+
+        }
 
         // Delete all of the triples in all of the named graphs
         UpdateRequest request = UpdateFactory.create();
-        request.add(SparqlUtil.dropAll());
+        request.add(SparqlUtil.dropGraph(NAMED_GRAPH_URI));
 
         /*
          * Create UpdateProcessor, an instance of execution of an UpdateRequest.
@@ -643,7 +646,7 @@ public class IndexController {
         generateXHTML(a1File, "../xsl/a1html.xsl", "../xhtml/a1.xhtml");
 
         // generisanje PDF i XHTML za Z1
-        generatePDF(z1File, "../xsl/z1.xsl", "../pdf/z1.pdf");
+//        generatePDF(z1File, "../xsl/z1.xsl", "../pdf/z1.pdf");
         generateXHTML(z1File, "../xsl/z1html.xsl", "../xhtml/z1.xhtml");
 
         // izvlacenje metapodataka
