@@ -656,9 +656,9 @@ public class IndexController {
         extractorZ1.test();
 
         // upis i citanje RDF
-//        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
-//        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/z1_metadata.rdf", Z1_NAMED_GRAPH_URI);
-//        readRDF(FusekiAuthProperties.loadProperties());
+        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
+        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/z1_metadata.rdf", Z1_NAMED_GRAPH_URI);
+        readRDF(FusekiAuthProperties.loadProperties());
 
         return "index.html";
     }

@@ -1,0 +1,288 @@
+<!--<div class="container">-->
+<!--  <header>Signup Form</header>-->
+<!--  <div class="progress-bar">-->
+<!--    <div class="step">-->
+<!--      <p>Podnosilac</p>-->
+<!--      <div class="bullet">-->
+<!--        <span>1</span>-->
+<!--      </div>-->
+<!--      <div class="check fas fa-check"></div>-->
+<!--    </div>-->
+<!--    <div class="step">-->
+<!--      <p>Contact</p>-->
+<!--      <div class="bullet">-->
+<!--        <span>2</span>-->
+<!--      </div>-->
+<!--      <div class="check fas fa-check"></div>-->
+<!--    </div>-->
+<!--    <div class="step">-->
+<!--      <p>Birth</p>-->
+<!--      <div class="bullet">-->
+<!--        <span>3</span>-->
+<!--      </div>-->
+<!--      <div class="check fas fa-check"></div>-->
+<!--    </div>-->
+<!--    <div class="step">-->
+<!--      <p>Debt</p>-->
+<!--      <div class="bullet">-->
+<!--        <span>4</span>-->
+<!--      </div>-->
+<!--      <div class="check fas fa-check"></div>-->
+<!--    </div>-->
+<!--    <div class="step">-->
+<!--      <p>Address</p>-->
+<!--      <div class="bullet">-->
+<!--        <span>5</span>-->
+<!--      </div>-->
+<!--      <div class="check fas fa-check"></div>-->
+<!--    </div>-->
+<!--    <div class="step">-->
+<!--      <p>Submit</p>-->
+<!--      <div class="bullet">-->
+<!--        <span>6</span>-->
+<!--      </div>-->
+<!--      <div class="check fas fa-check"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="form-outer">-->
+<!--    <div class="page slide-page">-->
+<!--    <form>-->
+<!--      <div class="radio1">-->
+<!--        <label for="fizicko">Fizicko lice</label>-->
+<!--        <input type="radio" id="fizicko" name="tip-korisnika" (click)="showForm()" value="fizicko">-->
+<!--      </div>-->
+<!--      <div class="radio2" >-->
+<!--        <label for="pravno">Pravno lice</label>-->
+<!--        <input type="radio" id="pravno" name="tip-korisnika" value="pravno" (click)="showForm2()">-->
+<!--      </div>-->
+
+
+<!--    </form>-->
+<!--      <br><br>-->
+<!--    <div id="forma" class="hide">-->
+
+<!--      <input type="text" id="ime" placeholder="Ime">-->
+<!--      <input type="text" id="prezime" placeholder="Prezime">-->
+<!--      <input type="text" id="adresa" placeholder="Adresa">-->
+<!--      <input type="text" id="drzavljanstvo" placeholder="Drzavljanstvo autora">-->
+<!--      <input type="text" id="telefon1" placeholder="Telefon">-->
+<!--      <input type="text" id="email1" placeholder="Email">-->
+
+<!--    </div>-->
+
+<!--    <div id="forma2" class="hide">-->
+<!--      <input type="text" id="poslovno_ime" placeholder="poslovno_ime">-->
+<!--      <input type="text" id="sediste_nosioca_autorsko_prava" placeholder="sediste_nosioca_autorsko_prava">-->
+<!--      <input type="text" id="telefon" placeholder="Telefon">-->
+<!--      <input type="text" id="email" placeholder="Email">-->
+<!--    </div>-->
+
+<!--      </div>-->
+
+<div class="container">
+  <header>Signup Form</header>
+  <div class="progress-bar">
+    <div class="step">
+      <p>Podnosilac</p>
+      <div class="bullet">
+        <span>1</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+    <br>
+    <div class="step">
+      <p>Punomocnik</p>
+      <div class="bullet">
+        <span>2</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+    <div class="step">
+      <p>Birth</p>
+      <div class="bullet">
+        <span>3</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+    <div class="step">
+      <p>Debt</p>
+      <div class="bullet">
+        <span>4</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+    <div class="step">
+      <p>Adress</p>
+      <div class="bullet">
+        <span>5</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+    <div class="step">
+      <p>Submit</p>
+      <div class="bullet">
+        <span>6</span>
+      </div>
+      <div class="check fas fa-check"></div>
+    </div>
+  </div>
+  <div class="form-outer">
+
+
+    <form action="#">
+      <div class="page slide-page">
+        <form>
+          <div class="radio1">
+            <label for="fizicko">Fizicko lice</label>
+            <input type="radio" id="fizicko" name="tip-korisnika" (click)="showForm()" value="fizicko">
+          </div>
+          <div class="radio2">
+            <label for="pravno">Pravno lice</label>
+            <input type="radio" id="pravno" name="tip-korisnika" value="pravno" (click)="showForm2()">
+          </div>
+
+
+        </form>
+
+
+        <div id="forma" class="hide">
+          <div class="title">Basic Info:</div>
+          <div class="field">
+            <div class="label">Ime</div>
+            <input type="text" required id="ime" placeholder="Ime">
+          </div>
+          <div class="field">
+            <div class="label">Prezime</div>
+            <input type="text" required id="prezime" placeholder="Prezime">
+          </div>
+          <div class="field">
+            <div class="label">Adresa</div>
+            <input type="text" required id="adresa" placeholder="Adresa">
+          </div>
+          <div class="field">
+            <div class="label">Drzavljanstvo</div>
+            <input type="text" required id="drzavljanstvo" placeholder="Drzavljanstvo autora">
+          </div>
+          <div class="field">
+            <div class="label">Telefon</div>
+            <input type="text" required id="telefon1" placeholder="Telefon">
+          </div>
+          <div class="field">
+            <div class="label">Email</div>
+            <input type="text" required id="email1" placeholder="Email">
+          </div>
+          <div class="field">
+            <button class="firstNext next">Next</button>
+          </div>
+
+
+
+
+        </div>
+
+        <div id="forma2" class="hide">
+
+          <div class="field">
+            <div class="label">Ime</div>
+            <input type="text" required id="poslovno_ime" placeholder="Poslovno ime">
+          </div>
+          <div class="field">
+            <div class="label">Ime</div>
+            <input type="text" required id="sediste_nosioca_autorsko_prava" placeholder="Sediste nosioca">
+          </div>
+          <div class="field">
+            <div class="label">Telefon</div>
+            <input type="text" required id="telefon" placeholder="Telefon">
+          </div>
+          <div class="field">
+            <div class="label">Email</div>
+            <input type="text" required id="email" placeholder="Email">
+          </div>
+          <div class="field">
+            <button class="firstNext next">Next</button>
+          </div>
+        </div>
+
+
+       </div>
+
+      <div class="page">
+        <div class="title">Contact Info:</div>
+        <div class="field">
+          <div class="label">Pseudonim</div>
+          <input type="text"/>
+        </div>
+        <div class="field btns">
+          <button class="prev-1 prev">Previous</button>
+          <button class="next-1 next">Next</button>
+        </div>
+      </div>
+      <div class="page">
+        <div class="title">Contact Info 2:</div>
+        <div class="field">
+          <div class="label">Email Address</div>
+          <input type="text" required/>
+        </div>
+        <div class="field">
+          <div class="label">Phone Number</div>
+          <input type="Number" required/>
+        </div>
+        <div class="field btns">
+          <button class="prev-2 prev">Previous</button>
+          <button class="next-2 next">Next</button>
+        </div>
+      </div>
+      <div class="page">
+        <div class="title">Contact Info 3:</div>
+        <div class="field">
+          <div class="label">Email Address</div>
+          <input type="text" required/>
+        </div>
+        <div class="field">
+          <div class="label">Phone Number</div>
+          <input type="Number" required/>
+        </div>
+        <div class="field btns">
+          <button class="prev-3 prev">Previous</button>
+          <button class="next-3 next">Next</button>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="title">Date of Birth:</div>
+        <div class="field">
+          <div class="label">Date</div>
+          <input type="text" required/>
+        </div>
+        <div class="field">
+          <div class="label">Gender</div>
+          <select required>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field btns">
+          <button class="prev-4 prev">Previous</button>
+          <button class="next-4 next">Next</button>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="title">Login Details:</div>
+        <div class="field">
+          <div class="label">Username</div>
+          <input type="text" required/>
+        </div>
+        <div class="field">
+          <div class="label">Password</div>
+          <input type="password" required/>
+        </div>
+        <div class="field btns">
+          <button class="prev-5 prev">Previous</button>
+          <button class="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
