@@ -8,7 +8,7 @@
       <fo:layout-master-set>
         <fo:simple-page-master master-name="Letter" page-width="8.5in" page-height="11in"
           margin-top="1in" margin-bottom="0.66in" margin-left="0.56in" margin-right="0.56in"
-          font-family="Arial, Helvetica, sans-serif" font-size="10pt">
+          font-family="Arial, sans-serif" font-size="10pt">
           <fo:region-body />
         </fo:simple-page-master>
       </fo:layout-master-set>

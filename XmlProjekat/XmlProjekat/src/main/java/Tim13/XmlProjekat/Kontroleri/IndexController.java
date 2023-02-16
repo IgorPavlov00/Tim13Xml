@@ -629,17 +629,17 @@ public class IndexController {
             e.printStackTrace();
         }
 
-//        // xml baza - upis i ucitavanje obrasca A1
-//        String[] args = {"/db/sample/library", "a1.xml", a1File};
-//        store(conn = ExistConnProperties.loadProperties(), args);
-//        String[] args2 = {"/db/sample/library", "a1.xml"};
-//        retrive(ExistConnProperties.loadProperties(), args2);
-//
-//        // xml baza - upis i ucitavanje obrasca Z1
-//        String[] argsZs = {"/db/sample/library", "z1.xml", z1File};
-//        store(conn = ExistConnProperties.loadProperties(), argsZs);
-//        String[] argsZr = {"/db/sample/library", "z1.xml"};
-//        retrive(ExistConnProperties.loadProperties(), argsZr);
+        // xml baza - upis i ucitavanje obrasca A1
+        String[] args = {"/db/sample/library", "a1.xml", a1File};
+        store(conn = ExistConnProperties.loadProperties(), args);
+        String[] args2 = {"/db/sample/library", "a1.xml"};
+        retrive(ExistConnProperties.loadProperties(), args2);
+
+        // xml baza - upis i ucitavanje obrasca Z1
+        String[] argsZs = {"/db/sample/library", "z1.xml", z1File};
+        store(conn = ExistConnProperties.loadProperties(), argsZs);
+        String[] argsZr = {"/db/sample/library", "z1.xml"};
+        retrive(ExistConnProperties.loadProperties(), argsZr);
 
         // generisanje PDF i XHTML za A1
         generatePDF(a1File, "../xsl/a1.xsl", "../pdf/a1.pdf");
@@ -704,7 +704,10 @@ public class IndexController {
         }
 
         OutputStream out = new BufferedOutputStream(new FileOutputStream(pdfFile));
+        outStream.flush(); // Ensure that all data has been written to the output stream
         out.write(outStream.toByteArray());
+        out.close();
+
 
 
         System.out.println("[INFO] End.");

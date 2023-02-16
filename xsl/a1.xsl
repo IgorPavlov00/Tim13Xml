@@ -6,7 +6,7 @@
         <fo:root>
 
             <fo:layout-master-set>
-                <fo:simple-page-master master-name="Letter" page-width="8.5in" page-height="11in" margin-top="1in" margin-bottom="0.66in" margin-left="0.56in" margin-right="0.56in" font-family="Arial, Helvetica, sans-serif" font-size="10pt">
+                <fo:simple-page-master master-name="Letter" page-width="8.5in" page-height="11in" margin-top="1in" margin-bottom="0.66in" margin-left="0.56in" margin-right="0.56in" font-family="Arial, sans-serif" font-size="10pt">
                     <fo:region-body/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
@@ -30,18 +30,17 @@
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
-                            <fo:table-row>
+
+                            <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
+                                    <!-- Podaci o podnosiocu -->
                                     <fo:block>
                                         
                                     1) Подносилац - име, презиме, адреса и држављанство аутора или другог носиоца ауторског права ако је подносилац физичко лице, односно пословно име и седиште носиоца ауторског права ако је подносилац правно лице*:
                                         
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
 
-                            <fo:table-row>
-                                <fo:table-cell>
+                                    <!-- Tabela telefon i mail-->
                                     <fo:table>
                                         <fo:table-column border-width="0.5px" border-style="solid"/>
                                         <fo:table-column border-width="0.5px" border-style="solid"/>
@@ -60,177 +59,115 @@
                                             </fo:table-row>
                                         </fo:table-body>
                                     </fo:table>
-                                </fo:table-cell>
-                            </fo:table-row>
 
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
                                         2) Псеудоним или знак аутора, (ако га има):
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
 
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
-                                        
-                                            3) Име, презиме и адреса пуномоћника, ако се пријава подноси преко пуномоћника:
-                                        
+                                        3) Име, презиме и адреса пуномоћника, ако се пријава подноси преко пуномоћника:
+                                    </fo:block>
+
+                                    <fo:block>
+                                        4) Наслов ауторског дела, односно алтернативни наслов, ако га има, по коме ауторско дело може да се идентификује*:
+                                    </fo:block>
+
+                                    <fo:block>
+                                        5) Подаци о наслову ауторског дела на коме се заснива дело прераде, ако је у питању ауторско дело прераде, као и податак о аутору изворног дела:
+                                    </fo:block>
+
+                                    <fo:block>
+                                        6) Подаци о врсти ауторског дела (књижевно дело, музичко дело, ликовно дело, рачунарски програм и др.) *:
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
 
-                            <fo:table-row>
+                            <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
-                                    <fo:block>
-                                        
-                                            4) Наслов ауторског дела, односно алтернативни наслов, ако га има, по коме ауторско дело може да се идентификује*:
-                                        
+                                    <fo:block>           
+                                        7) Подаци о форми записа ауторског дела (штампани текст, оптички диск и слично) *:
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
-                                        
-                                            5) Подаци о наслову ауторског дела на коме се заснива дело прераде, ако је у питању ауторско дело прераде, као и податак о аутору изворног дела:
-                                        
+                                        8) Подаци о аутору ако подносилац пријаве из тачке 1. овог захтева није аутор и то: презиме, име, адреса и држављанство аутора (групе аутора или коаутора), а ако су у питању један или више аутора који нису живи, имена аутора и године смрти аутора а ако је у питању ауторско дело анонимног аутора навод да је ауторско дело дело анонимног аутора:
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
-                                        
-                                            6) Подаци о врсти ауторског дела (књижевно дело, музичко дело, ликовно дело, рачунарски програм и др.) *:
-                                        
+                                        9) Податак да ли је у питању ауторско дело створено у радном односу:
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
-                                        
-                                            7) Подаци о форми записа ауторског дела (штампани текст, оптички диск и слично) *:
-                                        
+                                        10) Начин коришћења ауторског дела или намеравани начин коришћења ауторског дела:
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
-                                        
-                                            8) Подаци о аутору ако подносилац пријаве из тачке 1. овог захтева није аутор и то: презиме, име, адреса и држављанство аутора (групе аутора или коаутора), а ако су у питању један или више аутора који нису живи, имена аутора и године смрти аутора а ако је у питању ауторско дело анонимног аутора навод да је ауторско дело дело анонимног аутора:
-                                        
-                                    </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
-                                    <fo:block>
-                                        
-                                            9) Податак да ли је у питању ауторско дело створено у радном односу:
-                                        
-                                    </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
-                                    <fo:block>
-                                        
-                                            10) Начин коришћења ауторског дела или намеравани начин коришћења ауторског дела:
-                                        
-                                    </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
-                                    <fo:block text-align="right" font-weight="bold">
+                                        <fo:inline font-weight="bold">
                                         ________________________
+                                        </fo:inline>
                                     </fo:block>
                                     <fo:block>
                                         11)
                                     </fo:block>
-                                    <fo:block font-weight="bold" text-align="right">
-                                        Подносилац пријаве, носилац права
+                                    <fo:block>
+                                        <fo:inline font-weight="bold">
+                                            Подносилац пријаве, носилац права
+                                        </fo:inline>
                                     </fo:block>
-                                    <fo:block text-align="right">
-                                        
+                                    <fo:block>
                                             (место за потпис физичког лица, односно потпис заступника правног лица или овлашћеног представника у правном лицу)*
-                                        
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
 
-                            <fo:table-row>
+                            <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
                                     <fo:block>
                                         12) Прилози који се подносе уз захтев:
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
-                                    <fo:block text-align="center" font-weight="bold">
+                                    <fo:block text-align="center">
+                                        <fo:inline font-weight="bold">
                                         ПОПУЊАВА ЗАВОД:
+                                        </fo:inline>
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
-                                    <fo:block font-weight="bold">
+                                    <fo:block>
+                                        <fo:inline font-weight="bold">
                                         Прилози уз пријаву:
+                                        </fo:inline>
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
                                         _ опис ауторског дела (ако је дело поднето на оптичком диску);
                                     </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-
-                            <fo:table-row>
-                                <fo:table-cell>
                                     <fo:block>
                                         _ пример ауторског дела (слика, видео запис, аудио запис)
                                     </fo:block>
+                                    <fo:table>
+                                        <fo:table-column border-width="0.5px" border-style="solid" />
+
+                                        <fo:table-body>
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                                <fo:table-cell>
+                                                    <fo:block>
+                                                    Број пријаве
+                                                    </fo:block>
+                                                    <fo:block font-weight="bold">
+                                                    A-
+                                                    </fo:block>
+                                                </fo:table-cell>
+                                            </fo:table-row>
+
+                                            <fo:table-row border-width="0.5px" border-style="solid">
+                                                <fo:table-cell>
+                                                    <fo:block>
+                                                    Датум подношења:
+                                                    </fo:block>
+                                                    <fo:block>
+                                                    __________
+                                                    </fo:block>
+                                                </fo:table-cell>
+                                            </fo:table-row>
+                                        </fo:table-body>
+                                    </fo:table>
                                 </fo:table-cell>
                             </fo:table-row>
 
-                            <fo:table-row border-width="0.5px" border-style="solid">
-                                <fo:table-cell>
-                                    <fo:block>
-                                        Број пријаве
-                                    </fo:block>
-                                    <fo:block font-weight="bold">
-                                        A-
-                                    </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
 
-                            <fo:table-row border-width="0.5px" border-style="solid">
-                                <fo:table-cell>
-                                    <fo:block>
-                                        Датум подношења:
-                                    </fo:block>
-                                    <fo:block>
 
-                                    </fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
                         </fo:table-body>
                     </fo:table>
                     <fo:block>
