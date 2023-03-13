@@ -2,7 +2,7 @@
 <?xml-stylesheet href="../xsl/metadata.xsl" type="text/xsl"?>
 <zahtev_za_priznanje_ziga>
     <podaci_o_zahtevu>
-        <broj_prijave>Ž-05/1122</broj_prijave>
+        <broj_prijave>Z-05/1122</broj_prijave>
         <datum_podnosenja>15/11/2022</datum_podnosenja>
     </podaci_o_zahtevu>
     <podaci_o_podnosiocu>
@@ -23,26 +23,29 @@
         <licni_podaci tip_lica="pravno">
             <ime>IT Solutions DOO</ime>
             <adresa>
-                <ulica>Bulevar Oslobođenja 2</ulica>
+                <ulica>Bulevar Oslobodjenja 2</ulica>
                 <postanski_broj>11000</postanski_broj>
-                <mesto>Beograd</mesto>
                 <mesto>Beograd</mesto>
                 <drzava>Srbija</drzava>
             </adresa>
         </licni_podaci>
         <telefon>011123456</telefon>
         <email>info@itsolutions.com</email>
-        <telefon>011123456</telefon>
-        <email>info@itsolutions.com</email>
     </podaci_o_punomocniku>
     <podaci_o_zigu>
         <vrsta_ziga>
             <individualni_zig>true</individualni_zig>
+            <kolektivni_zig>false</kolektivni_zig>
+            <zig_garancije>false</zig_garancije>
         </vrsta_ziga>
         <vrsta_znaka>
+            <verbalni_znak>false</verbalni_znak>
             <graficki_znak>true</graficki_znak>
+            <kombinovani_znak>false</kombinovani_znak>
+            <trodimenzionalni_znak>false</trodimenzionalni_znak>
+            <drugo>false</drugo>
         </vrsta_znaka>
-        <izgled_znaka>https://localhost:8083/zahtev/51122/izgled</izgled_znaka>
+        <izgled_znaka></izgled_znaka>
         <naznacenje_boje>plava</naznacenje_boje>
         <opis>opis</opis>
         <brojevi_klasa_robe_i_usluga>9</brojevi_klasa_robe_i_usluga>

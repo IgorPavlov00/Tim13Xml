@@ -67,6 +67,7 @@
         <xs:element ref="kombinovani_znak"/>
         <xs:element ref="trodimenzionalni_znak"/>
         <xs:element ref="drugo"/>
+        <xs:element ref="druga_vrsta"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
@@ -76,6 +77,7 @@
   <xs:element name="kombinovani_znak" type="xs:boolean"/>
   <xs:element name="trodimenzionalni_znak" type="xs:boolean"/>
   <xs:element name="drugo" type="xs:boolean"/>
+  <xs:element name="druga_vrsta" type="xs:string"/>
   <xs:element name="izgled_znaka" type="xs:anyURI"/>
   <xs:element name="naznacenje_boje" type="xs:string"/>
   <xs:element name="transliteracija" type="xs:string"/>

@@ -6,13 +6,13 @@
         <fo:root>
 
             <fo:layout-master-set>
-                <fo:simple-page-master master-name="Letter" page-width="8.5in" page-height="11in" margin-top="1in" margin-bottom="0.66in" margin-left="0.56in" margin-right="0.56in" font-family="Arial, sans-serif" font-size="10pt">
+                <fo:simple-page-master master-name="Letter" page-width="8.5in" page-height="11in" margin-top="1in" margin-bottom="0.66in"  margin-left="0.56in" margin-right="0.56in" font-family="Arial, sans-serif" >
                     <fo:region-body/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
 
             <fo:page-sequence master-reference="Letter">
-                <fo:flow flow-name="xsl-region-body">
+                <fo:flow flow-name="xsl-region-body" font-size="10pt">
                     <fo:table>
                         <fo:table-column border-width="0.5px" border-style="solid"/>
 
@@ -20,24 +20,44 @@
                             <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
                                     <fo:block font-weight="bold">
-                                    ЗАВОД ЗА ИНТЕЛЕКТУАЛНУ СВОЈИНУ ОБРАЗАЦ А-1
+                                    ZAVOD ZA INTELEKTUALNU SVOJINU OBRAZAC A-1
                                     </fo:block>
                                     <fo:block>
-                                    Београд, Кнегиње Љубице 5
+                                    Beograd, Kneginje Ljubice 5
                                     </fo:block>
+                                    <fo:block space-after="12pt"></fo:block>
                                     <fo:block text-align="center" font-weight="bold">
-                                    ЗАХТЕВ ЗА УНОШЕЊЕ У ЕВИДЕНЦИЈУ И ДЕПОНОВАЊЕ АУТОРСКИХ ДЕЛА
+                                    ZAHTEV ZA UNOSENJJE U EVIDENCIJU I DEPONOVANJE AUTORSKIH DELA
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
 
                             <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
+                                    <fo:block space-after="36pt"></fo:block>
                                     <!-- Podaci o podnosiocu -->
-                                    <fo:block>
+                                    <fo:block space-after="36pt">
                                         
-                                    1) Подносилац - име, презиме, адреса и држављанство аутора или другог носиоца ауторског права ако је подносилац физичко лице, односно пословно име и седиште носиоца ауторског права ако је подносилац правно лице*:
-                                        
+                                    1) Podnosilac - ime, prezime, adresa i drzavljanstvo autora ili drugog nosioca autorskog prava ako je podnosilac fizicko lice, odnosno poslovno ime i sediste nosioca autorskog prava ako je podnosilac pravno lice*:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/poslovno_ime" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/ime" />
+                                            <xsl:text>&#x20;</xsl:text>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/prezime" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/sediste/ulica" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/adresa/ulica" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/sediste/mesto" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/adresa/mesto" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/drzavljanstvo" />
+                                        </fo:block>
+
                                     </fo:block>
 
                                     <!-- Tabela telefon i mail-->
@@ -48,7 +68,7 @@
                                         <fo:table-body>
                                             <fo:table-row border-width="0.5px" border-style="solid">
                                                 <fo:table-cell>
-                                                    <fo:block>телефон:
+                                                    <fo:block>telefon:
                                                     </fo:block>
                                                 </fo:table-cell>
                                                 <fo:table-cell>
@@ -60,93 +80,163 @@
                                         </fo:table-body>
                                     </fo:table>
 
-                                    <fo:block>
-                                        2) Псеудоним или знак аутора, (ако га има):
+                                    <fo:block space-before="36pt" space-after="48pt">
+                                        2) Pseudonim ili znak autora, (ako ga ima):
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/pseudonim" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/pseudonim" />
+                                        </fo:block>
                                     </fo:block>
 
-                                    <fo:block>
-                                        3) Име, презиме и адреса пуномоћника, ако се пријава подноси преко пуномоћника:
+                                    <fo:block space-after="48pt">
+                                        3) Ime, prezime i adresa punomocnika, ako se prijava podnosi preko punomocnika:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/poslovno_ime" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/ime" />
+                                            <xsl:text>&#x20;</xsl:text>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/prezime" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/adresa/ulica" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/licni_podaci/adresa/mesto" />
+                                        </fo:block>
                                     </fo:block>
 
-                                    <fo:block>
-                                        4) Наслов ауторског дела, односно алтернативни наслов, ако га има, по коме ауторско дело може да се идентификује*:
+                                    <fo:block space-after="48pt">
+                                        4) Naslov autorskog dela, odnosno alternativni naslov, ako ga ima, po kome autorsko delo moze da se identifikuje*:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/naslov" />
+                                        </fo:block>
+                                        <fo:block>
+                                            (<xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/alternativni_naslov" />)
+                                        </fo:block>
                                     </fo:block>
 
-                                    <fo:block>
-                                        5) Подаци о наслову ауторског дела на коме се заснива дело прераде, ако је у питању ауторско дело прераде, као и податак о аутору изворног дела:
+                                    <fo:block space-after="48pt">
+                                        5) Podaci o naslovu autorskog dela na kome se zasniva delo prerade, ako je u pitanju autorsko delo prerade, kao i podatak o autoru izvornog dela:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/podaci_o_izvornom_delu/naslov" />
+                                        </fo:block>
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/podaci_o_izvornom_delu/autor" />
+                                        </fo:block>
                                     </fo:block>
 
-                                    <fo:block>
-                                        6) Подаци о врсти ауторског дела (књижевно дело, музичко дело, ликовно дело, рачунарски програм и др.) *:
+                                    <fo:block space-after="48pt">
+                                        6) Podaci o vrsti autorskog dela (knjizevno delo, muzicko delo, likovno delo, racunarski program i dr.) *:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/vrsta_autorskog_dela" />
+                                        </fo:block>
                                     </fo:block>
+                                    
+                                    <fo:block break-after="page" />
                                 </fo:table-cell>
                             </fo:table-row>
 
                             <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
-                                    <fo:block>           
-                                        7) Подаци о форми записа ауторског дела (штампани текст, оптички диск и слично) *:
+                                    
+                                    <fo:block space-after="48pt">         
+                                        7) Podaci o formi zapisa autorskog dela (stampani tekst, opticki disk i slicno) *:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/forma_autorskog_dela" />
+                                        </fo:block>
                                     </fo:block>
-                                    <fo:block>
-                                        8) Подаци о аутору ако подносилац пријаве из тачке 1. овог захтева није аутор и то: презиме, име, адреса и држављанство аутора (групе аутора или коаутора), а ако су у питању један или више аутора који нису живи, имена аутора и године смрти аутора а ако је у питању ауторско дело анонимног аутора навод да је ауторско дело дело анонимног аутора:
+                                    <fo:block space-after="48pt">
+                                        8) Podaci o autoru ako podnosilac prijave iz tacke 1. ovog zahteva nije autor i to: prezime, ime, adresa i drzavljanstvo autora (grupe autora ili koautora), a ako su u pitanju jedan ili vise autora koji nisu zivi, imena autora i godine smrti autora, a ako je u pitanju autorsko delo anonimnog autora navod da je autorsko delo delo anonimnog autora:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/vrsta_autorskog_dela" />
+                                        </fo:block>
                                     </fo:block>
-                                    <fo:block>
-                                        9) Податак да ли је у питању ауторско дело створено у радном односу:
+                                    <fo:block space-after="48pt">
+                                        9) Podatak da li je u pitanju autorsko delo stvoreno u radnom odnosu:
+
+                                        <fo:block>
+                                            <xsl:choose>
+                                                <xsl:when test="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/stvoreno_u_radnom_odnosu = true()">Jeste</xsl:when>
+                                                <xsl:otherwise>Nije</xsl:otherwise>
+                                            </xsl:choose>
+                                        </fo:block>
                                     </fo:block>
-                                    <fo:block>
-                                        10) Начин коришћења ауторског дела или намеравани начин коришћења ауторског дела:
+                                    <fo:block space-after="48pt">
+                                        10) Nacin koriscenja autorskog dela ili nameravani nacin koriscenja autorskog dela:
+
+                                        <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/nacin_koriscenja" />
+                                        </fo:block>
                                     </fo:block>
-                                    <fo:block>
-                                        <fo:inline font-weight="bold">
+                                    <fo:block text-align="right">
+                                        <fo:inline font-weight="bold" >
                                         ________________________
                                         </fo:inline>
                                     </fo:block>
                                     <fo:block>
                                         11)
                                     </fo:block>
-                                    <fo:block>
+                                    <fo:block text-align="right">
                                         <fo:inline font-weight="bold">
-                                            Подносилац пријаве, носилац права
+                                            Podnosilac prijave, nosilac prava
                                         </fo:inline>
                                     </fo:block>
-                                    <fo:block>
-                                            (место за потпис физичког лица, односно потпис заступника правног лица или овлашћеног представника у правном лицу)*
+                                    <fo:block text-align="right">
+                                        (mesto za potpis fizickog lica, odnosno potpis zastupnika pravnog lica ili ovlascenog predstavnika u pravnom licu)*
                                     </fo:block>
+                                    
+                                    <fo:block break-after="page" />
                                 </fo:table-cell>
                             </fo:table-row>
 
                             <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
-                                    <fo:block>
-                                        12) Прилози који се подносе уз захтев:
+                                    <fo:block space-after="20pt">
+                                        12) Prilozi koji se podnose uz zahtev:
                                     </fo:block>
                                     <fo:block text-align="center">
                                         <fo:inline font-weight="bold">
-                                        ПОПУЊАВА ЗАВОД:
+                                            POPUNJAVA ZAVOD:
                                         </fo:inline>
                                     </fo:block>
                                     <fo:block>
                                         <fo:inline font-weight="bold">
-                                        Прилози уз пријаву:
+                                            Prilozi uz prijavu:
                                         </fo:inline>
                                     </fo:block>
                                     <fo:block>
-                                        _ опис ауторског дела (ако је дело поднето на оптичком диску);
+                                        <fo:inline border-bottom="1pt solid black">
+                                            <xsl:choose>
+                                                <xsl:when test="/zahtev_za_autorska_prava/prilozi/opis_autorskog_dela = true()">x</xsl:when>
+                                                <xsl:otherwise></xsl:otherwise>
+                                            </xsl:choose>
+                                        </fo:inline> opis autorskog dela (ako je delo podneto na optickom disku);
                                     </fo:block>
-                                    <fo:block>
-                                        _ пример ауторског дела (слика, видео запис, аудио запис)
+                                    <fo:block space-after="6in">
+                                        <fo:inline border-bottom="1pt solid black">
+                                            <xsl:choose>
+                                                <xsl:when test="/zahtev_za_autorska_prava/prilozi/primer_autorskog_dela = true()">x</xsl:when>
+                                                <xsl:otherwise></xsl:otherwise>
+                                            </xsl:choose>
+                                        </fo:inline> primer autorskog dela (slika, video zapis, audio zapis)
                                     </fo:block>
-                                    <fo:table>
-                                        <fo:table-column border-width="0.5px" border-style="solid" />
+                                    <fo:table font-size="14pt">
+                                        <fo:table-column border-width="0.5px" border-style="solid" column-width="2in"/>
 
                                         <fo:table-body>
                                             <fo:table-row border-width="0.5px" border-style="solid">
                                                 <fo:table-cell>
                                                     <fo:block>
-                                                    Број пријаве
+                                                    Broj prijave
                                                     </fo:block>
                                                     <fo:block font-weight="bold">
-                                                    A-
+                                                        <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_zahtevu/obrazac" />
                                                     </fo:block>
                                                 </fo:table-cell>
                                             </fo:table-row>
@@ -154,10 +244,12 @@
                                             <fo:table-row border-width="0.5px" border-style="solid">
                                                 <fo:table-cell>
                                                     <fo:block>
-                                                    Датум подношења:
+                                                    Datum podnosenja:
                                                     </fo:block>
                                                     <fo:block>
-                                                    __________
+                                                        <fo:inline border-bottom="1pt solid black"> 
+                                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_zahtevu/datum_podnosenja" />
+                                                        </fo:inline>
                                                     </fo:block>
                                                 </fo:table-cell>
                                             </fo:table-row>
@@ -165,13 +257,10 @@
                                     </fo:table>
                                 </fo:table-cell>
                             </fo:table-row>
-
-
-
                         </fo:table-body>
                     </fo:table>
                     <fo:block>
-                        Рубрике у захтеву А-1 које су означене са * морају да буду обавезно попуњене.
+                        Rubrike u zahtevu A-1 koje su oznacene sa * moraju da budu obavezno popunjene.
                     </fo:block>
                 </fo:flow>
             </fo:page-sequence>
