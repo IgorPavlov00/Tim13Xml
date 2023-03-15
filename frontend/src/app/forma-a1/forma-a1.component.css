@@ -56,6 +56,7 @@ body {
   width: calc(100% / 6);
   transition: margin-left 0.3s ease-in-out;
 }
+
 .form-outer form .page .title {
   text-align: left;
   font-size: 25px;

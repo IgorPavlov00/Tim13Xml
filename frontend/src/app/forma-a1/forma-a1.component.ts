@@ -20,6 +20,9 @@ export class FormaA1Component implements OnInit {
   prevButtons: any;
   stepsNumber: number|any;
   current: number|any;
+  selectedOption: string='da';
+  value: string|any;
+  private inputFields: any;
 
   ngOnInit() {
     this.progressNumber = document.querySelectorAll(".step").length;
@@ -117,4 +120,74 @@ export class FormaA1Component implements OnInit {
     // @ts-ignore
     document.getElementById("forma").style.display = "none";
   }
-}
+
+  showForm3() {
+
+    const forma3 = document.getElementById("forma3");
+     // @ts-ignore
+
+
+    // @ts-ignore
+    if (forma3.style.display === "none") {
+      // show the form if it is currently hidden
+      // @ts-ignore
+      forma3.style.display = "block";
+    } else {
+      // hide the form if it is currently visible
+      // @ts-ignore
+      forma3.style.display = "none";
+    }
+  }
+
+  showForm4() {
+    // @ts-ignore
+    document.getElementById("forma4").style.display = "none";
+    // @ts-ignore
+    document.getElementById("forma5").style.display = "none";
+
+    const inputs = document.querySelectorAll('.a');
+    // @ts-ignore
+    for (const input of inputs) {
+      input.removeAttribute('required');
+    }
+
+  }
+
+  showForm5() {
+// @ts-ignore
+    document.getElementById("forma4").style.display = "block";
+    const inputs = document.querySelectorAll('.a');
+    // @ts-ignore
+    for (const input of inputs) {
+      input.removeAttribute('required');
+    }
+
+  }
+
+  fun() {
+    // @ts-ignore
+    document.getElementById("forma5").style.display = "none";
+    const inputs = document.querySelectorAll('.a');
+    // @ts-ignore
+    for (const input of inputs) {
+      input.removeAttribute('required');
+    }
+
+
+  }
+
+  fun2() {
+    // @ts-ignore
+    document.getElementById("forma5").style.display = "block";
+    const inputs = document.querySelectorAll('.a');
+    // @ts-ignore
+    for (const input of inputs) {
+      input.setAttribute('required', '');
+    }
+  }
+
+  }
+
+
+
+
