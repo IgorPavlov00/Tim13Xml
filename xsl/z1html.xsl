@@ -1,7 +1,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
 	<xsl:template match="/">
-		<html xmlns="http://www.w3.org/1999/xhtml"><!--This file was converted to xhtml by
+		<html xmlns="http://www.w3.org/1999/xhtml">			<!--This file was converted to xhtml by
 			OpenOffice.org - see http://xml.openoffice.org/odf2xhtml for more info.-->
 			<head profile="http://dublincore.org/documents/dcmi-terms/">
 				<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
@@ -19,7 +19,7 @@
 				<style type="text/css"> @page { } table { border-collapse:collapse;
 		border-spacing:0; empty-cells:show } td, th { vertical-align:top; font-size:12pt;} h1, h2,
 		h3, h4, h5, h6 { clear:both } ol, ul { margin:0; padding:0;} li { list-style: none;
-		margin:0; padding:0;} 				<!-- "li span.odfLiEnd" - IE 7 issue--> li span. { clear: both; line-height:0; width:0; height:0; margin:0;
+		margin:0; padding:0;} 														<!-- "li span.odfLiEnd" - IE 7 issue--> li span. { clear: both; line-height:0; width:0; height:0; margin:0;
 		padding:0; } span.footnodeNumber { padding-right:1em; } span.annotation_style_by_filter {
 		font-size:95%; font-family:Arial; background-color:#fff000; margin:0; border:0; padding:0; }
 		* { margin:0;} .P1 { font-size:11pt; font-family:Calibri; writing-mode:lr-tb;
@@ -270,13 +270,12 @@
 		font-size:9.5pt; } .T6 { color:#00000a; font-family:Arial; font-size:9.5pt;
 		font-weight:bold; } .T7 { color:#00000a; font-family:Arial; font-size:9.5pt;
 		font-weight:bold; } .T8 { color:#00000a; font-family:Arial; font-size:8.5pt;
-		font-style:italic; } 				<!-- ODF styles with no properties representable as CSS --> .Sect1 .Sect2 .Sect3 .Sect4 .Table1.1 .Table1.2 .Table1.3 .Table1.4
+		font-style:italic; } 														<!-- ODF styles with no properties representable as CSS --> .Sect1 .Sect2 .Sect3 .Sect4 .Table1.1 .Table1.2 .Table1.3 .Table1.4
 		.Table2.1 .Table2.2 .Table3.1 .Table3.3 .Table3.4 .Table3.5 .Table3.6 .Table3.7 .Table4.1
 		.Table4.2 .Table4.3 .Table4.4 .Table4.5 .Table5.1 .Table5.2 .Table5.3 .Table5.4 .Table5.6
 		.Table5.7 .Table5.8 { } </style>
 			</head>
-			<body dir="ltr"
-				style="max-width:8.5in;margin-top:0.9965in; margin-bottom:0.6583in; margin-left:0.5555in; margin-right:0.5555in; ">
+			<body dir="ltr" style="max-width:8.5in;margin-top:0.9965in; margin-bottom:0.6583in; margin-left:0.5555in; margin-right:0.5555in; ">
 				<p class="P55">
 					<a name="page1" />
 					<span class="T1">ЗАХТЕВ ЗА ПРИЗНАЊЕ ЖИГА</span>
@@ -285,97 +284,101 @@
 					<span class="T3">Заводу за интелектуалну својину, Кнегиње Љубице 5, 11000
 		Београд</span>
 				</p>
-				<p class="P5"> </p>
+				<p class="P5"></p>
 				<p class="P2">
 					<span class="T2">(попунити на рачунару)</span>
 				</p>
-				<p class="P6"> </p>
-				<p class="P7"> </p>
+				<p class="P6"></p>
+				<p class="P7"></p>
 				<ol>
 					<li>
-						<p class="P60" style="margin-left:0.5999cm;"><span
-								style="display:block;float:left;min-width:0cm">1.</span><span
-								class="T3">Подносилац пријаве:</span><span class="T2"> име и
-		презиме/пословно име, улица и број, поштански број, место, држава пребивалишта/седишта:</span><span
-								class="odfLiEnd" /> </p>
+						<p class="P60" style="margin-left:0.5999cm;">
+							<span style="display:block;float:left;min-width:0cm">1.</span>
+							<span class="T3">Подносилац пријаве:</span>
+							<span class="T2"> име и
+		презиме/пословно име, улица и број, поштански број, место, држава пребивалишта/седишта:</span>
+							<span class="odfLiEnd" />
+						</p>
 					</li>
-				</ol><!--Next
+				</ol>				<!--Next
 				'div' was a 'text:section'.-->
 				<div class="Sect1" id="TextSection">
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P9"> </p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P9"></p>
 					<p class="P61">
 						<span class="T2">телефон:</span>
 					</p>
-					<p class="P6"> </p>
-					<p class="P56"> </p>
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P10"> </p>
+					<p class="P6"></p>
+					<p class="P56"></p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P10"></p>
 					<p class="P65">
 						<span class="T5">email:</span>
 					</p>
-					<p class="P6"> </p>
-					<p class="P56"> </p>
+					<p class="P6"></p>
+					<p class="P56"></p>
 					<p class="P8" />
-					<p class="P8"> </p>
-					<p class="P11"> </p>
+					<p class="P8"></p>
+					<p class="P11"></p>
 					<p class="P66">
 						<span class="T2">факс:</span>
 					</p>
-					<p class="P12"> </p>
-				</div><!--Next 'div' was a
+					<p class="P12"></p>
+				</div>				<!--Next 'div' was a
 				'text:section'.-->
 				<div class="Sect2" id="Section1">
 					<ol>
 						<li>
-							<p class="P67" style="margin-left:0.494cm;"><span
-									style="display:block;float:left;min-width:0cm">2.</span><span
-									class="T3">Пуномоћник:</span><span class="T2"> име и
-		презиме/пословно име, улица и број, поштански број, место, држава пребивалишта/седишта:</span><span
-									class="odfLiEnd" /> </p>
+							<p class="P67" style="margin-left:0.494cm;">
+								<span style="display:block;float:left;min-width:0cm">2.</span>
+								<span class="T3">Пуномоћник:</span>
+								<span class="T2"> име и
+		презиме/пословно име, улица и број, поштански број, место, држава пребивалишта/седишта:</span>
+								<span class="odfLiEnd" />
+							</p>
 						</li>
 					</ol>
-				</div><!--Next
+				</div>				<!--Next
 				'div' was a 'text:section'.-->
 				<div class="Sect3" id="Section2">
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P13"> </p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P13"></p>
 					<p class="P61">
 						<span class="T2">телефон:</span>
 					</p>
-					<p class="P6"> </p>
-					<p class="P56"> </p>
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P14"> </p>
+					<p class="P6"></p>
+					<p class="P56"></p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P14"></p>
 					<p class="P1">
 						<span class="T2">email:</span>
 					</p>
-					<p class="P6"> </p>
-					<p class="P56"> </p>
-					<p class="P8"> </p>
-					<p class="P8"> </p>
+					<p class="P6"></p>
+					<p class="P56"></p>
+					<p class="P8"></p>
+					<p class="P8"></p>
 					<p class="P15" />
 					<p class="P68">
 						<span class="T5">факс:</span>
 					</p>
-					<p class="P16"> </p>
-				</div><!--Next 'div' was a
+					<p class="P16"></p>
+				</div>				<!--Next 'div' was a
 				'text:section'.-->
 				<div class="Sect2" id="Section3">
 					<p class="P61">
 						<span class="T3">3. Подаци о заједничком представнику ако постоји више
 		подносилаца пријаве:</span>
 					</p>
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P8"> </p>
-					<p class="P17"> </p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P8"></p>
+					<p class="P17"></p>
 					<table border="0" cellspacing="0" cellpadding="0" class="Table1">
 						<colgroup>
 							<col width="170" />
@@ -388,21 +391,18 @@
 							<col width="28" />
 						</colgroup>
 						<tr class="Table11">
-							<td colspan="2" style="text-align:left;width:1.5306in; "
-								class="Table1_A1">
+							<td colspan="2" style="text-align:left;width:1.5306in; " class="Table1_A1">
 								<p class="P61">
 									<span class="T2">телефон:</span>
 								</p>
 							</td>
-							<td colspan="2" style="text-align:left;width:0.159in; "
-								class="Table1_C1">
+							<td colspan="2" style="text-align:left;width:0.159in; " class="Table1_C1">
 								<p class="P69">
 									<span class="T2">email:</span>
 								</p>
 							</td>
-							<td colspan="2" style="text-align:left;width:0.9528in; "
-								class="Table1_A1">
-								<p class="P22"> </p>
+							<td colspan="2" style="text-align:left;width:0.9528in; " class="Table1_A1">
+								<p class="P22"></p>
 							</td>
 							<td style="text-align:left;width:2.5417in; " class="Table1_C1">
 								<p class="P70">
@@ -410,44 +410,39 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:0.2514in; " class="Table1_H1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table12">
-							<td colspan="4" style="text-align:left;width:1.5306in; "
-								class="Table1_H1">
+							<td colspan="4" style="text-align:left;width:1.5306in; " class="Table1_H1">
 								<p class="P62">
 									<span class="T3">4. Пријава се подноси за (уписати X):</span>
 								</p>
 							</td>
-							<td colspan="2" style="text-align:left;width:0.9528in; "
-								class="Table1_H1">
-								<p class="P40"> </p>
+							<td colspan="2" style="text-align:left;width:0.9528in; " class="Table1_H1">
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:2.5417in; " class="Table1_H1">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.2514in; " class="Table1_H1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table13">
 							<td style="text-align:left;width:1.5306in; " class="Table1_A3">
-								<p class="P41"> </p>
+								<p class="P41"></p>
 							</td>
-							<td colspan="2" style="text-align:left;width:1.3715in; "
-								class="Table1_A3">
-								<p class="P41"> </p>
+							<td colspan="2" style="text-align:left;width:1.3715in; " class="Table1_A3">
+								<p class="P41"></p>
 							</td>
-							<td colspan="2" rowspan="2" style="text-align:left;width:0.5778in; "
-								class="Table1_H1">
+							<td colspan="2" rowspan="2" style="text-align:left;width:0.5778in; " class="Table1_H1">
 								<p class="P71">
 									<span class="T3">в) изглед знака:</span>
 								</p>
 							</td>
-							<td colspan="3" style="text-align:left;width:0.2681in; "
-								class="Table1_H1">
-								<p class="P39"> </p>
+							<td colspan="3" style="text-align:left;width:0.2681in; " class="Table1_H1">
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table14">
@@ -456,17 +451,15 @@
 									<span class="T2">индивидуални жиг</span>
 								</p>
 							</td>
-							<td colspan="2" style="text-align:left;width:1.3715in; "
-								class="Table1_H1">
-								<p class="P40"> </p>
+							<td colspan="2" style="text-align:left;width:1.3715in; " class="Table1_H1">
+								<p class="P40"></p>
 							</td>
-							<td colspan="3" style="text-align:left;width:0.2681in; "
-								class="Table1_H1">
-								<p class="P39"> </p>
+							<td colspan="3" style="text-align:left;width:0.2681in; " class="Table1_H1">
+								<p class="P39"></p>
 							</td>
 						</tr>
 					</table>
-					<p class="P18"> </p>
+					<p class="P18"></p>
 					<table border="0" cellspacing="0" cellpadding="0" class="Table2">
 						<colgroup>
 							<col width="41" />
@@ -486,12 +479,12 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:3.6403in; " class="Table2_A1">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 						</tr>
 						<tr class="Table22">
 							<td style="text-align:left;width:0.3667in; " class="Table2_A1">
-								<p class="P74"> </p>
+								<p class="P74"></p>
 							</td>
 							<td style="text-align:left;width:2.5347in; " class="Table2_A1">
 								<p class="P76">
@@ -499,15 +492,15 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:3.6403in; " class="Table2_A1">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 						</tr>
 					</table>
 					<p class="P77">
-						<span class="T4">        </span>
+						<span class="T4"></span>
 						<span class="T2">вербални знак (знак у речи)</span>
 					</p>
-					<p class="P19"> </p>
+					<p class="P19"></p>
 					<table border="0" cellspacing="0" cellpadding="0" class="Table3">
 						<colgroup>
 							<col width="31" />
@@ -516,7 +509,7 @@
 						</colgroup>
 						<tr class="Table31">
 							<td style="text-align:left;width:0.2771in; " class="Table3_A1">
-								<p class="P47"> </p>
+								<p class="P47"></p>
 							</td>
 							<td style="text-align:left;width:3.2917in; " class="Table3_A1">
 								<p class="P61">
@@ -524,12 +517,12 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table31">
 							<td style="text-align:left;width:0.2771in; " class="Table3_A1">
-								<p class="P22"> </p>
+								<p class="P22"></p>
 							</td>
 							<td style="text-align:left;width:3.2917in; " class="Table3_B2">
 								<p class="P61">
@@ -537,7 +530,7 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table33">
@@ -546,38 +539,37 @@
 									<span class="T7">б)</span>
 								</p>
 							</td>
-							<td rowspan="2" style="text-align:left;width:3.2917in; "
-								class="Table3_A1">
+							<td rowspan="2" style="text-align:left;width:3.2917in; " class="Table3_A1">
 								<p class="P63">
 									<span class="T2">комбиновани знак</span>
 								</p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table34">
 							<td style="text-align:left;width:0.2771in; " class="Table3_A1">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table35">
 							<td style="text-align:left;width:0.2771in; " class="Table3_A1">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:3.2917in; " class="Table3_B2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table36">
 							<td style="text-align:left;width:0.2771in; " class="Table3_A1">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:3.2917in; " class="Table3_A1">
 								<p class="P64">
@@ -585,23 +577,23 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table37">
 							<td style="text-align:left;width:0.2771in; " class="Table3_A1">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:3.2917in; " class="Table3_B2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 						<tr class="Table36">
 							<td style="text-align:left;width:0.2771in; " class="Table3_A1">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:3.2917in; " class="Table3_A1">
 								<p class="P64">
@@ -609,53 +601,62 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:0.2507in; " class="Table3_A1">
-								<p class="P39"> </p>
+								<p class="P39"></p>
 							</td>
 						</tr>
 					</table>
-					<p class="P20"> </p>
+					<p class="P20"></p>
 					<ol>
 						<li>
-							<p class="P78" style="margin-left:0.2121cm;"><span
-									style="display:block;float:left;min-width:0cm">5.</span><span
-									class="T3">Назначење боје, односно боја из којих се знак
-		састоји:</span><span class="odfLiEnd" /> </p>
+							<p class="P78" style="margin-left:0.2121cm;">
+								<span style="display:block;float:left;min-width:0cm">5.</span>
+								<span class="T3">Назначење боје, односно боја из којих се знак
+		састоји:</span>
+								<span class="odfLiEnd" />
+							</p>
 						</li>
 					</ol>
-					<p class="P42"> </p>
-					<p class="P43"> </p>
+					<p class="P42"></p>
+					<p class="P43"></p>
 					<ol>
 						<li>
-							<p class="P59" style="margin-left:0.5999cm;"><span
-									style="display:block;float:left;min-width:0cm">6.</span><span
-									class="T3">Транслитерација знака*:</span><span class="odfLiEnd" />
-		 </p>
+							<p class="P59" style="margin-left:0.5999cm;">
+								<span style="display:block;float:left;min-width:0cm">6.</span>
+								<span class="T3">Транслитерација знака*:</span>
+								<span class="odfLiEnd" />
+							</p>
 						</li>
 					</ol>
-					<p class="P44"> </p>
+					<p class="P44"></p>
 					<ol>
 						<li>
-							<p class="P79" style="margin-left:0.7061cm;"><span
-									style="display:block;float:left;min-width:0cm">7.</span><span
-									class="T3">Превод знака*:</span><span class="odfLiEnd" /> </p>
+							<p class="P79" style="margin-left:0.7061cm;">
+								<span style="display:block;float:left;min-width:0cm">7.</span>
+								<span class="T3">Превод знака*:</span>
+								<span class="odfLiEnd" />
+							</p>
 						</li>
 					</ol>
-					<p class="P45"> </p>
+					<p class="P45"></p>
 					<ol>
 						<li>
-							<p class="P59" style="margin-left:0.5999cm;"><span
-									style="display:block;float:left;min-width:0cm">8.</span><span
-									class="T3">Опис знака:</span><span class="odfLiEnd" /> </p>
+							<p class="P59" style="margin-left:0.5999cm;">
+								<span style="display:block;float:left;min-width:0cm">8.</span>
+								<span class="T3">Опис знака:</span>
+								<span class="odfLiEnd" />
+							</p>
 						</li>
 					</ol>
-					<p class="P42"> </p>
-					<p class="P46"> </p>
+					<p class="P42"></p>
+					<p class="P46"></p>
 					<ol>
 						<li>
-							<p class="P59" style="margin-left:0.5999cm;"><span
-									style="display:block;float:left;min-width:0cm">9.</span><span
-									class="T3">Заокружити бројеве класа робе и услуга према
-		Ничанској класификацији :</span><span class="odfLiEnd" /> </p>
+							<p class="P59" style="margin-left:0.5999cm;">
+								<span style="display:block;float:left;min-width:0cm">9.</span>
+								<span class="T3">Заокружити бројеве класа робе и услуга према
+		Ничанској класификацији :</span>
+								<span class="odfLiEnd" />
+							</p>
 						</li>
 					</ol>
 					<table border="0" cellspacing="0" cellpadding="0" class="Table4">
@@ -803,73 +804,73 @@
 						</tr>
 						<tr class="Table42">
 							<td style="text-align:left;width:0.3743in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.2917in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3326in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3056in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.375in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3889in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3194in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3111in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3125in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3056in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 							<td style="text-align:left;width:0.384in; " class="Table4_W2">
-								<p class="P49"> </p>
+								<p class="P49"></p>
 							</td>
 						</tr>
 						<tr class="Table43">
@@ -984,136 +985,135 @@
 								</p>
 							</td>
 							<td style="text-align:left;width:0.384in; " class="Table4_W3">
-								<p class="P50"> </p>
+								<p class="P50"></p>
 							</td>
 						</tr>
 						<tr class="Table44">
 							<td style="text-align:left;width:0.3743in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.2917in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3326in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3056in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.375in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3889in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3194in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3111in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3125in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3056in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_A2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 							<td style="text-align:left;width:0.384in; " class="Table4_W2">
-								<p class="P48"> </p>
+								<p class="P48"></p>
 							</td>
 						</tr>
 						<tr class="Table45">
-							<td colspan="9" style="text-align:left;width:0.3743in; "
-								class="Table4_W3">
+							<td colspan="9" style="text-align:left;width:0.3743in; " class="Table4_W3">
 								<p class="P54">
 									<span class="T3">10. Затражено право првенства и основ:</span>
 								</p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3889in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3194in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3111in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3125in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3056in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3188in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.3049in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 							<td style="text-align:left;width:0.384in; " class="Table4_W3">
-								<p class="P40"> </p>
+								<p class="P40"></p>
 							</td>
 						</tr>
 					</table>
-					<p class="P8"> </p>
-				</div><!--Next 'div' was a 'text:section'.-->
+					<p class="P8"></p>
+				</div>				<!--Next 'div' was a 'text:section'.-->
 				<div class="Sect2" id="Section4">
-					<p class="P8"> </p>
-					<p class="P21"> </p>
+					<p class="P8"></p>
+					<p class="P21"></p>
 					<p class="P90">
 						<span class="T2">*Попунити само ако је знак или елемент знака исписан
 		словима која нису ћирилична или латинична</span>
@@ -1141,10 +1141,10 @@
 					</tr>
 					<tr class="Table52">
 						<td style="text-align:left;width:2.9438in; " class="Table5_A2">
-							<p class="P4"> </p>
+							<p class="P4"></p>
 						</td>
 						<td style="text-align:left;width:0.9583in; " class="Table5_B2">
-							<p class="P4"> </p>
+							<p class="P4"></p>
 						</td>
 					</tr>
 					<tr class="Table53">
@@ -1154,15 +1154,15 @@
 							</p>
 						</td>
 						<td style="text-align:left;width:0.9583in; " class="Table5_B3">
-							<p class="P4"> </p>
+							<p class="P4"></p>
 						</td>
 					</tr>
 					<tr class="Table54">
 						<td style="text-align:left;width:2.9438in; " class="Table5_A2">
-							<p class="P51"> </p>
+							<p class="P51"></p>
 						</td>
 						<td style="text-align:left;width:0.9583in; " class="Table5_B2">
-							<p class="P51"> </p>
+							<p class="P51"></p>
 						</td>
 					</tr>
 					<tr class="Table53">
@@ -1172,7 +1172,7 @@
 							</p>
 						</td>
 						<td style="text-align:left;width:0.9583in; " class="Table5_B3">
-							<p class="P4"> </p>
+							<p class="P4"></p>
 						</td>
 					</tr>
 					<tr class="Table56">
@@ -1182,7 +1182,7 @@
 							</p>
 						</td>
 						<td style="text-align:left;width:0.9583in; " class="Table5_B2">
-							<p class="P4"> </p>
+							<p class="P4"></p>
 						</td>
 					</tr>
 					<tr class="Table57">
@@ -1192,116 +1192,116 @@
 							</p>
 						</td>
 						<td style="text-align:left;width:0.9583in; " class="Table5_B3">
-							<p class="P4"> </p>
+							<p class="P4"></p>
 						</td>
 					</tr>
 					<tr class="Table58">
 						<td style="text-align:left;width:2.9438in; " class="Table5_A3">
-							<p class="P52"> </p>
+							<p class="P52"></p>
 						</td>
 						<td style="text-align:left;width:0.9583in; " class="Table5_B3">
-							<p class="P58"> </p>
+							<p class="P58"></p>
 						</td>
 					</tr>
 				</table>
-				<p class="P23"> </p>
-				<p class="P23"> </p>
+				<p class="P23"></p>
+				<p class="P23"></p>
 				<p class="P89">
 					<span class="T3">Потпис подносиоца захтева</span>
 				</p>
-				<p class="P24"> </p>
-				<p class="P24"> </p>
-				<p class="P24"> </p>
-				<p class="P24"> </p>
-				<p class="P24"> </p>
-				<p class="P24"> </p>
-				<p class="P24"> </p>
-				<p class="P25"> </p>
+				<p class="P24"></p>
+				<p class="P24"></p>
+				<p class="P24"></p>
+				<p class="P24"></p>
+				<p class="P24"></p>
+				<p class="P24"></p>
+				<p class="P24"></p>
+				<p class="P25"></p>
 				<p class="P1">
 					<span class="T8">* Печат, уколико је потребан у складу са законом</span>
 				</p>
 				<p class="P23" />
-				<p class="P26"> </p><!--Next 'div' was a 'text:section'.-->
+				<p class="P26"></p>				<!--Next 'div' was a 'text:section'.-->
 				<div class="Sect2" id="Section5">
-					<p class="P24"> </p>
-					<p class="P27"> </p>
+					<p class="P24"></p>
+					<p class="P27"></p>
 					<p class="P91">
 						<span class="T7">ПОПУЊАВА ЗАВОД</span>
 					</p>
-					<p class="P23"> </p>
-				</div><!--Next 'div' was a
+					<p class="P23"></p>
+				</div>				<!--Next 'div' was a
 				'text:section'.-->
 				<div class="Sect4" id="Section6">
-					<p class="P28"> </p>
+					<p class="P28"></p>
 					<p class="P92">
 						<span class="T3">Прилози уз захтев:</span>
 					</p>
-					<p class="P23"> </p>
-					<p class="P29"> </p>
+					<p class="P23"></p>
+					<p class="P29"></p>
 					<p class="P92">
 						<span class="T2">Примерак знака</span>
 					</p>
-					<p class="P30"> </p>
+					<p class="P30"></p>
 					<p class="P92">
 						<span class="T2">Списак робе и услуга**</span>
 					</p>
-					<p class="P31"> </p>
+					<p class="P31"></p>
 					<p class="P92">
 						<span class="T2">Пуномоћје</span>
 					</p>
-					<p class="P31"> </p>
+					<p class="P31"></p>
 					<p class="P92">
 						<span class="T2">Генерално пуномоћје раније приложено</span>
 					</p>
-					<p class="P32"> </p>
+					<p class="P32"></p>
 					<p class="P92">
 						<span class="T5">Пуномоћје ће бити накнадно достављено</span>
 					</p>
-					<p class="P23"> </p>
-					<p class="P57"> </p>
+					<p class="P23"></p>
+					<p class="P57"></p>
 					<p class="P24" />
-					<p class="P33"> </p>
+					<p class="P33"></p>
 					<p class="P93">
 						<span class="T2">Број пријаве жига:</span>
 					</p>
-					<p class="P34"> </p>
+					<p class="P34"></p>
 					<p class="P94">
 						<span class="T2">Ж_________/___</span>
 					</p>
-					<p class="P35"> </p>
+					<p class="P35"></p>
 					<p class="P95">
 						<span class="T3">Датум подношења:</span>
 					</p>
-					<p class="P35"> </p>
+					<p class="P35"></p>
 					<p class="P1">
 						<span class="T3">________________________</span>
 					</p>
-					<p class="P36"> </p>
-				</div><!--Next 'div' was a
+					<p class="P36"></p>
+				</div>				<!--Next 'div' was a
 				'text:section'.-->
 				<div class="Sect2" id="Section7">
-					<p class="P37"> </p>
+					<p class="P37"></p>
 					<p class="P92">
 						<span class="T2">Општи акт о колективном жигу/жигу гаранције</span>
 					</p>
-					<p class="P31"> </p>
+					<p class="P31"></p>
 					<p class="P92">
 						<span class="T2">Доказ о праву првенства</span>
 					</p>
-					<p class="P30"> </p>
+					<p class="P30"></p>
 					<p class="P92">
 						<span class="T2">Доказ о уплати таксе</span>
 					</p>
-					<p class="P23"> </p>
-					<p class="P24"> </p>
-					<p class="P24"> </p>
-					<p class="P24"> </p>
-					<p class="P24"> </p>
+					<p class="P23"></p>
+					<p class="P24"></p>
+					<p class="P24"></p>
+					<p class="P24"></p>
+					<p class="P24"></p>
 					<p class="P24" />
-					<p class="P24"> </p>
-					<p class="P24"> </p>
-					<p class="P24"> </p>
-					<p class="P38"> </p>
+					<p class="P24"></p>
+					<p class="P24"></p>
+					<p class="P24"></p>
+					<p class="P38"></p>
 					<p class="P72">
 						<span class="T2">**Уз заокруживање броја класе робе/услуга Ничанске
 		класификације у рубрици 9 доставља се и списак који садржи конкретне називе робе коју
