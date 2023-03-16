@@ -355,7 +355,7 @@
                             <fo:table-row border-width="0.5px" border-style="solid">
                               <fo:table-cell>
                                 <fo:block>
-                                  <fo:inline>drugu vrstu znaka (navesti koju)</fo:inline><xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/druga_vrsta"></xsl:value-of>
+                                  <fo:inline>drugu vrstu znaka (navesti koju)</fo:inline><xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/druga_vrsta" />
                                 </fo:block>
                               </fo:table-cell>
                               <fo:table-cell>

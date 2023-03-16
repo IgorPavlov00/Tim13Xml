@@ -6,7 +6,7 @@
         <fo:root>
 
             <fo:layout-master-set>
-                <fo:simple-page-master master-name="Letter" page-width="8.5in" page-height="11in" margin-top="1in" margin-bottom="0.66in"  margin-left="0.56in" margin-right="0.56in" font-family="Arial, sans-serif" >
+                <fo:simple-page-master master-name="Letter" page-width="8.5in" page-height="11in" margin-top="1in" margin-bottom="0.66in" margin-left="0.56in" margin-right="0.56in" font-family="Arial, sans-serif">
                     <fo:region-body/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
@@ -68,7 +68,7 @@
                                         <fo:table-body>
                                             <fo:table-row border-width="0.5px" border-style="solid">
                                                 <fo:table-cell>
-                                                    <fo:block>telefon:
+                                                    <fo:block>telefon: 
                                                     </fo:block>
                                                 </fo:table-cell>
                                                 <fo:table-cell>
@@ -113,7 +113,8 @@
                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/naslov" />
                                         </fo:block>
                                         <fo:block>
-                                            (<xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/alternativni_naslov" />)
+                                            (                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/alternativni_naslov" />
+)
                                         </fo:block>
                                     </fo:block>
 
@@ -135,14 +136,14 @@
                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/vrsta_autorskog_dela" />
                                         </fo:block>
                                     </fo:block>
-                                    
+
                                     <fo:block break-after="page" />
                                 </fo:table-cell>
                             </fo:table-row>
 
                             <fo:table-row border-width="0.5px" border-style="solid">
                                 <fo:table-cell>
-                                    
+
                                     <fo:block space-after="48pt">         
                                         7) Podaci o formi zapisa autorskog dela (stampani tekst, opticki disk i slicno) *:
 
@@ -154,7 +155,11 @@
                                         8) Podaci o autoru ako podnosilac prijave iz tacke 1. ovog zahteva nije autor i to: prezime, ime, adresa i drzavljanstvo autora (grupe autora ili koautora), a ako su u pitanju jedan ili vise autora koji nisu zivi, imena autora i godine smrti autora, a ako je u pitanju autorsko delo anonimnog autora navod da je autorsko delo delo anonimnog autora:
 
                                         <fo:block>
-                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autorskom_delu/vrsta_autorskog_dela" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/ime" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/ime" />
+                                            <xsl:text>&#x20;</xsl:text>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/prezime" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/prezime" />
                                         </fo:block>
                                     </fo:block>
                                     <fo:block space-after="48pt">
@@ -175,7 +180,7 @@
                                         </fo:block>
                                     </fo:block>
                                     <fo:block text-align="right">
-                                        <fo:inline font-weight="bold" >
+                                        <fo:inline font-weight="bold">
                                         ________________________
                                         </fo:inline>
                                     </fo:block>
@@ -190,7 +195,7 @@
                                     <fo:block text-align="right">
                                         (mesto za potpis fizickog lica, odnosno potpis zastupnika pravnog lica ili ovlascenog predstavnika u pravnom licu)*
                                     </fo:block>
-                                    
+
                                     <fo:block break-after="page" />
                                 </fo:table-cell>
                             </fo:table-row>
@@ -247,7 +252,7 @@
                                                     Datum podnosenja:
                                                     </fo:block>
                                                     <fo:block>
-                                                        <fo:inline border-bottom="1pt solid black"> 
+                                                        <fo:inline border-bottom="1pt solid black">
                                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_zahtevu/datum_podnosenja" />
                                                         </fo:inline>
                                                     </fo:block>
