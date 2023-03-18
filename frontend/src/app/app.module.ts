@@ -10,13 +10,15 @@ import { UlogaComponent } from './uloga/uloga.component';
 import {HttpClientModule} from "@angular/common/http";
 
 
+import { Z1FormComponent } from './z1-form/z1-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormaA1Component,
     LoginComponent,
-    UlogaComponent
+    UlogaComponent,
+    Z1FormComponent
   ],
   imports: [
     BrowserModule,

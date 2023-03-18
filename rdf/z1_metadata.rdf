@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-<rdf:Description rdf:about="http://localhost:8083">
+<rdf:Description rdf:about="http://localhost:8082">
 <datum_podnosenja>15/11/2022</datum_podnosenja>
 <ime_podnosioca>Pera</ime_podnosioca>
 <prezime_podnosioca>Peric</prezime_podnosioca>

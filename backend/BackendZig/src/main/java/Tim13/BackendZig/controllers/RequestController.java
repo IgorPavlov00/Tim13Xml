@@ -408,7 +408,7 @@ public class RequestController {
 
     private void generatePDF(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
 
-        FopFactory fopFactory = FopFactory.newInstance(new File("../fop.xconf"));
+        FopFactory fopFactory = FopFactory.newInstance(new File("../../fop.xconf"));
 
         TransformerFactory transformerFactory = new TransformerFactoryImpl();
 
@@ -478,7 +478,7 @@ public class RequestController {
     @RequestMapping("/")
     public void main() throws Exception {
         System.out.println("Pocetna strana!");
-        String z1File = "../xml/z1.xml";
+        String z1File = "../../xml/z1.xml";
         File xmlZ1 = new File(z1File);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -486,7 +486,7 @@ public class RequestController {
         getZ1(z1);
 
 
-        String filepathZ = "..\\xml\\Z1_1.xml";
+        String filepathZ = "..\\..\\xml\\Z1_1.xml";
         try (FileOutputStream output =
                      new FileOutputStream(filepathZ)) {
             writeXml(z1, output);
@@ -502,15 +502,15 @@ public class RequestController {
         retrive(ExistConnProperties.loadProperties(), argsZr);
 
         // generisanje PDF i XHTML za Z1
-        generatePDF(z1File, "../xsl/z1.xsl", "../pdf/z1.pdf");
-        generateXHTML(z1File, "../xsl/z1html.xsl", "../xhtml/z1.xhtml");
+        generatePDF(z1File, "../../xsl/z1.xsl", "../../pdf/z1.pdf");
+        generateXHTML(z1File, "../../xsl/z1html.xsl", "../../xhtml/z1.xhtml");
 
         // izvlacenje metapodataka
-        MetadataExtractor extractorZ1 = new MetadataExtractor(z1File, "../rdf/z1_metadata.rdf");
+        MetadataExtractor extractorZ1 = new MetadataExtractor(z1File, "../../rdf/z1_metadata.rdf");
         extractorZ1.test();
 
         // upis i citanje RDF
-        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/z1_metadata.rdf", Z1_NAMED_GRAPH_URI);
+        writeRDF(FusekiAuthProperties.loadProperties(), "../../rdf/z1_metadata.rdf", Z1_NAMED_GRAPH_URI);
         readRDF(FusekiAuthProperties.loadProperties());
     }
 }
