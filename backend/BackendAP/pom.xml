@@ -14,7 +14,7 @@
 	<name>BackendAP</name>
 	<description>Backend servisa za rad sa autorskim pravima</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -38,6 +38,17 @@
 			<groupId>org.exist-db</groupId>
 			<artifactId>exist-core</artifactId>
 			<version>6.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xalan</groupId>
+					<artifactId>xalan</artifactId>
+				</exclusion></exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.2</version>
 		</dependency>
 
 		<dependency>

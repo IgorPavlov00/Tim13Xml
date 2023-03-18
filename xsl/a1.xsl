@@ -69,11 +69,13 @@
                                             <fo:table-row border-width="0.5px" border-style="solid">
                                                 <fo:table-cell>
                                                     <fo:block>telefon: 
+                                                    
+                                                        <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/telefon" />
                                                     </fo:block>
                                                 </fo:table-cell>
                                                 <fo:table-cell>
                                                     <fo:block>
-                                                        e-mail:
+                                                         <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_podnosiocu/email" />
                                                     </fo:block>
                                                 </fo:table-cell>
                                             </fo:table-row>
@@ -153,13 +155,36 @@
                                     </fo:block>
                                     <fo:block space-after="48pt">
                                         8) Podaci o autoru ako podnosilac prijave iz tacke 1. ovog zahteva nije autor i to: prezime, ime, adresa i drzavljanstvo autora (grupe autora ili koautora), a ako su u pitanju jedan ili vise autora koji nisu zivi, imena autora i godine smrti autora, a ako je u pitanju autorsko delo anonimnog autora navod da je autorsko delo delo anonimnog autora:
-
+                                          <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/ime" />
+                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/ime" />
+                                            <xsl:text>&#x20;</xsl:text>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/prezime" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/prezime" />
+                                        </fo:block>
+                                            <fo:block>
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/adresa/ulica" />
+                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/adresa/ulica" />
+                                                 <xsl:text>&#x20;</xsl:text>
+                                                <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/adresa/mesto" />
+                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/adresa/mesto" />
+                                        </fo:block>
                                         <fo:block>
                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/ime" />
                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/ime" />
                                             <xsl:text>&#x20;</xsl:text>
                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/prezime" />
                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/prezime" />
+                                            <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_ziv/drzavljanstvo" />
+                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/drzavljanstvo" />
+                                        </fo:block>
+                                        <fo:block>
+                                             <xsl:value-of select="/zahtev_za_autorska_prava/podaci_o_autoru_mrtav/godina_smrti" />
+                            
+                                            <xsl:choose>
+                                                <xsl:when test="/zahtev_za_autorska_prava/podaci_o_autoru_anoniman =true()">Anoniman autor</xsl:when>
+                                                <xsl:otherwise></xsl:otherwise>
+                                            </xsl:choose>
                                         </fo:block>
                                     </fo:block>
                                     <fo:block space-after="48pt">
