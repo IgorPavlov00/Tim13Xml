@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { UlogaComponent } from './uloga/uloga.component';
 import {HttpClientModule} from "@angular/common/http";
+import { TabelaZahtevaComponent } from './tabela-zahteva/tabela-zahteva.component';
 
 
 import { Z1FormComponent } from './z1-form/z1-form.component';
@@ -18,7 +19,8 @@ import { Z1FormComponent } from './z1-form/z1-form.component';
     FormaA1Component,
     LoginComponent,
     UlogaComponent,
-    Z1FormComponent
+    Z1FormComponent,
+    TabelaZahtevaComponent
   ],
   imports: [
     BrowserModule,
