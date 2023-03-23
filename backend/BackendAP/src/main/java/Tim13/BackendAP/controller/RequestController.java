@@ -9,7 +9,6 @@ import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
-import org.apache.jena.base.Sys;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -269,16 +268,21 @@ public class RequestController {
             col = DatabaseManager.getCollection(conn.uri + collectionId);
             col.setProperty(OutputKeys.INDENT, "yes");
 
-            System.out.println("[INFO] Retrieving the document: " + documentId);
-            res = (XMLResource) col.getResource(documentId);
+            for (String doc : col.listResources()) {
+                if(doc.startsWith("a")) {
 
-            if (res == null) {
-                System.out.println("[WARNING] Document '" + documentId + "' can not be found!");
-            } else {
+                    System.out.println("[INFO] Retrieving the document: " + doc);
+                    res = (XMLResource) col.getResource(doc);
 
-                System.out.println("[INFO] Showing the document as XML resource: ");
-                System.out.println(res.getContent());
-                resultList.add(res);
+                    if (res == null) {
+                        System.out.println("[WARNING] Document '" + doc + "' can not be found!");
+                    } else {
+
+                        System.out.println("[INFO] Showing the document as XML resource: ");
+                        System.out.println(res.getContent());
+                        resultList.add(res);
+                    }
+                }
             }
         } finally {
             //don't forget to clean up!
@@ -534,7 +538,7 @@ public class RequestController {
 
     private void generatePDF(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
 
-        FopFactory fopFactory = FopFactory.newInstance(new File("../fop.xconf"));
+        FopFactory fopFactory = FopFactory.newInstance(new File("../../fop.xconf"));
 
         TransformerFactory transformerFactory = new TransformerFactoryImpl();
 
@@ -600,6 +604,7 @@ public class RequestController {
         }
 
     }
+
     @RequestMapping("/")
     public void index() throws Exception {
         System.out.println("Pocetna strana!");
@@ -625,7 +630,7 @@ public class RequestController {
         String[] args = {"/db/sample/library", "a1.xml", a1File};
         store(conn = ExistConnProperties.loadProperties(), args);
         String[] args2 = {"/db/sample/library", "a1.xml"};
-        List<XMLResource> resultList = retrieve(conn, args);
+        List<XMLResource> resultList = retrieve(conn, args2);
         System.out.println(resultList);
 
 
