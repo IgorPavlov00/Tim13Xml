@@ -9,6 +9,7 @@ import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+import org.apache.jena.base.Sys;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -42,7 +43,9 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @RestController
 public class RequestController {
@@ -224,8 +227,7 @@ public class RequestController {
 
     }
 
-    public static void retrive(ExistConnProperties conn, String args[]) throws Exception {
-
+    public static List<XMLResource> retrieve(ExistConnProperties conn, String[] args) throws Exception {
 
         // initialize collection and document identifiers
         String collectionId = null;
@@ -259,6 +261,7 @@ public class RequestController {
 
         Collection col = null;
         XMLResource res = null;
+        List<XMLResource> resultList = new ArrayList<>();
 
         try {
             // get the collection
@@ -275,7 +278,7 @@ public class RequestController {
 
                 System.out.println("[INFO] Showing the document as XML resource: ");
                 System.out.println(res.getContent());
-
+                resultList.add(res);
             }
         } finally {
             //don't forget to clean up!
@@ -296,6 +299,7 @@ public class RequestController {
                 }
             }
         }
+        return resultList;
     }
 
     public static void store(ExistConnProperties conn, String args[]) throws Exception {
@@ -599,7 +603,7 @@ public class RequestController {
     @RequestMapping("/")
     public void index() throws Exception {
         System.out.println("Pocetna strana!");
-        String a1File = "../xml/a1.xml";
+        String a1File = "../../xml/a1.xml";
         // xml ucitavanje
         // samo zameni komentare kodom iz main f-je
         File xmlFile = new File(a1File);
@@ -608,7 +612,7 @@ public class RequestController {
         Document doc = builder.parse(xmlFile);
         getA1(doc);
 
-        String filepath = "..\\xml\\a11.xml";
+        String filepath = "..\\..\\xml\\a11.xml";
         try (FileOutputStream output =
                      new FileOutputStream(filepath)) {
             writeXml(doc, output);
@@ -621,20 +625,21 @@ public class RequestController {
         String[] args = {"/db/sample/library", "a1.xml", a1File};
         store(conn = ExistConnProperties.loadProperties(), args);
         String[] args2 = {"/db/sample/library", "a1.xml"};
-        retrive(ExistConnProperties.loadProperties(), args2);
+        List<XMLResource> resultList = retrieve(conn, args);
+        System.out.println(resultList);
 
 
         // generisanje PDF i XHTML za A1
-        generatePDF(a1File, "../xsl/a1.xsl", "../pdf/a1.pdf");
-        generateXHTML(a1File, "../xsl/a1html.xsl", "../xhtml/a1.xhtml");
+        generatePDF(a1File, "../../xsl/a1.xsl", "../../pdf/a1.pdf");
+        generateXHTML(a1File, "../../xsl/a1html.xsl", "../../xhtml/a1.xhtml");
 
 
         // izvlacenje metapodataka
-        MetadataExtractor extractorA1 = new MetadataExtractor(a1File, "../rdf/a1_metadata.rdf");
+        MetadataExtractor extractorA1 = new MetadataExtractor(a1File, "../../rdf/a1_metadata.rdf");
         extractorA1.test();
 
         // upis i citanje RDF
-        writeRDF(FusekiAuthProperties.loadProperties(), "../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
+        writeRDF(FusekiAuthProperties.loadProperties(), "../../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
         readRDF(FusekiAuthProperties.loadProperties());
 
     }
