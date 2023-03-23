@@ -8,7 +8,7 @@
     </xsl:template>
 
     <xsl:template match="zahtev_za_priznanje_ziga">
-        <rdf:Description rdf:about="http://localhost:8083"
+        <rdf:Description rdf:about="http://localhost:8082"
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
             <xsl:apply-templates select="podaci_o_zahtevu" />
             <xsl:apply-templates select="podaci_o_podnosiocu" />

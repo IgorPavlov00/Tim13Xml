@@ -1,0 +1,46 @@
+<div class="container">
+  <h6>Izaberi opciju:
+    <select [(ngModel)]="docType" id="docType">
+      <option value="ap">Autorska prava</option>
+      <option value="z">Žigovi</option>
+    </select></h6>
+  <br/>
+  <hr/>
+  <br/>
+  <table *ngIf="docType=='ap'">
+    <thead>
+    <tr>
+      <th>Autorsko delo</th>
+      <th>Autor</th>
+      <th>Datum evidencije</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ap of apData">
+      <td>{{ap.delo}}</td>
+      <td>{{ap.aut}}</td>
+      <td>{{ap.dat}}</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+  <table *ngIf="docType=='z'">
+    <thead>
+    <tr>
+      <th>Žig</th>
+      <th>Roba i usluge</th>
+      <th>Datum evidencije</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let z of zData">
+      <td>{{z.zig}}</td>
+      <td>{{z.riu}}</td>
+      <td>{{z.dat}}</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -47,7 +47,13 @@
             }
             .underline {
                 text-decoration: underline;
-            }</style>
+            }
+			.circle {
+				border-radius: 50%;
+    			border: 2px solid black;
+   				text-align: center;
+			}
+				</style>
 			</head>
 			<body>
 				<div class="center">
@@ -136,11 +142,11 @@
 								<table>
 									<tr>
 										<td>telefon: <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_punomocniku/telefon" />
-</td>
+										</td>
 										<td>e-mail: <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_punomocniku/email" />
-</td>
+										</td>
 										<td>faks: <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_punomocniku/faks" />
-</td>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -153,18 +159,22 @@
 						</tr>
 						<tr>
 							<td>
-								<p><xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/ime" />
-<xsl:text>&#x20;</xsl:text>
-<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/prezime" />
-</p>
-								<p><xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/ulica" />
-</p>
-								<p><xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/postanski_broj" />
-<xsl:text>&#x20;</xsl:text>
-<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/mesto" />
-</p>
-								<p><xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/drzava" />
-</p>
+								<p>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/ime" />
+									<xsl:text>&#x20;</xsl:text>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/prezime" />
+								</p>
+								<p>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/ulica" />
+								</p>
+								<p>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/postanski_broj" />
+									<xsl:text>&#x20;</xsl:text>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/mesto" />
+								</p>
+								<p>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/licni_podaci/adresa/drzava" />
+								</p>
 							</td>
 						</tr>
 						<tr>
@@ -172,11 +182,11 @@
 								<table>
 									<tr>
 										<td>telefon: <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/telefon" />
-</td>
+										</td>
 										<td>e-mail: <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/email" />
-</td>
+										</td>
 										<td>faks: <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_predstavniku/faks" />
-</td>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -204,24 +214,30 @@
 																	<table>
 																		<tr>
 																			<td>individualni žig</td>
-																			<td class="center x-field"><xsl:choose>
-	<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_ziga/individualni_zig = true()"> X </xsl:when>
-	<xsl:otherwise></xsl:otherwise>
-</xsl:choose></td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_ziga/individualni_zig = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td>kolektivni žig</td>
-																			<td class="center x-field"><xsl:choose>
-	<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_ziga/kolektivni_zig = true()"> X </xsl:when>
-	<xsl:otherwise></xsl:otherwise>
-</xsl:choose></td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_ziga/kolektivni_zig = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td>žig garancije</td>
-																			<td class="center x-field"><xsl:choose>
-	<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_ziga/zig_garancije = true()"> X </xsl:when>
-	<xsl:otherwise></xsl:otherwise>
-</xsl:choose></td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_ziga/zig_garancije = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																	</table>
 																</td>
@@ -240,38 +256,51 @@
 																	<table>
 																		<tr>
 																			<td>verbalni znak (znak u reči)</td>
-																			<td class="center x-field"><xsl:choose>
-	<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/verbalni_znak = true()"> X </xsl:when>
-	<xsl:otherwise></xsl:otherwise>
-</xsl:choose></td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/verbalni_znak = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td>grafički znak; boju, kombinaciju
                                         boja</td>
-																			<td class="center x-field"><xsl:choose>
-	<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/graficki_znak = true()"> X </xsl:when>
-	<xsl:otherwise></xsl:otherwise>
-</xsl:choose></td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/graficki_znak = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td>kombinovani znak</td>
-																			<td class="center x-field"><xsl:choose>
-	<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/kombinovani_znak = true()"> X </xsl:when>
-	<xsl:otherwise></xsl:otherwise>
-</xsl:choose></td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/kombinovani_znak = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td>trodimezionalni znak</td>
-																			<td class="center x-field"><xsl:choose>
-	<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/trodimenzionalni_znak = true()"> X </xsl:when>
-	<xsl:otherwise></xsl:otherwise>
-</xsl:choose></td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/trodimenzionalni_znak = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td>drugu vrstu znaka (navesti
                                         koju) <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/druga_vrsta" />
-</td>
-																			<td class="center x-field">X</td>
+																			</td>
+																			<td class="center x-field">
+																				<xsl:choose>
+																					<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/vrsta_znaka/drugo = true()"> X </xsl:when>
+																					<xsl:otherwise></xsl:otherwise>
+																				</xsl:choose>
+																			</td>
 																		</tr>
 																	</table>
 																</td>
@@ -284,42 +313,52 @@
 														<strong>5. Naznačenje boje, odnosno
                                         boja iz kojih se znak
                                         sastoji:</strong>
-														<p></p>
+														<p>
+															<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/naznacenje_boje" />
+														</p>
 													</td>
 												</tr>
 												<tr>
 													<td>
 														<strong>6. Transliteracija
                                         znaka*:</strong>
-														<p></p>
+														<p>
+															<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/transliteracija" />
+														</p>
 													</td>
 												</tr>
 												<tr>
 													<td>
 														<strong>7. Prevod
                                         znaka*:</strong>
-														<p></p>
+														<p>
+															<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/prevod" />
+														</p>
 													</td>
 												</tr>
 												<tr>
 													<td>
 														<strong>8. Opis
                                         znaka:</strong>
-														<p></p>
+														<p>
+															<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/opis" />
+														</p>
 													</td>
 												</tr>
 											</table>
 										</td>
 										<td>
 											<table>
-												<tr style="height:1cm;">
+												<tr>
 													<td>
 														<strong>v) izgled
                                         znaka:</strong>
 													</td>
 												</tr>
 												<tr>
-													<td></td>
+													<td style="height:150px;">
+														<img src="/zahtev_za_priznanje_ziga/podaci_o_zigu/izgled_znaka" />
+													</td>
 												</tr>
 											</table>
 										</td>
@@ -336,55 +375,416 @@
 						<tr>
 							<td>
 								<table>
+									<xsl:variable name="tokens" select="tokenize(/zahtev_za_priznanje_ziga/podaci_o_zigu/brojevi_klasa_robe_i_usluga, ',')"/>
 									<tr>
-										<td>1</td>
-										<td>2</td>
-										<td>3</td>
-										<td>4</td>
-										<td>5</td>
-										<td>6</td>
-										<td>7</td>
-										<td>8</td>
-										<td>9</td>
-										<td>10</td>
-										<td>11</td>
-										<td>12</td>
-										<td>13</td>
-										<td>14</td>
-										<td>15</td>
-										<td>16</td>
-										<td>17</td>
-										<td>18</td>
-										<td>19</td>
-										<td>20</td>
-										<td>21</td>
-										<td>22</td>
-										<td>23</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'1'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">1</div>
+												</xsl:when>
+												<xsl:otherwise>1</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'2'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">2</div>
+												</xsl:when>
+												<xsl:otherwise>2</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'3'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">3</div>
+												</xsl:when>
+												<xsl:otherwise>3</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'4'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">4</div>
+												</xsl:when>
+												<xsl:otherwise>4</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'5'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">5</div>
+												</xsl:when>
+												<xsl:otherwise>5</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'6'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">6</div>
+												</xsl:when>
+												<xsl:otherwise>6</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'7'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">7</div>
+												</xsl:when>
+												<xsl:otherwise>7</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'8'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">8</div>
+												</xsl:when>
+												<xsl:otherwise>8</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'9'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">9</div>
+												</xsl:when>
+												<xsl:otherwise>9</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'10'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">10</div>
+												</xsl:when>
+												<xsl:otherwise>10</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'11'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">11</div>
+												</xsl:when>
+												<xsl:otherwise>11</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'12'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">12</div>
+												</xsl:when>
+												<xsl:otherwise>12</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'13'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">13</div>
+												</xsl:when>
+												<xsl:otherwise>13</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'14'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">14</div>
+												</xsl:when>
+												<xsl:otherwise>14</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'15'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">15</div>
+												</xsl:when>
+												<xsl:otherwise>15</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'16'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">16</div>
+												</xsl:when>
+												<xsl:otherwise>16</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'17'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">17</div>
+												</xsl:when>
+												<xsl:otherwise>17</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'18'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">18</div>
+												</xsl:when>
+												<xsl:otherwise>18</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'19'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">19</div>
+												</xsl:when>
+												<xsl:otherwise>19</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'20'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">20</div>
+												</xsl:when>
+												<xsl:otherwise>20</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'21'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">21</div>
+												</xsl:when>
+												<xsl:otherwise>21</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'22'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">22</div>
+												</xsl:when>
+												<xsl:otherwise>22</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'23'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">23</div>
+												</xsl:when>
+												<xsl:otherwise>23</xsl:otherwise>
+											</xsl:choose>
+										</td>
 									</tr>
 									<tr>
-										<td>24</td>
-										<td>25</td>
-										<td>26</td>
-										<td>27</td>
-										<td>28</td>
-										<td>29</td>
-										<td>30</td>
-										<td>31</td>
-										<td>32</td>
-										<td>33</td>
-										<td>34</td>
-										<td>35</td>
-										<td>36</td>
-										<td>37</td>
-										<td>38</td>
-										<td>39</td>
-										<td>40</td>
-										<td>41</td>
-										<td>42</td>
-										<td>43</td>
-										<td>44</td>
-										<td>45</td>
-										<td></td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'24'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">24</div>
+												</xsl:when>
+												<xsl:otherwise>24</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'25'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">25</div>
+												</xsl:when>
+												<xsl:otherwise>25</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'26'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">26</div>
+												</xsl:when>
+												<xsl:otherwise>26</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'27'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">27</div>
+												</xsl:when>
+												<xsl:otherwise>27</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'28'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">28</div>
+												</xsl:when>
+												<xsl:otherwise>28</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'29'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">29</div>
+												</xsl:when>
+												<xsl:otherwise>29</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'30'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">30</div>
+												</xsl:when>
+												<xsl:otherwise>30</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'31'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">31</div>
+												</xsl:when>
+												<xsl:otherwise>31</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'32'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">32</div>
+												</xsl:when>
+												<xsl:otherwise>32</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'33'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">33</div>
+												</xsl:when>
+												<xsl:otherwise>33</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'34'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">34</div>
+												</xsl:when>
+												<xsl:otherwise>34</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'35'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">35</div>
+												</xsl:when>
+												<xsl:otherwise>35</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'36'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">36</div>
+												</xsl:when>
+												<xsl:otherwise>36</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'37'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">37</div>
+												</xsl:when>
+												<xsl:otherwise>37</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'38'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">38</div>
+												</xsl:when>
+												<xsl:otherwise>38</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'39'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">39</div>
+												</xsl:when>
+												<xsl:otherwise>39</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'40'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">40</div>
+												</xsl:when>
+												<xsl:otherwise>40</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'41'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">41</div>
+												</xsl:when>
+												<xsl:otherwise>41</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'42'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">42</div>
+												</xsl:when>
+												<xsl:otherwise>42</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'43'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">43</div>
+												</xsl:when>
+												<xsl:otherwise>43</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'44'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">44</div>
+												</xsl:when>
+												<xsl:otherwise>44</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center">
+											<xsl:variable name="searchValue" select="'45'"/>
+											<xsl:choose>
+												<xsl:when test="some $token in $tokens satisfies $token = $searchValue">
+													<div class="circle">45</div>
+												</xsl:when>
+												<xsl:otherwise>45</xsl:otherwise>
+											</xsl:choose>
+										</td>
+										<td class="center"></td>
 									</tr>
 								</table>
 							</td>
@@ -393,7 +793,16 @@
 							<td>
 								<strong>10. Zatraženo pravo prvenstva i
                         osnov:</strong>
-								<p></p>
+								<p>
+									<xsl:choose>
+										<xsl:when test="/zahtev_za_priznanje_ziga/podaci_o_zigu/pravo_prvenstva/zatrazeno = true()"> Jeste, osnov je
+										</xsl:when>
+										<xsl:otherwise>Nije zatrazeno</xsl:otherwise>
+									</xsl:choose>
+								</p>
+								<p>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/pravo_prvenstva/osnov"/>
+								</p>
 							</td>
 						</tr>
 						<tr>
@@ -417,112 +826,172 @@
 															<strong>a) osnovna
                                         taksa</strong>
 														</p>
+
+													</td>
+													<td>
+
 														<p>
-															<strong>b) za <span class="underline"></span>
-                                        klasa</strong>
+															<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_placenoj_taksi/osnovna_taksa" />
 														</p>
 													</td>
-													<td class="center">
-														<p></p>
-														<p></p>
-													</td>
 												</tr>
 												<tr>
 													<td>
+														<p>
+															<strong>b) za <span class="underline">
+																<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_placenoj_taksi/za_klase/@klase" />
+															</span>
+                                        klasa</strong>
+													</p>
+													<p>
 														<strong>v) za grafičko
                                         rešenje</strong>
-													</td>
-													<td class="center"></td>
-												</tr>
-												<tr>
-													<td>
-														<strong>UKUPNO</strong>
-													</td>
-													<td class="center"></td>
-												</tr>
-											</table>
-										</td>
-										<td>
-											<p>
-												<strong>Potpis podnosioca
+													</p>
+												</td>
+												<td>
+													<p>
+														<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_placenoj_taksi/za_klase" />
+													</p>
+													<p>
+														<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_placenoj_taksi/za_graficko_resenje" />
+													</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<strong>UKUPNO</strong>
+												</td>
+												<td>
+													<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_placenoj_taksi/ukupno" />
+												</td>
+											</tr>
+										</table>
+									</td>
+									<td>
+										<p>
+											<strong>Potpis podnosioca
                                         zahteva</strong>
-											</p>
-											<br />
-											<br />
-											<br />
-											<br />
-											<p>
-												<em>*Pecat, ukoliko je potreban u skladu
+										</p>
+										<br />
+										<br />
+										<br />
+										<br />
+										<p>
+											<em>*Pecat, ukoliko je potreban u skladu
                                         sa zakonom.</em>
-											</p>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-					<table class="main">
-						<tr>
-							<td colspan="3" class="center">
-								<strong>POPUNJAVA ZAVOD</strong>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<strong>Prilozi uz zahtev:</strong>
-							</td>
-							<td rowspan="9" class="center">
-								<br />
-								<br />
-								<p>Broj prijave žiga:</p>
-								<p class="underline">broj</p>
-								<p>
-									<strong>Datum podnošenja:</strong>
-								</p>
-								<p class="underline">
-									<strong>datum</strong>
-								</p>
-								<br />
-								<br />
-								<br />
-							</td>
-						</tr>
-						<tr>
-							<td>Primerak znaka</td>
-							<td class="center x-field"></td>
-						</tr>
-						<tr>
-							<td>Spisak robe i usluga**</td>
-							<td class="center x-field"></td>
-						</tr>
-						<tr>
-							<td>Punomoćje</td>
-							<td class="center x-field"></td>
-						</tr>
-						<tr>
-							<td>Generalno punomoćje ranije priloženo</td>
-							<td class="center x-field"></td>
-						</tr>
-						<tr>
-							<td>Punomoćje će biti naknadno dostavljeno</td>
-							<td class="center x-field"></td>
-						</tr>
-						<tr>
-							<td>Opšti akt o kolektivnom žigu/žigu garancije</td>
-							<td class="center x-field"></td>
-						</tr>
-						<tr>
-							<td>Dokaz o pravu prvenstva</td>
-							<td class="center x-field"></td>
-						</tr>
-						<tr>
-							<td>Dokaz o uplati takse</td>
-							<td class="center x-field"></td>
-						</tr>
-					</table>
-					<p>*Popuniti samo ako je znak ili element znaka ispisan slovima koja
+										</p>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<table class="main">
+					<tr>
+						<td colspan="3" class="center">
+							<strong>POPUNJAVA ZAVOD</strong>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<strong>Prilozi uz zahtev:</strong>
+						</td>
+						<td rowspan="9" class="center">
+							<br />
+							<br />
+							<p>Broj prijave žiga:</p>
+							<p class="underline">
+								<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zahtevu/broj_prijave" />
+							</p>
+							<p>
+								<strong>Datum podnošenja:</strong>
+							</p>
+							<p class="underline">
+								<strong>
+									<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zahtevu/datum_podnosenja" />
+								</strong>
+							</p>
+							<br />
+							<br />
+							<br />
+						</td>
+					</tr>
+					<tr>
+						<td>Primerak znaka</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/primerak_znaka = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>Spisak robe i usluga**</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/spisak_robe_i_usluga = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>Punomoćje</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/punomocje = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>Generalno punomoćje ranije priloženo</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/ranije_prilozeno_punomocje = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>Punomoćje će biti naknadno dostavljeno</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/naknadno_dostavljeno_punomocje = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>Opšti akt o kolektivnom žigu/žigu garancije</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/opsti_akt_o_zigu = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>Dokaz o pravu prvenstva</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/dokaz_o_pravu_prvenstva = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>Dokaz o uplati takse</td>
+						<td class="center x-field">
+							<xsl:choose>
+								<xsl:when test="/zahtev_za_priznanje_ziga/prilozi/dokaz_o_uplati_takse = true()"> X </xsl:when>
+								<xsl:otherwise></xsl:otherwise>
+							</xsl:choose>
+						</td>
+					</tr>
+				</table>
+				<p>*Popuniti samo ako je znak ili element znaka ispisan slovima koja
                 nisu ćirilična ili latinčna.</p>
-					<p style="text-align: justify;">**Uz zaokruživanje broja klase robe/usluga Ničanske klasifikacije
+				<p style="text-align: justify;">**Uz zaokruživanje broja klase robe/usluga Ničanske klasifikacije
                 u rubrici 9 dostavlja se i spisak koji sadrži konkretne nazive
                 robe koju podnosilac prijave proizvodi, odnosno usluga koje
                 pruža. U cilju određivanja obima zaštite koja se stiče žigom,
@@ -532,8 +1001,8 @@
                 Ukoliko se u spisak unose termini iz Liste klasa Ničanske
                 klasifikacije, zaštita obuhvata samo tako imenovane, konkretne
                 robe/usluge u njihovom jasnom i nedvosmislenom značenju. </p>
-				</div>
-			</body>
-		</html>
-	</xsl:template>
+			</div>
+		</body>
+	</html>
+</xsl:template>
 </xsl:stylesheet>
