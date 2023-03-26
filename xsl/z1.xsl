@@ -1066,7 +1066,7 @@
       <fo:table-cell>
         <fo:block space-after="10pt">
           <fo:inline font-weight="bold">b) za <fo:inline border-bottom="1pt solid black">
-            <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_placenoj_taksi/za_klase/@klase" />
+            <xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/brojevi_klasa_robe_i_usluga" />
           </fo:inline>
     klasa</fo:inline>
       </fo:block>

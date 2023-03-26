@@ -839,7 +839,7 @@
 													<td>
 														<p>
 															<strong>b) za <span class="underline">
-																<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_placenoj_taksi/za_klase/@klase" />
+																<xsl:value-of select="/zahtev_za_priznanje_ziga/podaci_o_zigu/brojevi_klasa_robe_i_usluga" />
 															</span>
                                         klasa</strong>
 													</p>

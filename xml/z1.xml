@@ -55,7 +55,7 @@
     </podaci_o_zigu>
     <podaci_o_placenoj_taksi>
         <osnovna_taksa>1000</osnovna_taksa>
-        <za_klase klase="9">2000</za_klase>
+        <za_klase>2000</za_klase>
         <za_graficko_resenje>1500</za_graficko_resenje>
         <ukupno>4500</ukupno>
     </podaci_o_placenoj_taksi>

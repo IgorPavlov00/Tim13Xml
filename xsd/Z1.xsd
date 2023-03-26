@@ -109,17 +109,7 @@
   </xs:element>
   
   <xs:element name="osnovna_taksa" type="xs:double"/>
-  
-  <xs:element name="za_klase">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:double">
-          <xs:attribute name="klase" use="required" type="xs:integer"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  
+  <xs:element name="za_klase" type="xs:double" />  
   <xs:element name="za_graficko_resenje" type="xs:double"/>
   <xs:element name="ukupno" type="xs:double"/>
   
