@@ -1,5 +1,6 @@
 package Tim13.BackendAP.controller;
 
+import Tim13.BackendAP.model.Resurs;
 import Tim13.BackendAP.util.ExistConnProperties;
 import Tim13.BackendAP.util.FusekiAuthProperties;
 import Tim13.BackendAP.util.MetadataExtractor;
@@ -30,10 +31,12 @@ import org.w3c.dom.NodeList;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
+import org.xmldb.api.base.Resource;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 
+import javax.xml.crypto.dsig.XMLObject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
@@ -42,6 +45,7 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -226,87 +230,93 @@ public class RequestController {
 
     }
 
-    public static List<XMLResource> retrieve(ExistConnProperties conn, String[] args) throws Exception {
-
-        // initialize collection and document identifiers
-        String collectionId = null;
-        String documentId = null;
-
-        if (args.length == 2) {
-
-            System.out.println("[INFO] Passing the arguments... ");
-
-            collectionId = args[0];
-            documentId = args[1];
-        } else {
-
-            System.out.println("[INFO] Using defaults.");
-
-            collectionId = "/db/sample/library";
-            documentId = "1.xml";
-        }
-
-        System.out.println("\t- collection ID: " + collectionId);
-        System.out.println("\t- document ID: " + documentId + "\n");
-
-        // initialize database driver
-        System.out.println("[INFO] Loading driver class: " + conn.driver);
-        Class<?> cl = Class.forName(conn.driver);
-
-        Database database = (Database) cl.newInstance();
-        database.setProperty("create-database", "true");
-
-        DatabaseManager.registerDatabase(database);
-
-        Collection col = null;
-        XMLResource res = null;
-        List<XMLResource> resultList = new ArrayList<>();
-
+    public static List<Resurs> retrieve(ExistConnProperties conn, String[] args) throws Exception {
         try {
-            // get the collection
-            System.out.println("[INFO] Retrieving the collection: " + collectionId);
-            col = DatabaseManager.getCollection(conn.uri + collectionId);
-            col.setProperty(OutputKeys.INDENT, "yes");
+            // initialize collection and document identifiers
+            String collectionId = null;
+            String documentId = null;
 
-            for (String doc : col.listResources()) {
-                if(doc.startsWith("a")) {
+            if (args.length == 2) {
+                System.out.println("[INFO] Passing the arguments...");
+                collectionId = args[0];
+                documentId = args[1];
+            } else {
+                System.out.println("[INFO] Using defaults.");
+                collectionId = "/db/sample/library";
+                documentId = "1.xml";
+            }
 
-                    System.out.println("[INFO] Retrieving the document: " + doc);
-                    res = (XMLResource) col.getResource(doc);
+            System.out.println("\t- collection ID: " + collectionId);
+            System.out.println("\t- document ID: " + documentId + "\n");
 
-                    if (res == null) {
-                        System.out.println("[WARNING] Document '" + doc + "' can not be found!");
-                    } else {
+            // initialize database driver
+            System.out.println("[INFO] Loading driver class: " + conn.driver);
+            Class<?> cl = Class.forName(conn.driver);
+            Database database = (Database) cl.newInstance();
+            database.setProperty("create-database", "true");
+            DatabaseManager.registerDatabase(database);
 
-                        System.out.println("[INFO] Showing the document as XML resource: ");
-                        System.out.println(res.getContent());
-                        resultList.add(res);
+            Collection col = null;
+            XMLResource res = null;
+            List<Resurs> resultList = new ArrayList<>();
+
+            try {
+                // get the collection
+                System.out.println("[INFO] Retrieving the collection: " + collectionId);
+                col = DatabaseManager.getCollection(conn.uri + collectionId);
+                if (col == null) {
+                    throw new XMLDBException(0);
+                }
+                col.setProperty(OutputKeys.INDENT, "yes");
+
+                for (String doc : col.listResources()) {
+                    if (doc.startsWith("a")) {
+                        System.out.println("[INFO] Retrieving the document: " + doc);
+                        res = (XMLResource) col.getResource(doc);
+                        System.out.println("Dokument:"+res.getContent());
+                        resultList.add(new Resurs(res.getId(),res.getContent()+""));
+
+
+
+                        }
+                        else {
+                            System.out.println("[WARNING] Document '" + doc + "' can not be found!");
+                        }
+
+                    }
+                return resultList;
+
+            } finally {
+                //don't forget to clean up!
+                if (res != null) {
+                    try {
+                        ((EXistResource) res).freeResources();
+                    } catch (XMLDBException xe) {
+                        xe.printStackTrace();
+                    }
+                }
+
+                if (col != null) {
+                    try {
+                        col.close();
+                    } catch (XMLDBException xe) {
+                        xe.printStackTrace();
                     }
                 }
             }
-        } finally {
-            //don't forget to clean up!
 
-            if (res != null) {
-                try {
-                    ((EXistResource) res).freeResources();
-                } catch (XMLDBException xe) {
-                    xe.printStackTrace();
-                }
-            }
 
-            if (col != null) {
-                try {
-                    col.close();
-                } catch (XMLDBException xe) {
-                    xe.printStackTrace();
-                }
-            }
+        } catch (XMLDBException xe) {
+            xe.printStackTrace();
+            throw xe;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
-        return resultList;
     }
 
-    public static void store(ExistConnProperties conn, String args[]) throws Exception {
+
+    public static void store(ExistConnProperties conn, String[] args, List<Resurs> resultList) throws Exception {
 
 
         // initialize collection and document identifiers
@@ -319,9 +329,11 @@ public class RequestController {
             System.out.println("[INFO] Passing the arguments... ");
 
             collectionId = args[0];
+            System.out.println(collectionId);
             documentId = args[1];
-
+            System.out.println(documentId);
             filePath = args[2];
+            System.out.println(filePath);
         } else {
 
             System.out.println("[INFO] Using defaults.");
@@ -351,43 +363,33 @@ public class RequestController {
 
         // a collection of Resources stored within an XML database
         Collection col = null;
-        XMLResource res = null;
+
 
         try {
 
             System.out.println("[INFO] Retrieving the collection: " + collectionId);
             col = getOrCreateCollection(collectionId);
 
+
             /*
              *  create new XMLResource with a given id
              *  an id is assigned to the new resource if left empty (null)
              */
-            System.out.println("[INFO] Inserting the document: " + documentId);
-            res = (XMLResource) col.createResource(documentId, XMLResource.RESOURCE_TYPE);
+            System.out.println("[INFO] Inserting the resource in the resultlist: " + documentId);
 
-            File f = new File(filePath);
+            for (Resurs resource : resultList) {
+                System.out.println(resource.getId());
 
-            if (!f.canRead()) {
-                System.out.println("[ERROR] Cannot read the file: " + filePath);
-                return;
+                 XMLResource r=(XMLResource)col.createResource(resource.getId(),XMLResource.RESOURCE_TYPE);
+                 r.setContent(resource.getContent());
+                col.storeResource((Resource) r);
+                System.out.println("[INFO] Storing the document: " + resource.getId());
             }
 
-            res.setContent(f);
-            System.out.println("[INFO] Storing the document: " + res.getId());
 
-            col.storeResource(res);
             System.out.println("[INFO] Done.");
 
         } finally {
-
-            //don't forget to cleanup
-            if (res != null) {
-                try {
-                    ((EXistResource) res).freeResources();
-                } catch (XMLDBException xe) {
-                    xe.printStackTrace();
-                }
-            }
 
             if (col != null) {
                 try {
@@ -397,7 +399,10 @@ public class RequestController {
                 }
             }
         }
+
+
     }
+
 
     private static Collection getOrCreateCollection(String collectionUri) throws XMLDBException {
         return getOrCreateCollection(collectionUri, 0);
@@ -610,7 +615,7 @@ public class RequestController {
         System.out.println("Pocetna strana!");
         String a1File = "../../xml/a1.xml";
         // xml ucitavanje
-        // samo zameni komentare kodom iz main f-je
+
         File xmlFile = new File(a1File);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -625,13 +630,23 @@ public class RequestController {
             e.printStackTrace();
         }
 
-
-        // xml baza - upis i ucitavanje obrasca A1
-        String[] args = {"/db/sample/library", "a1.xml", a1File};
-        store(conn = ExistConnProperties.loadProperties(), args);
         String[] args2 = {"/db/sample/library", "a1.xml"};
-        List<XMLResource> resultList = retrieve(conn, args2);
-        System.out.println(resultList);
+        conn=ExistConnProperties.loadProperties();
+        List<Resurs> resultList = retrieve(conn, args2);
+        if (resultList != null) {
+            for (Resurs x : resultList) {
+                System.out.println(x.getContent());
+            }
+        }else{
+            System.out.println("prazna");
+        }
+        // xml baza - upis i ucitavanje obrasca A1
+
+        String[] args = {"/db/sample/library", "a1.xml", a1File};
+        store(conn, args, resultList);
+
+
+        System.out.println("xml:" + resultList);
 
 
         // generisanje PDF i XHTML za A1
