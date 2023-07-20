@@ -5,11 +5,13 @@ import {FormaA1Component} from "./forma-a1/forma-a1.component";
 import {UlogaComponent} from "./uloga/uloga.component";
 import {TabelaZahtevaComponent} from "./tabela-zahteva/tabela-zahteva.component";
 import {EvidencijaComponent} from "./evidencija/evidencija.component";
+import {Z1FormComponent} from "./z1-form/z1-form.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: "full"},
   {path: 'home', component: UlogaComponent},
   {path: 'formaA1', component: FormaA1Component},
+  {path: 'z1', component: Z1FormComponent},
   {path: 'login', component: LoginComponent},
   {path: 'evid', component: EvidencijaComponent},
   {path:'zahtevi', component:TabelaZahtevaComponent}
