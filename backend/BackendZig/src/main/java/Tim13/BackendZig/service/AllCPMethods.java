@@ -1,5 +1,6 @@
 package Tim13.BackendZig.service;
 
+import Tim13.BackendZig.model.Request;
 import Tim13.BackendZig.util.ExistConnProperties;
 import Tim13.BackendZig.util.FusekiAuthProperties;
 import Tim13.BackendZig.util.SparqlUtil;
@@ -40,7 +41,7 @@ public class AllCPMethods {
     private static ExistConnProperties conn;
 
     public static void writeXml(Document doc,
-                                 OutputStream output)
+                                OutputStream output)
             throws TransformerException {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -114,7 +115,7 @@ public class AllCPMethods {
         }
     }
 
-    public static void retrive(ExistConnProperties conn, String args[]) throws Exception {
+    public static void retrive(ExistConnProperties conn, String[] args) throws Exception {
 
 
         // initialize collection and document identifiers
@@ -188,7 +189,7 @@ public class AllCPMethods {
         }
     }
 
-    public static void store(ExistConnProperties conn, String args[]) throws Exception {
+    public static void store(ExistConnProperties conn, String[] args) throws Exception {
 
 
         // initialize collection and document identifiers
@@ -299,7 +300,7 @@ public class AllCPMethods {
                 collectionUri = collectionUri.substring(1);
             }
 
-            String pathSegments[] = collectionUri.split("/");
+            String[] pathSegments = collectionUri.split("/");
 
             if (pathSegments.length > 0) {
                 StringBuilder path = new StringBuilder();
@@ -368,7 +369,7 @@ public class AllCPMethods {
 
         // Creating the first named graph and updating it with RDF data
         System.out.println("[INFO] Writing the triples to a named graph \"" + NAMED_GRAPH_URI + "\".");
-        String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + NAMED_GRAPH_URI, new String(out.toByteArray()));
+        String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + NAMED_GRAPH_URI, out.toString());
         System.out.println(sparqlUpdate);
 
         // UpdateRequest represents a unit of execution
@@ -394,14 +395,14 @@ public class AllCPMethods {
         // Query the collection, dump output response as XML
         ResultSet results = query.execSelect();
 
-        ResultSetFormatter.outputAsXML(System.out, results);
+        ResultSetFormatter.outputAsJSON(results);
 
         query.close();
 
         System.out.println("[INFO] End.");
     }
 
-    public static void generatePDF(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
+    public static void generatePDF(Request request, String XSL_FILE, String OUTPUT_FILE) throws Exception {
 
         FopFactory fopFactory = FopFactory.newInstance(new File("../../fop.xconf"));
 
@@ -414,7 +415,7 @@ public class AllCPMethods {
         StreamSource transformSource = new StreamSource(xslFile);
 
         // Initialize the transformation subject
-        StreamSource source = new StreamSource(new File(INPUT_FILE));
+        Source source = new StreamSource(new ByteArrayInputStream(request.toXml().getBytes()));
 
         // Initialize user agent needed for the transformation
         FOUserAgent userAgent = fopFactory.newFOUserAgent();
@@ -451,13 +452,12 @@ public class AllCPMethods {
 
     }
 
-    public static void generateXHTML(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
+    public static void generateXHTML(Request request, String XSL_FILE, String OUTPUT_FILE) throws Exception {
         try {
             TransformerFactory tFactory = TransformerFactory.newInstance();
 
             Source xslDoc = new StreamSource(XSL_FILE);
-
-            Source xmlDoc = new StreamSource(INPUT_FILE);
+            Source xmlDoc = new StreamSource(new ByteArrayInputStream(request.toXml().getBytes()));
 
             OutputStream xhtmlFile = new FileOutputStream(OUTPUT_FILE);
 

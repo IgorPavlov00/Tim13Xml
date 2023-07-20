@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 public class PersonInfo {
 
     @XmlElement(name = "ime")
-    private String firstName;
+    private String name;
 
     @XmlElement(name = "prezime")
     private String lastName;
@@ -16,24 +16,24 @@ public class PersonInfo {
     private Address address;
 
     @XmlAttribute(name = "tip_lica")
-    private String personType;
+    private PersonType personType;
 
     public PersonInfo() {
     }
 
-    public PersonInfo(String firstName, String lastName, Address address, String personType) {
-        this.firstName = firstName;
+    public PersonInfo(String name, String lastName, Address address, PersonType personType) {
+        this.name = name;
         this.lastName = lastName;
         this.address = address;
         this.personType = personType;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {
@@ -52,21 +52,21 @@ public class PersonInfo {
         this.address = address;
     }
 
-    public String getPersonType() {
+    public PersonType getPersonType() {
         return personType;
     }
 
     public void setPersonType(String personType) {
-        this.personType = personType;
+        this.personType = PersonType.valueOf(personType);
     }
 
     @Override
     public String toString() {
         return "PersonInfo{" +
-                "firstName='" + firstName + '\'' +
+                "firstName='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address=" + address +
-                ", personType='" + personType + '\'' +
+                ", personType='" + personType.toString() + '\'' +
                 '}';
     }
 }

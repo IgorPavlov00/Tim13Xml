@@ -2,6 +2,7 @@ package Tim13.BackendZig.repos;
 
 import Tim13.BackendZig.model.Request;
 import Tim13.BackendZig.model.RequestData;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -12,18 +13,30 @@ import org.xmldb.api.modules.XMLResource;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class ExistRepositoryImpl implements ExistRepository {
 
-    private static final String DB_USERNAME = "admin";
-    private static final String DB_PASSWORD = "";
-    private static final String DB_COLLECTION_NAME = "/db/requests/z";
-    private static final String DB_DRIVER = "org.exist.xmldb.DatabaseImpl";
-    private static final String DB_URI = "xmldb:exist://localhost:8088/exist/xmlrpc";
+
+    @Value("${exist.username}")
+    private static String DB_USERNAME;
+    @Value("${exist.password}")
+    private static String DB_PASSWORD;
+    @Value("${exist.collection}")
+    private static String DB_COLLECTION_NAME;
+    @Value("${exist.collection.pdf}")
+    private static String DB_PDF_COLLECTION;
+    @Value("${exist.driver}")
+    private static String DB_DRIVER;
+    @Value("${exist.uri}")
+    private static String DB_URI;
 
     @PostConstruct
     public void init() throws XMLDBException {
@@ -44,16 +57,43 @@ public class ExistRepositoryImpl implements ExistRepository {
         try {
             String id = entity.getRequestData().getRequestId(); // assume entity has an "id" field
             Collection collection = DatabaseManager.getCollection(DB_URI + DB_COLLECTION_NAME, DB_USERNAME, DB_PASSWORD);
-            XMLResource resource = (XMLResource) collection.createResource(id, "XMLResource");
+            XMLResource resource;
+            if (this.existsById(id)) {
+                resource = (XMLResource) collection.getResource(id + ".xml");
+            } else {
+                resource = (XMLResource) collection.createResource(id + ".xml", "XMLResource");
+            }
             resource.setContent(entity.toXml()); // assume entity has a "toXml" method that returns the XML content as a string
             collection.storeResource(resource);
             RequestData temp = entity.getRequestData();
-            temp.setRequestId(resource.getId());
+            temp.setRequestId(resource.getId().split("\\.")[0]);
             entity.setRequestData(temp);
             return entity;
         } catch (XMLDBException | JAXBException e) {
             throw new RuntimeException("Error saving entity to eXist database: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public void savePDF(String filePath, String documentName, String requestId) throws IOException, XMLDBException {
+
+        byte[] binaryData = Files.readAllBytes(Paths.get(filePath));
+        String base64Data = Base64.getEncoder().encodeToString(binaryData);
+
+        String xmlString = "<pdf-file>" + base64Data + "</pdf-file>";
+        Collection collection = DatabaseManager.getCollection(DB_URI + DB_PDF_COLLECTION + requestId, DB_USERNAME, DB_PASSWORD);
+        XMLResource xmlResource = (XMLResource) collection.createResource(documentName, "XMLResource");
+        xmlResource.setContent(xmlString);
+        collection.storeResource(xmlResource);
+    }
+
+    @Override
+    public String retrievePDF(String documentName, String requestId) throws XMLDBException {
+        Collection collection = DatabaseManager.getCollection(DB_URI + DB_PDF_COLLECTION + requestId, DB_USERNAME, DB_PASSWORD);
+        XMLResource xmlResource = (XMLResource) collection.getResource(documentName);
+        byte[] binaryData = xmlResource.getContent().toString().getBytes();
+        String base64Data = Base64.getEncoder().encodeToString(binaryData);
+        return base64Data;
     }
 
     @Override
@@ -69,11 +109,11 @@ public class ExistRepositoryImpl implements ExistRepository {
     public Optional<Request> findById(String id) {
         try {
             Collection collection = DatabaseManager.getCollection(DB_URI + DB_COLLECTION_NAME, DB_USERNAME, DB_PASSWORD);
-            XMLResource resource = (XMLResource) collection.getResource(id);
+            XMLResource resource = (XMLResource) collection.getResource(id + ".xml");
             if (resource != null) {
                 Request entity = Request.fromXml(resource.getContent().toString()); // assume entity has a "fromXml" static method that creates an instance from an XML string
                 RequestData temp = entity.getRequestData();
-                temp.setRequestId(resource.getId());
+                temp.setRequestId(resource.getId().split("\\.")[0]);
                 entity.setRequestData(temp);
                 return Optional.of(entity);
             } else {
@@ -88,7 +128,7 @@ public class ExistRepositoryImpl implements ExistRepository {
     public boolean existsById(String id) {
         try {
             Collection collection = DatabaseManager.getCollection(DB_URI + DB_COLLECTION_NAME, DB_USERNAME, DB_PASSWORD);
-            return collection.getResource(id) != null;
+            return collection.getResource(id + ".xml") != null;
         } catch (XMLDBException e) {
             throw new RuntimeException("Error checking if entity exists in eXist database: " + e.getMessage(), e);
         }
@@ -108,7 +148,7 @@ public class ExistRepositoryImpl implements ExistRepository {
                 XMLResource resource = (XMLResource) res;
                 Request entity = Request.fromXml(resource.getContent().toString());
                 RequestData temp = entity.getRequestData();
-                temp.setRequestId(resource.getId());
+                temp.setRequestId(resource.getId().split("\\.")[0]);
                 entity.setRequestData(temp);
                 entities.add(entity);
             }

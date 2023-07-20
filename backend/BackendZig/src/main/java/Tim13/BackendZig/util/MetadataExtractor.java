@@ -1,8 +1,10 @@
 package Tim13.BackendZig.util;
 
+import Tim13.BackendZig.model.Request;
 import org.apache.xalan.xsltc.trax.TransformerFactoryImpl;
 import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -12,23 +14,20 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 
 /**
- *
  * Primer demonstrira ekstrakciju RDFa metapodataka iz
  * XML dokumenta primenom GRDDL (Gleaning Resource Descriptions
  * from Dialects of Languages) transformacije.
- *
  */
 public class MetadataExtractor {
 
-    private TransformerFactory transformerFactory;
-
-    private String INPUT_FILE;
-    private String OUTPUT_METADATA;
     private static final String XSLT_FILE = "../../xsl/metadata.xsl";
+    private final TransformerFactory transformerFactory;
+    private final String XML_CONTENT;
+    private final String OUTPUT_METADATA;
 
-    public MetadataExtractor(String INPUT_FILE, String OUTPUT_METADATA) throws SAXException, IOException {
+    public MetadataExtractor(Request request, String OUTPUT_METADATA) throws SAXException, IOException, JAXBException {
 
-        this.INPUT_FILE = INPUT_FILE;
+        this.XML_CONTENT = request.toXml();
         this.OUTPUT_METADATA = OUTPUT_METADATA;
         // Setup the XSLT transformer factory
         this.transformerFactory = new TransformerFactoryImpl();
@@ -38,7 +37,7 @@ public class MetadataExtractor {
      * Generates RDF/XML based on RDFa metadata from an XML containing
      * input stream by applying GRDDL XSL transformation.
      *
-     * @param in XML containing input stream
+     * @param in  XML containing input stream
      * @param out RDF/XML output stream
      */
     public void extractMetadata(InputStream in, OutputStream out) throws FileNotFoundException, TransformerException {
@@ -69,7 +68,7 @@ public class MetadataExtractor {
 
         System.out.println("[INFO] " + MetadataExtractor.class.getSimpleName());
 
-        InputStream in = new FileInputStream(new File(this.INPUT_FILE));
+        InputStream in = new ByteArrayInputStream(XML_CONTENT.getBytes());
 
         OutputStream out = new FileOutputStream(this.OUTPUT_METADATA);
 
@@ -80,7 +79,6 @@ public class MetadataExtractor {
         System.out.println("[INFO] End.");
 
     }
-
 
 
 }
