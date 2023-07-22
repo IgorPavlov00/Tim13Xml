@@ -1,5 +1,9 @@
+import {User} from "../model/user";
+
 declare var $: any;
 import {Component, OnInit} from '@angular/core';
+import {FormData} from "../form-data";
+import {FormDataService} from "../form-data.service";
 
 @Component({
   selector: 'app-forma-a1',
@@ -23,7 +27,12 @@ export class FormaA1Component implements OnInit {
   selectedOption: string='da';
   value: string|any;
   private inputFields: any;
+  formData: FormData = new FormData();
+  radio:string='';
 
+
+
+  constructor(private servis: FormDataService) { }
   ngOnInit() {
     this.progressNumber = document.querySelectorAll(".step").length;
     this.slidePage = document.querySelector(".slide-page");
@@ -107,6 +116,7 @@ export class FormaA1Component implements OnInit {
   }
 
   showForm() {
+
     // @ts-ignore
     document.getElementById("forma").style.display = "block";
     // @ts-ignore
@@ -115,6 +125,7 @@ export class FormaA1Component implements OnInit {
 
 
   showForm2() {
+
     // @ts-ignore
     document.getElementById("forma2").style.display = "block";
     // @ts-ignore
@@ -186,7 +197,21 @@ export class FormaA1Component implements OnInit {
     }
   }
 
+  onSubmit() {
+    // Call the service function to send the form data
+    console.log(this.formData);
+    this.servis.submitFormData(this.formData).subscribe(
+      (response) => {
+        console.log('Form data sent successfully:', response);
+        // Handle the response from the backend if needed
+      },
+      (error) => {
+        console.error('Error sending form data:', error);
+        // Handle errors if any
+      }
+    );
   }
+}
 
 
 

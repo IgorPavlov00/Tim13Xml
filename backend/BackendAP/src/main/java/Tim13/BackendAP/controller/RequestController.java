@@ -1,5 +1,6 @@
 package Tim13.BackendAP.controller;
 
+import Tim13.BackendAP.model.FormDataDTO;
 import Tim13.BackendAP.model.Resurs;
 import Tim13.BackendAP.util.ExistConnProperties;
 import Tim13.BackendAP.util.FusekiAuthProperties;
@@ -22,8 +23,8 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.exist.xmldb.EXistResource;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -36,21 +37,21 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 
-import javax.xml.crypto.dsig.XMLObject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class RequestController {
 
     private static final String A1_NAMED_GRAPH_URI = "/a1";
@@ -229,7 +230,225 @@ public class RequestController {
         }
 
     }
+    private static void createA1(Document doc, Element rootElement) {
+        // Create "podaci_o_zavodu" element
+        Element podaci_o_zavodu = doc.createElement("podaci_o_zavodu");
+        rootElement.appendChild(podaci_o_zavodu);
 
+        // Create and set values for "naziv" element
+        Element naziv = doc.createElement("naziv");
+        naziv.setTextContent("Zavod za intelektualnu svojinu");
+        podaci_o_zavodu.appendChild(naziv);
+
+        // Create "adresa" element
+        Element adresa = doc.createElement("adresa");
+        podaci_o_zavodu.appendChild(adresa);
+
+        // Create and set values for "ulica" element within "adresa"
+        Element ulica1 = doc.createElement("ulica");
+        ulica1.setTextContent("Kneginja Ljubice 5");
+        adresa.appendChild(ulica1);
+
+        // Create and set values for "mesto" element within "adresa"
+        Element mesto1 = doc.createElement("mesto");
+        mesto1.setTextContent("Beograd");
+        adresa.appendChild(mesto1);
+
+        // Create "podaci_o_zahtevu" element
+        Element podaci_o_zahtevu = doc.createElement("podaci_o_zahtevu");
+        rootElement.appendChild(podaci_o_zahtevu);
+
+        // Create and set values for "datum_podnosenja" element within "podaci_o_zahtevu"
+        Element datum_podnosenja = doc.createElement("datum_podnosenja");
+        datum_podnosenja.setTextContent("22/11/2022");
+        podaci_o_zahtevu.appendChild(datum_podnosenja);
+
+        // Create and set values for "obrazac" element within "podaci_o_zahtevu"
+        Element obrazac = doc.createElement("obrazac");
+        obrazac.setTextContent("A-1");
+        podaci_o_zahtevu.appendChild(obrazac);
+
+        // Create "podaci_o_podnosiocu" element
+        Element podaci_o_podnosiocu = doc.createElement("podaci_o_podnosiocu");
+        rootElement.appendChild(podaci_o_podnosiocu);
+
+        // Create "licni_podaci" element within "podaci_o_podnosiocu" and set its attribute
+        Element licni_podaci = doc.createElement("licni_podaci");
+        licni_podaci.setAttribute("tip_lica", "Fizicko");
+        podaci_o_podnosiocu.appendChild(licni_podaci);
+
+        // Create and set values for "ime" element within "licni_podaci"
+        Element ime1 = doc.createElement("ime");
+        ime1.setTextContent("IGOR");
+        licni_podaci.appendChild(ime1);
+
+        // Create and set values for "prezime" element within "licni_podaci"
+        Element prezime1 = doc.createElement("prezime");
+        prezime1.setTextContent("PAVLOV");
+        licni_podaci.appendChild(prezime1);
+
+        // Create "adresa" element within "licni_podaci"
+        Element adresa2 = doc.createElement("adresa");
+        licni_podaci.appendChild(adresa2);
+
+        // Create and set values for "ulica" element within "adresa"
+        Element ulica2 = doc.createElement("ulica");
+        ulica2.setTextContent("aDI ENDREA 33");
+        adresa2.appendChild(ulica2);
+
+        // Create and set values for "mesto" element within "adresa"
+        Element mesto2 = doc.createElement("mesto");
+        mesto2.setTextContent("Novi Sad");
+        adresa2.appendChild(mesto2);
+
+        // Create and set values for "drzavljanstvo" element within "licni_podaci"
+        Element drzavljanstvo = doc.createElement("drzavljanstvo");
+        drzavljanstvo.setTextContent("SRPSKO");
+        licni_podaci.appendChild(drzavljanstvo);
+
+        // Create and set values for "telefon" element within "podaci_o_podnosiocu"
+        Element telefon = doc.createElement("telefon");
+        telefon.setTextContent("SRPSKO");
+        podaci_o_podnosiocu.appendChild(telefon);
+
+        // Create and set values for "email" element within "podaci_o_podnosiocu"
+        Element email = doc.createElement("email");
+        email.setTextContent("GMAIL");
+        podaci_o_podnosiocu.appendChild(email);
+
+        // Create and set values for "pseudonim" element within "podaci_o_podnosiocu"
+        Element pseudonim = doc.createElement("pseudonim");
+        pseudonim.setTextContent("IP");
+        podaci_o_podnosiocu.appendChild(pseudonim);
+
+        // Create "podaci_punomocnika" element
+        Element podaci_punomocnika = doc.createElement("podaci_punomocnika");
+        rootElement.appendChild(podaci_punomocnika);
+
+        // Create and set values for "ime" element within "podaci_punomocnika"
+        Element ime2 = doc.createElement("ime");
+        ime2.setTextContent("Igor");
+        podaci_punomocnika.appendChild(ime2);
+
+        // Create and set values for "prezime" element within "podaci_punomocnika"
+        Element prezime2 = doc.createElement("prezime");
+        prezime2.setTextContent("Popovic");
+        podaci_punomocnika.appendChild(prezime2);
+
+        // Create "adresa" element within "podaci_punomocnika"
+        Element adresa3 = doc.createElement("adresa");
+        podaci_punomocnika.appendChild(adresa3);
+
+        // Create and set values for "ulica" element within "adresa"
+        Element ulica3 = doc.createElement("ulica");
+        ulica3.setTextContent("Manjaca 69");
+        adresa3.appendChild(ulica3);
+
+        // Create and set values for "mesto" element within "adresa"
+        Element mesto3 = doc.createElement("mesto");
+        mesto3.setTextContent("Novi Sad");
+        adresa3.appendChild(mesto3);
+
+        // Create "podaci_o_autorskom_delu" element
+        Element podaci_o_autorskom_delu = doc.createElement("podaci_o_autorskom_delu");
+        rootElement.appendChild(podaci_o_autorskom_delu);
+
+        // Create and set values for "naslov" element within "podaci_o_autorskom_delu"
+        Element naslov = doc.createElement("naslov");
+        naslov.setTextContent("Naslov");
+        podaci_o_autorskom_delu.appendChild(naslov);
+
+        // Create and set values for "alternativni_naslov" element within "podaci_o_autorskom_delu"
+        Element alternativni_naslov = doc.createElement("alternativni_naslov");
+        alternativni_naslov.setTextContent("ANaslov");
+        podaci_o_autorskom_delu.appendChild(alternativni_naslov);
+
+        // Create "podaci_o_izvornom_delu" element within "podaci_o_autorskom_delu"
+        Element podaci_o_izvornom_delu = doc.createElement("podaci_o_izvornom_delu");
+        podaci_o_autorskom_delu.appendChild(podaci_o_izvornom_delu);
+
+        // Create and set values for "naslov" element within "podaci_o_izvornom_delu"
+        Element naslov2 = doc.createElement("naslov");
+        naslov2.setTextContent("Inaslov");
+        podaci_o_izvornom_delu.appendChild(naslov2);
+
+        // Create and set values for "autor" element within "podaci_o_izvornom_delu"
+        Element autor = doc.createElement("autor");
+        autor.setTextContent("Nikola");
+        podaci_o_izvornom_delu.appendChild(autor);
+
+        // Create and set values for "vrsta_autorskog_dela" element within "podaci_o_autorskom_delu"
+        Element vrsta_autorskog_dela = doc.createElement("vrsta_autorskog_dela");
+        vrsta_autorskog_dela.setTextContent("Triler");
+        podaci_o_autorskom_delu.appendChild(vrsta_autorskog_dela);
+
+        // Create and set values for "forma_autorskog_dela" element within "podaci_o_autorskom_delu"
+        Element forma_autorskog_dela = doc.createElement("forma_autorskog_dela");
+        forma_autorskog_dela.setTextContent("Pisana");
+        podaci_o_autorskom_delu.appendChild(forma_autorskog_dela);
+
+        // Create and set values for "stvoreno_u_radnom_odnosu" element within "podaci_o_autorskom_delu"
+        Element stvoreno_u_radnom_odnosu = doc.createElement("stvoreno_u_radnom_odnosu");
+        stvoreno_u_radnom_odnosu.setTextContent("false");
+        podaci_o_autorskom_delu.appendChild(stvoreno_u_radnom_odnosu);
+
+        // Create and set values for "nacin_koriscenja" element within "podaci_o_autorskom_delu"
+        Element nacin_koriscenja = doc.createElement("nacin_koriscenja");
+        nacin_koriscenja.setTextContent("aaa");
+        podaci_o_autorskom_delu.appendChild(nacin_koriscenja);
+
+        // Create "podaci_o_autoru_ziv" element
+        Element podaci_o_autoru_ziv = doc.createElement("podaci_o_autoru_ziv");
+        rootElement.appendChild(podaci_o_autoru_ziv);
+
+        // Create and set values for "ime" element within "podaci_o_autoru_ziv"
+        Element ime3 = doc.createElement("ime");
+        ime3.setTextContent("Igor");
+        podaci_o_autoru_ziv.appendChild(ime3);
+
+        // Create and set values for "prezime" element within "podaci_o_autoru_ziv"
+        Element prezime3 = doc.createElement("prezime");
+        prezime3.setTextContent("Pavlov");
+        podaci_o_autoru_ziv.appendChild(prezime3);
+
+        // Create "adresa" element within "podaci_o_autoru_ziv"
+        Element adresa4 = doc.createElement("adresa");
+        podaci_o_autoru_ziv.appendChild(adresa4);
+
+        // Create and set values for "ulica" element within "adresa"
+        Element ulica4 = doc.createElement("ulica");
+        ulica4.setTextContent("Adi Endrea 33");
+        adresa4.appendChild(ulica4);
+
+        // Create and set values for "mesto" element within "adresa"
+        Element mesto4 = doc.createElement("mesto");
+        mesto4.setTextContent("Novi Sad");
+        adresa4.appendChild(mesto4);
+
+        // Create and set values for "drzavljanstvo" element within "podaci_o_autoru_ziv"
+        Element drzavljanstvo2 = doc.createElement("drzavljanstvo");
+        drzavljanstvo2.setTextContent("srpsko");
+        podaci_o_autoru_ziv.appendChild(drzavljanstvo2);
+
+        // Create and set values for "pseudonim" element within "podaci_o_autoru_ziv"
+        Element pseudonim2 = doc.createElement("pseudonim");
+        pseudonim2.setTextContent("ip");
+        podaci_o_autoru_ziv.appendChild(pseudonim2);
+
+        // Create "prilozi" element
+        Element prilozi = doc.createElement("prilozi");
+        rootElement.appendChild(prilozi);
+
+        // Create and set values for "opis_autorskog_dela" element within "prilozi"
+        Element opis_autorskog_dela2 = doc.createElement("opis_autorskog_dela");
+        opis_autorskog_dela2.setTextContent("true");
+        prilozi.appendChild(opis_autorskog_dela2);
+
+        // Create and set values for "primer_autorskog_dela" element within "prilozi"
+        Element primer_autorskog_dela2 = doc.createElement("primer_autorskog_dela");
+        primer_autorskog_dela2.setTextContent("true");
+        prilozi.appendChild(primer_autorskog_dela2);
+    }
     public static List<Resurs> retrieve(ExistConnProperties conn, String[] args) throws Exception {
         try {
             // initialize collection and document identifiers
@@ -610,8 +829,45 @@ public class RequestController {
 
     }
 
+
+    @PostMapping("/podaciFormeA1")
+    public ResponseEntity<String> handleFormData(@RequestBody FormDataDTO formData) {
+        // Your logic to handle the form data using the formData object
+
+        // Call the function to map the form data and handle the response
+        System.out.println(formData);
+
+
+        return ResponseEntity.ok("Form data received successfully!");
+    }
+
     @RequestMapping("/")
     public void index() throws Exception {
+
+        try {
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
+
+            // Create the root element
+            Element rootElement = doc.createElement("zahtev_za_autorska_prava");
+            doc.appendChild(rootElement);
+
+            // Create and append elements similar to the original method
+
+            createA1(doc, rootElement);
+            try (FileOutputStream output =
+                         new FileOutputStream("../../xml/test.xml")) {
+                writeXml(doc, output);
+            } catch (IOException | TransformerException e) {
+                e.printStackTrace();
+            }
+            // Write the document to a file or print it as required
+            // (e.g., using Transformer)
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
         System.out.println("Pocetna strana!");
         String a1File = "../../xml/a1.xml";
         // xml ucitavanje

@@ -30,7 +30,7 @@ body {
   background: #333;
 }
 .container {
-  width: 600px;
+  width: 750px;
   background: #fff;
   text-align: center;
   border-radius: 5px;
@@ -99,6 +99,9 @@ form .page .field select {
 }
 
 .radio1{
+  margin-right: 10%;
+}
+.radio2{
   margin-right: 10%;
 }
 form .page .field button {
