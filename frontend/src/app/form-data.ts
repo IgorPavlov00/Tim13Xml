@@ -4,6 +4,7 @@ export class FormData {
   ime: string;
   prezime: string;
   adresa: string;
+  mesto:string;
   drzavljanstvo: string;
   telefon1: string;
   email1: string;
@@ -16,6 +17,7 @@ export class FormData {
   punomocnik_ime: string;
   punomocnik_prezime: string;
   punomocnik_adresa: string;
+  punomocnik_mesto: string;
   naslov: string;
   alternativni_naslov: string;
   naslov_izvornog_dela: string;
@@ -60,5 +62,7 @@ export class FormData {
     this.imena_preminulih_autora = '';
     this.godina_smrti = '';
     this.autorPodnosioc='';
+    this.mesto='';
+    this.punomocnik_mesto='';
   }
 }

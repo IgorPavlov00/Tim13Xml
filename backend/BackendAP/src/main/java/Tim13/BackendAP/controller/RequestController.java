@@ -23,6 +23,7 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.exist.xmldb.EXistResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
@@ -46,6 +47,8 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -230,7 +233,7 @@ public class RequestController {
         }
 
     }
-    private static void createA1(Document doc, Element rootElement) {
+    private static void createA1(Document doc, Element rootElement, FormDataDTO formData) {
         // Create "podaci_o_zavodu" element
         Element podaci_o_zavodu = doc.createElement("podaci_o_zavodu");
         rootElement.appendChild(podaci_o_zavodu);
@@ -260,7 +263,10 @@ public class RequestController {
 
         // Create and set values for "datum_podnosenja" element within "podaci_o_zahtevu"
         Element datum_podnosenja = doc.createElement("datum_podnosenja");
-        datum_podnosenja.setTextContent("22/11/2022");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String currentDate = LocalDate.now().format(formatter);
+        System.out.println(currentDate);
+        datum_podnosenja.setTextContent(currentDate);
         podaci_o_zahtevu.appendChild(datum_podnosenja);
 
         // Create and set values for "obrazac" element within "podaci_o_zahtevu"
@@ -274,17 +280,17 @@ public class RequestController {
 
         // Create "licni_podaci" element within "podaci_o_podnosiocu" and set its attribute
         Element licni_podaci = doc.createElement("licni_podaci");
-        licni_podaci.setAttribute("tip_lica", "Fizicko");
+        licni_podaci.setAttribute("tip_lica", formData.getTip_korisnika());
         podaci_o_podnosiocu.appendChild(licni_podaci);
 
         // Create and set values for "ime" element within "licni_podaci"
         Element ime1 = doc.createElement("ime");
-        ime1.setTextContent("IGOR");
+        ime1.setTextContent(formData.getIme());
         licni_podaci.appendChild(ime1);
 
         // Create and set values for "prezime" element within "licni_podaci"
         Element prezime1 = doc.createElement("prezime");
-        prezime1.setTextContent("PAVLOV");
+        prezime1.setTextContent(formData.getPrezime());
         licni_podaci.appendChild(prezime1);
 
         // Create "adresa" element within "licni_podaci"
@@ -293,32 +299,32 @@ public class RequestController {
 
         // Create and set values for "ulica" element within "adresa"
         Element ulica2 = doc.createElement("ulica");
-        ulica2.setTextContent("aDI ENDREA 33");
+        ulica2.setTextContent(formData.getAdresa());
         adresa2.appendChild(ulica2);
 
         // Create and set values for "mesto" element within "adresa"
         Element mesto2 = doc.createElement("mesto");
-        mesto2.setTextContent("Novi Sad");
+        mesto2.setTextContent(formData.getMesto());
         adresa2.appendChild(mesto2);
 
         // Create and set values for "drzavljanstvo" element within "licni_podaci"
         Element drzavljanstvo = doc.createElement("drzavljanstvo");
-        drzavljanstvo.setTextContent("SRPSKO");
+        drzavljanstvo.setTextContent(formData.getDrzavljanstvo());
         licni_podaci.appendChild(drzavljanstvo);
 
         // Create and set values for "telefon" element within "podaci_o_podnosiocu"
         Element telefon = doc.createElement("telefon");
-        telefon.setTextContent("SRPSKO");
+        telefon.setTextContent(formData.getTelefon());
         podaci_o_podnosiocu.appendChild(telefon);
 
         // Create and set values for "email" element within "podaci_o_podnosiocu"
         Element email = doc.createElement("email");
-        email.setTextContent("GMAIL");
+        email.setTextContent(formData.getEmail());
         podaci_o_podnosiocu.appendChild(email);
 
         // Create and set values for "pseudonim" element within "podaci_o_podnosiocu"
         Element pseudonim = doc.createElement("pseudonim");
-        pseudonim.setTextContent("IP");
+        pseudonim.setTextContent(formData.getPseudonim());
         podaci_o_podnosiocu.appendChild(pseudonim);
 
         // Create "podaci_punomocnika" element
@@ -327,12 +333,12 @@ public class RequestController {
 
         // Create and set values for "ime" element within "podaci_punomocnika"
         Element ime2 = doc.createElement("ime");
-        ime2.setTextContent("Igor");
+        ime2.setTextContent(formData.getPunomocnik_ime());
         podaci_punomocnika.appendChild(ime2);
 
         // Create and set values for "prezime" element within "podaci_punomocnika"
         Element prezime2 = doc.createElement("prezime");
-        prezime2.setTextContent("Popovic");
+        prezime2.setTextContent(formData.getPunomocnik_prezime());
         podaci_punomocnika.appendChild(prezime2);
 
         // Create "adresa" element within "podaci_punomocnika"
@@ -341,12 +347,12 @@ public class RequestController {
 
         // Create and set values for "ulica" element within "adresa"
         Element ulica3 = doc.createElement("ulica");
-        ulica3.setTextContent("Manjaca 69");
+        ulica3.setTextContent(formData.getPunomocnik_adresa());
         adresa3.appendChild(ulica3);
 
         // Create and set values for "mesto" element within "adresa"
         Element mesto3 = doc.createElement("mesto");
-        mesto3.setTextContent("Novi Sad");
+        mesto3.setTextContent(formData.getPunomocnik_mesto());
         adresa3.appendChild(mesto3);
 
         // Create "podaci_o_autorskom_delu" element
@@ -355,12 +361,12 @@ public class RequestController {
 
         // Create and set values for "naslov" element within "podaci_o_autorskom_delu"
         Element naslov = doc.createElement("naslov");
-        naslov.setTextContent("Naslov");
+        naslov.setTextContent(formData.getNaslov());
         podaci_o_autorskom_delu.appendChild(naslov);
 
         // Create and set values for "alternativni_naslov" element within "podaci_o_autorskom_delu"
         Element alternativni_naslov = doc.createElement("alternativni_naslov");
-        alternativni_naslov.setTextContent("ANaslov");
+        alternativni_naslov.setTextContent(formData.getAlternativni_naslov());
         podaci_o_autorskom_delu.appendChild(alternativni_naslov);
 
         // Create "podaci_o_izvornom_delu" element within "podaci_o_autorskom_delu"
@@ -369,32 +375,32 @@ public class RequestController {
 
         // Create and set values for "naslov" element within "podaci_o_izvornom_delu"
         Element naslov2 = doc.createElement("naslov");
-        naslov2.setTextContent("Inaslov");
+        naslov2.setTextContent(formData.getNaslov_izvornog_dela());
         podaci_o_izvornom_delu.appendChild(naslov2);
 
         // Create and set values for "autor" element within "podaci_o_izvornom_delu"
         Element autor = doc.createElement("autor");
-        autor.setTextContent("Nikola");
+        autor.setTextContent(formData.getAutor_izvornog_dela());
         podaci_o_izvornom_delu.appendChild(autor);
 
         // Create and set values for "vrsta_autorskog_dela" element within "podaci_o_autorskom_delu"
         Element vrsta_autorskog_dela = doc.createElement("vrsta_autorskog_dela");
-        vrsta_autorskog_dela.setTextContent("Triler");
+        vrsta_autorskog_dela.setTextContent(formData.getVrsta_dela());
         podaci_o_autorskom_delu.appendChild(vrsta_autorskog_dela);
 
         // Create and set values for "forma_autorskog_dela" element within "podaci_o_autorskom_delu"
         Element forma_autorskog_dela = doc.createElement("forma_autorskog_dela");
-        forma_autorskog_dela.setTextContent("Pisana");
+        forma_autorskog_dela.setTextContent(formData.getForma_zapisa());
         podaci_o_autorskom_delu.appendChild(forma_autorskog_dela);
 
         // Create and set values for "stvoreno_u_radnom_odnosu" element within "podaci_o_autorskom_delu"
         Element stvoreno_u_radnom_odnosu = doc.createElement("stvoreno_u_radnom_odnosu");
-        stvoreno_u_radnom_odnosu.setTextContent("false");
+        stvoreno_u_radnom_odnosu.setTextContent(formData.getAutorskoDeloStvorenoURadnomOdnosu());
         podaci_o_autorskom_delu.appendChild(stvoreno_u_radnom_odnosu);
 
         // Create and set values for "nacin_koriscenja" element within "podaci_o_autorskom_delu"
         Element nacin_koriscenja = doc.createElement("nacin_koriscenja");
-        nacin_koriscenja.setTextContent("aaa");
+        nacin_koriscenja.setTextContent(formData.getNacin_koriscenja());
         podaci_o_autorskom_delu.appendChild(nacin_koriscenja);
 
         // Create "podaci_o_autoru_ziv" element
@@ -837,13 +843,6 @@ public class RequestController {
         // Call the function to map the form data and handle the response
         System.out.println(formData);
 
-
-        return ResponseEntity.ok("Form data received successfully!");
-    }
-
-    @RequestMapping("/")
-    public void index() throws Exception {
-
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -854,20 +853,52 @@ public class RequestController {
             doc.appendChild(rootElement);
 
             // Create and append elements similar to the original method
+            createA1(doc, rootElement, formData);
 
-            createA1(doc, rootElement);
-            try (FileOutputStream output =
-                         new FileOutputStream("../../xml/test.xml")) {
+            try (FileOutputStream output = new FileOutputStream("../../xml/test.xml")) {
                 writeXml(doc, output);
             } catch (IOException | TransformerException e) {
                 e.printStackTrace();
             }
-            // Write the document to a file or print it as required
-            // (e.g., using Transformer)
 
+            return ResponseEntity.ok("Form data received successfully!");
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating XML.");
         }
+    }
+
+
+
+
+
+    @RequestMapping("/")
+    public void index() throws Exception {
+
+//        try {
+//            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+//            Document doc = docBuilder.newDocument();
+//
+//            // Create the root element
+//            Element rootElement = doc.createElement("zahtev_za_autorska_prava");
+//            doc.appendChild(rootElement);
+//
+//            // Create and append elements similar to the original method
+//
+//            createA1(doc, rootElement, formData);
+//            try (FileOutputStream output =
+//                         new FileOutputStream("../../xml/test.xml")) {
+//                writeXml(doc, output);
+//            } catch (IOException | TransformerException e) {
+//                e.printStackTrace();
+//            }
+//            // Write the document to a file or print it as required
+//            // (e.g., using Transformer)
+//
+//        } catch (ParserConfigurationException e) {
+//            e.printStackTrace();
+//        }
         System.out.println("Pocetna strana!");
         String a1File = "../../xml/a1.xml";
         // xml ucitavanje

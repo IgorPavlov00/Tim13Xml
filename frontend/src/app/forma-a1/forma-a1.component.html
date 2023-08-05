@@ -157,7 +157,9 @@
                 </div>
                 <div class="field">
                   <div class="label">Adresa</div>
-                  <input type="text" required id="adresa" placeholder="Adresa" name="adresa" [(ngModel)]="formData.adresa">
+                  <input type="text" required id="adresa" placeholder="Ulica" name="adresa" [(ngModel)]="formData.adresa">
+
+                  <input type="text" required id="ulica" placeholder="Mesto" name="ulica" [(ngModel)]="formData.mesto">
                 </div>
                 <div class="field">
                   <div class="label">Drzavljanstvo</div>
@@ -236,8 +238,10 @@
             <input type="text" name="punomocnik_prezime" [(ngModel)]="formData.punomocnik_prezime"/>
           </div>
           <div class="field">
-            <div class="label">Adresa:</div>
-            <input type="text" name="punomocnik_adresa" [(ngModel)]="formData.punomocnik_adresa" />
+            <div class="label">Adresa</div>
+            <input type="text" required id="adresa" placeholder="Ulica" name="adresa" [(ngModel)]="formData.punomocnik_adresa">
+
+            <input type="text" required id="ulica" placeholder="Mesto" name="ulica" [(ngModel)]="formData.punomocnik_mesto">
           </div>
 
         </div>

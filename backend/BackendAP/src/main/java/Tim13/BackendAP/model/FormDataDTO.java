@@ -6,6 +6,7 @@ public class FormDataDTO {
     private String ime;
     private String prezime;
     private String adresa;
+    private String mesto;
     private String drzavljanstvo;
     private String telefon1;
     private String email1;
@@ -18,6 +19,7 @@ public class FormDataDTO {
     private String punomocnik_ime;
     private String punomocnik_prezime;
     private String punomocnik_adresa;
+    private String punomocnik_mesto;
     private String naslov;
     private String alternativni_naslov;
     private String naslov_izvornog_dela;
@@ -35,11 +37,12 @@ public class FormDataDTO {
 
     }
 
-    public FormDataDTO(String tip_korisnika, String autorPodnosioc,String ime, String prezime, String adresa, String drzavljanstvo, String telefon1, String email1, String poslovno_ime, String sediste_nosioca_autorsko_prava, String telefon, String email, String pseudonim, boolean punomocnik, String punomocnik_ime, String punomocnik_prezime, String punomocnik_adresa, String naslov, String alternativni_naslov, String naslov_izvornog_dela, String autor_izvornog_dela, String vrsta_dela, String forma_zapisa, String autorskoDeloStvorenoURadnomOdnosu, String nacin_koriscenja, String autori_zivi, String imena_preminulih_autora, String godina_smrti) {
+    public FormDataDTO(String tip_korisnika, String autorPodnosioc,String ime, String prezime, String adresa, String drzavljanstvo,String punomocnik_mesto, String telefon1, String email1, String poslovno_ime, String sediste_nosioca_autorsko_prava, String telefon, String email, String pseudonim, boolean punomocnik, String punomocnik_ime, String punomocnik_prezime, String punomocnik_adresa, String naslov, String alternativni_naslov, String naslov_izvornog_dela, String autor_izvornog_dela, String vrsta_dela, String forma_zapisa, String autorskoDeloStvorenoURadnomOdnosu, String nacin_koriscenja, String autori_zivi, String imena_preminulih_autora, String godina_smrti,String mesto) {
         this.tip_korisnika = tip_korisnika;
         this.ime = ime;
         this.prezime = prezime;
         this.adresa = adresa;
+        this.mesto=mesto;
         this.drzavljanstvo = drzavljanstvo;
         this.telefon1 = telefon1;
         this.email1 = email1;
@@ -64,6 +67,7 @@ public class FormDataDTO {
         this.imena_preminulih_autora = imena_preminulih_autora;
         this.godina_smrti = godina_smrti;
         this.autorPodnosioc=autorPodnosioc;
+        this.punomocnik_mesto=punomocnik_mesto;
     }
 
     public String getAutorPodnosioc() {
@@ -290,6 +294,22 @@ public class FormDataDTO {
         this.godina_smrti = godina_smrti;
     }
 
+    public String getMesto() {
+        return mesto;
+    }
+
+    public void setMesto(String mesto) {
+        this.mesto = mesto;
+    }
+
+    public String getPunomocnik_mesto() {
+        return punomocnik_mesto;
+    }
+
+    public void setPunomocnik_mesto(String punomocnik_mesto) {
+        this.punomocnik_mesto = punomocnik_mesto;
+    }
+
     @Override
     public String toString() {
         return "FormDataDTO{" +
@@ -297,6 +317,7 @@ public class FormDataDTO {
                 ", ime='" + ime + '\'' +
                 ", prezime='" + prezime + '\'' +
                 ", adresa='" + adresa + '\'' +
+                ", mesto='" + mesto + '\'' +
                 ", drzavljanstvo='" + drzavljanstvo + '\'' +
                 ", telefon1='" + telefon1 + '\'' +
                 ", email1='" + email1 + '\'' +
@@ -309,6 +330,7 @@ public class FormDataDTO {
                 ", punomocnik_ime='" + punomocnik_ime + '\'' +
                 ", punomocnik_prezime='" + punomocnik_prezime + '\'' +
                 ", punomocnik_adresa='" + punomocnik_adresa + '\'' +
+                ", punomocnik_mesto='" + punomocnik_mesto + '\'' +
                 ", naslov='" + naslov + '\'' +
                 ", alternativni_naslov='" + alternativni_naslov + '\'' +
                 ", naslov_izvornog_dela='" + naslov_izvornog_dela + '\'' +
@@ -320,6 +342,7 @@ public class FormDataDTO {
                 ", autori_zivi='" + autori_zivi + '\'' +
                 ", imena_preminulih_autora='" + imena_preminulih_autora + '\'' +
                 ", godina_smrti='" + godina_smrti + '\'' +
+                ", autorPodnosioc='" + autorPodnosioc + '\'' +
                 '}';
     }
 }
