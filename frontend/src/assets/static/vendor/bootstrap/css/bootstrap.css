@@ -4261,9 +4261,10 @@ tbody.collapse.show {
 }
 
 .progress-bar {
-  height: 1rem;
+  height: rem;
   line-height: 1rem;
   color: #fff;
+
   transition: width 0.6s ease;
 }
 

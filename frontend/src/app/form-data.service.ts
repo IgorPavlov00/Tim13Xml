@@ -14,4 +14,8 @@ export class FormDataService {
   submitFormData(formData: any): Observable<any> {
     return this.http.post<any>(this.url+'podaciFormeA1', formData);
   }
+  getFormData(): Observable<any> {
+    return this.http.get<any>(this.url + 'zahtevi');
+  }
+
 }

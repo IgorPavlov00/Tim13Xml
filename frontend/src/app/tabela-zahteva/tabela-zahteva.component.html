@@ -67,18 +67,22 @@
         </button></div>
         <div class="product-cell price">Link<button class="sort-button">
         </button></div>
+        <div class="product-cell price">Preuzimanje<button class="sort-button">
+        </button></div>
       </div>
-      <div class="products-row" *ngFor="let p of data">
+      <div class="products-row" *ngFor="let p of retrievedData">
         <button class="cell-more-button">
         </button>
         <div class="product-cell image">
-          <span class="cell-label">Datum:</span>{{p.sifra}}
+          <span class="cell-label"></span>{{p.sifra}}
         </div>
-        <div class="product-cell category"><span class="cell-label">Datum:</span>{{p.datum}}</div>
+        <div class="product-cell category"><span class="cell-label"></span>{{p.datumPodnosenja}}</div>
 
-        <div class="product-cell sales"><span class="cell-label">Ime:</span>{{p.ime}}</div>
-        <div class="product-cell stock"><span class="cell-label">Prezime:</span>{{p.prezime}}</div>
-        <div class="product-cell price"><span class="cell-label">Link:</span>{{p.link}}</div>
+        <div class="product-cell sales"><span class="cell-label"></span>{{p.ime}}</div>
+        <div class="product-cell stock"><span class="cell-label"></span>{{p.prezime}}</div>
+        <div class="product-cell price"><span class="cell-label"></span>{{p.link}}</div>
+        <div class="product-cell price"> <button class="btn-hover color-1">PDF</button>
+          <button class="btn-hover color-2">XHTML</button>  </div>
       </div>
 
       </div>

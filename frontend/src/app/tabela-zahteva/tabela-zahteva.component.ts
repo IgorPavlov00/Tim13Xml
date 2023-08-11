@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {FormDataService} from "../form-data.service";
 
 @Component({
   selector: 'app-tabela-zahteva',
@@ -6,14 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./tabela-zahteva.component.css']
 })
 export class TabelaZahtevaComponent {
-  data = [
-    { sifra: 123, datum: '01/01/2023', ime: 'Igor', prezime: 'p', link: 'link'},
-    { sifra: 123, datum: '02/01/2023', ime: 'Ana', prezime: 'p', link: 'link'},
-    { sifra: 123, datum: '03/01/2023', ime: 'Nikola', prezime: 'p', link: 'link'},
-    { sifra: 123, datum: '04/01/2023', ime: 'Marko', prezime: 'p', link: 'link'},
-    { sifra: 123, datum: '05/01/2023', ime: 'Jovan', prezime: 'p', link: 'link'},
-    { sifra: 123, datum: '06/01/2023', ime: 'Nenad', prezime: 'p', link: 'link'}
-  ];
+
+  retrievedData: any=[] ; // Define the type based on your Resurs interface/model
+
+  constructor(private http: HttpClient,private formDataService: FormDataService) {
+    this.fetchFormData();
+  }
+
+
+
   mode() {
     const modeSwitch = document.querySelector('.mode-switch') as HTMLElement;
 
@@ -21,4 +24,50 @@ export class TabelaZahtevaComponent {
       document.documentElement.classList.toggle('light');
       modeSwitch.classList.toggle('active');
     });
-}}
+
+
+  }
+  fetchFormData(): void {
+    this.formDataService.getFormData().subscribe(
+      data => {
+        console.log('Retrieved Data:', data);
+
+        const parser = new DOMParser();
+        const extractedDataArray = [];
+
+        // Loop through each object in the array
+        for (const item of data) {
+          const xmlContent = item?.content || '';
+          const xmlData = parser.parseFromString(xmlContent, 'application/xml');
+
+          // Extract data
+          const sifra = item?.id ? item.id.replace(/\D+/g, '') : '';
+          const ime = xmlData.querySelector('ime')?.textContent || '';
+          const prezime = xmlData.querySelector('prezime')?.textContent || '';
+          const datumPodnosenja = xmlData.querySelector('datum_podnosenja')?.textContent || '';
+
+          // Create an object with extracted data
+          const extractedData = {
+            sifra,
+            ime,
+            prezime,
+            datumPodnosenja
+          };
+
+          // Add extracted data to the array
+          extractedDataArray.push(extractedData);
+        }
+
+        console.log('Extracted Data Array:', extractedDataArray);
+
+        // Assign the extracted data array to retrievedData
+        this.retrievedData = extractedDataArray;
+      },
+      error => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+
+}

@@ -11,10 +11,7 @@ import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
@@ -68,7 +65,6 @@ public class RequestController {
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
         StreamResult result = new StreamResult(output);
-
         transformer.transform(source, result);
 
     }
@@ -233,6 +229,7 @@ public class RequestController {
         }
 
     }
+
     private static void createA1(Document doc, Element rootElement, FormDataDTO formData) {
         // Create "podaci_o_zavodu" element
         Element podaci_o_zavodu = doc.createElement("podaci_o_zavodu");
@@ -455,6 +452,7 @@ public class RequestController {
         primer_autorskog_dela2.setTextContent("true");
         prilozi.appendChild(primer_autorskog_dela2);
     }
+
     public static List<Resurs> retrieve(ExistConnProperties conn, String[] args) throws Exception {
         try {
             // initialize collection and document identifiers
@@ -495,20 +493,18 @@ public class RequestController {
                 col.setProperty(OutputKeys.INDENT, "yes");
 
                 for (String doc : col.listResources()) {
-                    if (doc.startsWith("a")) {
+                    if (doc.startsWith("a") || doc.startsWith("form_data_")) {
                         System.out.println("[INFO] Retrieving the document: " + doc);
                         res = (XMLResource) col.getResource(doc);
-                        System.out.println("Dokument:"+res.getContent());
-                        resultList.add(new Resurs(res.getId(),res.getContent()+""));
+                        System.out.println("Dokument:" + res.getContent());
+                        resultList.add(new Resurs(res.getId(), res.getContent() + ""));
 
 
-
-                        }
-                        else {
-                            System.out.println("[WARNING] Document '" + doc + "' can not be found!");
-                        }
-
+                    } else {
+                        System.out.println("[WARNING] Document '" + doc + "' can not be found!");
                     }
+
+                }
                 return resultList;
 
             } finally {
@@ -605,8 +601,8 @@ public class RequestController {
             for (Resurs resource : resultList) {
                 System.out.println(resource.getId());
 
-                 XMLResource r=(XMLResource)col.createResource(resource.getId(),XMLResource.RESOURCE_TYPE);
-                 r.setContent(resource.getContent());
+                XMLResource r = (XMLResource) col.createResource(resource.getId(), XMLResource.RESOURCE_TYPE);
+                r.setContent(resource.getContent());
                 col.storeResource((Resource) r);
                 System.out.println("[INFO] Storing the document: " + resource.getId());
             }
@@ -739,7 +735,7 @@ public class RequestController {
 
         // Query the SPARQL endpoint, iterate over the result set...
         ResultSet results = query.execSelect();
-
+        ResultSetFormatter.outputAsJSON(results);
         String varName;
         RDFNode varValue;
 
@@ -835,6 +831,24 @@ public class RequestController {
 
     }
 
+    @GetMapping("/zahtevi")
+    public ResponseEntity<List<Resurs>>  handleFormData() {
+
+        try {
+            ExistConnProperties conn = ExistConnProperties.loadProperties();
+            String[] args = {"/db/sample/library"};
+
+            List<Resurs> resultList = retrieve(conn, args);
+
+
+            System.out.println(resultList.toString());
+            return ResponseEntity.ok(resultList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
     @PostMapping("/podaciFormeA1")
     public ResponseEntity<String> handleFormData(@RequestBody FormDataDTO formData) {
@@ -842,6 +856,8 @@ public class RequestController {
 
         // Call the function to map the form data and handle the response
         System.out.println(formData);
+        String timestamp = Long.toString(System.currentTimeMillis());
+        String xmlFileName = "a_" + timestamp + ".xml";
 
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -854,22 +870,63 @@ public class RequestController {
 
             // Create and append elements similar to the original method
             createA1(doc, rootElement, formData);
-
-            try (FileOutputStream output = new FileOutputStream("../../xml/test.xml")) {
+            String a1File = "../../xml/"+xmlFileName;
+            try (FileOutputStream output = new FileOutputStream(a1File)) {
                 writeXml(doc, output);
+
             } catch (IOException | TransformerException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
+            String[] args2 = {"/db/sample/library", "a1.xml"};
+            conn = ExistConnProperties.loadProperties();
+            List<Resurs> resultList = retrieve(conn, args2);
+            if (resultList != null) {
+                for (Resurs x : resultList) {
+                    System.out.println(x.getContent());
+                    System.out.println(x.getId());
+                }
+            } else {
+                System.out.println("prazna");
+            }
+            // xml baza - upis i ucitavanje obrasca A1
 
+            String[] args = {"/db/sample/library", "test.xml", a1File};
+
+
+            String content = "";
+            try (BufferedReader bf = new BufferedReader(new FileReader(a1File))) {
+                String line;
+                while ((line = bf.readLine()) != null) {
+
+
+                    content += line;
+                    content += "\n";
+
+                }
+            }
+            Resurs resurs = new Resurs();
+            resurs.setId(xmlFileName);
+            resurs.setContent(content);
+
+
+            resultList.add(resurs);
+
+
+            store(conn, args, resultList);
             return ResponseEntity.ok("Form data received successfully!");
+
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating XML.");
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-
-
-
 
 
     @RequestMapping("/")
@@ -918,13 +975,13 @@ public class RequestController {
         }
 
         String[] args2 = {"/db/sample/library", "a1.xml"};
-        conn=ExistConnProperties.loadProperties();
+        conn = ExistConnProperties.loadProperties();
         List<Resurs> resultList = retrieve(conn, args2);
         if (resultList != null) {
             for (Resurs x : resultList) {
                 System.out.println(x.getContent());
             }
-        }else{
+        } else {
             System.out.println("prazna");
         }
         // xml baza - upis i ucitavanje obrasca A1
