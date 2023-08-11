@@ -311,12 +311,12 @@ public class RequestController {
 
         // Create and set values for "telefon" element within "podaci_o_podnosiocu"
         Element telefon = doc.createElement("telefon");
-        telefon.setTextContent(formData.getTelefon());
+        telefon.setTextContent(formData.getTelefon1());
         podaci_o_podnosiocu.appendChild(telefon);
 
         // Create and set values for "email" element within "podaci_o_podnosiocu"
         Element email = doc.createElement("email");
-        email.setTextContent(formData.getEmail());
+        email.setTextContent(formData.getEmail1());
         podaci_o_podnosiocu.appendChild(email);
 
         // Create and set values for "pseudonim" element within "podaci_o_podnosiocu"

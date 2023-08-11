@@ -46,7 +46,8 @@
 
     </div>
     <div class="app-content-actions">
-      <input class="search-bar" placeholder="Search..." type="text">
+      <input class="search-bar" placeholder="Search..." type="text" [(ngModel)]="searchInput" (input)="search()">
+
       <div class="app-content-actions-wrapper">
 
 
@@ -70,7 +71,7 @@
         <div class="product-cell price">Preuzimanje<button class="sort-button">
         </button></div>
       </div>
-      <div class="products-row" *ngFor="let p of retrievedData">
+      <div class="products-row" *ngFor="let p of filteredData">
         <button class="cell-more-button">
         </button>
         <div class="product-cell image">
