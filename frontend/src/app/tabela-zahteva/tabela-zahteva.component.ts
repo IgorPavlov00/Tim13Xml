@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FormDataService} from "../form-data.service";
+import {MatDialog} from "@angular/material/dialog";
+import {PopupComponent} from "../popup/popup.component";
 
 @Component({
   selector: 'app-tabela-zahteva',
@@ -14,11 +16,27 @@ export class TabelaZahtevaComponent {
   public searchInput = '';
 
 
-  constructor(private http: HttpClient, private formDataService: FormDataService) {
+  constructor(private http: HttpClient, private formDataService: FormDataService,private dialog: MatDialog) {
     this.fetchFormData();
     this.filteredData;
   }
 
+
+
+
+  openPopup(rowData: any): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '1200px', // Set the desired width
+      data: rowData, // Pass the data of the selected row
+      height:'800px'
+
+
+    });
+     console.log(rowData);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
+  }
 
   mode() {
     const modeSwitch = document.querySelector('.mode-switch') as HTMLElement;

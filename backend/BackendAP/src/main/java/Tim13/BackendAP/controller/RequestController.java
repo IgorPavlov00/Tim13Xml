@@ -392,7 +392,7 @@ public class RequestController {
 
         // Create and set values for "stvoreno_u_radnom_odnosu" element within "podaci_o_autorskom_delu"
         Element stvoreno_u_radnom_odnosu = doc.createElement("stvoreno_u_radnom_odnosu");
-        stvoreno_u_radnom_odnosu.setTextContent(formData.getAutorskoDeloStvorenoURadnomOdnosu());
+        stvoreno_u_radnom_odnosu.setTextContent(formData.getAutorskoDeloStvorenoURadnomOdnosu().equals("da")?"true":"false");
         podaci_o_autorskom_delu.appendChild(stvoreno_u_radnom_odnosu);
 
         // Create and set values for "nacin_koriscenja" element within "podaci_o_autorskom_delu"
@@ -912,7 +912,7 @@ public class RequestController {
 
 
             resultList.add(resurs);
-
+            generateXHTML(a1File, "../../xsl/a1html.xsl", "../../xhtml/a_"+timestamp+".xhtml");
 
             store(conn, args, resultList);
             return ResponseEntity.ok("Form data received successfully!");

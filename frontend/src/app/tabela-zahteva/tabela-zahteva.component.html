@@ -46,13 +46,80 @@
 
     </div>
     <div class="app-content-actions">
+
       <input class="search-bar" placeholder="Search..." type="text" [(ngModel)]="searchInput" (input)="search()">
+
+        <input class="search-bar short-search-bar" placeholder="Ime Podnosioca" type="text" (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
+      <input class="search-bar short-search-bar" placeholder="Prezime Podnosioca" type="text"  (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
+      <input class="search-bar short-search-bar" placeholder="Ime Autora" type="text" (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
+      <input class="search-bar short-search-bar" placeholder="Prezime Autora" type="text" (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
+      <input class="search-bar short-search-bar" placeholder="Ime Punomocnika" type="text"  (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
+      <input class="search-bar short-search-bar" placeholder="Prezime Punomocnika" type="text"  (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
+      <input class="search-bar short-search-bar" placeholder="Naslov dela" type="text"  (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
+      <input class="search-bar short-search-bar" placeholder="Datum podnosenja" type="text"  (input)="search()">
+      <div class="search-bar-group">
+        <select class="operator-select">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+        </select>
+      </div>
 
       <div class="app-content-actions-wrapper">
 
 
       </div>
     </div>
+
     <div class="products-area-wrapper tableView" >
       <div class="products-header">
         <div class="product-cell image">
@@ -81,7 +148,11 @@
 
         <div class="product-cell sales"><span class="cell-label"></span>{{p.ime}}</div>
         <div class="product-cell stock"><span class="cell-label"></span>{{p.prezime}}</div>
-        <div class="product-cell price"><span class="cell-label"></span>{{p.link}}</div>
+        <div class="product-cell price">
+          <span class="cell-label"></span>
+          <a href="javascript:void(0);" (click)="openPopup(p)">Link</a>
+        </div>
+
         <div class="product-cell price"> <button class="btn-hover color-1">PDF</button>
           <button class="btn-hover color-2">XHTML</button>  </div>
       </div>

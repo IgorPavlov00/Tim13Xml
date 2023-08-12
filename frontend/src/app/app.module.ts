@@ -25,6 +25,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDialogModule} from "@angular/material/dialog";
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     Z1FormComponent,
     TabelaZahtevaComponent,
     EvidencijaComponent,
-    KlasifikacijaDialog
+    KlasifikacijaDialog,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
