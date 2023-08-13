@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  margin: 0 200px;
+  justify-items: center;
 }
 
 .mat-stepper-horizontal {

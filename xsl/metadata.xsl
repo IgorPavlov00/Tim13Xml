@@ -8,8 +8,12 @@
     </xsl:template>
 
     <xsl:template match="zahtev_za_priznanje_ziga">
-        <rdf:Description rdf:about="http://localhost:8082"
+        <rdf:Description
             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <xsl:attribute name="rdf:about">
+                <xsl:value-of select="concat('http://localhost:8082/', /zahtev_za_priznanje_ziga/podaci_o_zahtevu/broj_prijave)
+"/>
+            </xsl:attribute>
             <xsl:apply-templates select="podaci_o_zahtevu" />
             <xsl:apply-templates select="podaci_o_podnosiocu" />
             <xsl:apply-templates select="podaci_o_punomocniku" />

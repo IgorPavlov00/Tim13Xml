@@ -1,5 +1,6 @@
 package Tim13.BackendZig.service;
 
+import Tim13.BackendZig.controllers.RequestController;
 import Tim13.BackendZig.model.Request;
 import Tim13.BackendZig.util.ExistConnProperties;
 import Tim13.BackendZig.util.FusekiAuthProperties;
@@ -20,6 +21,8 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.exist.xmldb.EXistResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.*;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -38,6 +41,7 @@ import java.io.*;
 
 public class AllCPMethods {
     private static final String Z1_NAMED_GRAPH_URI = "/z1";
+    private static final Logger logger = LoggerFactory.getLogger(RequestController.class);
     private static ExistConnProperties conn;
 
     public static void writeXml(Document doc,
@@ -54,7 +58,7 @@ public class AllCPMethods {
     }
 
     public static void getZ1(Document doc) {
-        System.out.println("Podaci o dokumentu Z1");
+        logger.info("Podaci o dokumentu Z1");
         //printNode(doc);
     }
 
@@ -65,7 +69,7 @@ public class AllCPMethods {
 
         if (node instanceof Document) {
 
-            System.out.println("START_DOCUMENT\n");
+            logger.info("START_DOCUMENT\n");
 
             Document doc = (Document) node;
             printNode(doc.getDocumentElement());
@@ -89,7 +93,7 @@ public class AllCPMethods {
                 }
             }
 
-            System.out.println();
+            logger.info("\n");
 
             NodeList children = element.getChildNodes();
 
@@ -108,10 +112,10 @@ public class AllCPMethods {
             Text text = (Text) node;
 
             if (text.getTextContent().trim().length() > 0)
-                System.out.println("\nCHARACTERS: " + text.getTextContent().trim());
+                logger.info("\nCHARACTERS: " + text.getTextContent().trim());
         } else if (node instanceof Entity) {
             Entity entity = (Entity) node;
-            System.out.println("\nENTITY: " + entity.getNotationName());
+            logger.info("\nENTITY: " + entity.getNotationName());
         }
     }
 
@@ -124,23 +128,23 @@ public class AllCPMethods {
 
         if (args.length == 2) {
 
-            System.out.println("[INFO] Passing the arguments... ");
+            logger.info("[INFO] Passing the arguments... ");
 
             collectionId = args[0];
             documentId = args[1];
         } else {
 
-            System.out.println("[INFO] Using defaults.");
+            logger.info("[INFO] Using defaults.");
 
             collectionId = "/db/sample/library";
             documentId = "1.xml";
         }
 
-        System.out.println("\t- collection ID: " + collectionId);
-        System.out.println("\t- document ID: " + documentId + "\n");
+        logger.info("\t- collection ID: " + collectionId);
+        logger.info("\t- document ID: " + documentId + "\n");
 
         // initialize database driver
-        System.out.println("[INFO] Loading driver class: " + conn.driver);
+        logger.info("[INFO] Loading driver class: " + conn.driver);
         Class<?> cl = Class.forName(conn.driver);
 
         Database database = (Database) cl.newInstance();
@@ -153,19 +157,19 @@ public class AllCPMethods {
 
         try {
             // get the collection
-            System.out.println("[INFO] Retrieving the collection: " + collectionId);
+            logger.info("[INFO] Retrieving the collection: " + collectionId);
             col = DatabaseManager.getCollection(conn.uri + collectionId);
             col.setProperty(OutputKeys.INDENT, "yes");
 
-            System.out.println("[INFO] Retrieving the document: " + documentId);
+            logger.info("[INFO] Retrieving the document: " + documentId);
             res = (XMLResource) col.getResource(documentId);
 
             if (res == null) {
-                System.out.println("[WARNING] Document '" + documentId + "' can not be found!");
+                logger.info("[WARNING] Document '" + documentId + "' can not be found!");
             } else {
 
-                System.out.println("[INFO] Showing the document as XML resource: ");
-                System.out.println(res.getContent());
+                logger.info("[INFO] Showing the document as XML resource: ");
+                logger.info((String) res.getContent());
 
             }
         } finally {
@@ -199,7 +203,7 @@ public class AllCPMethods {
 
         if (args.length == 3) {
 
-            System.out.println("[INFO] Passing the arguments... ");
+            logger.info("[INFO] Passing the arguments... ");
 
             collectionId = args[0];
             documentId = args[1];
@@ -207,7 +211,7 @@ public class AllCPMethods {
             filePath = args[2];
         } else {
 
-            System.out.println("[INFO] Using defaults.");
+            logger.info("[INFO] Using defaults.");
 
             collectionId = "/db/sample/library";
             documentId = "1.xml";
@@ -216,12 +220,12 @@ public class AllCPMethods {
 
         }
 
-        System.out.println("\t- collection ID: " + collectionId);
-        System.out.println("\t- document ID: " + documentId);
-        System.out.println("\t- file path: " + filePath + "\n");
+        logger.info("\t- collection ID: " + collectionId);
+        logger.info("\t- document ID: " + documentId);
+        logger.info("\t- file path: " + filePath + "\n");
 
         // initialize database driver
-        System.out.println("[INFO] Loading driver class: " + conn.driver);
+        logger.info("[INFO] Loading driver class: " + conn.driver);
         Class<?> cl = Class.forName(conn.driver);
 
 
@@ -238,28 +242,28 @@ public class AllCPMethods {
 
         try {
 
-            System.out.println("[INFO] Retrieving the collection: " + collectionId);
+            logger.info("[INFO] Retrieving the collection: " + collectionId);
             col = getOrCreateCollection(collectionId);
 
             /*
              *  create new XMLResource with a given id
              *  an id is assigned to the new resource if left empty (null)
              */
-            System.out.println("[INFO] Inserting the document: " + documentId);
+            logger.info("[INFO] Inserting the document: " + documentId);
             res = (XMLResource) col.createResource(documentId, XMLResource.RESOURCE_TYPE);
 
             File f = new File(filePath);
 
             if (!f.canRead()) {
-                System.out.println("[ERROR] Cannot read the file: " + filePath);
+                logger.info("[ERROR] Cannot read the file: " + filePath);
                 return;
             }
 
             res.setContent(f);
-            System.out.println("[INFO] Storing the document: " + res.getId());
+            logger.info("[INFO] Storing the document: " + res.getId());
 
             col.storeResource(res);
-            System.out.println("[INFO] Done.");
+            logger.info("[INFO] Done.");
 
         } finally {
 
@@ -288,9 +292,9 @@ public class AllCPMethods {
 
     public static Collection getOrCreateCollection(String collectionUri, int pathSegmentOffset) throws XMLDBException, IOException {
         conn = ExistConnProperties.loadProperties();
-        System.out.println(conn.uri + collectionUri);
-        System.out.println(conn.user);
-        System.out.println(conn.password);
+        logger.info(conn.uri + collectionUri);
+        logger.info(conn.user);
+        logger.info(conn.password);
         Collection col = DatabaseManager.getCollection(conn.uri + collectionUri, conn.user, conn.password);
 
         // create the collection if it does not exist
@@ -320,7 +324,7 @@ public class AllCPMethods {
 
                     CollectionManagementService mgt = (CollectionManagementService) parentCol.getService("CollectionManagementService", "1.0");
 
-                    System.out.println("[INFO] Creating the collection: " + pathSegments[pathSegmentOffset]);
+                    logger.info("[INFO] Creating the collection: " + pathSegments[pathSegmentOffset]);
                     col = mgt.createCollection(pathSegments[pathSegmentOffset]);
 
                     col.close();
@@ -338,7 +342,7 @@ public class AllCPMethods {
 
     public static void writeRDF(FusekiAuthProperties.FusekiConnProperties conn, String rdfFilePath, String NAMED_GRAPH_URI) throws IOException {
 
-        System.out.println("[INFO] Loading triples from an RDF/XML to a model...");
+        logger.info("[INFO] Loading triples from an RDF/XML to a model...");
 
 
         // Creates a default model
@@ -349,7 +353,7 @@ public class AllCPMethods {
 
         model.write(out, SparqlUtil.NTRIPLES);
 
-        System.out.println("[INFO] Rendering model as RDF/XML...");
+        logger.info("[INFO] Rendering model as RDF/XML...");
         try {
             model.write(System.out, SparqlUtil.RDF_XML);
         } catch (Exception e) {
@@ -368,9 +372,9 @@ public class AllCPMethods {
         processor.execute();
 
         // Creating the first named graph and updating it with RDF data
-        System.out.println("[INFO] Writing the triples to a named graph \"" + NAMED_GRAPH_URI + "\".");
+        logger.info("[INFO] Writing the triples to a named graph \"" + NAMED_GRAPH_URI + "\".");
         String sparqlUpdate = SparqlUtil.insertData(conn.dataEndpoint + NAMED_GRAPH_URI, out.toString());
-        System.out.println(sparqlUpdate);
+        logger.info(sparqlUpdate);
 
         // UpdateRequest represents a unit of execution
         UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -379,13 +383,13 @@ public class AllCPMethods {
         processor.execute();
 
 
-        System.out.println("[INFO] End.");
+        logger.info("[INFO] End.");
     }
 
     public static void readRDF(FusekiAuthProperties.FusekiConnProperties conn) throws IOException {
 
         // Querying the other named graph
-        System.out.println("[INFO] Selecting the triples from the named graph \"" + Z1_NAMED_GRAPH_URI + "\".");
+        logger.info("[INFO] Selecting the triples from the named graph \"" + Z1_NAMED_GRAPH_URI + "\".");
         String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + Z1_NAMED_GRAPH_URI, "?s ?p ?o");
 
         // Create a QueryExecution that will access a SPARQL service over HTTP
@@ -394,12 +398,16 @@ public class AllCPMethods {
 
         // Query the collection, dump output response as XML
         ResultSet results = query.execSelect();
-
-        ResultSetFormatter.outputAsJSON(results);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        ResultSetFormatter.outputAsJSON(ps, results);
+        ps.close();
+        String jsonOutput = baos.toString();
+        logger.info(jsonOutput);
 
         query.close();
 
-        System.out.println("[INFO] End.");
+        logger.info("[INFO] End.");
     }
 
     public static void generatePDF(Request request, String XSL_FILE, String OUTPUT_FILE) throws Exception {
@@ -438,7 +446,7 @@ public class AllCPMethods {
         // Generate PDF file
         File pdfFile = new File(OUTPUT_FILE);
         if (!pdfFile.getParentFile().exists()) {
-            System.out.println("[INFO] A new directory is created: " + pdfFile.getParentFile().getAbsolutePath() + ".");
+            logger.info("[INFO] A new directory is created: " + pdfFile.getParentFile().getAbsolutePath() + ".");
             pdfFile.getParentFile().mkdir();
         }
 
@@ -448,7 +456,7 @@ public class AllCPMethods {
         out.close();
 
 
-        System.out.println("[INFO] End.");
+        logger.info("[INFO] End.");
 
     }
 

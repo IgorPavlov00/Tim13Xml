@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-<rdf:Description rdf:about="http://localhost:8082">
+<rdf:Description rdf:about="http://localhost:8082/z-2903-23">
 <datum_podnosenja>29-03-2023</datum_podnosenja>
 <ime_podnosioca>Mika</ime_podnosioca>
 <prezime_podnosioca>Mikic</prezime_podnosioca>

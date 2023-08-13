@@ -12,7 +12,7 @@ public class Address {
     private String street;
 
     @XmlElement(name = "postanski_broj")
-    private int postCode;
+    private String postCode;
 
     @XmlElement(name = "mesto")
     private String city;
@@ -23,7 +23,7 @@ public class Address {
     public Address() {
     }
 
-    public Address(String street, int postCode, String city, String country) {
+    public Address(String street, String postCode, String city, String country) {
         this.street = street;
         this.postCode = postCode;
         this.city = city;
@@ -38,11 +38,11 @@ public class Address {
         this.street = street;
     }
 
-    public int getPostCode() {
+    public String getPostCode() {
         return postCode;
     }
 
-    public void setPostCode(int postCode) {
+    public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 

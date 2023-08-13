@@ -34,3 +34,7 @@ build/
 .vscode/
 teodora-ignore
 teodora-ignore/
+
+### Logs ###
+**/logs/
+

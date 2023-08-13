@@ -26,17 +26,17 @@ public class ExistRepositoryImpl implements ExistRepository {
 
 
     @Value("${exist.username}")
-    private static String DB_USERNAME;
+    private String DB_USERNAME;
     @Value("${exist.password}")
-    private static String DB_PASSWORD;
+    private String DB_PASSWORD;
     @Value("${exist.collection}")
-    private static String DB_COLLECTION_NAME;
+    private String DB_COLLECTION_NAME;
     @Value("${exist.collection.pdf}")
-    private static String DB_PDF_COLLECTION;
+    private String DB_PDF_COLLECTION;
     @Value("${exist.driver}")
-    private static String DB_DRIVER;
+    private String DB_DRIVER;
     @Value("${exist.uri}")
-    private static String DB_URI;
+    private String DB_URI;
 
     @PostConstruct
     public void init() throws XMLDBException {

@@ -1,18 +1,21 @@
 <div class="stepper">
   <mat-stepper #stepper [linear]="true">
     <mat-step [stepControl]="requesterFormGroup" label="Podaci o podnosiocu">
-      <mat-radio-group
-        [(ngModel)]="requesterType"
-        aria-labelledby="radio-group-label"
-        class="radio-group">
-        <mat-radio-button [value]="true" checked class="radio-button">
-          Fizicko lice
-        </mat-radio-button>
-        <mat-radio-button [value]="false" class="radio-button">
-          Pravno lice
-        </mat-radio-button>
-      </mat-radio-group>
       <form [formGroup]="requesterFormGroup">
+        <p>
+          <mat-radio-group
+            [(ngModel)]="requesterType"
+            aria-labelledby="radio-group-label"
+            class="radio-group"
+            formControlName="personType">
+            <mat-radio-button [value]="true" checked class="radio-button">
+              Fizičko lice
+            </mat-radio-button>
+            <mat-radio-button [value]="false" class="radio-button">
+              Pravno lice
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
         <p>
           <mat-form-field appearance="fill">
             <mat-label>Ime</mat-label>
@@ -29,16 +32,16 @@
             <input formControlName="street" matInput placeholder="Ulica i broj">
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Postanski broj</mat-label>
-            <input formControlName="postCode" matInput placeholder="Postanski broj">
+            <mat-label>Poštanski broj</mat-label>
+            <input formControlName="postCode" matInput placeholder="Poštanski broj">
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Grad</mat-label>
             <input formControlName="city" matInput placeholder="Grad">
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Drzava</mat-label>
-            <input formControlName="country" matInput placeholder="Drzava">
+            <mat-label>Država</mat-label>
+            <input formControlName="country" matInput placeholder="Država">
           </mat-form-field>
         </p>
         <p>
@@ -60,28 +63,31 @@
         </div>
       </form>
     </mat-step>
-    <mat-step label="Punomocnik?">
+    <mat-step label="Punomoćnik?">
       <mat-checkbox (change)="changeAttorney($event.checked)" [checked]="hasAttorney" class="margin">Da li
-        postoji punomocnik?
+        postoji punomoćnik?
       </mat-checkbox>
       <div>
         <button color="primary" mat-flat-button matStepperPrevious>Nazad</button>
         <button [disabled]="!requesterFormGroup.valid" color="primary" mat-flat-button matStepperNext>Dalje</button>
       </div>
     </mat-step>
-    <mat-step [optional]="!hasAttorney" [stepControl]="attorneyFormGroup" label="Podaci o punomocniku">
-      <mat-radio-group
-        [(ngModel)]="attorneyType"
-        aria-labelledby="radio-group-label"
-        class="radio-group">
-        <mat-radio-button [value]="true" checked class="radio-button">
-          Fizicko lice
-        </mat-radio-button>
-        <mat-radio-button [value]="false" class="radio-button">
-          Pravno lice
-        </mat-radio-button>
-      </mat-radio-group>
+    <mat-step [optional]="!hasAttorney" [stepControl]="attorneyFormGroup" label="Podaci o punomoćniku">
       <form [formGroup]="attorneyFormGroup">
+        <p>
+          <mat-radio-group
+            [(ngModel)]="attorneyType"
+            aria-labelledby="radio-group-label"
+            class="radio-group"
+            formControlName="personType">
+            <mat-radio-button [value]="true" checked class="radio-button">
+              Fizičko lice
+            </mat-radio-button>
+            <mat-radio-button [value]="false" class="radio-button">
+              Pravno lice
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
         <p>
           <mat-form-field appearance="fill">
             <mat-label>Ime</mat-label>
@@ -98,16 +104,16 @@
             <input formControlName="street" matInput placeholder="Ulica i broj">
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Postanski broj</mat-label>
-            <input formControlName="postCode" matInput placeholder="Postanski broj">
+            <mat-label>Poštanski broj</mat-label>
+            <input formControlName="postCode" matInput placeholder="Poštanski broj">
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Grad</mat-label>
             <input formControlName="city" matInput placeholder="Grad">
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Drzava</mat-label>
-            <input formControlName="country" matInput placeholder="Drzava">
+            <mat-label>Država</mat-label>
+            <input formControlName="country" matInput placeholder="Država">
           </mat-form-field>
         </p>
         <p>
@@ -134,7 +140,7 @@
     </mat-step>
     <mat-step label="Broj podnosilaca?">
       <mat-checkbox (change)="changeRequester($event.checked)" [checked]="hasMoreThanOneRequester" class="margin">Da li
-        postoji vise od jednog podnosilaca zahteva?
+        postoji više od jednog podnosilaca zahteva?
       </mat-checkbox>
       <div>
         <button color="primary" mat-flat-button matStepperPrevious>Nazad</button>
@@ -143,18 +149,21 @@
     </mat-step>
     <mat-step [optional]="!hasMoreThanOneRequester" [stepControl]="representativeFormGroup"
               label="Podaci o predstavniku">
-      <mat-radio-group
-        [(ngModel)]="representativeType"
-        aria-labelledby="radio-group-label"
-        class="radio-group">
-        <mat-radio-button [value]="true" checked class="radio-button">
-          Fizicko lice
-        </mat-radio-button>
-        <mat-radio-button [value]="false" class="radio-button">
-          Pravno lice
-        </mat-radio-button>
-      </mat-radio-group>
       <form [formGroup]="representativeFormGroup">
+        <p>
+          <mat-radio-group
+            [(ngModel)]="representativeType"
+            aria-labelledby="radio-group-label"
+            class="radio-group"
+            formControlName="personType">
+            <mat-radio-button [value]="true" checked class="radio-button">
+              Fizičko lice
+            </mat-radio-button>
+            <mat-radio-button [value]="false" class="radio-button">
+              Pravno lice
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
         <p>
           <mat-form-field appearance="fill">
             <mat-label>Ime</mat-label>
@@ -171,16 +180,16 @@
             <input formControlName="street" matInput placeholder="Ulica i broj">
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Postanski broj</mat-label>
-            <input formControlName="postCode" matInput placeholder="Postanski broj">
+            <mat-label>Poštanski broj</mat-label>
+            <input formControlName="postCode" matInput placeholder="Poštanski broj">
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Grad</mat-label>
             <input formControlName="city" matInput placeholder="Grad">
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Drzava</mat-label>
-            <input formControlName="country" matInput placeholder="Drzava">
+            <mat-label>Država</mat-label>
+            <input formControlName="country" matInput placeholder="Država">
           </mat-form-field>
         </p>
         <p>
@@ -205,7 +214,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="trademarkFormGroup" label="Podaci o zigu">
+    <mat-step [stepControl]="trademarkFormGroup" label="Podaci o žigu">
       <form [formGroup]="trademarkFormGroup">
         <p><label id="radio-group-label">Zahtev se podnosi za:</label></p>
         <p>
@@ -219,15 +228,22 @@
         </p>
         <p>
           <mat-radio-group
-            aria-labelledby="radio-group-label"
-            class="radio-group" formControlName="glyphType">
+            (change)="checkIfOther()"
+            aria-labelledby="radio-group-label" class="radio-group" formControlName="glyphType">
             <mat-radio-button *ngFor="let option of glyphTypeOptions" [value]="option.value">
               {{ option.label }}
             </mat-radio-button>
           </mat-radio-group>
+          <mat-form-field *ngIf="isOther" appearance="fill">
+            <mat-label>Druga vrsta</mat-label>
+            <input formControlName="other" matInput placeholder="Navesti koju">
+          </mat-form-field>
         </p>
         <p>
-          <input formControlName="image" type="file">
+          <label for="imgUpload">Izgled znaka<span *ngIf="isImgRequired">*</span></label>
+          <br/>
+          <input (change)="onImageFileChange($event)" accept=".png, .jpg, .jpeg" formControlName="image" id="imgUpload"
+                 type="file">
         </p>
         <p>
           <mat-form-field appearance="fill">
@@ -252,7 +268,7 @@
           </mat-form-field>
         </p>
         <p>
-          <label id="button-toggle-group-label">Odabrati brojeve klasa robe i usluga po Nicanskoj klasifikaciji:</label>
+          <label id="button-toggle-group-label">Odabrati brojeve klasa robe i usluga po Ničanskoj klasifikaciji*</label>
           <mat-button-toggle-group [formControl]="classesToggle" aria-labelledby="button-toggle-group-label" multiple>
             <mat-button-toggle *ngFor="let option of classNumbers" [value]="option">
               {{ option }}
@@ -293,8 +309,8 @@
             <span matTextSuffix>din.&nbsp;</span>
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Za graficko resenje</mat-label>
-            <input (change)="calculateSum()" formControlName="graphic" matInput placeholder="Za graficko resenje">
+            <mat-label>Za grafičko rešenje</mat-label>
+            <input (change)="calculateSum()" formControlName="graphic" matInput placeholder="Za grafičko resenje">
             <span matTextSuffix>din.&nbsp;</span>
           </mat-form-field>
         </p>
@@ -307,11 +323,54 @@
         </div>
       </form>
     </mat-step>
-    <mat-step label="Prilozi">
-      <div>
-        <button color="primary" mat-flat-button matStepperPrevious>Nazad</button>
-        <button (click)="submitAll()" color="accent" mat-raised-button>Podnesi zahtev</button>
-      </div>
+    <mat-step [stepControl]="attachmentsFormGroup" label="Prilozi">
+      <form [formGroup]="attachmentsFormGroup">
+        <p>
+          <label for="pdf0">Primerak znaka* </label><br/>
+          <input (change)="onPdfFileChange($event, 0)" accept=".pdf" formControlName="example" id="pdf0" type="file">
+        </p>
+        <p>
+          <label for="pdf1">Lista robe i usluga* </label>
+          <br/>
+          <input (change)="onPdfFileChange($event, 1)" accept=".pdf" formControlName="list" id="pdf1" type="file">
+        </p>
+        <p>
+          <label for="pdf2">Punomoćje<span *ngIf="hasAttorney">*</span> </label>
+          <br/>
+          <input (change)="onPdfFileChange($event, 2)" accept=".pdf" formControlName="list" id="pdf2" type="file">
+        </p>
+        <p>
+          <label for="pdf3">Ranije priloženo punomoćje<span *ngIf="hasAttorney">**</span> </label>
+          <br/>
+          <input (change)="onPdfFileChange($event, 3)" accept=".pdf" formControlName="list" id="pdf3" type="file">
+        </p>
+        <p>
+          <label for="pdf4">Naknadno priloženo punomoćje<span *ngIf="hasAttorney">**</span> </label>
+          <br/>
+          <input (change)="onPdfFileChange($event, 4)" accept=".pdf" formControlName="list" id="pdf4" type="file">
+        </p>
+        <p>
+          <label for="pdf5">Opšti akt o žigu* </label>
+          <br/>
+          <input (change)="onPdfFileChange($event, 5)" accept=".pdf" formControlName="list" id="pdf5" type="file">
+        </p>
+        <p>
+          <label for="pdf6">Dokaz o pravu prvenstva<span *ngIf="hasRight">*</span> </label>
+          <br/>
+          <input (change)="onPdfFileChange($event, 6)" accept=".pdf" formControlName="list" id="pdf6" type="file">
+        </p>
+        <p>
+          <label for="pdf7">Dokaz o uplati takse* </label>
+          <br/>
+          <input (change)="onPdfFileChange($event, 7)" accept=".pdf" formControlName="list" id="pdf7" type="file">
+        </p>
+        <div>
+          <button color="primary" mat-flat-button matStepperPrevious>Nazad</button>
+          <button (click)="submitAll()" color="accent" mat-raised-button>
+            Podnesi zahtev
+          </button>
+        </div>
+      </form>
     </mat-step>
   </mat-stepper>
 </div>
