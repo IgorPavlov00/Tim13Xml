@@ -10,6 +10,7 @@ import {Trademark} from "../model/trademark/trademark";
 import {Tax} from "../model/trademark/tax";
 import {Attachments} from "../model/trademark/attachments";
 import {TrademarkRequestService} from "../servisi/trademark-request.service";
+import {RequestData} from "../model/trademark/request-data";
 
 @Component({
   selector: 'app-z1-form',
@@ -295,12 +296,17 @@ export class Z1FormComponent implements OnInit {
     let attachmentsDTO = new Attachments();
     this.setAttachments(attachments, attachmentsDTO);
 
+    let requestData = new RequestData();
+    requestData.requestID = "";
+    requestData.requestDate = "";
+
     this.request.requester = requesterDTO;
     this.request.attorney = attorneyDTO;
     this.request.representative = representativeDTO;
     this.request.trademark = trademarkDTO;
     this.request.tax = taxDTO;
     this.request.attachments = attachmentsDTO;
+    this.request.requestData = requestData;
 
     const formData = new FormData();
     const emptyFile = new Blob([], {type: 'application/pdf'});

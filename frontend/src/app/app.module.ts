@@ -11,8 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {TabelaZahtevaComponent} from './tabela-zahteva/tabela-zahteva.component';
 
 
-import {Z1FormComponent} from './z1-form/z1-form.component';
-import {KlasifikacijaDialog} from "./z1-form/z1-form.component";
+import {KlasifikacijaDialog, Z1FormComponent} from './z1-form/z1-form.component';
 import {EvidencijaComponent} from './evidencija/evidencija.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatStepperModule} from "@angular/material/stepper";
@@ -25,7 +24,12 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDialogModule} from "@angular/material/dialog";
-import { PopupComponent } from './popup/popup.component';
+import {PopupComponent} from './popup/popup.component';
+import {TrademarkTableComponent} from './trademark-table/trademark-table.component';
+import {TrademarkRequestComponent} from './trademark-request/trademark-request.component';
+import {TrademarkTypePipe} from './pipes/trademark-type.pipe';
+import {GlyphTypePipe} from './pipes/glyph-type.pipe';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { PopupComponent } from './popup/popup.component';
     TabelaZahtevaComponent,
     EvidencijaComponent,
     KlasifikacijaDialog,
-    PopupComponent
+    PopupComponent,
+    TrademarkTableComponent,
+    TrademarkRequestComponent,
+    TrademarkTypePipe,
+    GlyphTypePipe,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +64,7 @@ import { PopupComponent } from './popup/popup.component';
     MatTooltipModule,
     MatIconModule,
     MatDialogModule,
+    NgOptimizedImage,
   ],
   providers: [],
 

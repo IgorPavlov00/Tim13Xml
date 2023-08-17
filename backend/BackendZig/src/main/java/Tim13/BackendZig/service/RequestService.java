@@ -141,4 +141,117 @@ public class RequestService {
         String date = currentDateTime.format(dateFormat);
         return new RequestData(id, date);
     }
+
+    public AttachmentsDTO mapToAttachmentsDTO(Attachments attachments) {
+        return new AttachmentsDTO(
+                attachments.isHasCopy(),
+                attachments.isHasList(),
+                attachments.isHasPowerOfAttorney(),
+                attachments.isHasEarlierAttorney(),
+                attachments.isHasLaterAttorney(),
+                attachments.isHasTrademarkAct(),
+                attachments.isHasProofOfRight(),
+                attachments.isHasProofOfPayment()
+        );
+    }
+
+    public PersonDTO mapRequesterToPersonDTO(Requester person) {
+        PersonInfo personInfo = person.getPersonInfo();
+        Address address = personInfo.getAddress();
+        return new PersonDTO(
+                personInfo.getName(),
+                personInfo.getLastName(),
+                address.getStreet(),
+                address.getPostCode(),
+                address.getCity(),
+                address.getCountry(),
+                person.getPhone(),
+                person.getEmail(),
+                person.getFax(),
+                personInfo.getPersonType().name()
+        );
+    }
+
+    public PersonDTO mapAttorneyToPersonDTO(Attorney person) {
+        PersonInfo personInfo = person.getPersonInfo();
+        Address address = personInfo.getAddress();
+        return new PersonDTO(
+                personInfo.getName(),
+                personInfo.getLastName(),
+                address.getStreet(),
+                address.getPostCode(),
+                address.getCity(),
+                address.getCountry(),
+                person.getPhone(),
+                person.getEmail(),
+                person.getFax(),
+                personInfo.getPersonType().name()
+        );
+    }
+
+    public PersonDTO mapRepresentativeToPersonDTO(Representative person) {
+        PersonInfo personInfo = person.getPersonInfo();
+        Address address = personInfo.getAddress();
+        return new PersonDTO(
+                personInfo.getName(),
+                personInfo.getLastName(),
+                address.getStreet(),
+                address.getPostCode(),
+                address.getCity(),
+                address.getCountry(),
+                person.getPhone(),
+                person.getEmail(),
+                person.getFax(),
+                personInfo.getPersonType().name()
+        );
+    }
+
+
+    public TaxDTO mapToTaxDTO(TaxData taxData) {
+        return new TaxDTO(
+                taxData.getBasicTax(),
+                taxData.getClassTax(),
+                taxData.getGraphicTax(),
+                taxData.getTotalTax()
+        );
+    }
+
+    public TrademarkDTO mapToTrademarkDTO(Trademark trademark) {
+        TrademarkType trademarkType = trademark.getTrademarkType();
+        GlyphType glyphType = trademark.getGlyphType();
+        RightPair rightPair = trademark.getRightBasis();
+        return new TrademarkDTO(
+                trademarkType.isIndividual(),
+                trademarkType.isCollective(),
+                trademarkType.isWarranty(),
+                glyphType.isVerbal(),
+                glyphType.isGraphic(),
+                glyphType.isCombination(),
+                glyphType.isThreedimensional(),
+                glyphType.isOther(),
+                glyphType.getOtherType(),
+                rightPair.isHasRight(),
+                rightPair.getRightBasis(),
+                trademark.getImageLink(),
+                trademark.getColor(),
+                trademark.getTransliteration(),
+                trademark.getTranslation(),
+                trademark.getDescription(),
+                trademark.getClasses()
+        );
+    }
+
+    public TrademarkRequestDTO mapToTrademarkRequestDTO(Request request) {
+        return new TrademarkRequestDTO(
+                new DataDTO(request.getRequestData().getRequestId(), request.getRequestData().getDate()),
+                mapRequesterToPersonDTO(request.getRequester()),
+                request.getAttorney() == null ? new PersonDTO("", "", "", "", "", "", "", "", "", "") : mapAttorneyToPersonDTO(request.getAttorney()),
+                request.getRepresentative() == null ? new PersonDTO("", "", "", "", "", "", "", "", "", "") : mapRepresentativeToPersonDTO(request.getRepresentative()),
+                mapToTrademarkDTO(request.getTrademark()),
+                mapToTaxDTO(request.getTaxData()),
+                mapToAttachmentsDTO(request.getAttachments())
+        );
+    }
+
+
 }

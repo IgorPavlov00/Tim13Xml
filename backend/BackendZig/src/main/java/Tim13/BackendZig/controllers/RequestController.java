@@ -3,6 +3,8 @@ package Tim13.BackendZig.controllers;
 import Tim13.BackendZig.dto.TrademarkRequestDTO;
 import Tim13.BackendZig.model.Request;
 import Tim13.BackendZig.repos.ExistRepositoryImpl;
+import Tim13.BackendZig.service.CPService;
+import Tim13.BackendZig.service.FileService;
 import Tim13.BackendZig.service.RequestService;
 import Tim13.BackendZig.util.FusekiAuthProperties;
 import Tim13.BackendZig.util.MetadataExtractor;
@@ -16,38 +18,37 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static Tim13.BackendZig.service.AllCPMethods.*;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class RequestController {
     private static final String Z1_NAMED_GRAPH_URI = "/z1";
-    private static final String BASE_FOLDER = "../../priloziZig/";
-
+    private static final String BASE_FOLDER = "../../zahteviLocal/";
+    private static final String ATTACHMENTS_FOLDER = "/prilozi/";
+    private static final String PDF_FORMAT = BASE_FOLDER + "%s/%s.pdf";
+    private static final String XHTML_FORMAT = BASE_FOLDER + "%s/%s.xhtml";
+    private static final String RDF_FORMAT = BASE_FOLDER + "%s/%s.rdf";
+    private static final String XSL_2_PDF_PATH = "../../xsl/z1.xsl";
+    private static final String XSL_2_XHTML_PATH = "../../xsl/z1html.xsl";
     private static final Logger logger = LoggerFactory.getLogger(RequestController.class);
-
+    private static final String LOG_FORMAT = "Request ID: {}.";
+    private static final String RESPONSE_FORMAT = "inline";
     private static final Map<String, String> FILENAME_MAPPING = new HashMap<>();
+
     @Autowired
     ExistRepositoryImpl existRepository;
     @Autowired
     RequestService requestService;
+    @Autowired
+    FileService fileService;
+    @Autowired
+    CPService cpService;
 
-    public static int getIndex(MultipartFile[] array, MultipartFile value) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == value) {
-                return i;
-            }
-        }
-        return -1;  // if the value is not found in the array
-    }
 
     @PostConstruct
     public void init() {
@@ -59,48 +60,27 @@ public class RequestController {
         FILENAME_MAPPING.put("act", "opsti_akt_o_zigu.pdf");
         FILENAME_MAPPING.put("rightProof", "dokaz_o_pravu_prvenstva.pdf");
         FILENAME_MAPPING.put("taxProof", "dokaz_o_uplati_takse.pdf");
+        FILENAME_MAPPING.put("download", "preuzimanje.pdf");
     }
 
     private void generateRDF(Request req) {
         try {
-
-            String rdfPath = "../../rdf/" + req.getRequestData().getRequestId() + ".rdf";
-
-            MetadataExtractor extractorZ1 = new MetadataExtractor(req, rdfPath);
+            MetadataExtractor extractorZ1 = new MetadataExtractor(req, String.format(RDF_FORMAT, req.getRequestData().getRequestId(), req.getRequestData().getRequestId()));
             extractorZ1.test();
 
-            writeRDF(FusekiAuthProperties.loadProperties(), rdfPath, Z1_NAMED_GRAPH_URI);
+            cpService.writeRDF(FusekiAuthProperties.loadProperties(), String.format(RDF_FORMAT, req.getRequestData().getRequestId(), req.getRequestData().getRequestId()), Z1_NAMED_GRAPH_URI);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public String getValueFromMapForFile(int index) {
-        if (index == -1) {
-            return null;
-        }
-
-        List<String> keysList = new ArrayList<>(FILENAME_MAPPING.keySet());
-
-        if (index >= keysList.size()) {
-            return null;
-        }
-
-        String key = keysList.get(index);
-
-        return FILENAME_MAPPING.get(key);
-    }
-
-    @RequestMapping("/")
+    @GetMapping("/")
     public void start() throws Exception {
         for (Request req : existRepository.findAll()) {
             // generisanje PDF i XHTML za Z1
-            String pdfPath = "../../pdf/" + req.getRequestData().getRequestId() + ".pdf";
-            String xhtmlPath = "../../xhtml/" + req.getRequestData().getRequestId() + ".xhtml";
-            generatePDF(req, "../../xsl/z1.xsl", pdfPath);
-            generateXHTML(req, "../../xsl/z1html.xsl", xhtmlPath);
-            this.generateRDF(req);
-            readRDF(FusekiAuthProperties.loadProperties());
+            cpService.generatePDF(req, XSL_2_PDF_PATH, String.format(PDF_FORMAT, req.getRequestData().getRequestId(), req.getRequestData().getRequestId()));
+            cpService.generateXHTML(req, XSL_2_XHTML_PATH, String.format(XHTML_FORMAT, req.getRequestData().getRequestId(), req.getRequestData().getRequestId()));
+            generateRDF(req);
         }
         logger.info("Requests Count: {}.", existRepository.count());
     }
@@ -114,7 +94,7 @@ public class RequestController {
             Request req = this.requestService.mapToRequest(dto);
             req.getTrademark().setImageLink("http://localhost:8082/requests/" + req.getRequestData().getRequestId() + "/img");
 
-            String requestFolder = BASE_FOLDER + req.getRequestData().getRequestId() + "/";
+            String requestFolder = BASE_FOLDER + req.getRequestData().getRequestId() + ATTACHMENTS_FOLDER;
             File directory = new File(requestFolder);
             if (!directory.exists()) {
                 directory.mkdir();
@@ -122,21 +102,25 @@ public class RequestController {
 
             if (img != null) {
                 String filename = img.getOriginalFilename();
-                String imgExtension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
-                saveFileWithCustomName(img, requestFolder, "prikaz_znaka." + imgExtension);
+                if (filename != null) {
+                    String imgExtension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
+                    fileService.saveFileWithCustomName(img, requestFolder, "prikaz_znaka." + imgExtension);
+                }
             }
 
             for (MultipartFile pdf : pdfs) {
                 if (pdf.getSize() > 0) {
-                    String filename = getValueFromMapForFile(getIndex(pdfs, pdf));
-                    saveFileWithCustomName(pdf, requestFolder, filename);
+                    String filename = fileService.getValueFromMapForFile(fileService.getIndex(pdfs, pdf), FILENAME_MAPPING);
+                    fileService.saveFileWithCustomName(pdf, requestFolder, filename);
                 } else {
                     logger.info("No PDF uploaded!");
                 }
             }
 
             this.existRepository.save(req);
-            this.generateRDF(req);
+            generateRDF(req);
+            cpService.generatePDF(req, XSL_2_PDF_PATH, String.format(PDF_FORMAT, req.getRequestData().getRequestId(), req.getRequestData().getRequestId()));
+            cpService.generateXHTML(req, XSL_2_XHTML_PATH, String.format(XHTML_FORMAT, req.getRequestData().getRequestId(), req.getRequestData().getRequestId()));
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,18 +129,18 @@ public class RequestController {
     }
 
     @GetMapping("/requests/{id}")
-    public ResponseEntity<Request> getRequest(@PathVariable("id") String requestID) {
+    public ResponseEntity<TrademarkRequestDTO> getRequest(@PathVariable("id") String requestID) {
         try {
-            logger.info("Request ID: {}.", requestID);
+            logger.info(LOG_FORMAT, requestID);
             Request req;
             new Request();
             Optional<Request> opt = this.existRepository.findById(requestID);
             if (opt.isPresent()) {
                 req = opt.get();
             } else {
-                throw new Exception("Request not found!");
+                return ResponseEntity.notFound().build();
             }
-            return ResponseEntity.ok(req);
+            return ResponseEntity.ok(requestService.mapToTrademarkRequestDTO(req));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
@@ -164,25 +148,29 @@ public class RequestController {
     }
 
     @GetMapping("/requests")
-    public ResponseEntity<List<Request>> getAllRequests() {
+    public ResponseEntity<List<TrademarkRequestDTO>> getAllRequests() {
         try {
             List<Request> requests = (List<Request>) this.existRepository.findAll();
             IntStream.range(0, requests.size())
                     .forEach(i -> logger.info("Request {}: {}.", i, requests.get(i)));
-            return ResponseEntity.ok(requests);
+            List<TrademarkRequestDTO> requestDTOList = new ArrayList<>();
+            for (Request req : requests) {
+                requestDTOList.add(requestService.mapToTrademarkRequestDTO(req));
+            }
+            return ResponseEntity.ok(requestDTOList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
 
-    @GetMapping("/requests/{id}/img")
-    public ResponseEntity<?> getImage(@PathVariable("id") String requestID) {
+    @GetMapping(value = "/requests/{id}/img", produces = {"image/png", "image/jpeg"})
+    public ResponseEntity<byte[]> getImage(@PathVariable("id") String requestID) {
         try {
-            logger.info("Request ID: {}.", requestID);
-            String requestFolder = BASE_FOLDER + requestID + "/";
+            logger.info(LOG_FORMAT, requestID);
+            String requestFolder = BASE_FOLDER + requestID + ATTACHMENTS_FOLDER;
 
-            Path imagePath = findImageInFolder(requestID, requestFolder);
+            Path imagePath = fileService.findImageInFolder(requestID, requestFolder);
 
             if (imagePath == null) {
                 return ResponseEntity.notFound().build();
@@ -192,7 +180,7 @@ public class RequestController {
             byte[] imageBytes = Files.readAllBytes(imagePath);
 
             HttpHeaders headers = new HttpHeaders();
-            String contentType = determineContentTypeFromExtension(imagePath.getFileName().toString());
+            String contentType = fileService.determineContentTypeFromExtension(imagePath.getFileName().toString());
             headers.setContentType(MediaType.parseMediaType(contentType));
             headers.setContentLength(imageBytes.length);
             return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
@@ -202,20 +190,31 @@ public class RequestController {
         }
     }
 
-    @GetMapping("/requests/{id}/pdf/{pdfName}")
-    public ResponseEntity<?> getPDF(@PathVariable("id") String requestID, @PathVariable("pdfName") String pdfUrlName) {
+    @GetMapping(value = "/requests/{id}/pdf/{pdfName}", produces = "application/pdf")
+    public ResponseEntity<byte[]> getPDF(@PathVariable("id") String requestID, @PathVariable("pdfName") String pdfUrlName) {
         try {
-            logger.info("Request ID: {}.", requestID);
+            logger.info(LOG_FORMAT, requestID);
             logger.info("PDF URL: {}.", pdfUrlName);
             String requestFolder = BASE_FOLDER + requestID + "/";
 
             String pdfName = FILENAME_MAPPING.get(pdfUrlName);
             if (pdfName == null) {
-                return ResponseEntity.badRequest().body("Invalid file name provided");
+                return ResponseEntity.badRequest().build();
+            } else if (pdfName.equals("preuzimanje.pdf")) {
+                pdfName = requestID + ".pdf";
             }
             logger.info("PDF NAME: {}.", pdfName);
 
-            Path pdfPath = Paths.get(requestFolder + pdfName);
+            Path pdfPath;
+            if (pdfName.equals(requestID + ".pdf")) {
+                pdfPath = Paths.get(requestFolder + pdfName);
+            } else {
+                File directory = new File(requestFolder + ATTACHMENTS_FOLDER);
+                if (!directory.exists()) {
+                    directory.mkdir();
+                }
+                pdfPath = Paths.get(requestFolder + ATTACHMENTS_FOLDER + pdfName);
+            }
 
             if (!Files.exists(pdfPath)) {
                 return ResponseEntity.notFound().build();
@@ -226,7 +225,7 @@ public class RequestController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentLength(pdfBytes.length);
-            headers.setContentDisposition(ContentDisposition.builder("inline").filename(pdfName + ".pdf").build());
+            headers.setContentDisposition(ContentDisposition.builder(RESPONSE_FORMAT).filename(pdfName).build());
             return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,31 +233,66 @@ public class RequestController {
         }
     }
 
+    @GetMapping(value = "/requests/{id}/xhtml", produces = "application/xhtml+xml")
+    public ResponseEntity<byte[]> getXHTML(@PathVariable("id") String requestID) {
+        try {
+            logger.info(LOG_FORMAT, requestID);
+            String requestFolder = BASE_FOLDER + requestID + "/";
 
-    private Path findImageInFolder(String id, String folder) throws IOException {
-        try (Stream<Path> paths = Files.find(Paths.get(folder), 1,
-                (path, attrs) -> path.getFileName().toString().startsWith("prikaz_znaka."))) {
-            return paths.findFirst().orElse(null);
+            Path xhtmlPath = Paths.get(requestFolder + requestID + ".xhtml");
+
+            if (!Files.exists(xhtmlPath)) {
+                return ResponseEntity.notFound().build();
+            }
+
+            byte[] xhtmlBytes = Files.readAllBytes(xhtmlPath);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_XHTML_XML);
+            headers.setContentLength(xhtmlBytes.length);
+            headers.setContentDisposition(ContentDisposition.builder(RESPONSE_FORMAT).filename(requestID + ".xhtml").build());
+            return new ResponseEntity<>(xhtmlBytes, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping(value = "/requests/{id}/rdf", produces = "application/rdf+xml")
+    public ResponseEntity<String> getRDF(@PathVariable("id") String requestID) {
+        try {
+            logger.info(LOG_FORMAT, requestID);
+
+            String rdfString = cpService.readRDF(FusekiAuthProperties.loadProperties(), "rdf", requestID);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf("application/rdf+xml"));
+            headers.setContentLength(rdfString.length());
+            headers.setContentDisposition(ContentDisposition.builder(RESPONSE_FORMAT).filename(requestID + ".rdf").build());
+            return new ResponseEntity<>(rdfString, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping(value = "/requests/{id}/json", produces = "application/json")
+    public ResponseEntity<String> getJSON(@PathVariable("id") String requestID) {
+        try {
+            logger.info(LOG_FORMAT, requestID);
+
+            String jsonString = cpService.readRDF(FusekiAuthProperties.loadProperties(), "json", requestID);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentLength(jsonString.length());
+            headers.setContentDisposition(ContentDisposition.builder(RESPONSE_FORMAT).filename(requestID + ".json").build());
+            return new ResponseEntity<>(jsonString, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
         }
     }
 
 
-    private String determineContentTypeFromExtension(String filename) {
-        String extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
-        switch (extension) {
-            case "png":
-                return "image/png";
-            case "jpg":
-            case "jpeg":
-            default:
-                return "image/jpeg";
-        }
-    }
-
-
-    private void saveFileWithCustomName(MultipartFile file, String directoryPath, String desiredName) throws IOException {
-        Path path = Paths.get(directoryPath + desiredName);
-        byte[] bytes = file.getBytes();
-        Files.write(path, bytes);
-    }
 }

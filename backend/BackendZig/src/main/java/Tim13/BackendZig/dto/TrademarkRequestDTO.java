@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TrademarkRequestDTO {
+    private DataDTO requestData;
     private PersonDTO requester;
     private PersonDTO attorney;
     private PersonDTO representative;
