@@ -1,7 +1,7 @@
 package Tim13.BackendZig.service;
 
 import Tim13.BackendZig.controllers.RequestController;
-import Tim13.BackendZig.model.Request;
+import Tim13.BackendZig.model.request.Request;
 import Tim13.BackendZig.util.FusekiAuthProperties;
 import Tim13.BackendZig.util.SparqlUtil;
 import net.sf.saxon.TransformerFactoryImpl;
@@ -95,6 +95,9 @@ public class CPService {
         logger.info("[INFO] Selecting Request triples from the named graph \"" + Z1_NAMED_GRAPH_URI + "\".");
         String subjectUri = "http://localhost:8082/" + requestID;
         String sparqlString = "SELECT ?s ?p ?o WHERE { ?s ?p ?o. FILTER(?s = <" + subjectUri + ">)}";
+        if (requestID.equals("")) {
+            sparqlString = "SELECT ?s ?p ?o WHERE { ?s ?p ?o. }";
+        }
         String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + Z1_NAMED_GRAPH_URI, sparqlString);
 
 

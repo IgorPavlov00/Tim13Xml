@@ -1,15 +1,13 @@
 import {Component} from '@angular/core';
 import {TrademarkRequest} from "../model/trademark/trademark-request";
 import {TrademarkRequestService} from "../servisi/trademark-request.service";
-import {saveAs} from 'file-saver';
-
 
 @Component({
-  selector: 'app-trademark-table',
-  templateUrl: './trademark-table.component.html',
-  styleUrls: ['./trademark-table.component.css']
+  selector: 'app-trademarks',
+  templateUrl: './trademarks.component.html',
+  styleUrls: ['./trademarks.component.css']
 })
-export class TrademarkTableComponent {
+export class TrademarksComponent {
   retrievedData: TrademarkRequest[] = [];
   filteredData: TrademarkRequest[] = [];
   searchString: string = '';
@@ -17,13 +15,16 @@ export class TrademarkTableComponent {
 
 
   constructor(private trademarkService: TrademarkRequestService) {
-    trademarkService.getRequests().subscribe(
+    trademarkService.getAcceptedRequests().subscribe(
       data => {
+        console.log(data);
         this.retrievedData = data;
         this.filteredData = data;
         for (let i = 0; i < data.length; i++) {
-          this.links[i] = '/zahtev/' + data[i].requestData.requestID;
+          this.links[i] = '/zig/' + data[i].requestData.requestID;
         }
+      }, error => {
+        console.log(error);
       }
     )
   }
@@ -61,20 +62,6 @@ export class TrademarkTableComponent {
     });
   }
 
-
-  downloadMetadataRDF() {
-    this.trademarkService.getAllMetadataRDF().subscribe(data => {
-      const blob = new Blob([data], {type: 'application/rdf+xml'});
-      saveAs(blob, "metadata.rdf");
-    });
-  }
-
-  downloadMetadataJSON() {
-    this.trademarkService.getAllMetadataJSON().subscribe(data => {
-      const blob = new Blob([data], {type: 'application/json'});
-      saveAs(blob, "metadata.json");
-    });
-  }
 
   reset() {
     if (this.searchString === '') {

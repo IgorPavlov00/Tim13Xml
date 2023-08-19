@@ -47,11 +47,11 @@
   
   <xs:element name="vrsta_ziga">
     <xs:complexType>
-      <xs:choice>
+      <xs:sequence>
         <xs:element ref="individualni_zig"/>
         <xs:element ref="kolektivni_zig"/>
         <xs:element ref="zig_garancije"/>
-      </xs:choice>
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   
@@ -61,14 +61,14 @@
   
   <xs:element name="vrsta_znaka">
     <xs:complexType>
-      <xs:choice>
+      <xs:sequence>
         <xs:element ref="verbalni_znak"/>
         <xs:element ref="graficki_znak"/>
         <xs:element ref="kombinovani_znak"/>
         <xs:element ref="trodimenzionalni_znak"/>
         <xs:element ref="drugo"/>
         <xs:element ref="druga_vrsta"/>
-      </xs:choice>
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   
@@ -142,7 +142,7 @@
   <xs:element name="prezime" type="xs:string"/>
   <xs:element name="adresa" type="AdresaType"/>
   <xs:element name="ulica" type="xs:string"/>
-  <xs:element name="postanski_broj" type="xs:integer"/>
+  <xs:element name="postanski_broj" type="xs:string"/>
   <xs:element name="mesto" type="xs:string"/>
   <xs:element name="drzava" type="xs:string"/>
   <xs:element name="telefon" type="xs:string"/>

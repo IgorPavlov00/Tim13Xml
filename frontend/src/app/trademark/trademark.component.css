@@ -484,6 +484,7 @@ body {
   color: #e4e4e4;
   line-height: 20pt;
 }
+
 .notice-form {
   background-color: var(--app-content-secondary-color);
   border: 1px solid var(--action-color);
@@ -492,6 +493,7 @@ body {
   padding: 20px;
   width: 50%;
 }
+
 .tableView .products-header {
   display: flex;
   align-items: center;

@@ -1,6 +1,6 @@
 package Tim13.BackendZig.util;
 
-import Tim13.BackendZig.model.Request;
+import Tim13.BackendZig.model.request.Request;
 import org.apache.xalan.xsltc.trax.TransformerFactoryImpl;
 import org.xml.sax.SAXException;
 

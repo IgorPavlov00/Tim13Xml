@@ -21,7 +21,7 @@
           <span>Zahtevi za autorska prava</span>
         </a>
       </li>
-      <li class="sidebar-list-item active">
+      <li class="sidebar-list-item">
         <a routerLink="/zahtevi-zig">
           <svg class="feather feather-home" fill="none" height="18" stroke="currentColor" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"
@@ -71,7 +71,7 @@
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Zahtevi za žig</h1>
+      <h1 class="app-content-headerText">Zavedeni žigovi</h1>
 
 
     </div>
@@ -139,21 +139,12 @@
       </div>
 
       <div class="app-content-actions-wrapper">
-        <button (click)="downloadMetadataRDF()" class="btn-hover color-1">RDF</button>
-        <button (click)="downloadMetadataJSON()" class="btn-hover color-2">JSON</button>
+
       </div>
     </div>
 
     <div class="products-area-wrapper tableView">
       <div class="products-header">
-        <div class="product-cell image">Šifra
-          <button class="sort-button">
-          </button>
-        </div>
-        <div class="product-cell status-cell">Datum
-          <button class="sort-button">
-          </button>
-        </div>
         <div class="product-cell sales">Podnosilac
           <button class="sort-button">
           </button>
@@ -165,12 +156,6 @@
       </div>
       <div *ngFor="let req of filteredData; let i = index" class="products-row">
         <button class="cell-more-button"></button>
-        <div class="product-cell image">
-          <span class="cell-label"></span>{{req.requestData.requestID}}
-        </div>
-        <div class="product-cell category">
-          <span class="cell-label"></span>{{req.requestData.requestDate}}
-        </div>
         <div class="product-cell sales">
           <span
             class="cell-label"></span>{{req.requester.name}}{{req.requester.personType == "fizicko" ? " " + req.requester.lastName : "req.requester.name"}}

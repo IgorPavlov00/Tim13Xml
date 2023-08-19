@@ -12,7 +12,6 @@ import {TabelaZahtevaComponent} from './tabela-zahteva/tabela-zahteva.component'
 
 
 import {KlasifikacijaDialog, Z1FormComponent} from './z1-form/z1-form.component';
-import {EvidencijaComponent} from './evidencija/evidencija.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -30,45 +29,50 @@ import {TrademarkRequestComponent} from './trademark-request/trademark-request.c
 import {TrademarkTypePipe} from './pipes/trademark-type.pipe';
 import {GlyphTypePipe} from './pipes/glyph-type.pipe';
 import {NgOptimizedImage} from "@angular/common";
+import {ReportsComponent} from './reports/reports.component';
+import {TrademarksComponent} from './trademarks/trademarks.component';
+import {TrademarkComponent} from './trademark/trademark.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FormaA1Component,
-    LoginComponent,
-    UlogaComponent,
-    Z1FormComponent,
-    TabelaZahtevaComponent,
-    EvidencijaComponent,
-    KlasifikacijaDialog,
-    PopupComponent,
-    TrademarkTableComponent,
-    TrademarkRequestComponent,
-    TrademarkTypePipe,
-    GlyphTypePipe,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatStepperModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatButtonToggleModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatDialogModule,
-    NgOptimizedImage,
-  ],
-  providers: [],
+    declarations: [
+        AppComponent,
+        FormaA1Component,
+        LoginComponent,
+        UlogaComponent,
+        Z1FormComponent,
+        TabelaZahtevaComponent,
+        KlasifikacijaDialog,
+        PopupComponent,
+        TrademarkTableComponent,
+        TrademarkRequestComponent,
+        TrademarkTypePipe,
+        GlyphTypePipe,
+        ReportsComponent,
+        TrademarksComponent,
+        TrademarkComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatButtonToggleModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatDialogModule,
+        NgOptimizedImage,
+    ],
+    providers: [],
 
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

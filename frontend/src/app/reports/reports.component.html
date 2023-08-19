@@ -21,7 +21,7 @@
           <span>Zahtevi za autorska prava</span>
         </a>
       </li>
-      <li class="sidebar-list-item active">
+      <li class="sidebar-list-item">
         <a routerLink="/zahtevi-zig">
           <svg class="feather feather-home" fill="none" height="18" stroke="currentColor" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"
@@ -56,7 +56,7 @@
           <span>Zavedeni žigovi</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
+      <li class="sidebar-list-item active">
         <a routerLink="/izvestaji">
           <svg class="feather feather-pie-chart" fill="none" height="18" stroke="currentColor" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"
@@ -71,116 +71,48 @@
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Zahtevi za žig</h1>
-
+      <h1 class="app-content-headerText"></h1>
 
     </div>
     <div class="app-content-actions">
-
-      <input (focusout)="reset()" (input)="search()" [(ngModel)]="searchString" class="search-bar"
-             placeholder="Search..." type="text">
-
-      <input (input)="search()" class="search-bar short-search-bar" placeholder="Ime podnosioca" type="text">
-      <div class="search-bar-group">
-        <select class="operator-select">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
-        </select>
-      </div>
-      <input (input)="search()" class="search-bar short-search-bar" placeholder="Prezime podnosioca" type="text">
-      <div class="search-bar-group">
-        <select class="operator-select">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
-        </select>
-      </div>
-      <input (input)="search()" class="search-bar short-search-bar" placeholder="Ime punomoćnika" type="text">
-      <div class="search-bar-group">
-        <select class="operator-select">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
-        </select>
-      </div>
-      <input (input)="search()" class="search-bar short-search-bar" placeholder="Prezime punomoćnika" type="text">
-      <div class="search-bar-group">
-        <select class="operator-select">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
-        </select>
-      </div>
-      <input (input)="search()" class="search-bar short-search-bar" placeholder="Šifra zahteva" type="text">
-      <div class="search-bar-group">
-        <select class="operator-select">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
-        </select>
-      </div>
-      <input (input)="search()" class="search-bar short-search-bar" placeholder="Datum podnošenja" type="text">
-      <div class="search-bar-group">
-        <select class="operator-select">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
-        </select>
-      </div>
-
-      <input (input)="search()" class="search-bar short-search-bar" placeholder="Ukupna taksa" type="text">
-      <div class="search-bar-group">
-        <select class="operator-select">
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
-        </select>
-      </div>
-
       <div class="app-content-actions-wrapper">
-        <button (click)="downloadMetadataRDF()" class="btn-hover color-1">RDF</button>
-        <button (click)="downloadMetadataJSON()" class="btn-hover color-2">JSON</button>
+
       </div>
     </div>
 
-    <div class="products-area-wrapper tableView">
+    <div class="products-area-wrapper gridView">
       <div class="products-header">
-        <div class="product-cell image">Šifra
-          <button class="sort-button">
-          </button>
+        <input [(ngModel)]="startDate" type="date">
+        <input [(ngModel)]="endDate" type="date">
+        <button (click)="getReports()" class="btn-hover color-1">Pregled</button>
+      </div>
+      <div class="products-row">
+        <div class="product-cell">
+          <h2>{{trademarkCounts[0] || 0}}</h2>
         </div>
-        <div class="product-cell status-cell">Datum
-          <button class="sort-button">
-          </button>
-        </div>
-        <div class="product-cell sales">Podnosilac
-          <button class="sort-button">
-          </button>
-        </div>
-        <div class="product-cell price">Link
-          <button class="sort-button">
-          </button>
+        <div class="product-cell">
+          <p>podnešenih zahteva za žig</p>
         </div>
       </div>
-      <div *ngFor="let req of filteredData; let i = index" class="products-row">
-        <button class="cell-more-button"></button>
-        <div class="product-cell image">
-          <span class="cell-label"></span>{{req.requestData.requestID}}
+      <div class="products-row">
+        <div class="product-cell">
+          <h2>{{trademarkCounts[1] || 0}}</h2>
         </div>
-        <div class="product-cell category">
-          <span class="cell-label"></span>{{req.requestData.requestDate}}
+        <div class="product-cell">
+          <p>odobrenih zahteva za žig</p>
         </div>
-        <div class="product-cell sales">
-          <span
-            class="cell-label"></span>{{req.requester.name}}{{req.requester.personType == "fizicko" ? " " + req.requester.lastName : "req.requester.name"}}
+      </div>
+      <div class="products-row">
+        <div class="product-cell">
+          <h2>{{trademarkCounts[2] || 0}}</h2>
         </div>
-        <div class="product-cell price">
-          <span class="cell-label"></span>
-          <a [routerLink]="links[i]">Otvori</a>
+        <div class="product-cell">
+          <p>odbijenih zahteva za žig</p>
         </div>
       </div>
 
     </div>
+
+
   </div>
 </div>

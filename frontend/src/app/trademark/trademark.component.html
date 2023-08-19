@@ -71,30 +71,19 @@
   </div>
   <div class="app-content">
     <div class="app-content-header">
-      <h1 class="app-content-headerText">Zahtev {{request.requestData.requestID}}</h1>
+      <h1 class="app-content-headerText">Žig {{notice.requestID}}</h1>
 
     </div>
     <div class="app-content-actions">
       <div class="app-content-actions-wrapper">
-        <div>
-          <button (click)="downloadRequestPDF()" class="btn-hover color-1">RDF</button>
-          <button (click)="downloadRequestXHTML()" class="btn-hover color-2">JSON</button>
-        </div>
-        <div>
-          <button (click)="downloadMetadataRDF()" class="btn-hover color-1">RDF</button>
-          <button (click)="downloadMetadataJSON()" class="btn-hover color-2">JSON</button>
-        </div>
+
       </div>
     </div>
 
     <div class="products-area-wrapper">
 
-      <div *ngIf="request">
+      <div *ngIf="request&&notice">
 
-        <div class="data-category">
-          <p>Podnešen na dan {{request.requestData.requestDate}}</p>
-          <br>
-        </div>
         <div class="data-category">
           <h5>Podaci o podnosiocu</h5>
           <p><strong>Tip lica:</strong> {{ request.requester.personType }}</p>
@@ -219,19 +208,19 @@
         </div>
 
         <div class="data-category notice-form">
-          <form [formGroup]="noticeFormGroup">
-            <p>
-              <input class="search-bar" formControlName="officialName" placeholder="Ime službenika" type="text">
-              <input class="search-bar" formControlName="officialLastName" placeholder="Prezime službenika" type="text">
-            </p>
-            <p>
-              <input class="search-bar" formControlName="reason" placeholder="Razlog" type="text">
-            </p>
-            <p>
-              <button (click)="onApprove()" class="btn-hover color-1">Odobri</button>
-              <button (click)="onReject()" class="btn-hover color-2">Odbij</button>
-            </p>
-          </form>
+          <h5>Rešenje zahteva</h5>
+          <p>
+            <strong>Šifra žiga:</strong>
+            {{notice.requestID}}
+          </p>
+          <p>
+            <strong>Službenik:</strong>
+            {{notice.officialName + " " + notice.officialLastName}}
+          </p>
+          <p>
+            <strong>Datum odobrenja:</strong>
+            {{date}}
+          </p>
         </div>
 
       </div>

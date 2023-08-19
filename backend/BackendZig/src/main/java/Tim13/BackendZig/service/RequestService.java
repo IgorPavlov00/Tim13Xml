@@ -1,14 +1,23 @@
 package Tim13.BackendZig.service;
 
 import Tim13.BackendZig.dto.*;
-import Tim13.BackendZig.model.*;
+import Tim13.BackendZig.model.enums.PersonType;
+import Tim13.BackendZig.model.request.*;
+import Tim13.BackendZig.repos.RequestRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class RequestService {
+
+    @Autowired
+    RequestRepository requestRepository;
 
     public Attachments mapToAttachments(AttachmentsDTO dto) {
         return new Attachments(
@@ -253,5 +262,25 @@ public class RequestService {
         );
     }
 
+    public Request getRequestById(String id) {
+        Optional<Request> opt = this.requestRepository.findById(id);
+        return opt.orElse(null);
+    }
 
+    public long countRequestsInDateRange(LocalDate start, LocalDate end) {
+        Iterable<Request> allRequests = requestRepository.findAll();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        return StreamSupport.stream(allRequests.spliterator(), false)
+                .filter(request -> {
+                    LocalDate requestDate = LocalDate.parse(request.getRequestData().getDate(), formatter);
+                    return !requestDate.isBefore(start) && !requestDate.isAfter(end);
+                })
+                .count();
+    }
+
+    public Request getAcceptedRequestById(String id) {
+        Optional<Request> opt = this.requestRepository.findAcceptedById(id);
+        return opt.orElse(null);
+    }
 }

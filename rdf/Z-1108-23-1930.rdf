@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-<rdf:Description rdf:about="http://localhost:8082/Z-1108-23-1930">
-<datum_podnosenja>11-08-2023</datum_podnosenja>
-<ime_podnosioca>t</ime_podnosioca>
-<prezime_podnosioca>s</prezime_podnosioca>
-<ime_punomocnika/>
-<ukupno>3000.0</ukupno>
-</rdf:Description>
-</rdf:RDF>
