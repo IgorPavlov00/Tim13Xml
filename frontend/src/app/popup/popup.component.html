@@ -1,56 +1,83 @@
 
 <form mat-dialog class="forma">
-  <div>
-    <label for="ime">Ime podnosioca:</label>
-    <input type="text" id="ime" name="ime" [(ngModel)]="data.ime" readonly>
+  <div *ngIf="data.tipkorisnika === 'pravno'">
+    <!-- Fields to show for 'pravno' tipkorisnika -->
+    <div *ngIf="data.poslovno_ime">
+      <label for="ime">Poslovno ime:</label>
+      <input type="text" name="poslovnoime" [(ngModel)]="data.poslovno_ime" readonly>
+    </div>
+    <div *ngIf="data.ulicaPodnosioca">
+      <label for="ime">Adresa sedista:</label>
+      <input type="text" name="ulicaPodnosioca" [(ngModel)]="data.ulicaPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.mestoPodnosioca">
+      <label for="ime">Mesto sedista:</label>
+      <input type="text" name="mestoPodnosioca" [(ngModel)]="data.mestoPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.telefonPodnosioca">
+      <label for="ime">Telefon:</label>
+      <input type="text" name="telefonPodnosioca" [(ngModel)]="data.telefonPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.emailPodnosioca">
+      <label for="ime">Email:</label>
+      <input type="text" name="emailPodnosioca" [(ngModel)]="data.emailPodnosioca" readonly>
+    </div>
   </div>
-  <div>
-    <label for="ime">Prezime podnosioca:</label>
-    <input type="text" id="prezime" name="prezime" [(ngModel)]="data.prezime" readonly>
-  </div>
-  <div>
-    <label for="ime">Ulica podnosioca:</label>
-    <input type="text" id="ulica" name="ulicaPodnosioca" [(ngModel)]="data.ulicaPodnosioca" readonly>
-  </div>
-  <div>
-    <label for="ime">Mesto podnosioca:</label>
-    <input type="text" id="mesto" name="mestoPodnosioca" [(ngModel)]="data.mestoPodnosioca" readonly>
-  </div>
-  <div>
-    <label for="ime">Drzavljanstvo podnosioca:</label>
-    <input type="text"  name="drzavljanstvoPodnosioca" [(ngModel)]="data.drzavljanstvoPodnosioca" readonly>
-  </div>
-  <div>
-    <label for="ime">Pseudonim podnosioca:</label>
-    <input type="text"  name="pseudonimPodnosioca" [(ngModel)]="data.pseudonimPodnosioca" readonly>
-  </div>
-  <div>
-    <label for="ime">Telefon podnosioca:</label>
-    <input type="text" name="telefonPodnosioca" [(ngModel)]="data.telefonPodnosioca" readonly>
-  </div>
-  <div>
-    <label for="ime">Email podnosioca:</label>
-    <input type="text" name="emailPodnosioca" [(ngModel)]="data.emailPodnosioca" readonly>
-  </div>
+  <div *ngIf="data.tipkorisnika === 'fizicko'">
+    <!-- Fields to show for 'fizicko' tipkorisnika -->
+    <div *ngIf="data.ime">
+      <label for="ime">Ime podnosioca:</label>
+      <input type="text" id="ime" name="ime" [(ngModel)]="data.ime" readonly>
+    </div>
+    <div *ngIf="data.prezime">
+      <label for="ime">Prezime podnosioca:</label>
+      <input type="text" id="prezime" name="prezime" [(ngModel)]="data.prezime" readonly>
+    </div>
+    <div *ngIf="data.ulicaPodnosioca">
+      <label for="ime">Ulica podnosioca:</label>
+      <input type="text" id="ulica" name="ulicaPodnosioca" [(ngModel)]="data.ulicaPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.mestoPodnosioca">
+      <label for="ime">Mesto podnosioca:</label>
+      <input type="text" id="mesto" name="mestoPodnosioca" [(ngModel)]="data.mestoPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.drzavljanstvoPodnosioca">
+      <label for="ime">Drzavljanstvo podnosioca:</label>
+      <input type="text" name="drzavljanstvoPodnosioca" [(ngModel)]="data.drzavljanstvoPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.pseudonimPodnosioca">
+      <label for="ime">Pseudonim podnosioca:</label>
+      <input type="text" name="pseudonimPodnosioca" [(ngModel)]="data.pseudonimPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.telefonPodnosioca">
+      <label for="ime">Telefon podnosioca:</label>
+      <input type="text" name="telefonPodnosioca" [(ngModel)]="data.telefonPodnosioca" readonly>
+    </div>
+    <div *ngIf="data.emailPodnosioca">
+      <label for="ime">Email podnosioca:</label>
+      <input type="text" name="emailPodnosioca" [(ngModel)]="data.emailPodnosioca" readonly>
+    </div>
   <div>
     <label for="ime">Obrazac:</label>
     <input type="text" id="ulica" name="obrazac" [(ngModel)]="data.obrazac" readonly>
   </div>
-  <div>
-    <label for="ime">Ulica podnosioca:</label>
-    <input type="text" id="ulica" name="naslov" [(ngModel)]="data.naslov" readonly>
+
   </div>
   <div>
-    <label for="ime">Naslov:</label>
-    <input type="text" id="ulica" name="alternativni_naslov" [(ngModel)]="data.alternativni_naslov" readonly>
+    <label for="ime">Naslov dela:</label>
+    <input type="text" id="naslov" name="naslov" [(ngModel)]="data.naslov" readonly>
   </div>
-  <div>
-    <label for="ime">Naslov izvornog autorskog dela:</label>
-    <input type="text" id="ulica" name="naslov_izvornog_dela" [(ngModel)]="data.naslov_izvornog_dela" readonly>
-  </div>
+<!--  <div>-->
+<!--    <label for="ime">Alternativni naslov:</label>-->
+<!--    <input type="text" name="alternativni_naslov" [(ngModel)]="data.alternativni_naslov" readonly>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <label for="ime">Naslov izvornog autorskog dela:</label>-->
+<!--    <input type="text" id="naslov_izvornog_dela" name="naslov_izvornog_dela" [(ngModel)]="data.naslov_izvornog_dela" readonly>-->
+<!--  </div>-->
   <div>
     <label for="ime">Autor izvornog  dela:</label>
-    <input type="text" id="ulica" name="autorIzvornogDela" [(ngModel)]="data.autorIzvornogDela" readonly>
+    <input type="text" id="autorIzvornogDela" name="autorIzvornogDela" [(ngModel)]="data.autorIzvornogDela" readonly>
   </div>
   <div>
     <label for="ime">Vrsta autorskog dela:</label>
@@ -64,31 +91,31 @@
     <label for="ime">Stvoreno u radnom odnosu:</label>
     <input type="text" id="ulica" name="stvorenoURadnomOdnosu" [(ngModel)]="data.stvorenoURadnomOdnosu" readonly>
   </div>
-  <div>
-    <label for="ime">Nacin koriscenja:</label>
-    <input type="text" id="ulica" name="nacin_koriscenja" [(ngModel)]="data.nacin_koriscenja" readonly>
-  </div>
-  <div>
+<!--  <div>-->
+<!--    <label for="ime">Nacin koriscenja:</label>-->
+<!--    <input type="text" id="ulica" name="nacin_koriscenja" [(ngModel)]="data.nacin_koriscenja" readonly>-->
+<!--  </div>-->
+  <div *ngIf="data.imeAutoraZiv">
     <label for="ime">Ime autora ziv:</label>
     <input type="text" id="ulica" name="imeAutoraZiv" [(ngModel)]="data.imeAutoraZiv" readonly>
   </div>
-  <div>
+  <div *ngIf="data.prezimeAutoraZiv">
     <label for="ime">Prezime autora ziv:</label>
     <input type="text" id="ulica" name="prezimeAutoraZiv" [(ngModel)]="data.prezimeAutoraZiv" readonly>
   </div>
-  <div>
+  <div *ngIf="data.ulicaAutoraZiv">
     <label for="ime">Ulica autora ziv:</label>
     <input type="text" id="ulica" name="ulicaAutoraZiv" [(ngModel)]="data.ulicaAutoraZiv" readonly>
   </div>
-  <div>
+  <div *ngIf="data.mestoAutoraZiv">
     <label for="ime">Mesto autora ziv:</label>
     <input type="text" id="ulica" name="mestoAutoraZiv" [(ngModel)]="data.mestoAutoraZiv" readonly>
   </div>
-  <div>
+  <div *ngIf="data.drzavljanstvoAutoraZiv">
     <label for="ime">Drzavljanstvo autora ziv:</label>
     <input type="text" id="ulica" name="drzavljanstvoAutoraZiv" [(ngModel)]="data.drzavljanstvoAutoraZiv" readonly>
   </div>
-  <div>
+  <div *ngIf="data.pseudonimAutoraZiv">
     <label for="ime">Pseudonim autora ziv:</label>
     <input type="text" id="ulica" name="pseudonimAutoraZiv" [(ngModel)]="data.pseudonimAutoraZiv" readonly>
   </div>

@@ -33,7 +33,7 @@
         </a>
       </li>
       <li class="sidebar-list-item">
-        <a routerLink="">
+        <a routerLink="/a1zavedena">
           <svg class="feather feather-inbox" fill="none" height="18" stroke="currentColor" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"
                xmlns="http://www.w3.org/2000/svg">
@@ -111,6 +111,30 @@
         </div>
       </div>
 
+      <div class="products-row">
+        <div class="product-cell">
+          <h2>{{lista[0] || 0}}</h2>
+        </div>
+        <div class="product-cell">
+          <p>podnešenih zahteva za autorsko pravo</p>
+        </div>
+      </div>
+      <div class="products-row">
+        <div class="product-cell">
+          <h2>{{lista[1] || 0}}</h2>
+        </div>
+        <div class="product-cell">
+          <p>odobrenih zahteva za autorsko pravo</p>
+        </div>
+      </div>
+      <div class="products-row">
+        <div class="product-cell">
+          <h2>{{lista[2] || 0}}</h2>
+        </div>
+        <div class="product-cell">
+          <p>odbijenih zahteva za autorsko pravo</p>
+        </div>
+      </div>
     </div>
 
 

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {TrademarkRequestService} from "../servisi/trademark-request.service";
+import {FormDataService} from "../form-data.service";
 
 @Component({
   selector: 'app-reports',
@@ -10,8 +11,8 @@ export class ReportsComponent {
   startDate: string = "";
   endDate: string = "";
   trademarkCounts: number[] = [];
-
-  constructor(private trademarkService: TrademarkRequestService) {
+  lista: number[] = [];
+  constructor(private trademarkService: TrademarkRequestService,private formdata:FormDataService) {
 
   }
 
@@ -26,13 +27,24 @@ export class ReportsComponent {
       data => {
         console.log(data);
         this.setTrademarkCounts(data);
+
       }, error => {
         console.log(error);
       }
     );
+    this.formdata.getReports(start,end).subscribe(data=>{
+      console.log(data);
+      this.setList(data);
+    })
   }
 
   setTrademarkCounts(data: number[]) {
     this.trademarkCounts = data;
   }
+  setList(data: number[]) {
+    this.lista = data;
+  }
+
+
+
 }

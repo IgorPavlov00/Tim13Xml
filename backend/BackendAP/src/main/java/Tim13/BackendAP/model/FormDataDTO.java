@@ -11,7 +11,9 @@ public class FormDataDTO {
     private String telefon1;
     private String email1;
     private String poslovno_ime;
-    private String sediste_nosioca_autorsko_prava;
+
+    private String adresa_sedista;
+    private String mesto_sedista;
     private String telefon;
     private String email;
     private String pseudonim;
@@ -31,23 +33,37 @@ public class FormDataDTO {
     private String autori_zivi;
     private String imena_preminulih_autora;
     private String godina_smrti;
-    private  String autorPodnosioc;
+    private String autorPodnosioc;
 
-    public FormDataDTO(){
+    private String imeAutora;
+
+    private String prezimeAutora;
+
+    private String drzavljanstvoAutora;
+
+    private String ulicaAutora;
+
+    private String mestoAutora;
+
+    private String pseudonimAutora;
+
+
+    public FormDataDTO() {
 
     }
 
-    public FormDataDTO(String tip_korisnika, String autorPodnosioc,String ime, String prezime, String adresa, String drzavljanstvo,String punomocnik_mesto, String telefon1, String email1, String poslovno_ime, String sediste_nosioca_autorsko_prava, String telefon, String email, String pseudonim, boolean punomocnik, String punomocnik_ime, String punomocnik_prezime, String punomocnik_adresa, String naslov, String alternativni_naslov, String naslov_izvornog_dela, String autor_izvornog_dela, String vrsta_dela, String forma_zapisa, String autorskoDeloStvorenoURadnomOdnosu, String nacin_koriscenja, String autori_zivi, String imena_preminulih_autora, String godina_smrti,String mesto) {
+    public FormDataDTO(String tip_korisnika, String ime, String prezime, String pseudonimAutora,String ulicaAutora,String mestoAutora,String adresa, String mesto, String drzavljanstvo, String telefon1, String email1, String poslovno_ime, String adresa_sedista, String mesto_sedista, String telefon, String email, String pseudonim, boolean punomocnik, String punomocnik_ime, String punomocnik_prezime, String punomocnik_adresa, String punomocnik_mesto, String naslov, String alternativni_naslov, String naslov_izvornog_dela, String autor_izvornog_dela, String vrsta_dela, String forma_zapisa, String autorskoDeloStvorenoURadnomOdnosu, String nacin_koriscenja, String autori_zivi, String imena_preminulih_autora, String godina_smrti, String autorPodnosioc, String imeAutora, String prezimeAutora, String drzavljanstvoAutora) {
         this.tip_korisnika = tip_korisnika;
         this.ime = ime;
         this.prezime = prezime;
         this.adresa = adresa;
-        this.mesto=mesto;
+        this.mesto = mesto;
         this.drzavljanstvo = drzavljanstvo;
         this.telefon1 = telefon1;
         this.email1 = email1;
         this.poslovno_ime = poslovno_ime;
-        this.sediste_nosioca_autorsko_prava = sediste_nosioca_autorsko_prava;
+        this.adresa_sedista = adresa_sedista;
+        this.mesto_sedista = mesto_sedista;
         this.telefon = telefon;
         this.email = email;
         this.pseudonim = pseudonim;
@@ -55,6 +71,7 @@ public class FormDataDTO {
         this.punomocnik_ime = punomocnik_ime;
         this.punomocnik_prezime = punomocnik_prezime;
         this.punomocnik_adresa = punomocnik_adresa;
+        this.punomocnik_mesto = punomocnik_mesto;
         this.naslov = naslov;
         this.alternativni_naslov = alternativni_naslov;
         this.naslov_izvornog_dela = naslov_izvornog_dela;
@@ -66,8 +83,61 @@ public class FormDataDTO {
         this.autori_zivi = autori_zivi;
         this.imena_preminulih_autora = imena_preminulih_autora;
         this.godina_smrti = godina_smrti;
-        this.autorPodnosioc=autorPodnosioc;
-        this.punomocnik_mesto=punomocnik_mesto;
+        this.autorPodnosioc = autorPodnosioc;
+        this.imeAutora = imeAutora;
+        this.prezimeAutora = prezimeAutora;
+        this.drzavljanstvoAutora = drzavljanstvoAutora;
+        this.ulicaAutora=ulicaAutora;
+        this.mestoAutora=mestoAutora;
+        this.pseudonimAutora=pseudonimAutora;
+    }
+
+    public String getImeAutora() {
+        return imeAutora;
+    }
+
+    public void setImeAutora(String imeAutora) {
+        this.imeAutora = imeAutora;
+    }
+
+    public String getPrezimeAutora() {
+        return prezimeAutora;
+    }
+
+    public String getPseudonimAutora() {
+        return pseudonimAutora;
+    }
+
+    public void setPseudonimAutora(String pseudonimAutora) {
+        this.pseudonimAutora = pseudonimAutora;
+    }
+
+    public void setPrezimeAutora(String prezimeAutora) {
+        this.prezimeAutora = prezimeAutora;
+    }
+
+    public String getDrzavljanstvoAutora() {
+        return drzavljanstvoAutora;
+    }
+
+    public String getUlicaAutora() {
+        return ulicaAutora;
+    }
+
+    public void setUlicaAutora(String ulicaAutora) {
+        this.ulicaAutora = ulicaAutora;
+    }
+
+    public String getMestoAutora() {
+        return mestoAutora;
+    }
+
+    public void setMestoAutora(String mestoAutora) {
+        this.mestoAutora = mestoAutora;
+    }
+
+    public void setDrzavljanstvoAutora(String drzavljanstvoAutora) {
+        this.drzavljanstvoAutora = drzavljanstvoAutora;
     }
 
     public String getAutorPodnosioc() {
@@ -80,6 +150,22 @@ public class FormDataDTO {
 
     public String getTip_korisnika() {
         return tip_korisnika;
+    }
+
+    public String getAdresa_sedista() {
+        return adresa_sedista;
+    }
+
+    public void setAdresa_sedista(String adresa_sedista) {
+        this.adresa_sedista = adresa_sedista;
+    }
+
+    public String getMesto_sedista() {
+        return mesto_sedista;
+    }
+
+    public void setMesto_sedista(String mesto_sedista) {
+        this.mesto_sedista = mesto_sedista;
     }
 
     public void setTip_korisnika(String tip_korisnika) {
@@ -142,13 +228,6 @@ public class FormDataDTO {
         this.poslovno_ime = poslovno_ime;
     }
 
-    public String getSediste_nosioca_autorsko_prava() {
-        return sediste_nosioca_autorsko_prava;
-    }
-
-    public void setSediste_nosioca_autorsko_prava(String sediste_nosioca_autorsko_prava) {
-        this.sediste_nosioca_autorsko_prava = sediste_nosioca_autorsko_prava;
-    }
 
     public String getTelefon() {
         return telefon;
@@ -322,7 +401,8 @@ public class FormDataDTO {
                 ", telefon1='" + telefon1 + '\'' +
                 ", email1='" + email1 + '\'' +
                 ", poslovno_ime='" + poslovno_ime + '\'' +
-                ", sediste_nosioca_autorsko_prava='" + sediste_nosioca_autorsko_prava + '\'' +
+                ", adresa_sedista='" + adresa_sedista + '\'' +
+                ", mesto_sedista='" + mesto_sedista + '\'' +
                 ", telefon='" + telefon + '\'' +
                 ", email='" + email + '\'' +
                 ", pseudonim='" + pseudonim + '\'' +
@@ -343,6 +423,12 @@ public class FormDataDTO {
                 ", imena_preminulih_autora='" + imena_preminulih_autora + '\'' +
                 ", godina_smrti='" + godina_smrti + '\'' +
                 ", autorPodnosioc='" + autorPodnosioc + '\'' +
+                ", imeAutora='" + imeAutora + '\'' +
+                ", prezimeAutora='" + prezimeAutora + '\'' +
+                ", drzavljanstvoAutora='" + drzavljanstvoAutora + '\'' +
+                ", ulicaAutora='" + ulicaAutora + '\'' +
+                ", mestoAutora='" + mestoAutora + '\'' +
+                ", pseudonimAutora='" + pseudonimAutora + '\'' +
                 '}';
     }
 }

@@ -655,12 +655,17 @@ body {
 
 .gridView {
   display: flex;
-  width: 90%;
+
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 -8px;
 }
-
+.gridView > *:first-child ~ *{
+  flex: 0 0 30%;
+}
+.gridView > *:nth-child(3n+1){
+  clear: left;
+}
 @media screen and (max-width: 520px) {
   .gridView {
     margin: 0;

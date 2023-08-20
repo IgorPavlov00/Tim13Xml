@@ -203,6 +203,7 @@ export class FormaA1Component implements OnInit {
     this.servis.submitFormData(this.formData).subscribe(
       (response) => {
         console.log('Form data sent successfully:', response);
+        this.formData=new FormData();
         // Handle the response from the backend if needed
       },
       (error) => {

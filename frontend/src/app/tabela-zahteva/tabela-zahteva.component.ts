@@ -3,6 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {FormDataService} from "../form-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {PopupComponent} from "../popup/popup.component";
+import {FormData} from "../form-data";
+import {Zahtev} from "../zahtev";
+import {Router, RouterModule} from "@angular/router";
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-tabela-zahteva',
@@ -14,9 +18,12 @@ export class TabelaZahtevaComponent {
   retrievedData: any = []; // Define the type based on your Resurs interface/model
   filteredData: any[] = [];
   public searchInput = '';
-
-
-  constructor(private http: HttpClient, private formDataService: FormDataService,private dialog: MatDialog) {
+  selectedXmlObjects: any[] = [];
+  rejectedXmlObjects: any[] = [];
+  deletedData: any[] = [];
+  formData: FormData = new FormData();
+  zahtevData: Zahtev = new Zahtev();
+  constructor(private http: HttpClient, private formDataService: FormDataService,private dialog: MatDialog,private router:Router) {
     this.fetchFormData();
     this.filteredData;
   }
@@ -74,12 +81,11 @@ export class TabelaZahtevaComponent {
           const telefonPodnosioca = xmlData.querySelector('podaci_o_podnosiocu telefon')?.textContent || '';
           const emailPodnosioca = xmlData.querySelector('podaci_o_podnosiocu email')?.textContent || '';
           const obrazac = xmlData.querySelector('obrazac')?.textContent || '';
-          const naslov = xmlData.querySelector('naslov')?.textContent || '';
-          const alternativniNaslov = xmlData.querySelector('alternativni_naslov')?.textContent || '';
+
           const vrstaAutorskogDela = xmlData.querySelector('vrsta_autorskog_dela')?.textContent || '';
           const formaAutorskogDela = xmlData.querySelector('forma_autorskog_dela')?.textContent || '';
           const stvorenoURadnomOdnosu = xmlData.querySelector('stvoreno_u_radnom_odnosu')?.textContent || '';
-          const nacinKoriscenja = xmlData.querySelector('nacin_koriscenja')?.textContent || '';
+
           const imeAutoraZiv = xmlData.querySelector('podaci_o_autoru_ziv ime')?.textContent || '';
           const prezimeAutoraZiv = xmlData.querySelector('podaci_o_autoru_ziv prezime')?.textContent || '';
           const ulicaAutoraZiv = xmlData.querySelector('podaci_o_autoru_ziv ulica')?.textContent || '';
@@ -92,10 +98,18 @@ export class TabelaZahtevaComponent {
           const prezimePunomocnika = xmlData.querySelector('podaci_punomocnika prezime')?.textContent || '';
           const ulicaPunomocnika = xmlData.querySelector('podaci_punomocnika ulica')?.textContent || '';
           const mestoPunomocnika = xmlData.querySelector('podaci_punomocnika mesto')?.textContent || '';
+
+          const tipkorisnika = xmlData.querySelector('licni_podaci')?.getAttribute('tip_lica') || 'NIJE UNETO';
+          const naslov = xmlData.querySelector('podaci_o_autorskom_delu naslov')?.textContent || '';
+          const alternativniNaslov = xmlData.querySelector('alternativni_naslov')?.textContent || '';
           const naslovIzvornogDela = xmlData.querySelector('podaci_o_izvornom_delu naslov')?.textContent || '';
+          const nacinKoriscenja = xmlData.querySelector('nacin_koriscenja')?.textContent || '';
+
           const autorIzvornogDela = xmlData.querySelector('podaci_o_izvornom_delu autor')?.textContent || '';
 
+          const poslovno_ime = xmlData.querySelector('ime')?.textContent || '';
           // Create an object with extracted data
+
           const extractedData = {
             sifra,
             datumPodnosenja,
@@ -128,24 +142,69 @@ export class TabelaZahtevaComponent {
             mestoPunomocnika,
             naslovIzvornogDela,
             autorIzvornogDela,
+            tipkorisnika,
+            poslovno_ime
             // Add more variables here as needed
           };
 
           // Add extracted data to the array
           extractedDataArray.push(extractedData);
         }
-
+        extractedDataArray.sort((a, b) => parseInt(a.sifra) - parseInt(b.sifra));
         console.log('Extracted Data Array:', extractedDataArray);
 
         // Assign the extracted data array to retrievedData
         this.retrievedData = extractedDataArray;
         this.filteredData=extractedDataArray;
+
       },
       error => {
         console.error('Error fetching data:', error);
       }
     );
   }
+  onApprove(xml:Zahtev) {
+    console.log(xml)
+
+
+    this.formDataService.acceptData(xml).subscribe(
+      (response) => {
+        console.log('Form data sent successfully:', response);
+
+
+        // Handle the response from the backend if needed
+
+      },
+      (error) => {
+        console.error('Error sending form data:', error);
+        // Handle errors if any
+      }
+    );
+  }
+
+
+  onDelete(xml:Zahtev) {
+    console.log(xml)
+
+
+    this.formDataService.rejectData(xml).subscribe(
+      (response) => {
+        console.log('Form data sent successfully:', response);
+
+        // Handle the response from the backend if needed
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error sending form data:', error);
+        // Handle errors if any
+      }
+    );
+  }
+
+
+
+
+
 
   // search(searchTerm: string): void {
   //   this.filteredData = this.retrievedData.filter((item: { sifra: string; datumPodnosenja: string; ime: string; prezime: string; ulicaPodnosioca: string; mestoPodnosioca: string; drzavljanstvoPodnosioca: string; pseudonimPodnosioca: string; telefonPodnosioca: string; emailPodnosioca: string; obrazac: string; naslov: string; alternativniNaslov: string; vrstaAutorskogDela: string; formaAutorskogDela: string; stvorenoURadnomOdnosu: string; nacinKoriscenja: string; imeAutoraZiv: string; prezimeAutoraZiv: string; ulicaAutoraZiv: string; mestoAutoraZiv: string; drzavljanstvoAutoraZiv: string; pseudonimAutoraZiv: string; opisAutorskogDela: string; primerAutorskogDela: string; imePunomocnika: string; prezimePunomocnika: string; ulicaPunomocnika: string; mestoPunomocnika: string; naslovIzvornogDela: string; autorIzvornogDela: string; }) => {
@@ -226,4 +285,35 @@ export class TabelaZahtevaComponent {
       ));
     }
 
+  fun() {
+    window.location.reload();
+  }
+
+  getxhtml(sifra: string) {
+    this.formDataService.getRequestXHTML(sifra).subscribe(data => {
+      const blob = new Blob([data], {type: 'application/xhtml+xml'});
+      saveAs(blob, `${sifra}.xhtml`);
+    });
+  }
+
+  getpdf(sifra: string) {
+    this.formDataService.getRequestPDF(sifra).subscribe(data => {
+      const blob = new Blob([data], {type: 'application/pdf'});
+      saveAs(blob, `${sifra}.pdf`);
+    });
+  }
+
+  getrdf() {
+    this.formDataService.getMetadataRDF().subscribe(data => {
+      const blob = new Blob([data], {type: 'application/rdf+xml'});
+      saveAs(blob, `metadata.rdf`);
+    });
+  }
+
+  getjson() {
+    this.formDataService.getMetadataJSON().subscribe(data => {
+      const blob = new Blob([data], {type: 'application/json'});
+      saveAs(blob, `metadata.json`);
+    });
+  }
 }

@@ -1,93 +1,14 @@
-<!--<div class="container">-->
-<!--  <header>Signup Form</header>-->
-<!--  <div class="progress-bar">-->
-<!--    <div class="step">-->
-<!--      <p>Podnosilac</p>-->
-<!--      <div class="bullet">-->
-<!--        <span>1</span>-->
-<!--      </div>-->
-<!--      <div class="check fas fa-check"></div>-->
-<!--    </div>-->
-<!--    <div class="step">-->
-<!--      <p>Contact</p>-->
-<!--      <div class="bullet">-->
-<!--        <span>2</span>-->
-<!--      </div>-->
-<!--      <div class="check fas fa-check"></div>-->
-<!--    </div>-->
-<!--    <div class="step">-->
-<!--      <p>Birth</p>-->
-<!--      <div class="bullet">-->
-<!--        <span>3</span>-->
-<!--      </div>-->
-<!--      <div class="check fas fa-check"></div>-->
-<!--    </div>-->
-<!--    <div class="step">-->
-<!--      <p>Debt</p>-->
-<!--      <div class="bullet">-->
-<!--        <span>4</span>-->
-<!--      </div>-->
-<!--      <div class="check fas fa-check"></div>-->
-<!--    </div>-->
-<!--    <div class="step">-->
-<!--      <p>Address</p>-->
-<!--      <div class="bullet">-->
-<!--        <span>5</span>-->
-<!--      </div>-->
-<!--      <div class="check fas fa-check"></div>-->
-<!--    </div>-->
-<!--    <div class="step">-->
-<!--      <p>Submit</p>-->
-<!--      <div class="bullet">-->
-<!--        <span>6</span>-->
-<!--      </div>-->
-<!--      <div class="check fas fa-check"></div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="form-outer">-->
-<!--    <div class="page slide-page">-->
-<!--    <form>-->
-<!--      <div class="radio1">-->
-<!--        <label for="fizicko">Fizicko lice</label>-->
-<!--        <input type="radio" id="fizicko" name="tip-korisnika" (click)="showForm()" value="fizicko">-->
-<!--      </div>-->
-<!--      <div class="radio2" >-->
-<!--        <label for="pravno">Pravno lice</label>-->
-<!--        <input type="radio" id="pravno" name="tip-korisnika" value="pravno" (click)="showForm2()">-->
-<!--      </div>-->
 
-
-<!--    </form>-->
-<!--      <br><br>-->
-<!--    <div id="forma" class="hide">-->
-
-<!--      <input type="text" id="ime" placeholder="Ime">-->
-<!--      <input type="text" id="prezime" placeholder="Prezime">-->
-<!--      <input type="text" id="adresa" placeholder="Adresa">-->
-<!--      <input type="text" id="drzavljanstvo" placeholder="Drzavljanstvo autora">-->
-<!--      <input type="text" id="telefon1" placeholder="Telefon">-->
-<!--      <input type="text" id="email1" placeholder="Email">-->
-
-<!--    </div>-->
-
-<!--    <div id="forma2" class="hide">-->
-<!--      <input type="text" id="poslovno_ime" placeholder="poslovno_ime">-->
-<!--      <input type="text" id="sediste_nosioca_autorsko_prava" placeholder="sediste_nosioca_autorsko_prava">-->
-<!--      <input type="text" id="telefon" placeholder="Telefon">-->
-<!--      <input type="text" id="email" placeholder="Email">-->
-<!--    </div>-->
-
-<!--      </div>-->
 
 <div class="container">
   <header>Signup Form</header>
-  <div class="progress-bar">
+  <div class="progress-bar " style="background-color: white; color: black">
     <div class="step">
       <p>Podnosilac</p>
       <div class="bullet">
         <span>1</span>
       </div>
-      <div class="check fas fa-check"></div>
+      <div class="check fas fa-check" style="color: transparent"></div>
     </div>
     <br>
     <div class="step">
@@ -95,37 +16,39 @@
       <div class="bullet">
         <span>2</span>
       </div>
-      <div class="check fas fa-check"></div>
+      <div class="check fas fa-check" style="color: transparent"></div>
     </div>
     <div class="step">
       <p>Podaci</p>
       <div class="bullet">
         <span>3</span>
       </div>
-      <div class="check fas fa-check"></div>
+      <div class="check fas fa-check" style="color: transparent"></div>
     </div>
     <div class="step">
       <p>Delo</p>
       <div class="bullet">
         <span>4</span>
       </div>
-      <div class="check fas fa-check"></div>
+      <div class="check fas fa-check" style="color: transparent"></div>
     </div>
     <div class="step">
       <p>Autor</p>
       <div class="bullet">
         <span>5</span>
       </div>
-      <div class="check fas fa-check"></div>
+      <div class="check fas fa-check" style="color: transparent"></div>
     </div>
     <div class="step">
       <p>Submit</p>
       <div class="bullet">
         <span>6</span>
       </div>
-      <div class="check fas fa-check"></div>
+      <div class="check fas fa-check" style="color: transparent"></div>
     </div>
   </div>
+
+  <br>
   <div class="form-outer">
 
     <form action="#">
@@ -149,15 +72,15 @@
                 <div class="title">Basic Info:</div>
                 <div class="field">
                   <div class="label">Ime</div>
-                  <input type="text" required id="ime" placeholder="Ime" [(ngModel)]="formData.ime" name="ime" >
+                  <input type="name" required id="ime" placeholder="Ime" [(ngModel)]="formData.ime" name="ime" >
                 </div>
                 <div class="field">
                   <div class="label">Prezime</div>
-                  <input type="text" required id="prezime" placeholder="Prezime" name="prezime" [(ngModel)]="formData.prezime">
+                  <input type="lastname" required id="prezime" placeholder="Prezime" name="prezime" [(ngModel)]="formData.prezime">
                 </div>
                 <div class="field">
                   <div class="label">Adresa</div>
-                  <input type="text" required id="adresa" placeholder="Ulica" name="adresa" [(ngModel)]="formData.adresa">
+                  <input type="text" required id="adresa" formControlName="street" placeholder="Ulica" name="adresa" [(ngModel)]="formData.adresa">
 
                   <input type="text" required id="ulica" placeholder="Mesto" name="ulica" [(ngModel)]="formData.mesto">
                 </div>
@@ -168,11 +91,11 @@
                 </div>
                 <div class="field">
                   <div class="label">Telefon</div>
-                  <input type="text" required id="telefon1" placeholder="Telefon" name="telefon" [(ngModel)]="formData.telefon1">
+                  <input type="number" required id="telefon1" placeholder="Telefon" name="telefon" [(ngModel)]="formData.telefon1">
                 </div>
                 <div class="field">
                   <div class="label">Email</div>
-                  <input type="text" required id="email1" placeholder="Email" name="email" [(ngModel)]="formData.email1">
+                  <input type="email" required id="email1" placeholder="Email" name="email" [(ngModel)]="formData.email1">
                 </div>
                 <div class="field">
                   <button class="firstNext next">Next</button>
@@ -184,22 +107,26 @@
 
           <div class="field">
             <div class="label">Ime</div>
-            <input type="text" required id="poslovno_ime" placeholder="Poslovno ime" name="poslovno_ime" [(ngModel)]="formData.poslovno_ime">
+            <input type="name" required id="poslovno_ime" placeholder="Poslovno ime" name="poslovno_ime" [(ngModel)]="formData.poslovno_ime">
           </div>
           <div class="field">
-            <div class="label">Sediste</div>
-            <input type="text" required id="sediste_nosioca_autorsko_prava" placeholder="Sediste nosioca" name="sediste_nosioca_autorsko_pravo" [(ngModel)]="formData.sediste_nosioca_autorsko_prava">
+            <div class="label">Adresa sedista</div>
+            <input type="lastname" required id="adresa_sedista" placeholder="sediste nosioca"   name="adresa_sedista" [(ngModel)]="formData.adresa_sedista">
+          </div>
+          <div class="field">
+            <div class="label">Mesto sedista</div>
+            <input type="text" required id="mesto_sedista" placeholder="sediste nosioca" name="mesto_sedista" [(ngModel)]="formData.mesto_sedista">
           </div>
           <div class="field">
             <div class="label">Telefon</div>
-            <input type="text" required id="telefon" placeholder="Telefon" name="telefon" [(ngModel)]="formData.telefon">
+            <input type="number" required id="telefon" placeholder="Telefon" name="telefon" [(ngModel)]="formData.telefon">
           </div>
           <div class="field">
             <div class="label">Email</div>
             <input type="text" required id="email" placeholder="Email" name="email" [(ngModel)]="formData.email">
           </div>
           <div class="field">
-            <button class="firstNext next" (click)="onSubmit()">Next</button>
+            <button class="firstNext next" >Next</button>
           </div>
         </div>
 
@@ -231,17 +158,17 @@
 
           <div class="field">
             <div class="label">Ime:</div>
-            <input type="text" name="punomocnik_ime" [(ngModel)]="formData.punomocnik_ime" />
+            <input type="name" name="punomocnik_ime" [(ngModel)]="formData.punomocnik_ime" />
           </div>
           <div class="field">
             <div class="label">Prezime:</div>
-            <input type="text" name="punomocnik_prezime" [(ngModel)]="formData.punomocnik_prezime"/>
+            <input type="lastname" name="punomocnik_prezime" [(ngModel)]="formData.punomocnik_prezime"/>
           </div>
           <div class="field">
             <div class="label">Adresa</div>
-            <input type="text" required id="adresa" placeholder="Ulica" name="adresa" [(ngModel)]="formData.punomocnik_adresa">
+            <input type="text"  id="adresa" placeholder="Ulica" name="adresa" [(ngModel)]="formData.punomocnik_adresa">
 
-            <input type="text" required id="ulica" placeholder="Mesto" name="ulica" [(ngModel)]="formData.punomocnik_mesto">
+            <input type="name"  id="ulica" placeholder="Mesto" name="ulica" [(ngModel)]="formData.punomocnik_mesto">
           </div>
 
         </div>
@@ -260,7 +187,7 @@
         </div>
         <div class="field">
           <div class="label">Alternativni naslov:</div>
-          <input type="text" required name="alternativni_naslov" [(ngModel)]="formData.alternativni_naslov"/>
+          <input type="text"  name="alternativni_naslov" [(ngModel)]="formData.alternativni_naslov"/>
         </div>
         <div class="field">
           <div class="label">Naslov izvornog dela:</div>
@@ -268,7 +195,7 @@
         </div>
         <div class="field">
           <div class="label">Autor izvornog dela:</div>
-          <input type="text" required name="autor_izvornog_dela" [(ngModel)]="formData.autor_izvornog_dela"/>
+          <input type="name" required name="autor_izvornog_dela" [(ngModel)]="formData.autor_izvornog_dela"/>
         </div>
         <div class="field">
           <div class="label">Vrsta dela:</div>
@@ -297,11 +224,11 @@
       <div class="page">
         <div>
           <label for="punomocnik">Autor je podnosioc</label>
-          <input type="radio" name="tip-korisnika" value="da"  [(ngModel)]="formData.autorPodnosioc" (click)="showForm4()">
+          <input type="radio" name="autorPodnosioc" value="da"  [(ngModel)]="formData.autorPodnosioc" (click)="showForm4()">
         </div>
         <div>
           <label for="punomocnik">Autor nije podnosioc</label>
-          <input type="radio" name="tip-korisnika" value="ne" [(ngModel)]="formData.autorPodnosioc" (click)="showForm5()">
+          <input type="radio" name="autorPodnosioc" value="ne" [(ngModel)]="formData.autorPodnosioc" (click)="showForm5()">
         </div>
 
         <div class="field btns" id="dugmici">
@@ -313,16 +240,29 @@
           <div class="title">Podaci autora:</div>
           <div class="field">
             <div class="label">Ime</div>
-            <input type="text" maxlength="13" minlength="0" name="ime" [(ngModel)]="formData.ime"/>
+            <input type="text" maxlength="13" minlength="0" name="imeAutora" [(ngModel)]="formData.imeAutora"/>
           </div>
           <div class="field">
             <div class="label">Prezime</div>
-            <input type="text" minlength="0" name="prezime" [(ngModel)]="formData.prezime"/>
+            <input type="text" minlength="0" name="prezimeAutora" [(ngModel)]="formData.prezimeAutora"/>
           </div>
           <div class="field">
             <div class="label">Drzavljanstvo</div>
-            <input type="text" minlength="0" name="drzavljanstvo" [(ngModel)]="formData.drzavljanstvo"/>
+            <input type="text" minlength="0" name="drzavljanstvoAutora" [(ngModel)]="formData.drzavljanstvoAutora"/>
           </div>
+          <div class="field">
+            <div class="label">Ulica</div>
+            <input type="text" minlength="0" name="ulicaAutora" [(ngModel)]="formData.ulicaAutora"/>
+          </div>
+          <div class="field">
+            <div class="label">Mesto</div>
+            <input type="text" minlength="0" name="mestoAutora" [(ngModel)]="formData.mestoAutora"/>
+          </div>
+          <div class="field">
+            <div class="label">Pseudonim</div>
+            <input type="text" minlength="0" name="pseudonimAutora" [(ngModel)]="formData.pseudonimAutora"/>
+          </div>
+
 
           <div class="field">
             <div class="label">Da li je autorsko delo stvoreno u radnom odnosu?</div>
@@ -339,13 +279,13 @@
             <div class="label">Da li su autori zivi?</div>
 
             <label for="da">Da</label>
-            <input type="radio" id="da" name="tip-korisnika" value="da" [(ngModel)]="formData.autori_zivi">
+            <input type="radio" id="da" name="autori_zivi" value="da" [(ngModel)]="formData.autori_zivi">
 
             <label for="ne">Ne</label>
-            <input type="radio" id="ne" name="tip-korisnika" value="ne" [(ngModel)]="formData.autori_zivi">
+            <input type="radio" id="ne" name="autori_zivi" value="ne" [(ngModel)]="formData.autori_zivi">
           </div>
 
-          <div id="forma5" [ngClass]="{'hide': formData.autori_zivi === 'da'}">
+          <div id="forma5" [ngClass]="{'hide': formData.autori_zivi === 'ne'}">
             <div class="field">
               <div class="label">Imena preminulih autora</div>
               <input type="text" class="a" name="imena_preminulih_autora" required [(ngModel)]="formData.imena_preminulih_autora"/>

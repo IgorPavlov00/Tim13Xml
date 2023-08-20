@@ -9,7 +9,8 @@ export class FormData {
   telefon1: string;
   email1: string;
   poslovno_ime: string;
-  sediste_nosioca_autorsko_prava: string;
+  adresa_sedista:string;
+  mesto_sedista:string;
   telefon: string;
   email: string;
   pseudonim: string;
@@ -30,7 +31,12 @@ export class FormData {
   imena_preminulih_autora: string;
   godina_smrti: string;
   autorPodnosioc:string;
-
+  imeAutora:string;
+  prezimeAutora:string;
+  drzavljanstvoAutora:string;
+  ulicaAutora:string;
+  mestoAutora:string;
+  pseudonimAutora:string;
 
   constructor() {
     // You can set default values for the properties if needed
@@ -42,7 +48,9 @@ export class FormData {
     this.telefon1 = '';
     this.email1 = '';
     this.poslovno_ime = '';
-    this.sediste_nosioca_autorsko_prava = '';
+    this.ulicaAutora='';
+    this.mestoAutora='';
+    this.pseudonimAutora='';
     this.telefon = '';
     this.email = '';
     this.pseudonim = '';
@@ -64,5 +72,11 @@ export class FormData {
     this.autorPodnosioc='';
     this.mesto='';
     this.punomocnik_mesto='';
+    this.adresa_sedista='';
+    this.mesto_sedista='';
+    this.imeAutora='';
+    this.prezimeAutora='';
+    this.drzavljanstvoAutora='';
   }
+
 }

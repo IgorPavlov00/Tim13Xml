@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:zap="http://localhost:8083/vocabulary/autorskopravo/" xmlns:zz="http://localhost:8082/vocabulary/zig/">
+<rdf:Description rdf:about="http://localhost:8083/A-120/08/2023">
+<zap:datum_podnosenja>20/08/2023</zap:datum_podnosenja>
+<zap:ime_podnosioca>;l</zap:ime_podnosioca>
+<zap:prezime_podnosioca/>
+<zap:ime_punomocnika>l;</zap:ime_punomocnika>
+<zap:prezime_punomocnika>l;</zap:prezime_punomocnika>
+<zap:naslov>l;</zap:naslov>
+<zap:ime_autora/>
+<zap:prezime_autora/>
+</rdf:Description>
+</rdf:RDF>

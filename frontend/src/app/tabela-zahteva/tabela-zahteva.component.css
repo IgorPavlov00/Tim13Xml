@@ -21,6 +21,9 @@
   rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
+.products-row .pravno-row {
+  background-color: black; /* Change this to the desired color */
+}
 .light:root {
   --app-bg: #fff;
   --sidebar: #f3f6fd;
@@ -61,10 +64,29 @@ body {
   max-width: 2000px;
   margin: 0 auto;
 }
+.btn-circle.btn-xl {
+  width: 54px;
+  height: 54px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
+  margin-right: 10px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
 
 .sidebar {
-  flex-basis: 150px;
-  max-width: 150px;
+  flex-basis: 250px;
+  max-width: 250px;
   flex-shrink: 0;
   background-color: var(--sidebar);
   display: flex;

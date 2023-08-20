@@ -2,31 +2,39 @@ package Tim13.BackendAP.controller;
 
 import Tim13.BackendAP.model.FormDataDTO;
 import Tim13.BackendAP.model.Resurs;
+import Tim13.BackendAP.model.ZahtevDataDTO;
 import Tim13.BackendAP.util.ExistConnProperties;
 import Tim13.BackendAP.util.FusekiAuthProperties;
 import Tim13.BackendAP.util.MetadataExtractor;
 import Tim13.BackendAP.util.SparqlUtil;
+
+
 import net.sf.saxon.TransformerFactoryImpl;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Property;
+
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.update.UpdateRequest;
 import org.exist.xmldb.EXistResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
@@ -44,10 +52,13 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -56,7 +67,8 @@ public class RequestController {
 
     private static final String A1_NAMED_GRAPH_URI = "/a1";
     private static ExistConnProperties conn;
-
+    public ArrayList<Resurs> odbijeniZahtevi = new ArrayList<Resurs>();
+    public ArrayList<Resurs> prihvaceniZahtevi = new ArrayList<Resurs>();
     private static void writeXml(Document doc,
                                  OutputStream output)
             throws TransformerException {
@@ -230,6 +242,27 @@ public class RequestController {
 
     }
 
+    private static void addDatum(Document doc){
+        NodeList drugiglavnicvor = doc.getElementsByTagName("podaci_o_zahtevu");
+        for (int i = 0; i < drugiglavnicvor.getLength(); i++) {
+            Node studentNode = drugiglavnicvor.item(i);
+            if (studentNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element studentElement = (Element) studentNode;
+                Element datum=doc.createElement("datum_resenja");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String currentDate = LocalDate.now().format(formatter);
+                System.out.println(currentDate);
+                datum.setTextContent(currentDate);
+                studentElement.appendChild(datum);
+
+
+
+            }
+        }
+
+
+    }
+
     private static void createA1(Document doc, Element rootElement, FormDataDTO formData) {
         // Create "podaci_o_zavodu" element
         Element podaci_o_zavodu = doc.createElement("podaci_o_zavodu");
@@ -256,6 +289,7 @@ public class RequestController {
 
         // Create "podaci_o_zahtevu" element
         Element podaci_o_zahtevu = doc.createElement("podaci_o_zahtevu");
+
         rootElement.appendChild(podaci_o_zahtevu);
 
         // Create and set values for "datum_podnosenja" element within "podaci_o_zahtevu"
@@ -280,44 +314,76 @@ public class RequestController {
         licni_podaci.setAttribute("tip_lica", formData.getTip_korisnika());
         podaci_o_podnosiocu.appendChild(licni_podaci);
 
-        // Create and set values for "ime" element within "licni_podaci"
-        Element ime1 = doc.createElement("ime");
-        ime1.setTextContent(formData.getIme());
-        licni_podaci.appendChild(ime1);
+        if (formData.getTip_korisnika().equals("fizicko")) {
+            // Create and set values for "ime" element within "licni_podaci"
+            Element ime1 = doc.createElement("ime");
+            ime1.setTextContent(formData.getIme());
+            licni_podaci.appendChild(ime1);
 
-        // Create and set values for "prezime" element within "licni_podaci"
-        Element prezime1 = doc.createElement("prezime");
-        prezime1.setTextContent(formData.getPrezime());
-        licni_podaci.appendChild(prezime1);
+            // Create and set values for "prezime" element within "licni_podaci"
+            Element prezime1 = doc.createElement("prezime");
+            prezime1.setTextContent(formData.getPrezime());
+            licni_podaci.appendChild(prezime1);
 
-        // Create "adresa" element within "licni_podaci"
-        Element adresa2 = doc.createElement("adresa");
-        licni_podaci.appendChild(adresa2);
+            // Create "adresa" element within "licni_podaci"
+            Element adresa2 = doc.createElement("adresa");
+            licni_podaci.appendChild(adresa2);
 
-        // Create and set values for "ulica" element within "adresa"
-        Element ulica2 = doc.createElement("ulica");
-        ulica2.setTextContent(formData.getAdresa());
-        adresa2.appendChild(ulica2);
+            // Create and set values for "ulica" element within "adresa"
+            Element ulica2 = doc.createElement("ulica");
+            ulica2.setTextContent(formData.getAdresa());
+            adresa2.appendChild(ulica2);
 
-        // Create and set values for "mesto" element within "adresa"
-        Element mesto2 = doc.createElement("mesto");
-        mesto2.setTextContent(formData.getMesto());
-        adresa2.appendChild(mesto2);
+            // Create and set values for "mesto" element within "adresa"
+            Element mesto2 = doc.createElement("mesto");
+            mesto2.setTextContent(formData.getMesto());
+            adresa2.appendChild(mesto2);
 
-        // Create and set values for "drzavljanstvo" element within "licni_podaci"
-        Element drzavljanstvo = doc.createElement("drzavljanstvo");
-        drzavljanstvo.setTextContent(formData.getDrzavljanstvo());
-        licni_podaci.appendChild(drzavljanstvo);
+            // Create and set values for "drzavljanstvo" element within "licni_podaci"
+            Element drzavljanstvo = doc.createElement("drzavljanstvo");
+            drzavljanstvo.setTextContent(formData.getDrzavljanstvo());
+            licni_podaci.appendChild(drzavljanstvo);
 
-        // Create and set values for "telefon" element within "podaci_o_podnosiocu"
-        Element telefon = doc.createElement("telefon");
-        telefon.setTextContent(formData.getTelefon1());
-        podaci_o_podnosiocu.appendChild(telefon);
+            // Create and set values for "telefon" element within "podaci_o_podnosiocu"
+            Element telefon = doc.createElement("telefon");
+            telefon.setTextContent(formData.getTelefon1());
+            podaci_o_podnosiocu.appendChild(telefon);
 
-        // Create and set values for "email" element within "podaci_o_podnosiocu"
-        Element email = doc.createElement("email");
-        email.setTextContent(formData.getEmail1());
-        podaci_o_podnosiocu.appendChild(email);
+            // Create and set values for "email" element within "podaci_o_podnosiocu"
+            Element email = doc.createElement("email");
+            email.setTextContent(formData.getEmail1());
+            podaci_o_podnosiocu.appendChild(email);
+        } else if (formData.getTip_korisnika().equals("pravno")) {
+            // Create and set values for "ime" element within "licni_podaci"
+            Element ime1 = doc.createElement("ime");
+            ime1.setTextContent(formData.getPoslovno_ime());
+            licni_podaci.appendChild(ime1);
+
+
+            Element adresa2 = doc.createElement("adresa");
+            licni_podaci.appendChild(adresa2);
+
+            // Create and set values for "ulica" element within "adresa"
+            Element ulica2 = doc.createElement("ulica");
+            ulica2.setTextContent(formData.getAdresa_sedista());
+            adresa2.appendChild(ulica2);
+
+            // Create and set values for "mesto" element within "adresa"
+            Element mesto2 = doc.createElement("mesto");
+            mesto2.setTextContent(formData.getMesto_sedista());
+            adresa2.appendChild(mesto2);
+
+
+            // Create and set values for "telefon" element within "podaci_o_podnosiocu"
+            Element telefon = doc.createElement("telefon");
+            telefon.setTextContent(formData.getTelefon());
+            podaci_o_podnosiocu.appendChild(telefon);
+
+            // Create and set values for "email" element within "podaci_o_podnosiocu"
+            Element email = doc.createElement("email");
+            email.setTextContent(formData.getEmail());
+            podaci_o_podnosiocu.appendChild(email);
+        }
 
         // Create and set values for "pseudonim" element within "podaci_o_podnosiocu"
         Element pseudonim = doc.createElement("pseudonim");
@@ -392,7 +458,7 @@ public class RequestController {
 
         // Create and set values for "stvoreno_u_radnom_odnosu" element within "podaci_o_autorskom_delu"
         Element stvoreno_u_radnom_odnosu = doc.createElement("stvoreno_u_radnom_odnosu");
-        stvoreno_u_radnom_odnosu.setTextContent(formData.getAutorskoDeloStvorenoURadnomOdnosu().equals("da")?"true":"false");
+        stvoreno_u_radnom_odnosu.setTextContent(formData.getAutorskoDeloStvorenoURadnomOdnosu().equals("da") ? "true" : "false");
         podaci_o_autorskom_delu.appendChild(stvoreno_u_radnom_odnosu);
 
         // Create and set values for "nacin_koriscenja" element within "podaci_o_autorskom_delu"
@@ -406,12 +472,12 @@ public class RequestController {
 
         // Create and set values for "ime" element within "podaci_o_autoru_ziv"
         Element ime3 = doc.createElement("ime");
-        ime3.setTextContent("Igor");
+        ime3.setTextContent(formData.getImeAutora());
         podaci_o_autoru_ziv.appendChild(ime3);
 
         // Create and set values for "prezime" element within "podaci_o_autoru_ziv"
         Element prezime3 = doc.createElement("prezime");
-        prezime3.setTextContent("Pavlov");
+        prezime3.setTextContent(formData.getPrezimeAutora());
         podaci_o_autoru_ziv.appendChild(prezime3);
 
         // Create "adresa" element within "podaci_o_autoru_ziv"
@@ -420,22 +486,22 @@ public class RequestController {
 
         // Create and set values for "ulica" element within "adresa"
         Element ulica4 = doc.createElement("ulica");
-        ulica4.setTextContent("Adi Endrea 33");
+        ulica4.setTextContent(formData.getUlicaAutora());
         adresa4.appendChild(ulica4);
 
         // Create and set values for "mesto" element within "adresa"
         Element mesto4 = doc.createElement("mesto");
-        mesto4.setTextContent("Novi Sad");
+        mesto4.setTextContent(formData.getMestoAutora());
         adresa4.appendChild(mesto4);
 
         // Create and set values for "drzavljanstvo" element within "podaci_o_autoru_ziv"
         Element drzavljanstvo2 = doc.createElement("drzavljanstvo");
-        drzavljanstvo2.setTextContent("srpsko");
+        drzavljanstvo2.setTextContent(formData.getDrzavljanstvoAutora());
         podaci_o_autoru_ziv.appendChild(drzavljanstvo2);
 
         // Create and set values for "pseudonim" element within "podaci_o_autoru_ziv"
         Element pseudonim2 = doc.createElement("pseudonim");
-        pseudonim2.setTextContent("ip");
+        pseudonim2.setTextContent(formData.getPseudonimAutora());
         podaci_o_autoru_ziv.appendChild(pseudonim2);
 
         // Create "prilozi" element
@@ -457,20 +523,20 @@ public class RequestController {
         try {
             // initialize collection and document identifiers
             String collectionId = null;
-            String documentId = null;
 
-            if (args.length == 2) {
+
+            if (args.length >0 ) {
                 System.out.println("[INFO] Passing the arguments...");
                 collectionId = args[0];
-                documentId = args[1];
+
             } else {
                 System.out.println("[INFO] Using defaults.");
                 collectionId = "/db/sample/library";
-                documentId = "1.xml";
+
             }
 
             System.out.println("\t- collection ID: " + collectionId);
-            System.out.println("\t- document ID: " + documentId + "\n");
+
 
             // initialize database driver
             System.out.println("[INFO] Loading driver class: " + conn.driver);
@@ -496,7 +562,7 @@ public class RequestController {
                     if (doc.startsWith("a") || doc.startsWith("form_data_")) {
                         System.out.println("[INFO] Retrieving the document: " + doc);
                         res = (XMLResource) col.getResource(doc);
-                        System.out.println("Dokument:" + res.getContent());
+                        // System.out.println("Dokument:" + res.getContent());
                         resultList.add(new Resurs(res.getId(), res.getContent() + ""));
 
 
@@ -536,6 +602,76 @@ public class RequestController {
         }
     }
 
+    public static void delete(ExistConnProperties conn, String[] args, Resurs resurs) throws Exception {
+        try {
+            // initialize collection and document identifiers
+            String collectionId = null;
+            String documentId = null;
+
+            if (args.length == 2) {
+                System.out.println("[INFO] Passing the arguments...");
+                collectionId = args[0];
+                documentId = args[1];
+            } else {
+                System.out.println("[INFO] Using defaults.");
+                collectionId = "/db/sample/library";
+                documentId = "1.xml";
+            }
+
+            System.out.println("\t- collection ID: " + collectionId);
+            System.out.println("\t- document ID: " + documentId + "\n");
+
+            // initialize database driver
+            System.out.println("[INFO] Loading driver class: " + conn.driver);
+            Class<?> cl = Class.forName(conn.driver);
+            Database database = (Database) cl.newInstance();
+            database.setProperty("create-database", "true");
+            DatabaseManager.registerDatabase(database);
+
+            Collection col = null;
+            Resource res = null;
+
+
+            try {
+                // get the collection
+                System.out.println("[INFO] Retrieving the collection: " + collectionId);
+                col = DatabaseManager.getCollection(conn.uri + collectionId);
+                if (col == null) {
+                    throw new XMLDBException(0);
+                }
+                res = col.getResource(resurs.getId());
+                col.removeResource(res);
+
+
+            } finally {
+                //don't forget to clean up!
+                if (res != null) {
+                    try {
+                        ((EXistResource) res).freeResources();
+                    } catch (XMLDBException xe) {
+                        xe.printStackTrace();
+                    }
+                }
+
+                if (col != null) {
+                    try {
+                        col.close();
+                    } catch (XMLDBException xe) {
+                        xe.printStackTrace();
+                    }
+                }
+            }
+
+
+        } catch (XMLDBException xe) {
+            xe.printStackTrace();
+            throw xe;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
 
     public static void store(ExistConnProperties conn, String[] args, List<Resurs> resultList) throws Exception {
 
@@ -545,16 +681,14 @@ public class RequestController {
         String documentId = null;
         String filePath = null;
 
-        if (args.length == 3) {
+        if (args.length > 0) {
 
             System.out.println("[INFO] Passing the arguments... ");
 
             collectionId = args[0];
             System.out.println(collectionId);
-            documentId = args[1];
-            System.out.println(documentId);
-            filePath = args[2];
-            System.out.println(filePath);
+
+
         } else {
 
             System.out.println("[INFO] Using defaults.");
@@ -589,7 +723,7 @@ public class RequestController {
         try {
 
             System.out.println("[INFO] Retrieving the collection: " + collectionId);
-            col = getOrCreateCollection(collectionId);
+            col = getOrCreateCollection(collectionId, conn);
 
 
             /*
@@ -625,11 +759,11 @@ public class RequestController {
     }
 
 
-    private static Collection getOrCreateCollection(String collectionUri) throws XMLDBException {
-        return getOrCreateCollection(collectionUri, 0);
+    private static Collection getOrCreateCollection(String collectionUri, ExistConnProperties conn) throws XMLDBException {
+        return getOrCreateCollection(collectionUri, 0, conn);
     }
 
-    private static Collection getOrCreateCollection(String collectionUri, int pathSegmentOffset) throws XMLDBException {
+    private static Collection getOrCreateCollection(String collectionUri, int pathSegmentOffset, ExistConnProperties conn) throws XMLDBException {
         System.out.println(conn.uri + collectionUri);
         System.out.println(conn.user);
         System.out.println(conn.password);
@@ -672,7 +806,7 @@ public class RequestController {
                     startCol.close();
                 }
             }
-            return getOrCreateCollection(collectionUri, ++pathSegmentOffset);
+            return getOrCreateCollection(collectionUri, ++pathSegmentOffset, conn);
         } else {
             return col;
         }
@@ -724,7 +858,7 @@ public class RequestController {
         System.out.println("[INFO] End.");
     }
 
-    public static void readRDF(FusekiAuthProperties.FusekiConnProperties conn) throws IOException {
+    public static String readRDF(FusekiAuthProperties.FusekiConnProperties conn, String tip) throws IOException {
 
         // Querying the first named graph with a simple SPARQL query
         System.out.println("[INFO] Selecting the triples from the named graph \"" + A1_NAMED_GRAPH_URI + "\".");
@@ -735,31 +869,40 @@ public class RequestController {
 
         // Query the SPARQL endpoint, iterate over the result set...
         ResultSet results = query.execSelect();
-        ResultSetFormatter.outputAsJSON(results);
-        String varName;
-        RDFNode varValue;
-
-        while (results.hasNext()) {
-
-            // A single answer from a SELECT query
-            QuerySolution querySolution = results.next();
-            Iterator<String> variableBindings = querySolution.varNames();
-
-            // Retrieve variable bindings
-            while (variableBindings.hasNext()) {
-
-                varName = variableBindings.next();
-                varValue = querySolution.get(varName);
-
-                System.out.println(varName + ": " + varValue);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if (tip.equals("rdf")) {
+            ByteArrayOutputStream json = new ByteArrayOutputStream();
+            ResultSetFormatter.outputAsJSON(json, results);
+            String jsonstring = new String(json.toByteArray(), StandardCharsets.UTF_8);
+            JSONObject object = new JSONObject(jsonstring);
+            JSONArray bindings = object.getJSONObject("results").getJSONArray("bindings");
+            Model model = ModelFactory.createDefaultModel();
+            model.setNsPrefix("zap", "http://localhost:8083/vocabulary/autorskopravo/");
+            for (int i = 0; i < bindings.length(); i++) {
+                JSONObject binding = bindings.getJSONObject(i);
+                String s = binding.getJSONObject("s").getString("value");
+                String p = binding.getJSONObject("p").getString("value");
+                String o = binding.getJSONObject("o").getString("value");
+                org.apache.jena.rdf.model.Resource subject = model.createResource(s);
+                Property predikat = model.createProperty(p);
+                subject.addProperty(predikat, o);
             }
-            System.out.println();
+            model.write(baos, "RDF/XML");
+
+        } else if (tip.equals("json")) {
+            PrintStream ps = new PrintStream(baos);
+            ResultSetFormatter.outputAsJSON(ps, results);
+            ps.close();
+        } else {
+            System.out.println("nije dobar format");
         }
+        String output = baos.toString();
 
 
         query.close();
 
         System.out.println("[INFO] End.");
+        return output;
     }
 
     private void generatePDF(String INPUT_FILE, String XSL_FILE, String OUTPUT_FILE) throws Exception {
@@ -831,8 +974,184 @@ public class RequestController {
 
     }
 
+    @PostMapping("/odbijenizahtev")
+    public ResponseEntity<String> denyrequest(@RequestBody ZahtevDataDTO zahtevDataDTO) throws Exception {
+        // Process the rowData and perform the delete operation
+        // Return appropriate response
+
+        System.out.println(zahtevDataDTO);
+        System.out.println(zahtevDataDTO.getSifra());
+        ExistConnProperties conn = ExistConnProperties.loadProperties();
+        String[] args = {"/db/sample/library"};
+
+        List<Resurs> resultList = retrieve(conn, args);
+
+        for (Resurs r : resultList) {
+            System.out.println(r.getId());
+            if (r.getId().equals("a_" + zahtevDataDTO.getSifra() + ".xml")) {
+                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+                // Parse the XML string using an InputSource
+                InputSource inputSource = new InputSource(new StringReader(r.getContent()));
+                Document doc = docBuilder.parse(inputSource);
+                addDatum(doc);
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+
+                // Convert the Document to a DOMSource
+                DOMSource source = new DOMSource(doc);
+
+                // Create a StringWriter to hold the XML string
+                StringWriter writer = new StringWriter();
+
+                // Transform the DOMSource to a StreamResult (XML string)
+                StreamResult result = new StreamResult(writer);
+                transformer.transform(source, result);
+
+                // Get the XML string from the StringWriter
+                String xmlString = writer.toString();
+                r.setContent(xmlString);
+                odbijeniZahtevi.add(r);
+                delete(conn, args, r);
+                break;
+            }
+        }
+
+        store(ExistConnProperties.loadProperties(), new String[]{"/db/sample/odbijeni"}, odbijeniZahtevi);
+
+        return ResponseEntity.ok("Request denied  successfully");
+    }
+
+    @PostMapping("/prihvatizahtev")
+    public ResponseEntity<String> acceptrequest(@RequestBody ZahtevDataDTO zahtevDataDTO) throws Exception {
+        // Process the rowData and perform the delete operation
+        // Return appropriate response
+
+        System.out.println(zahtevDataDTO);
+        System.out.println(zahtevDataDTO.getSifra());
+        ExistConnProperties conn = ExistConnProperties.loadProperties();
+        String[] args = {"/db/sample/library"};
+
+        List<Resurs> resultList = retrieve(conn, args);
+
+        for (Resurs r : resultList) {
+            System.out.println(r.getId());
+            if (r.getId().equals("a_" + zahtevDataDTO.getSifra() + ".xml")) {
+                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+                // Parse the XML string using an InputSource
+                InputSource inputSource = new InputSource(new StringReader(r.getContent()));
+                Document doc = docBuilder.parse(inputSource);
+                addDatum(doc);
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+
+                // Convert the Document to a DOMSource
+                DOMSource source = new DOMSource(doc);
+
+                // Create a StringWriter to hold the XML string
+                StringWriter writer = new StringWriter();
+
+                // Transform the DOMSource to a StreamResult (XML string)
+                StreamResult result = new StreamResult(writer);
+                transformer.transform(source, result);
+
+                // Get the XML string from the StringWriter
+                String xmlString = writer.toString();
+                r.setContent(xmlString);
+                prihvaceniZahtevi.add(r);
+                delete(conn, args, r);
+                break;
+            }
+        }
+
+        store(ExistConnProperties.loadProperties(), new String[]{"/db/sample/prihvaceni"}, prihvaceniZahtevi);
+
+        return ResponseEntity.ok("Request accepted succefully successfully");
+    }
+
+    @GetMapping(value = "/pdf/{id}", produces = "application/pdf")
+    public ResponseEntity<byte[]> getpdf(@PathVariable String id) {
+        try {
+            String putanja = "../../pdf/a_" + id + ".pdf";
+            Path path = Paths.get(putanja);
+            if (!Files.exists(path)) {
+                return ResponseEntity.notFound().build();
+            }
+            byte[] pdf = Files.readAllBytes(path);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentLength(pdf.length);
+            headers.setContentDisposition(ContentDisposition.builder("inline").filename("a_" + id + ".pdf").build());
+
+            return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+
+    }
+
+    @GetMapping(value = "/xhtml/{id}", produces = "application/xhtml+xml")
+    public ResponseEntity<byte[]> getxhtml(@PathVariable String id) {
+
+        try {
+            String putanja = "../../xhtml/a_" + id + ".xhtml";
+            Path path = Paths.get(putanja);
+            if (!Files.exists(path)) {
+                return ResponseEntity.notFound().build();
+            }
+            byte[] pdf = Files.readAllBytes(path);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_XHTML_XML);
+            headers.setContentLength(pdf.length);
+            headers.setContentDisposition(ContentDisposition.builder("inline").filename("a_" + id + ".xhtml").build());
+
+            return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping(value = "/rdf", produces = "application/rdf+xml")
+    public ResponseEntity<String> getrdf() {
+        try {
+
+            String rdf = readRDF(FusekiAuthProperties.loadProperties(), "rdf");
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf("application/rdf+xml"));
+            headers.setContentLength(rdf.length());
+            headers.setContentDisposition(ContentDisposition.builder("inline").filename("a_metadata.rdf").build());
+
+            return new ResponseEntity<>(rdf, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/json")
+    public ResponseEntity<String> getjson() {
+        try {
+
+            String rdf = readRDF(FusekiAuthProperties.loadProperties(), "json");
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentLength(rdf.length());
+            headers.setContentDisposition(ContentDisposition.builder("inline").filename("a_metadata.json").build());
+
+            return new ResponseEntity<>(rdf, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @GetMapping("/zahtevi")
-    public ResponseEntity<List<Resurs>>  handleFormData() {
+    public ResponseEntity<List<Resurs>> handleFormData() {
 
         try {
             ExistConnProperties conn = ExistConnProperties.loadProperties();
@@ -849,6 +1168,112 @@ public class RequestController {
         }
     }
 
+    @GetMapping("/izvestaji/{start}_{end}")
+    public ResponseEntity<int[]> izvestaji(@PathVariable String start,@PathVariable String end) {
+        try{
+            int niz[]=new int[]{0,0,0};
+            ExistConnProperties conn = ExistConnProperties.loadProperties();
+            String[] args = {"/db/sample/library"};
+
+            List<Resurs> resultList = retrieve(conn, args);
+            for (Resurs r: resultList ) {
+                String datum=getDatumPodnosenja(r.getContent());
+                if (checkDATE(datum,start,end)){
+                    niz[0]++;
+                }
+            }
+            String[] args2 = {"/db/sample/odbijeni"};
+
+            List<Resurs> resultList2 = retrieve(conn, args2);
+            for (Resurs r: resultList2 ) {
+                String datum=getDatumPodnosenja(r.getContent());
+                if (checkDATE(datum,start,end)){
+                    niz[1]++;
+                }
+            }
+            String[] args3 = {"/db/sample/prihvaceni"};
+
+            List<Resurs> resultList3 = retrieve(conn, args3);
+            for (Resurs r: resultList3 ) {
+                String datum=getDatumPodnosenja(r.getContent());
+                if (checkDATE(datum,start,end)){
+                    niz[2]++;
+                }
+            }
+            return ResponseEntity.ok(niz);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    public static boolean checkDATE(String a,String start,String end){
+           DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+           DateTimeFormatter dtf2=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+           LocalDate adatum =  LocalDate.parse(a,dtf2);
+           LocalDate startdatum = LocalDate.parse(start,dtf);
+        LocalDate enddatum = LocalDate.parse(end,dtf);
+
+        return !adatum.isAfter(enddatum)&&!adatum.isBefore(startdatum);
+
+    }
+    public static String getDatumPodnosenja(String xml) throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+        // Parse the XML string using an InputSource
+        InputSource inputSource = new InputSource(new StringReader(xml));
+        Document doc = docBuilder.parse(inputSource);
+        NodeList drugiglavnicvor = doc.getElementsByTagName("podaci_o_zahtevu");
+        for (int i = 0; i < drugiglavnicvor.getLength(); i++) {
+            Node studentNode = drugiglavnicvor.item(i);
+            if (studentNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element studentElement = (Element) studentNode;
+                String studentId = studentElement.getElementsByTagName("datum_podnosenja").item(0).getTextContent();
+                return studentId;
+
+
+            }
+        }
+        return null;
+    }
+    public static String getDatumResenja(String xml) throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+        // Parse the XML string using an InputSource
+        InputSource inputSource = new InputSource(new StringReader(xml));
+        Document doc = docBuilder.parse(inputSource);
+        NodeList drugiglavnicvor = doc.getElementsByTagName("podaci_o_zahtevu");
+        for (int i = 0; i < drugiglavnicvor.getLength(); i++) {
+            Node studentNode = drugiglavnicvor.item(i);
+            if (studentNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element studentElement = (Element) studentNode;
+                String studentId = studentElement.getElementsByTagName("datum_resenja").item(0).getTextContent();
+                 return studentId;
+
+
+            }
+        }
+        return null;
+    }
+    @GetMapping("/prihvacenizahtevi")
+    public ResponseEntity<List<Resurs>> prihvacenizahtevi() {
+
+        try {
+            ExistConnProperties conn = ExistConnProperties.loadProperties();
+            String[] args = {"/db/sample/prihvaceni"};
+
+            List<Resurs> resultList = retrieve(conn, args);
+
+
+            System.out.println("prihvaceni:" + resultList.toString());
+            return ResponseEntity.ok(resultList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     @PostMapping("/podaciFormeA1")
     public ResponseEntity<String> handleFormData(@RequestBody FormDataDTO formData) {
@@ -870,7 +1295,7 @@ public class RequestController {
 
             // Create and append elements similar to the original method
             createA1(doc, rootElement, formData);
-            String a1File = "../../xml/"+xmlFileName;
+            String a1File = "../../xml/" + xmlFileName;
             try (FileOutputStream output = new FileOutputStream(a1File)) {
                 writeXml(doc, output);
 
@@ -912,8 +1337,11 @@ public class RequestController {
 
 
             resultList.add(resurs);
-            generateXHTML(a1File, "../../xsl/a1html.xsl", "../../xhtml/a_"+timestamp+".xhtml");
-
+            generateXHTML(a1File, "../../xsl/a1html.xsl", "../../xhtml/a_" + timestamp + ".xhtml");
+            generatePDF(a1File, "../../xsl/a1.xsl", "../../pdf/a_" + timestamp + ".pdf");
+            MetadataExtractor extractorA1 = new MetadataExtractor(a1File, "../../rdf/a_" + timestamp + ".rdf");
+            extractorA1.test();
+            writeRDF(FusekiAuthProperties.loadProperties(), "../../rdf/a_" + timestamp + ".rdf", A1_NAMED_GRAPH_URI);
             store(conn, args, resultList);
             return ResponseEntity.ok("Form data received successfully!");
 
@@ -991,20 +1419,25 @@ public class RequestController {
 
 
         System.out.println("xml:" + resultList);
+        String base = "../../xml/";
+        for (Resurs resurs : resultList) {
+            String xml = base + resurs.getId();
+            String ime = resurs.getId().split(".")[0];
+            generatePDF(xml, "../../xsl/a1.xsl", "../../pdf/" + ime + ".pdf");
+            generateXHTML(xml, "../../xsl/a1html.xsl", "../../xhtml/" + ime + ".xhtml");
 
+
+            // izvlacenje metapodataka
+            MetadataExtractor extractorA1 = new MetadataExtractor(xml, "../../rdf/" + ime + ".rdf");
+            extractorA1.test();
+
+            // upis i citanje RDF
+            writeRDF(FusekiAuthProperties.loadProperties(), "../../rdf/" + ime + ".rdf", A1_NAMED_GRAPH_URI);
+            String rdf = readRDF(FusekiAuthProperties.loadProperties(), "rdf");
+        }
 
         // generisanje PDF i XHTML za A1
-        generatePDF(a1File, "../../xsl/a1.xsl", "../../pdf/a1.pdf");
-        generateXHTML(a1File, "../../xsl/a1html.xsl", "../../xhtml/a1.xhtml");
 
-
-        // izvlacenje metapodataka
-        MetadataExtractor extractorA1 = new MetadataExtractor(a1File, "../../rdf/a1_metadata.rdf");
-        extractorA1.test();
-
-        // upis i citanje RDF
-        writeRDF(FusekiAuthProperties.loadProperties(), "../../rdf/a1_metadata.rdf", A1_NAMED_GRAPH_URI);
-        readRDF(FusekiAuthProperties.loadProperties());
 
     }
 
