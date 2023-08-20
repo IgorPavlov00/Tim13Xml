@@ -16,7 +16,7 @@ export class TrademarkRequestService {
         this.ngZone.run(() => {
             this.http.post<any>('http://localhost:8082/requests/add', formData).subscribe(
                 (response) => {
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/evidencija-zigova']);
                 },
                 (error) => {
                     console.log(error);

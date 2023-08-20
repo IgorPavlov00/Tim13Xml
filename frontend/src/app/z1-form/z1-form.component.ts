@@ -1,16 +1,16 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {TrademarkRequest} from "../model/trademark/trademark-request";
-import {Router} from "@angular/router";
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
-import {MatStepperIntl} from "@angular/material/stepper";
-import {MatDialog} from "@angular/material/dialog";
-import {Person} from "../model/trademark/person";
-import {Trademark} from "../model/trademark/trademark";
-import {Tax} from "../model/trademark/tax";
-import {Attachments} from "../model/trademark/attachments";
-import {TrademarkRequestService} from "../servisi/trademark-request.service";
-import {RequestData} from "../model/trademark/request-data";
+import { Component, NgZone, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { TrademarkRequest } from "../model/trademark/trademark-request";
+import { Router } from "@angular/router";
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatStepperIntl } from "@angular/material/stepper";
+import { MatDialog } from "@angular/material/dialog";
+import { Person } from "../model/trademark/person";
+import { Trademark } from "../model/trademark/trademark";
+import { Tax } from "../model/trademark/tax";
+import { Attachments } from "../model/trademark/attachments";
+import { TrademarkRequestService } from "../servisi/trademark-request.service";
+import { RequestData } from "../model/trademark/request-data";
 
 @Component({
   selector: 'app-z1-form',
@@ -20,17 +20,17 @@ import {RequestData} from "../model/trademark/request-data";
 export class Z1FormComponent implements OnInit {
   request: TrademarkRequest = new TrademarkRequest();
   pdfNames = [
-    {"index": 0, "name": "primerak.pdf"},
-    {"index": 1, "name": "lista_robe_i_usluga.pdf"},
-    {"index": 2, "name": "punomocje.pdf"},
-    {"index": 3, "name": "ranije_prilozeno_punomocje.pdf"},
-    {"index": 4, "name": "naknadno_prilozeno_punomocje.pdf"},
-    {"index": 5, "name": "opsti_akt_o_zigu.pdf"},
-    {"index": 6, "name": "dokaz_o_pravu_prvenstva.pdf"},
-    {"index": 7, "name": "dokaz_o_uplati_takse.pdf"}
+    { "index": 0, "name": "primerak.pdf" },
+    { "index": 1, "name": "lista_robe_i_usluga.pdf" },
+    { "index": 2, "name": "punomocje.pdf" },
+    { "index": 3, "name": "ranije_prilozeno_punomocje.pdf" },
+    { "index": 4, "name": "naknadno_prilozeno_punomocje.pdf" },
+    { "index": 5, "name": "opsti_akt_o_zigu.pdf" },
+    { "index": 6, "name": "dokaz_o_pravu_prvenstva.pdf" },
+    { "index": 7, "name": "dokaz_o_uplati_takse.pdf" }
   ];
 
-  classNumbers = Array.from({length: 45}, (_, i) => i + 1);
+  classNumbers = Array.from({ length: 45 }, (_, i) => i + 1);
   total: number = 0;
   requesterType: boolean = true;
   attorneyType: boolean = true;
@@ -42,12 +42,28 @@ export class Z1FormComponent implements OnInit {
 
   pdfFiles: File[] = [];
   imageFile: File | null = null;
+  get lastNameRequesterValidator() {
+    return this.requesterType ? Validators.required : null;
+  }
+  get lastNameAttorneyValidator() {
+    return this.attorneyType ? Validators.required : null;
+  }
+  get lastNameRepresentativeValidator() {
+    return this.representativeType ? Validators.required : null;
+  }
+  get isOtherValidator() {
+    return this.isOther ? Validators.required : null;
+  }
+  get hasAttorneyValidator() {
+    return this.hasAttorney ? Validators.required : null;
+  }
+
 
   hasRight: boolean = false;
   requesterFormGroup = this._formBuilder.group({
     personType: ['', Validators.required],
     name: ['', Validators.required],
-    lastName: ['', this.requesterType ? Validators.required : null],
+    lastName: ['', this.lastNameRequesterValidator],
     street: ['', Validators.required],
     postCode: ['', [Validators.required, Validators.pattern(/^[1-9]\d{4}$/)]],
     city: ['', Validators.required],
@@ -59,7 +75,7 @@ export class Z1FormComponent implements OnInit {
   attorneyFormGroup = this._formBuilder.group({
     personType: ['', Validators.required],
     name: ['', Validators.required],
-    lastName: ['', this.attorneyType ? Validators.required : null],
+    lastName: ['', this.lastNameAttorneyValidator],
     street: ['', Validators.required],
     postCode: ['', [Validators.required, Validators.pattern(/^[1-9]\d{4}$/)]],
     city: ['', Validators.required],
@@ -71,7 +87,7 @@ export class Z1FormComponent implements OnInit {
   representativeFormGroup = this._formBuilder.group({
     personType: ['', Validators.required],
     name: ['', Validators.required],
-    lastName: ['', this.representativeType ? Validators.required : null],
+    lastName: ['', this.lastNameRepresentativeValidator],
     street: ['', Validators.required],
     postCode: ['', [Validators.required, Validators.pattern(/^[1-9]\d{4}$/)]],
     city: ['', Validators.required],
@@ -84,7 +100,7 @@ export class Z1FormComponent implements OnInit {
   trademarkFormGroup = this._formBuilder.group({
     trademarkType: ['', Validators.required],
     glyphType: ['', Validators.required],
-    other: ['', this.isOther ? Validators.required : null],
+    other: ['', this.isOtherValidator],
     image: [null],
     color: [''],
     transliteration: [''],
@@ -102,7 +118,7 @@ export class Z1FormComponent implements OnInit {
   attachmentsFormGroup = this._formBuilder.group({
     example: ['', Validators.required],
     list: ['', Validators.required],
-    attorney: ['', this.hasAttorney ? Validators.required : null],
+    attorney: ['', this.hasAttorneyValidator],
     earlyGiven: [''],
     laterGiven: [''],
     act: ['', Validators.required],
@@ -110,16 +126,16 @@ export class Z1FormComponent implements OnInit {
     taxProof: ['', Validators.required],
   })
   trademarkTypeOptions = [
-    {label: "Individualni žig", value: "individualni"},
-    {label: "Kolektivni žig", value: "kolektivni"},
-    {label: "Žig garancije", value: "garancija"},
+    { label: "Individualni žig", value: "individualni" },
+    { label: "Kolektivni žig", value: "kolektivni" },
+    { label: "Žig garancije", value: "garancija" },
   ];
   glyphTypeOptions = [
-    {label: "Verbalni znak", value: "verbalni"},
-    {label: "Grafički znak; boja, kombinacija boja", value: "graficki"},
-    {label: "Kombinovani znak", value: "kombinovani"},
-    {label: "Trodimenzionalni znak", value: "trodimenzionalni"},
-    {label: "Druga vrsta znaka", value: "drugo"},
+    { label: "Verbalni znak", value: "verbalni" },
+    { label: "Grafički znak; boja, kombinacija boja", value: "graficki" },
+    { label: "Kombinovani znak", value: "kombinovani" },
+    { label: "Trodimenzionalni znak", value: "trodimenzionalni" },
+    { label: "Druga vrsta znaka", value: "drugo" },
   ];
 
   constructor(private http: HttpClient, private router: Router, private _formBuilder: FormBuilder, private _matStepperIntl: MatStepperIntl, public dialog: MatDialog, private ngZone: NgZone, private requestService: TrademarkRequestService) {
@@ -309,7 +325,7 @@ export class Z1FormComponent implements OnInit {
     this.request.requestData = requestData;
 
     const formData = new FormData();
-    const emptyFile = new Blob([], {type: 'application/pdf'});
+    const emptyFile = new Blob([], { type: 'application/pdf' });
 
     formData.append('request', JSON.stringify(this.request));
     const pdfKeys = ["example", "list", "attorney", "earlyGiven", "laterGiven", "act", "rightProof", "taxProof"];
@@ -341,9 +357,9 @@ export class Z1FormComponent implements OnInit {
         this.updateFormValidators();
       });
 
-      // this.trademarkFormGroup.get('right')?.valueChanges.subscribe(() => {
-      //   this.updateFormValidators();
-      // });
+      this.trademarkFormGroup.get('right')?.valueChanges.subscribe(() => {
+        this.updateFormValidators();
+      });
     });
   }
 

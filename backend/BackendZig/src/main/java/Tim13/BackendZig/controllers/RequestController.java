@@ -77,7 +77,6 @@ public class RequestController {
         FILENAME_MAPPING.put("act", "opsti_akt_o_zigu.pdf");
         FILENAME_MAPPING.put("rightProof", "dokaz_o_pravu_prvenstva.pdf");
         FILENAME_MAPPING.put("taxProof", "dokaz_o_uplati_takse.pdf");
-        FILENAME_MAPPING.put("download", "preuzimanje.pdf");
     }
 
     private void generateRDF(Request req) {
@@ -114,10 +113,15 @@ public class RequestController {
             req.getTrademark().setImageLink("http://localhost:8082/" + req.getRequestData().getRequestId() + "/img");
 
             String requestFolder = BASE_FOLDER + req.getRequestData().getRequestId() + ATTACHMENTS_FOLDER;
-            File directory = new File(requestFolder);
-            if (!directory.exists()) {
-                directory.mkdir();
+
+            Path dirPath = Paths.get(requestFolder);
+
+            if (!Files.exists(dirPath)) {
+                Files.createDirectories(dirPath);
             }
+
+            logger.info("Directory ensured at: {}", dirPath.toAbsolutePath());
+
 
             if (img != null) {
                 String filename = img.getOriginalFilename();
@@ -228,11 +232,14 @@ public class RequestController {
             logger.info("PDF URL: {}.", pdfUrlName);
             String requestFolder = BASE_FOLDER + requestID + "/";
 
-            String pdfName = FILENAME_MAPPING.get(pdfUrlName);
+            String pdfName;
+            if (pdfUrlName.equals("download")) {
+                pdfName = requestID + ".pdf";
+            } else {
+                pdfName = FILENAME_MAPPING.get(pdfUrlName);
+            }
             if (pdfName == null) {
                 return ResponseEntity.badRequest().build();
-            } else if (pdfName.equals("preuzimanje.pdf")) {
-                pdfName = requestID + ".pdf";
             }
             logger.info("PDF NAME: {}.", pdfName);
 

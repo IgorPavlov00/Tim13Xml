@@ -5,7 +5,7 @@
 }
 
 .app-container {
-  --app-bg: #101827;
+  --app-bg: #101827a2;
   --sidebar: rgba(21, 30, 47, 1);
   --sidebar-main-color: #fff;
   --table-border: #1a2131;
@@ -291,7 +291,6 @@ body {
   width: 100%;
   max-width: 320px;
   transition: 0.2s;
-  margin-right: 20px;
 }
 
 .light .search-bar {

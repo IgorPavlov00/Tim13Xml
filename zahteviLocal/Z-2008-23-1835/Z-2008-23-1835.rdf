@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:zap="http://localhost:8083/vocabulary/autorskopravo/" xmlns:zz="http://localhost:8082/vocabulary/zig/">
+<rdf:Description rdf:about="http://localhost:8082/Z-2008-23-1835">
+<zz:datum_podnosenja>20-08-2023</zz:datum_podnosenja>
+<zz:ime_podnosioca>Sara</zz:ime_podnosioca>
+<zz:prezime_podnosioca>Sarci</zz:prezime_podnosioca>
+<zz:ime_punomocnika/>
+<zz:prezime_punomocnika/>
+<zz:ukupno>3000.0</zz:ukupno>
+</rdf:Description>
+</rdf:RDF>

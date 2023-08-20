@@ -34,6 +34,7 @@ import {ReportsComponent} from './reports/reports.component';
 import {TrademarksComponent} from './trademarks/trademarks.component';
 import {TrademarkComponent} from './trademark/trademark.component';
 import { EvidencijaAComponent } from './evidencija-a/evidencija-a.component';
+import { TrademarksUserComponent } from './trademarks-user/trademarks-user.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { EvidencijaAComponent } from './evidencija-a/evidencija-a.component';
     TrademarksComponent,
     TrademarkComponent,
     EvidencijaAComponent,
+    TrademarksUserComponent
   ],
   imports: [
     BrowserModule,
