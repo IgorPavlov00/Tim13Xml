@@ -22,6 +22,7 @@ export class FormDataService {
   getPrihvaceniZahtevi(): Observable<any> {
     return this.http.get<any>(this.url + 'prihvacenizahtevi');
   }
+
   rejectData(id: Zahtev): Observable<any> {
 
      return this.http.post<any>(this.url+'odbijenizahtev', id);

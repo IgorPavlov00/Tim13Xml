@@ -35,7 +35,11 @@ public class ZahtevDataDTO {
     private String autorIzvornogDela;
     private String poslovno_ime;
 
-    public ZahtevDataDTO(String sifra, String datumPodnosenja, String ime, String prezime, String ulicaPodnosioca, String mestoPodnosioca, String drzavljanstvoPodnosioca, String pseudonimPodnosioca, String telefonPodnosioca, String emailPodnosioca, String obrazac, String vrstaAutorskogDela, String formaAutorskogDela, String stvorenoURadnomOdnosu, String imeAutoraZiv, String prezimeAutoraZiv, String ulicaAutoraZiv, String mestoAutoraZiv, String drzavljanstvoAutoraZiv, String pseudonimAutoraZiv, String opisAutorskogDela, String primerAutorskogDela, String imePunomocnika, String prezimePunomocnika, String ulicaPunomocnika, String mestoPunomocnika, String tipkorisnika, String naslov, String alternativniNaslov, String naslovIzvornogDela, String nacinKoriscenja, String autorIzvornogDela, String poslovno_ime) {
+    private String ime_sluzbenika;
+    private String prezime_sluzbenika;
+    private String razlog;
+
+    public ZahtevDataDTO(String sifra, String datumPodnosenja, String ime, String prezime, String ulicaPodnosioca,String ime_sluzbenika,String prezime_sluzbenika,String razlog, String mestoPodnosioca, String drzavljanstvoPodnosioca, String pseudonimPodnosioca, String telefonPodnosioca, String emailPodnosioca, String obrazac, String vrstaAutorskogDela, String formaAutorskogDela, String stvorenoURadnomOdnosu, String imeAutoraZiv, String prezimeAutoraZiv, String ulicaAutoraZiv, String mestoAutoraZiv, String drzavljanstvoAutoraZiv, String pseudonimAutoraZiv, String opisAutorskogDela, String primerAutorskogDela, String imePunomocnika, String prezimePunomocnika, String ulicaPunomocnika, String mestoPunomocnika, String tipkorisnika, String naslov, String alternativniNaslov, String naslovIzvornogDela, String nacinKoriscenja, String autorIzvornogDela, String poslovno_ime) {
         this.sifra = sifra;
         this.datumPodnosenja = datumPodnosenja;
         this.ime = ime;
@@ -69,6 +73,33 @@ public class ZahtevDataDTO {
         this.nacinKoriscenja = nacinKoriscenja;
         this.autorIzvornogDela = autorIzvornogDela;
         this.poslovno_ime = poslovno_ime;
+        this.ime_sluzbenika=ime_sluzbenika;
+        this.prezime_sluzbenika=prezime_sluzbenika;
+        this.razlog=razlog;
+    }
+
+    public String getIme_sluzbenika() {
+        return ime_sluzbenika;
+    }
+
+    public void setIme_sluzbenika(String ime_sluzbenika) {
+        this.ime_sluzbenika = ime_sluzbenika;
+    }
+
+    public String getPrezime_sluzbenika() {
+        return prezime_sluzbenika;
+    }
+
+    public void setPrezime_sluzbenika(String prezime_sluzbenika) {
+        this.prezime_sluzbenika = prezime_sluzbenika;
+    }
+
+    public String getRazlog() {
+        return razlog;
+    }
+
+    public void setRazlog(String razlog) {
+        this.razlog = razlog;
     }
 
     public String getSifra() {
@@ -371,6 +402,9 @@ public class ZahtevDataDTO {
                 ", nacinKoriscenja='" + nacinKoriscenja + '\'' +
                 ", autorIzvornogDela='" + autorIzvornogDela + '\'' +
                 ", poslovno_ime='" + poslovno_ime + '\'' +
+                ", ime_sluzbenika='" + ime_sluzbenika + '\'' +
+                ", prezime_sluzbenika='" + prezime_sluzbenika + '\'' +
+                ", razlog='" + razlog + '\'' +
                 '}';
     }
 }

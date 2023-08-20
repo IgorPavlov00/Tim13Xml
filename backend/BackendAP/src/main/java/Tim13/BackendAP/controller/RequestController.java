@@ -263,6 +263,27 @@ public class RequestController {
 
     }
 
+    public static void addSluzbenik(Document doc,ZahtevDataDTO dto){
+        NodeList drugiglavnicvor = doc.getElementsByTagName("podaci_o_zahtevu");
+        for (int i = 0; i < drugiglavnicvor.getLength(); i++) {
+            Node studentNode = drugiglavnicvor.item(i);
+            if (studentNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element studentElement = (Element) studentNode;
+                Element ime_sluzbenika = doc.createElement("ime_sluzbenika");
+                ime_sluzbenika.setTextContent(dto.getIme_sluzbenika());
+                Element prezime_sluzbenika = doc.createElement("prezime_sluzbenika");
+                prezime_sluzbenika.setTextContent(dto.getPrezime_sluzbenika());
+                Element razlog = doc.createElement("razlog");
+                razlog.setTextContent(dto.getRazlog());
+                studentElement.appendChild(ime_sluzbenika);
+                studentElement.appendChild(prezime_sluzbenika);
+
+            }
+        }
+
+    }
+
+
     private static void createA1(Document doc, Element rootElement, FormDataDTO formData) {
         // Create "podaci_o_zavodu" element
         Element podaci_o_zavodu = doc.createElement("podaci_o_zavodu");
@@ -996,6 +1017,7 @@ public class RequestController {
                 InputSource inputSource = new InputSource(new StringReader(r.getContent()));
                 Document doc = docBuilder.parse(inputSource);
                 addDatum(doc);
+                addSluzbenik(doc,zahtevDataDTO);
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
 
@@ -1045,6 +1067,7 @@ public class RequestController {
                 InputSource inputSource = new InputSource(new StringReader(r.getContent()));
                 Document doc = docBuilder.parse(inputSource);
                 addDatum(doc);
+                addSluzbenik(doc,zahtevDataDTO);
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
 

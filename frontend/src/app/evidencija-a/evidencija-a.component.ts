@@ -161,5 +161,43 @@ export class EvidencijaAComponent {
       }
     );
   }
+  search(): void {
+    const loweredSearchTerm = this.searchInput.toLowerCase();
+    this.filteredData = this.retrievedData.filter((item: { sifra: string; datumPodnosenja: string; ime: string; prezime: string; ulicaPodnosioca: string; mestoPodnosioca: string; drzavljanstvoPodnosioca: string; pseudonimPodnosioca: string; telefonPodnosioca: string; emailPodnosioca: string; obrazac: string; naslov: string; alternativniNaslov: string; vrstaAutorskogDela: string; formaAutorskogDela: string; stvorenoURadnomOdnosu: string; nacinKoriscenja: string; imeAutoraZiv: string; prezimeAutoraZiv: string; ulicaAutoraZiv: string; mestoAutoraZiv: string; drzavljanstvoAutoraZiv: string; pseudonimAutoraZiv: string; opisAutorskogDela: string; primerAutorskogDela: string; imePunomocnika: string; prezimePunomocnika: string; ulicaPunomocnika: string; mestoPunomocnika: string; naslovIzvornogDela: string; autorIzvornogDela: string; }) => (
+
+      item.sifra.toLowerCase().includes(loweredSearchTerm) ||
+      item.datumPodnosenja.toLowerCase().includes(loweredSearchTerm) ||
+      item.ime.toLowerCase().includes(loweredSearchTerm) ||
+      item.prezime.toLowerCase().includes(loweredSearchTerm) ||
+      item.ulicaPodnosioca.toLowerCase().includes(loweredSearchTerm) ||
+      item.mestoPodnosioca.toLowerCase().includes(loweredSearchTerm) ||
+      item.drzavljanstvoPodnosioca.toLowerCase().includes(loweredSearchTerm) ||
+      item.pseudonimPodnosioca.toLowerCase().includes(loweredSearchTerm) ||
+      item.telefonPodnosioca.toLowerCase().includes(loweredSearchTerm) ||
+      item.emailPodnosioca.toLowerCase().includes(loweredSearchTerm) ||
+      item.obrazac.toLowerCase().includes(loweredSearchTerm) ||
+      item.naslov.toLowerCase().includes(loweredSearchTerm) ||
+      item.alternativniNaslov.toLowerCase().includes(loweredSearchTerm) ||
+      item.vrstaAutorskogDela.toLowerCase().includes(loweredSearchTerm) ||
+      item.formaAutorskogDela.toLowerCase().includes(loweredSearchTerm) ||
+      item.stvorenoURadnomOdnosu.toLowerCase().includes(loweredSearchTerm) ||
+      item.nacinKoriscenja.toLowerCase().includes(loweredSearchTerm) ||
+      item.imeAutoraZiv.toLowerCase().includes(loweredSearchTerm) ||
+      item.prezimeAutoraZiv.toLowerCase().includes(loweredSearchTerm) ||
+      item.ulicaAutoraZiv.toLowerCase().includes(loweredSearchTerm) ||
+      item.mestoAutoraZiv.toLowerCase().includes(loweredSearchTerm) ||
+      item.drzavljanstvoAutoraZiv.toLowerCase().includes(loweredSearchTerm) ||
+      item.pseudonimAutoraZiv.toLowerCase().includes(loweredSearchTerm) ||
+      item.opisAutorskogDela.toLowerCase().includes(loweredSearchTerm) ||
+      item.primerAutorskogDela.toLowerCase().includes(loweredSearchTerm) ||
+      item.imePunomocnika.toLowerCase().includes(loweredSearchTerm) ||
+      item.prezimePunomocnika.toLowerCase().includes(loweredSearchTerm) ||
+      item.ulicaPunomocnika.toLowerCase().includes(loweredSearchTerm) ||
+      item.mestoPunomocnika.toLowerCase().includes(loweredSearchTerm) ||
+      item.naslovIzvornogDela.toLowerCase().includes(loweredSearchTerm) ||
+      item.autorIzvornogDela.toLowerCase().includes(loweredSearchTerm)
+
+    ));
+  }
 
 }

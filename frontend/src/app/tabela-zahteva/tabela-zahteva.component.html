@@ -167,9 +167,18 @@
 
         <div class="product-cell price">Link<button class="sort-button">
         </button></div>
-        <div class="product-cell price">Preuzimanje<button class="sort-button">
+        <div class="product-cell price"><button class="sort-button">
         </button></div>
-        <div class="product-cell price">Prihvati/Odbij<button class="sort-button">
+        <div class="product-cell price" style="margin-right:120px ">Preuzimanje<button class="sort-button">
+        </button></div>
+        <div class="product-cell price">Ime<button class="sort-button">
+        </button></div>
+        <div class="product-cell price">Prezime<button class="sort-button">
+        </button></div>
+        <div class="product-cell price">Razlog<button class="sort-button">
+        </button></div>
+
+        <div class="product-cell price"><button class="sort-button">
         </button></div>
       </div>
       <div class="products-row" *ngFor="let p of filteredData">
@@ -183,13 +192,17 @@
 
         <div class="product-cell sales"><span class="cell-label"></span>{{p.ime}}</div>
 
+
         <div class="product-cell price">
           <span class="cell-label"></span>
           <a href="javascript:void(0);" (click)="openPopup(p)">Link</a>
         </div>
-
         <div class="product-cell price"> <button class="btn-hover color-1" (click)="getpdf(p.sifra)">PDF</button>
           <button class="btn-hover color-2" (click)="getxhtml(p.sifra)">XHTML</button>  </div>
+        <div class="product-cell sales">  <input class="fields " placeholder="Ime" type="text" name="ime_sluzbenika" [(ngModel)]="zahtevData.ime_sluzbenika"></div>
+        <div class="product-cell sales">  <input class="fields " placeholder="Prezime" type="text" name="prezime_sluzbenika"  [(ngModel)]="zahtevData.prezime_sluzbenika"></div>
+        <div class="product-cell sales">  <input class="fields " placeholder="Razlog" type="text" name="razlog"  [(ngModel)]="zahtevData.razlog"></div>
+
         <div class="product-cell price">
           <button type="button" class="btn btn-info btn-circle btn-xl" (click)="onApprove(p)"><i class="fa fa-check"></i>
           </button>
@@ -201,5 +214,9 @@
 
     </div>
     </div>
+
+
   </div>
+
+
 

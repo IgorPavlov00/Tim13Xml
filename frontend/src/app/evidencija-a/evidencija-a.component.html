@@ -42,7 +42,7 @@
         </a>
       </li>
       <li class="sidebar-list-item active">
-        <a routerLink="/evidencija-zigova">
+        <a routerLink="/zigovi">
           <svg class="feather feather-inbox" fill="none" height="18" stroke="currentColor" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
             <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
@@ -57,7 +57,7 @@
   <div class="app-content">
     <div class="app-content-header">
       <h1 class="app-content-headerText">Prihvaceni zahtevi</h1>
-
+      <input class="search-bar" placeholder="Search..." type="text" [(ngModel)]="searchInput" (input)="search()">
 
     </div>
     <div class="app-content-actions">

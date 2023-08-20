@@ -165,7 +165,9 @@ export class TabelaZahtevaComponent {
   }
   onApprove(xml:Zahtev) {
     console.log(xml)
-
+    xml.ime_sluzbenika = this.zahtevData.ime_sluzbenika;
+    xml.prezime_sluzbenika= this.zahtevData.prezime_sluzbenika;
+    xml.razlog= this.zahtevData.razlog;
 
     this.formDataService.acceptData(xml).subscribe(
       (response) => {
@@ -180,11 +182,19 @@ export class TabelaZahtevaComponent {
         // Handle errors if any
       }
     );
+    const index = this.filteredData.indexOf(xml);
+    if (index !== -1) {
+      this.filteredData.splice(index, 1);
+    }
   }
 
 
   onDelete(xml:Zahtev) {
     console.log(xml)
+
+    xml.ime_sluzbenika = this.zahtevData.ime_sluzbenika;
+    xml.prezime_sluzbenika= this.zahtevData.prezime_sluzbenika;
+    xml.razlog= this.zahtevData.razlog;
 
 
     this.formDataService.rejectData(xml).subscribe(
@@ -199,6 +209,10 @@ export class TabelaZahtevaComponent {
         // Handle errors if any
       }
     );
+    const index = this.filteredData.indexOf(xml);
+    if (index !== -1) {
+      this.filteredData.splice(index, 1);
+    }
   }
 
 

@@ -73,7 +73,7 @@
     <div class="app-content-header">
       <h1 class="app-content-headerText">Prihvaceni zahtevi</h1>
 
-
+      <input class="search-bar" placeholder="Search..." type="text" [(ngModel)]="searchInput" (input)="search()">
     </div>
     <div class="app-content-actions">
 
@@ -81,12 +81,13 @@
 
     <div class="products-area-wrapper tableView" >
       <div class="products-header">
-
+        <div class="product-cell status-cell">Sifra<button class="sort-button">
+        </button></div>
         <div class="product-cell status-cell">Datum<button class="sort-button">
         </button></div>
-        <div class="product-cell sales">Naslov<button class="sort-button">
+        <div class="product-cell sales">ime<button class="sort-button">
         </button></div>
-        <div class="product-cell sales">Podnosilac<button class="sort-button">
+        <div class="product-cell sales">prezime<button class="sort-button">
         </button></div>
 
         <div class="product-cell price" >Link<button class="sort-button">
@@ -96,12 +97,12 @@
       </div>
       <div class="products-row" *ngFor="let p of filteredData">
         <button class="cell-more-button"></button>
+        <div class="product-cell category"><span class="cell-label"></span>{{p.sifra}}</div>
+        <div class="product-cell category"><span class="cell-label"></span>{{p.datumResenja}}</div>
 
-        <div class="product-cell category"><span class="cell-label"></span>{{p.datumPodnosenja}}</div>
+        <div class="product-cell sales"><span class="cell-label"></span>{{p.ime_sluzbenika}}</div>
 
-        <div class="product-cell sales"><span class="cell-label"></span>{{p.naslov}}</div>
-
-        <div class="product-cell sales"><span class="cell-label"></span>{{p.ime}}</div>
+        <div class="product-cell sales"><span class="cell-label"></span>{{p.prezime_sluzbenika}}</div>
 
         <div class="product-cell price">
           <span class="cell-label"></span>

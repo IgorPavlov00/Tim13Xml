@@ -32,6 +32,9 @@ export class Zahtev {
   nacinKoriscenja: string = '';
   autorIzvornogDela: string = '';
   poslovno_ime: string = '';
+  ime_sluzbenika:string='';
+  prezime_sluzbenika:string='';
+  razlog:string='';
 
   constructor(data?: Partial<Zahtev>) {
     if (data) {
